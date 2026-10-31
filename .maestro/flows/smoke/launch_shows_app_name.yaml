@@ -1,0 +1,8 @@
+appId: com.ericwathome.stovetime
+name: The app opens and shows its name
+tags:
+  - smoke
+---
+- launchApp:
+    clearState: true
+- assertVisible: "Stovetime"

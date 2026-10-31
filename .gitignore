@@ -20,4 +20,6 @@ local.properties
 /sdk/build
 build/
 .kotlin
-.ai/
+.claude/skills/
+.claude/agents/
+.claude/settings.local.json
