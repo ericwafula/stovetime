@@ -9,6 +9,7 @@ cd "$repo_root"
 link_all() {
   local dest="$1" prefix="$2"; shift 2
   mkdir -p "$dest"
+  find "$dest" -maxdepth 1 -type l ! -exec test -e {} \; -delete
   for src in "$@"; do
     [[ -e "$src" ]] || continue
     [[ "$(basename "$src")" == "README.md" ]] && continue
