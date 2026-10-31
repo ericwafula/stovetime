@@ -61,7 +61,7 @@ Run `/init` once to have Claude write a `CLAUDE.md` describing the project, then
 
 ## Level 3: with skills and agents
 
-This branch has the full Claude Code setup in `.ai/`. Link it once, then start Claude Code:
+This branch has the finished Claude Code setup in `.ai/`, everything built live in the workshop. Link it once, then start Claude Code:
 
 ```bash
 .ai/setup.sh
