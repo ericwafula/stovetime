@@ -34,6 +34,18 @@ To check everything builds without installing:
 ./gradlew assembleDebug
 ```
 
+## Level 1: chat and copy-paste
+
+1. Take a screenshot of the quick timer screen in Figma.
+2. Open a new chat on [claude.ai](https://claude.ai), with no project.
+3. Paste the screenshot, then this prompt:
+
+   ```text
+   Build this screen in Jetpack Compose, and add a ViewModel to handle its state.
+   ```
+
+4. Copy the code into `app/`, build, and paste any errors back into the chat.
+
 ## Using it with Claude Code
 
 From the project folder:
