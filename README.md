@@ -34,21 +34,6 @@ To check everything builds without installing:
 ./gradlew assembleDebug
 ```
 
-## Level 1: chat and copy-paste
-
-The screen to build:
-
-<img src="assets/kitchen-screen.png" alt="Stovetime Kitchen screen" width="300">
-
-1. Open a new chat on [claude.ai](https://claude.ai).
-2. Attach [`assets/kitchen-screen.png`](assets/kitchen-screen.png), then paste this prompt:
-
-   ```text
-   Build this screen in Jetpack Compose, and add a ViewModel to handle its state.
-   ```
-
-3. Claude only replies with code. Copy it into `app/`, build in Android Studio, and paste any errors back into the chat.
-
 ## Using it with Claude Code
 
 From the project folder:
