@@ -49,16 +49,6 @@ The screen to build:
 
 3. Claude only replies with code. Copy it into `app/`, build in Android Studio, and paste any errors back into the chat.
 
-## Using it with Claude Code
-
-From the project folder:
-
-```bash
-claude
-```
-
-Run `/init` once to have Claude write a `CLAUDE.md` describing the project, then ask it for whatever you want to build.
-
 ## Project layout
 
 - `app/` — the Android app
