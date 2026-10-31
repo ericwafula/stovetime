@@ -34,20 +34,28 @@ To check everything builds without installing:
 ./gradlew assembleDebug
 ```
 
-## Level 1: chat and copy-paste
+## Level 2: Claude Code in the repo
+
+Same screen, same prompt, but now Claude Code can read the project. Nothing is set up yet: no skills, no agents, no `CLAUDE.md`.
 
 The screen to build:
 
 <img src="assets/kitchen-screen.png" alt="Stovetime Kitchen screen" width="300">
 
-1. Open a new chat on [claude.ai](https://claude.ai).
-2. Attach [`assets/kitchen-screen.png`](assets/kitchen-screen.png), then paste this prompt:
+1. From the project folder, start Claude Code:
+
+   ```bash
+   claude
+   ```
+
+2. Run `/init` so Claude writes a `CLAUDE.md` describing the project. Read what it wrote.
+3. Drag in [`assets/kitchen-screen.png`](assets/kitchen-screen.png), then paste this prompt:
 
    ```text
    Build this screen in Jetpack Compose, and add a ViewModel to handle its state.
    ```
 
-3. Claude only replies with code. Copy it into `app/`, build in Android Studio, and paste any errors back into the chat.
+4. When it's done, run `/context` to see how many tokens went on exploring the repo.
 
 ## Project layout
 
