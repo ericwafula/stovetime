@@ -29,4 +29,7 @@ link_all() {
 link_all .claude/skills ../../.ai/skills .ai/skills/*/
 link_all .claude/agents ../../.ai/agents .ai/agents/*.md
 
-echo "ok: $(ls -d .ai/skills/*/ | wc -l | tr -d ' ') skills, $(ls .ai/agents/*.md | grep -v README | wc -l | tr -d ' ') agents linked"
+shopt -s nullglob
+skills=(.ai/skills/*/)
+agents=(.ai/agents/*.md)
+echo "ok: ${#skills[@]} skills, ${#agents[@]} agents linked"
