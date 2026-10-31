@@ -34,16 +34,6 @@ To check everything builds without installing:
 ./gradlew assembleDebug
 ```
 
-## Using it with Claude Code
-
-From the project folder:
-
-```bash
-claude
-```
-
-Run `/init` once to have Claude write a `CLAUDE.md` describing the project, then ask it for whatever you want to build.
-
 ## Level 3: build the setup
 
 This branch is the starting point for Level 3. Each step is built live.
