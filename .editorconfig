@@ -1,0 +1,7 @@
+root = true
+
+[*]
+ktlint_function_naming_ignore_when_annotated_with = Composable
+
+[**/resources/**]
+ktlint_standard_property-naming = disabled
