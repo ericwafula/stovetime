@@ -61,15 +61,41 @@ Run `/init` once to have Claude write a `CLAUDE.md` describing the project, then
 
 ## Level 3: build the setup
 
-This branch is the starting point for Level 3. Each step is built live:
+This branch is the starting point for Level 3. Each step is built live.
 
-- [ ] 1. Create a skill: Route → Screen → Content, with previews
-- [ ] 2. Create a subagent: a code reviewer (read-only, Sonnet)
-- [ ] 3. Manage context: `/context`, `/compact`, `/clear`
-- [ ] 4. Control cost: models and effort levels
-- [ ] 5. Plan: turn a requirement into acceptance criteria
-- [ ] 6. Verify: checks, a Maestro flow, and the Figma and Mobile MCP servers in `.mcp.json`
-- [ ] 7. See it all together: `git checkout workshop/level-3-complete`
+- [ ] **1. Connect Figma and create a skill.** Add the Figma MCP server, then write a skill for how we build screens (Route → Screen → Content, with previews):
+
+  ```bash
+  claude mcp add --transport http --scope project figma https://mcp.figma.com/mcp
+  ```
+
+  Then give Claude the Figma frame instead of the screenshot:
+
+  ```text
+  Build this screen in Jetpack Compose, and add a ViewModel to handle its state: https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=24-92
+  ```
+
+- [ ] **2. Create a subagent:** a read-only code reviewer on Sonnet.
+
+  ```text
+  Review my changes.
+  ```
+
+- [ ] **3. Manage context:** run `/context`, then `/compact keep the decisions about the Kitchen screen`, then `/clear`.
+- [ ] **4. Control cost:** run the same small task on low effort, then on high effort, and compare.
+- [ ] **5. Plan:**
+
+  ```text
+  Users want to time poached eggs too. Turn that into a roadmap step with acceptance criteria.
+  ```
+
+- [ ] **6. Verify:** run the checks, add a Maestro flow for the Kitchen screen, and add the Mobile MCP to check it on the emulator:
+
+  ```bash
+  claude mcp add --scope project mobile -- npx -y @mobilenext/mobile-mcp@latest
+  ```
+
+- [ ] **7. See it all together:** `git checkout workshop/level-3-complete`
 
 Skills and agents go in `.ai/skills/` and `.ai/agents/`. Run `.ai/setup.sh` after adding one so Claude Code can find it.
 
