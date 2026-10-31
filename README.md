@@ -36,15 +36,18 @@ To check everything builds without installing:
 
 ## Level 1: chat and copy-paste
 
-1. Take a screenshot of the quick timer screen in Figma.
-2. Open a new chat on [claude.ai](https://claude.ai), with no project.
-3. Paste the screenshot, then this prompt:
+The screen to build:
+
+<img src="assets/kitchen-screen.png" alt="Stovetime Kitchen screen" width="300">
+
+1. Open a new chat on [claude.ai](https://claude.ai).
+2. Attach [`assets/kitchen-screen.png`](assets/kitchen-screen.png), then paste this prompt:
 
    ```text
    Build this screen in Jetpack Compose, and add a ViewModel to handle its state.
    ```
 
-4. Copy the code into `app/`, build, and paste any errors back into the chat.
+3. Claude only replies with code. Copy it into `app/`, build in Android Studio, and paste any errors back into the chat.
 
 ## Using it with Claude Code
 
