@@ -99,6 +99,33 @@ This branch is the starting point for Level 3. Each step is built live.
 
 Skills and agents go in `.ai/skills/` and `.ai/agents/`. Run `.ai/setup.sh` after adding one so Claude Code can find it.
 
+## Tools for Level 3
+
+Install these before the Level 3 steps. Everything else comes with the repo.
+
+| Tool | Used for | Setup |
+|---|---|---|
+| [Claude Code](https://docs.claude.com/en/docs/claude-code/overview) | Everything | `curl -fsSL https://claude.ai/install.sh \| bash`, then run `claude` and sign in |
+| [GitHub CLI](https://cli.github.com) | Issues, branches and PRs (the `github` skill) | `brew install gh`, then `gh auth login` |
+| [Maestro](https://maestro.mobile.dev) | End-to-end flows in `.maestro/` | Needs Java 17+. `curl -fsSL "https://get.maestro.mobile.dev" \| bash` |
+| [Figma MCP](https://developers.figma.com/docs/figma-mcp-server/) | Reading the design straight from Figma | A Figma account. See below |
+| [Mobile MCP](https://github.com/mobile-next/mobile-mcp) | Letting Claude tap through the app on an emulator | Node.js 18+ and `adb`. See below |
+
+### Figma MCP
+
+The server is in `.mcp.json` (on `workshop/level-3-complete`), or added in step 1 on `workshop/level-3-start`.
+
+1. Start `claude` in the project and approve the `figma` server when asked.
+2. Run `/mcp`, pick `figma` and choose **Authenticate**. Sign in to Figma in the browser that opens.
+3. Check it works: ask Claude to describe the frame at https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=24-92
+
+### Mobile MCP
+
+1. Install Node.js 18 or later (`node -v` to check). The server runs through `npx`, so there's nothing else to install.
+2. Make sure `adb` from the Android SDK platform-tools is on your `PATH` (`adb version`).
+3. Start an emulator from Android Studio's Device Manager, or plug in a phone with USB debugging on. `adb devices` should list it.
+4. Start `claude`, approve the `mobile` server, and ask: "List the available devices."
+
 ## Project layout
 
 - `app/` — the Android app
