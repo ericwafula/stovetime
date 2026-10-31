@@ -4,23 +4,50 @@
 
 Stovetime answers "how long do I cook this?" with cooking guides and timers that keep running while you cook several things at once, then grows into a recipe app with cook mode, a shopping list and your own cookbook.
 
-## Status
+## Requirements
 
-Early setup. The plan lives in [`.ai/roadmap/ROADMAP.md`](.ai/roadmap/ROADMAP.md), broken into steps with acceptance criteria in [`.ai/roadmap/backlog/`](.ai/roadmap/backlog/README.md).
+- Android Studio, latest stable
+- JDK 21. Android Studio's bundled JDK works, and Gradle downloads one if it can't find it.
+- An emulator or a device on Android 10 (API 29) or later
 
-## Build and run
+## Getting started
 
-Requirements: Android Studio (latest stable) and JDK 17.
+Clone the repo:
+
+```bash
+git clone https://github.com/ericwafula/stovetime.git
+cd stovetime
+```
+
+Then either:
+
+- **Android Studio:** open the `stovetime` folder, let Gradle sync, pick an emulator or device and press Run.
+- **Command line:** with an emulator running or a device plugged in:
+
+  ```bash
+  ./gradlew installDebug
+  ```
+
+To check everything builds without installing:
 
 ```bash
 ./gradlew assembleDebug
 ```
 
+## Using it with Claude Code
+
+From the project folder:
+
+```bash
+claude
+```
+
+Run `/init` once to have Claude write a `CLAUDE.md` describing the project, then ask it for whatever you want to build.
+
 ## Project layout
 
 - `app/` — the Android app
 - `build-logic/` — Gradle convention plugins (`stovetime.*`)
-- `.ai/` — the plan, plus the AI skills and agents used to build this app. Unlike many projects, this folder is committed on purpose, so you can copy the setup.
 
 ## License
 
