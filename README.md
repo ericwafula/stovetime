@@ -59,23 +59,25 @@ claude
 
 Run `/init` once to have Claude write a `CLAUDE.md` describing the project, then ask it for whatever you want to build.
 
-## Level 3: with skills and agents
+## Level 3: build the setup
 
-This branch has the full Claude Code setup in `.ai/`. Link it once, then start Claude Code:
+This branch is the starting point for Level 3. Each step is built live:
 
-```bash
-.ai/setup.sh
-claude
-```
+- [ ] 1. Create a skill: Route → Screen → Content, with previews
+- [ ] 2. Create a subagent: a code reviewer (read-only, Sonnet)
+- [ ] 3. Manage context: `/context`, `/compact`, `/clear`
+- [ ] 4. Control cost: models and effort levels
+- [ ] 5. Plan: turn a requirement into acceptance criteria
+- [ ] 6. Verify: checks, a Maestro flow, and the Figma and Mobile MCP servers in `.mcp.json`
+- [ ] 7. See it all together: `git checkout workshop/level-3-complete`
 
-Claude Code starts as the `orchestrator` agent and follows the skills in `.ai/skills/`. It asks to enable the Figma and Mobile MCP servers from `.mcp.json` the first time.
+Skills and agents go in `.ai/skills/` and `.ai/agents/`. Run `.ai/setup.sh` after adding one so Claude Code can find it.
 
 ## Project layout
 
 - `app/` — the Android app
 - `build-logic/` — Gradle convention plugins (`stovetime.*`)
-- `.ai/` — skills, agents and the roadmap used to build the app
-- `.maestro/` — end-to-end flows
+- `.ai/` — the roadmap, and the skills and agents you add
 
 ## License
 
