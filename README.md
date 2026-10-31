@@ -34,16 +34,6 @@ To check everything builds without installing:
 ./gradlew assembleDebug
 ```
 
-## Using it with Claude Code
-
-From the project folder:
-
-```bash
-claude
-```
-
-Run `/init` once to have Claude write a `CLAUDE.md` describing the project, then ask it for whatever you want to build.
-
 ## Level 3: with skills and agents
 
 This branch has the finished Claude Code setup in `.ai/`, everything built live in the workshop. Link it once, then start Claude Code:
