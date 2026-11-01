@@ -6,7 +6,18 @@
     },
     "mobile": {
       "command": "npx",
-      "args": ["-y", "@mobilenext/mobile-mcp@latest"]
+      "args": [
+        "-y",
+        "@mobilenext/mobile-mcp@latest"
+      ]
+    },
+    "code-review-graph": {
+      "command": "uvx",
+      "args": [
+        "code-review-graph",
+        "serve"
+      ],
+      "type": "stdio"
     }
   }
 }

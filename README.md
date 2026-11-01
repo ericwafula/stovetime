@@ -52,18 +52,23 @@ Install these before the Level 3 steps. Everything else comes with the repo.
 | Tool | Used for | Setup |
 |---|---|---|
 | [Claude Code](https://docs.claude.com/en/docs/claude-code/overview) | Everything | `curl -fsSL https://claude.ai/install.sh \| bash`, then run `claude` and sign in |
-| [GitHub CLI](https://cli.github.com) | Issues, branches and PRs (the `github` skill) | `brew install gh`, then `gh auth login` |
+| [GitHub CLI](https://cli.github.com) | Issues, branches and PRs | `brew install gh`, then `gh auth login` |
 | [Maestro](https://maestro.mobile.dev) | End-to-end flows in `.maestro/` | Needs Java 17+. `curl -fsSL "https://get.maestro.mobile.dev" \| bash` |
 | [Figma MCP](https://developers.figma.com/docs/figma-mcp-server/) | Reading the design straight from Figma | A Figma account. See below |
-| [Mobile MCP](https://github.com/mobile-next/mobile-mcp) | Letting Claude tap through the app on an emulator | Node.js 20+ and `adb`. See below |
+| [Mobile MCP](https://github.com/mobile-next/mobile-mcp) | Letting Claude tap through the app on a device | Node.js 20+ and `adb`. See below |
+| [uv](https://docs.astral.sh/uv/) | Running code-review-graph and memsearch (they need Python 3.10+) | `brew install uv`, then `uv tool update-shell` and open a new terminal |
+| [context-mode](https://github.com/mksglu/context-mode) | Keeping big command output out of context | Comes with the repo: `.claude/settings.json` enables the plugin. Approve it on first run |
+| [memsearch](https://github.com/zilliztech/memsearch) | Memory across sessions | Comes with the repo, the same way. Memories go to `.memsearch/` |
+| [code-review-graph](https://github.com/tirth8205/code-review-graph) | A map of the code, so Claude opens fewer files | `uv tool install code-review-graph`, then `code-review-graph install --platform claude-code --no-instructions` and `code-review-graph build` |
+| [RTK](https://github.com/rtk-ai/rtk) | Shorter command output | Optional, see its README |
 
 ### Figma MCP
 
-The server is in `.mcp.json` (on `workshop/level-3-complete`), or added in step 1 on `workshop/level-3-start`.
+The server is added in step 1 on `workshop/level-3-start`, and is already in `.mcp.json` on `workshop/level-3-complete`.
 
 1. Start `claude` in the project and approve the `figma` server when asked.
 2. Run `/mcp`, pick `figma` and choose **Authenticate**. Sign in to Figma in the browser that opens.
-3. Check it works: ask Claude to describe the frame at https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=24-92
+3. Check it works: ask Claude to describe the frame at https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=70-98
 
 ### Mobile MCP
 

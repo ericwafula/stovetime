@@ -23,3 +23,5 @@ build/
 .claude/skills/
 .claude/agents/
 .claude/settings.local.json
+.memsearch/
+.code-review-graph/
