@@ -82,6 +82,7 @@ This branch is the starting point for Level 3. Each step is built live. Skills a
   | code-review-graph | `What depends on StoveButton?` | It answers from the graph instead of opening files |
   | memsearch | In a new session: `What did we build last time?` | It recalls the earlier session from `.memsearch/` |
   | RTK | `git status` with and without RTK | Shorter command output |
+  | ctxline | Watch the status line during `/compact` | The `ctx` figure drops, and the `5h` and `wk` limits stay in view |
 
 - [ ] **4. Control cost:** run the same small task (for example `Add a preview for the empty state`) on low effort, then on high effort (`/effort`), and compare.
 - [ ] **5. Plan:**
@@ -118,6 +119,7 @@ Install these before the Level 3 steps. Everything else comes with the repo.
 | [memsearch](https://github.com/zilliztech/memsearch) | Memory across sessions | Comes with the repo, the same way. Memories go to `.memsearch/` |
 | [code-review-graph](https://github.com/tirth8205/code-review-graph) | A map of the code, so Claude opens fewer files | `uv tool install code-review-graph`, then `code-review-graph install --platform claude-code --no-instructions` and `code-review-graph build` |
 | [RTK](https://github.com/rtk-ai/rtk) | Shorter command output | Optional, see its README |
+| [ctxline](https://github.com/ericwafula/ctxline) | A status line with context used and the 5-hour and weekly limits | Optional. See below |
 
 ### Figma MCP
 
@@ -133,6 +135,36 @@ The server is added in step 1 on `workshop/level-3-start`, and is already in `.m
 2. Make sure `adb` from the Android SDK platform-tools is on your `PATH` (`adb version`).
 3. Start an emulator from Android Studio's Device Manager, or plug in a phone with USB debugging on. `adb devices` should list it.
 4. Start `claude`, approve the `mobile` server, and ask: "List the available devices."
+
+### ctxline
+
+A status line at the bottom of Claude Code:
+
+```text
+Opus 5.5 · stovetime ⑂ main · ctx 186k (19%) · 5h 8%(3h) · wk 28%(2d) · $8.30
+```
+
+`ctx` is how full the context window is. `5h` and `wk` are how much of your 5-hour and weekly limits you've used, with the time until each resets. The limits show on Pro, Max and Ultra plans. It runs on your machine, so it uses no tokens.
+
+1. Install it with uv or with Node, whichever you prefer:
+
+   ```bash
+   uv tool install git+https://github.com/ericwafula/ctxline
+   ```
+
+   ```bash
+   npm install -g github:ericwafula/ctxline
+   ```
+
+2. Make it your status line. This adds it to `~/.claude/settings.json` and saves any status line you already had:
+
+   ```bash
+   ctxline install
+   ```
+
+3. Start `claude`. The line appears at the bottom and fills in after the first reply.
+
+To go back to your old status line, run `ctxline uninstall`.
 
 ## Project layout
 
