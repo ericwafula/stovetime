@@ -36,43 +36,71 @@ To check everything builds without installing:
 
 ## Level 3: build the setup
 
-This branch is the starting point for Level 3. Each step is built live.
+This branch is the starting point for Level 3. Each step is built live. Skills and agents go in `.ai/skills/` and `.ai/agents/`; run `.ai/setup.sh` after adding one so Claude Code can find it.
 
-- [ ] **1. Connect Figma and create a skill.** Add the Figma MCP server, then write a skill for how we build screens (Route → Screen → Content, with previews):
+- [ ] **0. Check your setup.** Start `claude` in the project and approve the plugins and MCP servers it asks about. Then:
+
+  - `/mcp` lists `code-review-graph` and `context-mode` as connected.
+  - `/context-mode:ctx-doctor` shows every check as `[x]`.
+  - `/context` gives your starting token count. Note it down.
+
+- [ ] **1. Connect Figma and create a skill.** Add the Figma MCP server, then `/mcp` → `figma` → **Authenticate**:
 
   ```bash
   claude mcp add --transport http --scope project figma https://mcp.figma.com/mcp
   ```
 
-  Then give Claude the Figma frame instead of the screenshot:
+  Write the skill for how we build screens:
 
   ```text
-  Build this screen in Jetpack Compose, and add a ViewModel to handle its state: https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=24-92
+  Create a skill in .ai/skills/compose-screen for how we build screens: Route → Screen → Content, the ViewModel through Koin, previews, strings in strings.xml, and only StovetimeTheme and the Stove* components from :presentation:design, never Material. Then run .ai/setup.sh.
   ```
 
-- [ ] **2. Create a subagent:** a read-only code reviewer on Sonnet.
+  Then build the screen from its Figma frame:
+
+  ```text
+  Build this screen in Jetpack Compose, and add a ViewModel to handle its state: https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=70-98
+  ```
+
+- [ ] **2. Create a subagent:**
+
+  ```text
+  Create a code-reviewer subagent in .ai/agents/code-reviewer.md: read-only (Read, Grep, Glob), model sonnet, reviews changed files against our conventions and reports only issues it's at least 80% sure of. Then run .ai/setup.sh.
+  ```
 
   ```text
   Review my changes.
   ```
 
-- [ ] **3. Manage context:** run `/context`, then `/compact keep the decisions about the Kitchen screen`, then `/clear`.
-- [ ] **4. Control cost:** run the same small task on low effort, then on high effort, and compare.
+  Compare `/context` before and after: the main session barely grows.
+
+- [ ] **3. Manage context.** Run `/context`, then `/compact keep the decisions about the Path screen`, then `/clear`. Then try the tools that keep context small:
+
+  | Tool | Try | What to look for |
+  |---|---|---|
+  | context-mode | `Run the Gradle build and tell me if it passed`, then `/context-mode:ctx-stats` | How much output stayed out of context |
+  | code-review-graph | `What depends on StoveButton?` | It answers from the graph instead of opening files |
+  | memsearch | In a new session: `What did we build last time?` | It recalls the earlier session from `.memsearch/` |
+  | RTK | `git status` with and without RTK | Shorter command output |
+
+- [ ] **4. Control cost:** run the same small task (for example `Add a preview for the empty state`) on low effort, then on high effort (`/effort`), and compare.
 - [ ] **5. Plan:**
 
   ```text
-  Users want to time poached eggs too. Turn that into a roadmap step with acceptance criteria.
+  Users want to time poached eggs too. Turn that into a roadmap step with acceptance criteria in our backlog format.
   ```
 
-- [ ] **6. Verify:** run the checks, add a Maestro flow for the Kitchen screen, and add the Mobile MCP to check it on the emulator:
+- [ ] **6. Verify:** run the checks, add the Mobile MCP, and let Claude check the screen on a device:
 
   ```bash
   claude mcp add --scope project mobile -- npx -y @mobilenext/mobile-mcp@latest
   ```
 
-- [ ] **7. See it all together:** `git checkout workshop/level-3-complete`
+  ```text
+  Install the app on my phone and check the Path screen matches the Figma frame. Then add a Maestro flow for it.
+  ```
 
-Skills and agents go in `.ai/skills/` and `.ai/agents/`. Run `.ai/setup.sh` after adding one so Claude Code can find it.
+- [ ] **7. See it all together:** `git checkout workshop/level-3-complete`
 
 ## Tools for Level 3
 
@@ -81,18 +109,23 @@ Install these before the Level 3 steps. Everything else comes with the repo.
 | Tool | Used for | Setup |
 |---|---|---|
 | [Claude Code](https://docs.claude.com/en/docs/claude-code/overview) | Everything | `curl -fsSL https://claude.ai/install.sh \| bash`, then run `claude` and sign in |
-| [GitHub CLI](https://cli.github.com) | Issues, branches and PRs (the `github` skill) | `brew install gh`, then `gh auth login` |
+| [GitHub CLI](https://cli.github.com) | Issues, branches and PRs | `brew install gh`, then `gh auth login` |
 | [Maestro](https://maestro.mobile.dev) | End-to-end flows in `.maestro/` | Needs Java 17+. `curl -fsSL "https://get.maestro.mobile.dev" \| bash` |
 | [Figma MCP](https://developers.figma.com/docs/figma-mcp-server/) | Reading the design straight from Figma | A Figma account. See below |
-| [Mobile MCP](https://github.com/mobile-next/mobile-mcp) | Letting Claude tap through the app on an emulator | Node.js 20+ and `adb`. See below |
+| [Mobile MCP](https://github.com/mobile-next/mobile-mcp) | Letting Claude tap through the app on a device | Node.js 20+ and `adb`. See below |
+| [uv](https://docs.astral.sh/uv/) | Running code-review-graph and memsearch (they need Python 3.10+) | `brew install uv`, then `uv tool update-shell` and open a new terminal |
+| [context-mode](https://github.com/mksglu/context-mode) | Keeping big command output out of context | Comes with the repo: `.claude/settings.json` enables the plugin. Approve it on first run |
+| [memsearch](https://github.com/zilliztech/memsearch) | Memory across sessions | Comes with the repo, the same way. Memories go to `.memsearch/` |
+| [code-review-graph](https://github.com/tirth8205/code-review-graph) | A map of the code, so Claude opens fewer files | `uv tool install code-review-graph`, then `code-review-graph install --platform claude-code --no-instructions` and `code-review-graph build` |
+| [RTK](https://github.com/rtk-ai/rtk) | Shorter command output | Optional, see its README |
 
 ### Figma MCP
 
-The server is in `.mcp.json` (on `workshop/level-3-complete`), or added in step 1 on `workshop/level-3-start`.
+The server is added in step 1 on `workshop/level-3-start`, and is already in `.mcp.json` on `workshop/level-3-complete`.
 
 1. Start `claude` in the project and approve the `figma` server when asked.
 2. Run `/mcp`, pick `figma` and choose **Authenticate**. Sign in to Figma in the browser that opens.
-3. Check it works: ask Claude to describe the frame at https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=24-92
+3. Check it works: ask Claude to describe the frame at https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=70-98
 
 ### Mobile MCP
 
