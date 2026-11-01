@@ -149,7 +149,7 @@ Opus 5.5 · stovetime ⑂ main · ctx 186k (19%) · 5h 8%(3h) · wk 28%(2d) · $
 1. Install it with Homebrew, uv or Node, whichever you prefer:
 
    ```bash
-   brew install ericwafula/tap/ctxline
+   brew install ericwafula/tools/ctxline
    ```
 
    ```bash
