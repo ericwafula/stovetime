@@ -146,7 +146,11 @@ Opus 5.5 · stovetime ⑂ main · ctx 186k (19%) · 5h 8%(3h) · wk 28%(2d) · $
 
 `ctx` is how full the context window is. `5h` and `wk` are how much of your 5-hour and weekly limits you've used, with the time until each resets. The limits show on Pro, Max and Ultra plans. It runs on your machine, so it uses no tokens.
 
-1. Install it with uv or with Node, whichever you prefer:
+1. Install it with Homebrew, uv or Node, whichever you prefer:
+
+   ```bash
+   brew install ericwafula/tap/ctxline
+   ```
 
    ```bash
    uv tool install git+https://github.com/ericwafula/ctxline
