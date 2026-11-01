@@ -27,3 +27,4 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 rootProject.name = "Stovetime"
 include(":app")
+include(":presentation:design")
