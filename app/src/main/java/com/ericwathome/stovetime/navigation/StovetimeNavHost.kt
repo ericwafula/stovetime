@@ -34,6 +34,7 @@ import com.ericwathome.stovetime.navigation.entry.navigationCook
 import com.ericwathome.stovetime.navigation.entry.navigationLessonIntro
 import com.ericwathome.stovetime.navigation.entry.navigationPath
 import com.ericwathome.stovetime.navigation.entry.navigationPlaceholder
+import com.ericwathome.stovetime.navigation.entry.navigationRecipe
 import com.ericwathome.stovetime.navigation.entry.navigationRecipesBrowse
 import com.ericwathome.stovetime.ui.helpers.isKeyboardOpen
 
@@ -80,7 +81,11 @@ fun StovetimeNavHost(
                             Destination.Path,
                             onOpenLesson = { lessonId -> navigator.navigate(Destination.LessonIntro(lessonId)) },
                         )
-                    Destination.Recipes -> navigationRecipesBrowse(Destination.Recipes, onOpenRecipe = {})
+                    Destination.Recipes ->
+                        navigationRecipesBrowse(
+                            Destination.Recipes,
+                            onOpenRecipe = { recipeId -> navigator.navigate(Destination.Recipe(recipeId)) },
+                        )
                     Destination.Timers -> navigationPlaceholder(destination, R.string.tab_timers)
                     Destination.Me -> navigationPlaceholder(destination, R.string.tab_me)
                     is Destination.LessonIntro ->
@@ -100,6 +105,7 @@ fun StovetimeNavHost(
                             },
                         )
                     is Destination.CookDone -> navigationPlaceholder(destination, R.string.app_name)
+                    is Destination.Recipe -> navigationRecipe(destination, onBack = navigator::backward, onStartCooking = {})
                 }
             },
         )

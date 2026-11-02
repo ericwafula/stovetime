@@ -37,4 +37,9 @@ sealed interface Destination : NavKey {
         val startedAt: Long,
         val finishedAt: Long,
     ) : Destination
+
+    @Serializable
+    data class Recipe(
+        val recipeId: String,
+    ) : Destination
 }

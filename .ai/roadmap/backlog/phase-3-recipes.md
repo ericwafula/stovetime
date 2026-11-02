@@ -31,7 +31,7 @@ Keep a copy of TheMealDB's catalogue on the phone: every category and the meals 
 
 ---
 
-## 3.2 Browse and search
+## 3.2 Browse and search ✅
 
 **Size:** M · **Depends on:** 3.1, 0.3
 **Design:** [Figma › Recipes — Browse](https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=80-48)
@@ -44,7 +44,7 @@ The Recipes tab: category chips across the top, a grid of meal cards with photos
 - [x] Tapping a category shows only its meals
 - [x] Typing in search filters by meal name as you type, ignoring case and accents
 - [x] Pull to refresh runs a sync and shows when it last synced
-- [ ] Tapping a card opens its recipe page (3.3)
+- [x] Tapping a card opens its recipe page (3.3)
 - [x] Tests cover: category filter, search ignoring case and accents, empty search result, pull to refresh starts a sync
 
 ### Edge cases
@@ -58,7 +58,7 @@ The Recipes tab: category chips across the top, a grid of meal cards with photos
 
 ---
 
-## 3.3 Recipe page
+## 3.3 Recipe page ✅
 
 **Size:** M · **Depends on:** 3.2
 **Design:** follow [Figma › Recipe — Intro](https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=72-120) until it has its own frame
@@ -67,11 +67,11 @@ The Recipes tab: category chips across the top, a grid of meal cards with photos
 A recipe from TheMealDB in the same layout as a lesson intro: photo, name, category and area, "+10 XP", the ingredients with measures, and a Start cooking button. The full recipe is fetched the first time it's opened and kept on the phone after that.
 
 ### Acceptance Criteria
-- [ ] A recipe opened before shows straight away, even offline
-- [ ] A recipe never opened before shows a loading state, then the recipe
-- [ ] Each ingredient shows with its measure, and can be ticked off like the lesson intro
+- [x] A recipe opened before shows straight away, even offline
+- [x] A recipe never opened before shows a loading state, then the recipe
+- [x] Each ingredient shows with its measure, and can be ticked off like the lesson intro
 - [ ] Start cooking opens cook mode for this recipe (3.4)
-- [ ] Tests cover: opened before and offline, first open online, first open offline
+- [x] Tests cover: opened before and offline, first open online, first open offline
 
 ### Edge cases
 - First open with no connection: an error that says the recipe needs a connection the first time, with a retry.

@@ -104,8 +104,8 @@ The **Path screen (1.2)** is the screen built live in the workshop.
 | ID | Item | Status |
 |---|---|---|
 | 3.1 | Recipe sync: TheMealDB's catalogue kept on the phone, refreshed in the background | ✅ |
-| 3.2 | Browse by category and search, from the phone's copy | 🟨 |
-| 3.3 | Recipe page: fetched on first open, kept for offline | ⬜ |
+| 3.2 | Browse by category and search, from the phone's copy | ✅ |
+| 3.3 | Recipe page: fetched on first open, kept for offline | ✅ |
 | 3.4 | Cook any recipe: steps split from the instructions, times turned into timers, XP | ⬜ |
 | 3.5 | Offline and sync states: last synced, stale data, retry | ⬜ |
 
@@ -260,6 +260,9 @@ These rules live in `:core:domain` and are covered by tests with fixed dates.
 | 2026-11-02 | `StoveChip`, `StoveSearchField` and `StovePhotoCard` join `:presentation:design`, built from the Recipes — Browse frame | They hold the frame's sizes and borders, keeping dp literals out of the feature; Path and Me can reuse the card |
 | 2026-11-02 | The Recipes tab's loading, empty and no-match states are plain centred text (and a Try again button) until Figma has frames for them | The Browse frame shows only the filled state |
 | 2026-11-02 | Images load with Coil 3.3 over Ktor through one `RemotePhoto` in `:presentation:ui`, falling back to the sunken colour | Ktor is already the app's HTTP client; one shared composable keeps placeholders consistent |
+| 2026-11-02 | The recipe page leaves out the lesson-only parts of the Recipe — Intro frame (unit label, time, difficulty, what you'll learn) and shows category, area and +10 XP pills; a ticked ingredient is a basil check | TheMealDB has no times, levels or skills; the frame has no ticked state |
+| 2026-11-02 | `StoveIconButton` and `StoveCheckRow` join `:presentation:design` | The close button and the ingredient checklist are shared with the lesson intro (1.3) and need 48 dp touch targets |
+| 2026-11-02 | Start cooking on the recipe page sends its event but `StovetimeNavHost` wires it to an empty lambda until cook mode exists | 3.4 builds cook mode for recipes on top of 1.4 |
 
 ---
 

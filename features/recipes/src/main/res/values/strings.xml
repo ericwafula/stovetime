@@ -13,4 +13,13 @@
     <string name="recipes_retry">Try again</string>
     <string name="recipes_no_matches">No recipes match \'%1$s\'</string>
     <string name="recipes_category_empty">Nothing in this category yet</string>
+    <string name="recipe_close">Close</string>
+    <string name="recipe_xp">+%1$d XP</string>
+    <string name="recipe_you_will_need">You’ll need</string>
+    <string name="recipe_ingredient">%1$s %2$s</string>
+    <string name="recipe_start_cooking">Start cooking</string>
+    <string name="recipe_loading">Getting the recipe…</string>
+    <string name="recipe_needs_connection">This recipe needs a connection the first time you open it. Connect to Wi-Fi or mobile data, then try again.</string>
+    <string name="recipe_failed">Couldn\'t load this recipe. Try again in a moment.</string>
+    <string name="recipe_retry">Try again</string>
 </resources>

@@ -76,4 +76,19 @@ class NavigatorTest {
         // then
         assertThat(backStack).containsExactly(Destination.Path)
     }
+
+    @Test
+    fun opening_a_recipe_from_recipes_hides_the_tab_bar_and_back_returns_to_recipes() {
+        // given
+        sut.selectTab(Destination.Recipes)
+
+        // when
+        sut.navigate(Destination.Recipe("52772"))
+
+        // then
+        assertThat(sut.isOnTab).isFalse()
+        assertThat(sut.currentTab).isEqualTo(Destination.Recipes)
+        sut.backward()
+        assertThat(backStack).containsExactly(Destination.Path, Destination.Recipes).inOrder()
+    }
 }
