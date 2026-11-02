@@ -10,6 +10,8 @@ import com.ericwathome.stovetime.core.data.helpers.ObserveConnectivity
 import com.ericwathome.stovetime.core.data.model.recipes.Catalogue
 import com.ericwathome.stovetime.core.data.model.recipes.CatalogueMeal
 import com.ericwathome.stovetime.core.data.model.recipes.RecipeSyncStatus
+import com.ericwathome.stovetime.core.data.model.recipes.isSyncDue
+import com.ericwathome.stovetime.core.data.model.recipes.keepsFailing
 import com.ericwathome.stovetime.core.data.repo.recipes.RecipesRepository
 import com.ericwathome.stovetime.core.data.workers.recipes.StartRecipeSyncWork
 import com.ericwathome.stovetime.ui.helpers.MviViewModel
@@ -69,6 +71,7 @@ data class RecipesBrowseState(
     val syncStatus: RecipeSyncStatus = RecipeSyncStatus(),
     val isOnline: Boolean = true,
     val lastSynced: Elapsed? = null,
+    val keepsFailing: Boolean = false,
 ) {
     val categories: List<String>
         get() = catalogue.dataOrNull()?.categories.orEmpty()
@@ -171,10 +174,12 @@ class RecipesBrowseViewModel(
         recipesRepository
             .observeSyncStatus()
             .onEach { status ->
+                val now = Now.toEpochMilliseconds()
                 updateState {
                     it.copy(
                         syncStatus = status,
-                        lastSynced = status.lastSyncedAt?.let { syncedAt -> elapsedBetween(syncedAt, Now.toEpochMilliseconds()) },
+                        lastSynced = status.lastSyncedAt?.let { syncedAt -> elapsedBetween(syncedAt, now) },
+                        keepsFailing = status.keepsFailing(now),
                     )
                 }
             }.launchIn(viewModelScope)
@@ -183,7 +188,10 @@ class RecipesBrowseViewModel(
     private fun observeConnectivity() {
         observeConnectivity
             .invoke()
-            .onEach { isOnline -> updateState { it.copy(isOnline = isOnline) } }
-            .launchIn(viewModelScope)
+            .onEach { isOnline ->
+                val cameBackOnline = isOnline && !currentState.isOnline
+                updateState { it.copy(isOnline = isOnline) }
+                if (cameBackOnline && currentState.syncStatus.isSyncDue(Now.toEpochMilliseconds())) startRecipeSyncWork()
+            }.launchIn(viewModelScope)
     }
 }

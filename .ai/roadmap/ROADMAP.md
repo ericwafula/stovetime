@@ -107,7 +107,7 @@ The **Path screen (1.2)** is the screen built live in the workshop.
 | 3.2 | Browse by category and search, from the phone's copy | ✅ |
 | 3.3 | Recipe page: fetched on first open, kept for offline | ✅ |
 | 3.4 | Cook any recipe: steps split from the instructions, times turned into timers, XP | ⬜ |
-| 3.5 | Offline and sync states: last synced, stale data, retry | ⬜ |
+| 3.5 | Offline and sync states: last synced, stale data, retry | ✅ |
 
 ### Phase 4 — Me
 | ID | Item | Status |
@@ -263,6 +263,8 @@ These rules live in `:core:domain` and are covered by tests with fixed dates.
 | 2026-11-02 | The recipe page leaves out the lesson-only parts of the Recipe — Intro frame (unit label, time, difficulty, what you'll learn) and shows category, area and +10 XP pills; a ticked ingredient is a basil check | TheMealDB has no times, levels or skills; the frame has no ticked state |
 | 2026-11-02 | `StoveIconButton` and `StoveCheckRow` join `:presentation:design` | The close button and the ingredient checklist are shared with the lesson intro (1.3) and need 48 dp touch targets |
 | 2026-11-02 | Start cooking on the recipe page sends its event but `StovetimeNavHost` wires it to an empty lambda until cook mode exists | 3.4 builds cook mode for recipes on top of 1.4 |
+| 2026-11-02 | Offline, the Recipes header line becomes "Offline · last synced …"; a sync that has kept failing for over a week shows a yolk note with Try again | The note stays small and only appears when the copy is really old |
+| 2026-11-02 | Coming back online starts a sync from the Recipes tab when the last one is over a day old; elsewhere the daily periodic work catches up once a connection returns | Keeps the app start-up free of coroutines; WorkManager already runs an overdue periodic sync when its network constraint is met |
 
 ---
 

@@ -106,7 +106,7 @@ Cook a TheMealDB recipe in the same cook mode as a lesson. Its instructions are 
 
 ---
 
-## 3.5 Offline and sync states
+## 3.5 Offline and sync states ✅
 
 **Size:** S · **Depends on:** 3.2, 3.3
 
@@ -114,10 +114,10 @@ Cook a TheMealDB recipe in the same cook mode as a lesson. Its instructions are 
 Make it clear when the Recipes tab is working from the phone's copy, and what to do when something can't load.
 
 ### Acceptance Criteria
-- [ ] Offline, the tab shows a small "Offline · last synced 2 days ago" note and everything stored still works
-- [ ] A sync that keeps failing for over a week shows a gentle note with a retry
-- [ ] Coming back online triggers a sync if the last one is over a day old
-- [ ] Tests cover: the offline note, the stale-sync note, a sync when the connection returns
+- [x] Offline, the tab shows a small "Offline · last synced 2 days ago" note and everything stored still works
+- [x] A sync that keeps failing for over a week shows a gentle note with a retry
+- [x] Coming back online triggers a sync if the last one is over a day old
+- [x] Tests cover: the offline note, the stale-sync note, a sync when the connection returns
 
 ### Out of scope
 - Letting the user choose how often it syncs

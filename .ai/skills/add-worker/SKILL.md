@@ -215,4 +215,4 @@ There is no notification module yet. Workers never build Android notifications i
 
 ## Reference
 
-None yet. When the first worker lands, list it here.
+`core/data/.../workers/recipes/RecipeSyncWorker.kt` (daily unique periodic work plus a one-time run, both `NetworkType.CONNECTED` with exponential backoff), its schedulers in `RecipeSyncWorkScheduler.kt` (`ScheduleRecipeSyncWork`, `StartRecipeSyncWork`, `ObserveRecipeSyncRunning`), `WorkerModule`, and `WorkerHelpersTest` / `RecipeSyncRunningTest`.

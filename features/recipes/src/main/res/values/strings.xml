@@ -2,6 +2,9 @@
     <string name="recipes_title">Recipes</string>
     <string name="recipes_synced">Synced %1$s · works offline</string>
     <string name="recipes_not_synced">Not synced yet</string>
+    <string name="recipes_offline_synced">Offline · last synced %1$s</string>
+    <string name="recipes_offline">Offline</string>
+    <string name="recipes_stale_note">Recipes haven\'t updated for over a week, so some may be out of date.</string>
     <string name="recipes_search_placeholder">Search recipes</string>
     <string name="recipes_category_all">All</string>
     <string name="recipes_pull_to_sync">Pull to sync</string>

@@ -172,4 +172,4 @@ Add a new module to `RepositoryModule.includes(...)`. `CachingStrategy` is provi
 
 ## Reference
 
-None yet. When the first repository lands, list its operation, parent, Koin module and test here.
+`repo/recipes/`: `SyncCatalogueRepository`, `ObserveCatalogueRepository`, `GetRecipeRepository` (local first, fetched and stored on first open) and `ObserveRecipeSyncStatusRepository` under `RecipesRepository`, bound in `RecipesRepositoryModule`; tests in `core/data/src/test/.../repo/recipes/`.

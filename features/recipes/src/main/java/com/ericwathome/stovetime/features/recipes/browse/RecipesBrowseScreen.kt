@@ -43,6 +43,8 @@ import com.ericwathome.stovetime.core.data.model.recipes.CatalogueMeal
 import com.ericwathome.stovetime.core.data.model.recipes.RecipeSyncStatus
 import com.ericwathome.stovetime.design.components.Pill
 import com.ericwathome.stovetime.design.components.StoveButton
+import com.ericwathome.stovetime.design.components.StoveButtonStyle
+import com.ericwathome.stovetime.design.components.StoveCard
 import com.ericwathome.stovetime.design.components.StoveChip
 import com.ericwathome.stovetime.design.components.StoveNavBarClearance
 import com.ericwathome.stovetime.design.components.StovePhotoCard
@@ -114,6 +116,9 @@ private fun RecipesBrowseContent(
         ) {
             if (!keyboardOpen) {
                 BrowseHeader(state = state)
+                if (state.keepsFailing) {
+                    StaleSyncNote(onRetry = { onAction(RecipesBrowseAction.OnClickRetry) })
+                }
             }
             StoveSearchField(
                 value = state.query,
@@ -168,9 +173,41 @@ private fun BrowseHeader(
     Column(modifier = modifier) {
         StoveText(text = stringResource(R.string.recipes_title), style = StovetimeTheme.typography.title)
         StoveText(
-            text = state.lastSynced?.let { stringResource(R.string.recipes_synced, it.agoText()) } ?: stringResource(R.string.recipes_not_synced),
+            text = state.syncText(),
             style = StovetimeTheme.typography.caption,
             color = StovetimeTheme.colors.textSecondary,
+        )
+    }
+}
+
+@Composable
+private fun RecipesBrowseState.syncText(): String {
+    val synced = lastSynced?.agoText()
+    return when {
+        !isOnline && synced != null -> stringResource(R.string.recipes_offline_synced, synced)
+        !isOnline -> stringResource(R.string.recipes_offline)
+        synced != null -> stringResource(R.string.recipes_synced, synced)
+        else -> stringResource(R.string.recipes_not_synced)
+    }
+}
+
+@Composable
+private fun StaleSyncNote(
+    onRetry: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    StoveCard(
+        modifier = modifier.fillMaxWidth(),
+        color = StovetimeTheme.colors.xpSoft,
+        ledge = StovetimeTheme.colors.xpSoft,
+        bordered = false,
+    ) {
+        StoveText(text = stringResource(R.string.recipes_stale_note), style = StovetimeTheme.typography.caption)
+        StoveButton(
+            text = stringResource(R.string.recipes_retry),
+            onClick = onRetry,
+            style = StoveButtonStyle.Secondary,
+            modifier = Modifier.padding(top = StovetimeTheme.spacing.s12),
         )
     }
 }
@@ -323,6 +360,14 @@ private fun RecipesBrowseEmptyOfflinePreview() {
                 ),
             onAction = {},
         )
+    }
+}
+
+@Preview(showBackground = true, backgroundColor = 0xFFFBF6EC)
+@Composable
+private fun RecipesBrowseOfflineStalePreview() {
+    StovetimeTheme {
+        RecipesBrowseContent(state = sampleState.copy(isOnline = false, lastSynced = Elapsed.Days(9), keepsFailing = true), onAction = {})
     }
 }
 
