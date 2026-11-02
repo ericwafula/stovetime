@@ -4,6 +4,8 @@ import com.ericwathome.stovetime.core.domain.useCase.CalculateCookXpUseCase
 import com.ericwathome.stovetime.core.domain.useCase.CalculateCookXpUseCaseImpl
 import com.ericwathome.stovetime.core.domain.useCase.CheckWeeklyReminderUseCase
 import com.ericwathome.stovetime.core.domain.useCase.CheckWeeklyReminderUseCaseImpl
+import com.ericwathome.stovetime.core.domain.useCase.ObserveBadgesUseCase
+import com.ericwathome.stovetime.core.domain.useCase.ObserveBadgesUseCaseImpl
 import com.ericwathome.stovetime.core.domain.useCase.ObserveCoursesUseCase
 import com.ericwathome.stovetime.core.domain.useCase.ObserveCoursesUseCaseImpl
 import com.ericwathome.stovetime.core.domain.useCase.ObserveLessonPathUseCase
@@ -35,6 +37,9 @@ internal val ProgressUseCaseModule =
         }
         singleOf(::ObserveLessonPathUseCaseImpl) {
             bind<ObserveLessonPathUseCase>()
+        }
+        singleOf(::ObserveBadgesUseCaseImpl) {
+            bind<ObserveBadgesUseCase>()
         }
         singleOf(::ObserveCoursesUseCaseImpl) {
             bind<ObserveCoursesUseCase>()

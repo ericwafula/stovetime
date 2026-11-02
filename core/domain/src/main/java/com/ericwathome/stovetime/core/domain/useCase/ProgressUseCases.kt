@@ -6,6 +6,7 @@ interface ProgressUseCases {
     val observeLessonPath: ObserveLessonPathUseCase
     val observeCourses: ObserveCoursesUseCase
     val calculateCookXp: CalculateCookXpUseCase
+    val observeBadges: ObserveBadgesUseCase
 }
 
 internal class ProgressUseCasesImpl(
@@ -14,4 +15,5 @@ internal class ProgressUseCasesImpl(
     override val observeLessonPath: ObserveLessonPathUseCase,
     override val observeCourses: ObserveCoursesUseCase,
     override val calculateCookXp: CalculateCookXpUseCase,
+    override val observeBadges: ObserveBadgesUseCase,
 ) : ProgressUseCases

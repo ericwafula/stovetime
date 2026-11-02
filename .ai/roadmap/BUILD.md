@@ -52,3 +52,4 @@ Run them in order. Paste one, wait for it to finish, look at the commits, then r
 Nothing blocked. One check was done off the device:
 
 - 2.1 "running timers come back after the phone restarts": the boot receiver runs the same restore as a killed process, which was checked on the phone (a timer killed mid-run rang on time over the lock screen). The phone itself wasn't rebooted, because it has a secure lock screen that needs the owner to unlock it.
+- 5.3 "on Saturday after 17:00": the rule, the worker and the notification are unit-tested with fixed dates and times, and the switch was checked on the phone. The phone's clock wasn't moved to a Saturday evening to watch a real reminder arrive.

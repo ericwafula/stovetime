@@ -31,7 +31,7 @@ Three more courses next to "Home basics": "Rice & grains", "One-pan dinners" and
 
 ---
 
-## 5.2 Badges
+## 5.2 Badges ✅
 
 **Size:** M · **Depends on:** 1.5, 4.1
 
@@ -39,12 +39,12 @@ Three more courses next to "Home basics": "Rice & grains", "One-pan dinners" and
 Small rewards for real cooking: a badge for finishing every lesson in a unit, and badges for week streaks of 2, 4 and 8 weeks (best streak, so they're never taken away). They show on Me, and the finish screen celebrates a badge the moment it's earned.
 
 ### Acceptance Criteria
-- [ ] Earning rules: "Unit done" per unit when all its lessons are cooked; "2-week streak", "4-week streak", "8-week streak" from the best week streak
-- [ ] Me shows every badge, earned ones in colour and the rest greyed with how to earn them
-- [ ] The finish screen shows "New badge!" with the badge when this cook earned one
-- [ ] Badges are worked out from progress, so Start over removes them and they come back as you cook again
-- [ ] TalkBack reads each badge with its name and whether it's earned
-- [ ] Tests cover: a unit badge on the last lesson, streak badges at 2, 4 and 8 weeks, a badge kept after the streak resets, the finish screen's new badge
+- [x] Earning rules: "Unit done" per unit when all its lessons are cooked; "2-week streak", "4-week streak", "8-week streak" from the best week streak
+- [x] Me shows every badge, earned ones in colour and the rest greyed with how to earn them
+- [x] The finish screen shows "New badge!" with the badge when this cook earned one
+- [x] Badges are worked out from progress, so Start over removes them and they come back as you cook again
+- [x] TalkBack reads each badge with its name and whether it's earned
+- [x] Tests cover: a unit badge on the last lesson, streak badges at 2, 4 and 8 weeks, a badge kept after the streak resets, the finish screen's new badge
 
 ### Out of scope
 - Sharing badges

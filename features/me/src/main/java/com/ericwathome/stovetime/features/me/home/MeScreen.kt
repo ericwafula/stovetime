@@ -1,6 +1,9 @@
 package com.ericwathome.stovetime.features.me.home
 
 import androidx.compose.foundation.background
+import com.ericwathome.stovetime.ui.components.BadgeCard
+import com.ericwathome.stovetime.core.domain.model.BadgeKind
+import com.ericwathome.stovetime.core.domain.model.Badge
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.runtime.LaunchedEffect
@@ -198,6 +201,10 @@ private fun MeDetails(
             goal = progress.thisWeek.goal,
             modifier = Modifier.fillMaxWidth(),
         )
+        if (state.badges.isNotEmpty()) {
+            SectionHeading(text = stringResource(R.string.me_badges))
+            MeBadges(badges = state.badges)
+        }
         state.settings?.let { settings ->
             SectionHeading(text = stringResource(R.string.me_settings))
             SettingsCard(
@@ -370,6 +377,30 @@ private fun SettingsCard(
                 StoveSwitch(checked = settings.weeklyReminder, onCheckedChange = null)
             }
         }
+    }
+}
+
+@Composable
+private fun MeBadges(badges: List<Badge>) {
+    val spacing = StovetimeTheme.spacing
+    Column(verticalArrangement = Arrangement.spacedBy(spacing.s8), modifier = Modifier.testTag("me_badges")) {
+        badges.chunked(2).forEach { pair ->
+            Row(horizontalArrangement = Arrangement.spacedBy(spacing.s8), modifier = Modifier.fillMaxWidth()) {
+                pair.forEach { badge -> MeBadge(badge = badge, modifier = Modifier.weight(1f)) }
+                if (pair.size == 1) Spacer(Modifier.weight(1f))
+            }
+        }
+    }
+}
+
+@Composable
+private fun MeBadge(
+    badge: Badge,
+    modifier: Modifier = Modifier,
+) {
+    when (val kind = badge.kind) {
+        is BadgeKind.UnitDone -> BadgeCard(unitTitle = kind.unitTitle, streakWeeks = null, earned = badge.earned, modifier = modifier)
+        is BadgeKind.Streak -> BadgeCard(unitTitle = null, streakWeeks = kind.weeks, earned = badge.earned, modifier = modifier)
     }
 }
 

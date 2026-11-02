@@ -9,6 +9,7 @@ import com.ericwathome.stovetime.core.data.model.progress.CookKind
 import com.ericwathome.stovetime.core.data.model.settings.CookSettings
 import com.ericwathome.stovetime.core.data.repo.progress.ProgressRepository
 import com.ericwathome.stovetime.core.data.repo.settings.SettingsRepository
+import com.ericwathome.stovetime.core.domain.model.Badge
 import com.ericwathome.stovetime.core.domain.model.Progress
 import com.ericwathome.stovetime.core.domain.useCase.ProgressUseCases
 import com.ericwathome.stovetime.ui.helpers.MviViewModel
@@ -66,6 +67,7 @@ data class MeState(
     val progress: ViewState<Progress> = ViewState.Initial,
     val today: LocalDate = Today,
     val settings: CookSettings? = null,
+    val badges: List<Badge> = emptyList(),
 ) {
     val canLowerGoal: Boolean
         get() = settings != null && settings.weeklyGoal > CookSettings.MIN_WEEKLY_GOAL
@@ -93,6 +95,7 @@ class MeViewModel(
     override fun onStateSubscription() {
         if (observeJob == null) observeProgress()
         if (settingsJob == null) observeSettings()
+        if (badgesJob == null) observeBadges()
     }
 
     override fun onAction(action: MeAction) {
@@ -133,6 +136,17 @@ class MeViewModel(
                 onConfirmStartOver()
             }
         }
+    }
+
+    private var badgesJob: Job? = null
+
+    private fun observeBadges() {
+        badgesJob =
+            viewModelScope.launch {
+                progressUseCases.observeBadges().collect { result ->
+                    result.onSuccess { badges -> updateState { it.copy(badges = badges) } }
+                }
+            }
     }
 
     private fun observeProgress() {

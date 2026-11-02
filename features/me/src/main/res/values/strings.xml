@@ -36,4 +36,5 @@
     <string name="me_start_over_failed">Couldn\'t clear your progress. Try again.</string>
     <string name="me_error_title">We couldn\'t load your progress</string>
     <string name="me_retry">Try again</string>
+    <string name="me_badges">Badges</string>
 </resources>

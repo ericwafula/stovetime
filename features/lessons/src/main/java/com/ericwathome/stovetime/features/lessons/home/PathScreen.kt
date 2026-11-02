@@ -18,6 +18,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.relocation.BringIntoViewRequester
+import androidx.compose.foundation.relocation.bringIntoViewRequester
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -27,6 +29,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Rect
+import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
@@ -146,20 +151,21 @@ private fun PathDetails(
     onClickCourse: () -> Unit,
 ) {
     val spacing = StovetimeTheme.spacing
+    Column(Modifier.fillMaxSize()) {
+    PathHeader(
+        courseTitle = path.courseTitle,
+        streak = path.progress.weekStreak,
+        xp = path.progress.totalXp,
+        onClickCourse = onClickCourse,
+        modifier = Modifier.padding(horizontal = spacing.s24).padding(top = spacing.s20, bottom = spacing.s12),
+    )
     Column(
         Modifier
-            .fillMaxSize()
+            .weight(1f)
             .verticalScroll(rememberScrollState())
             .padding(horizontal = spacing.s24)
-            .padding(top = spacing.s20, bottom = NavBarClearance),
+            .padding(top = spacing.s8, bottom = NavBarClearance),
     ) {
-        PathHeader(
-            courseTitle = path.courseTitle,
-            streak = path.progress.weekStreak,
-            xp = path.progress.totalXp,
-            onClickCourse = onClickCourse,
-        )
-        Spacer(Modifier.height(spacing.s20))
         UnitBanner(unit = path.unit, cooked = path.cookedCount, isDone = path.isUnitDone)
         Spacer(Modifier.height(spacing.s20))
         path.lessons.forEachIndexed { index, lesson ->
@@ -170,15 +176,26 @@ private fun PathDetails(
                 modifier = Modifier.testTag("path_node_$index"),
             )
             if (lesson.state == LessonState.Current) {
+                val bringIntoView = remember { BringIntoViewRequester() }
+                var cardHeight by remember { mutableIntStateOf(0) }
+                val clearancePx = with(LocalDensity.current) { NavBarClearance.toPx() }
+                LaunchedEffect(path.courseId, lesson.lesson.id, cardHeight) {
+                    if (cardHeight > 0) bringIntoView.bringIntoView(Rect(0f, 0f, 1f, cardHeight + clearancePx))
+                }
                 UpNextCard(
                     lesson = lesson.lesson,
                     xp = lesson.nextCookXp,
                     onStart = { onAction(PathAction.OnClickStart) },
-                    modifier = Modifier.padding(vertical = spacing.s12),
+                    modifier =
+                        Modifier
+                            .padding(vertical = spacing.s12)
+                            .bringIntoViewRequester(bringIntoView)
+                            .onSizeChanged { cardHeight = it.height },
                 )
             }
             Spacer(Modifier.height(spacing.s12))
         }
+    }
     }
 }
 
@@ -195,9 +212,10 @@ private fun PathHeader(
     streak: Int,
     xp: Int,
     onClickCourse: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     val colors = StovetimeTheme.colors
-    Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()) {
+    Row(verticalAlignment = Alignment.CenterVertically, modifier = modifier.fillMaxWidth()) {
         Box(
             contentAlignment = Alignment.Center,
             modifier =

@@ -15,6 +15,9 @@ import com.ericwathome.stovetime.core.domain.useCase.ProgressUseCases
 import com.ericwathome.stovetime.testing.MainDispatcherRule
 import com.ericwathome.stovetime.ui.helpers.ViewState
 import com.ericwathome.stovetime.ui.helpers.dataOrNull
+import com.ericwathome.stovetime.core.domain.model.Badge
+import com.ericwathome.stovetime.core.domain.model.BadgeKind
+import kotlinx.coroutines.flow.flowOf
 import com.google.common.truth.Truth.assertThat
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
@@ -429,6 +432,25 @@ class MeViewModelTest {
 
                 // then
                 assertThat(awaitItem()).isEqualTo(MeEvent.ShowStartOverFailed)
+            }
+        }
+
+    @Test
+    fun badges_show_earned_and_not_yet_earned() =
+        runTest {
+            // given
+            val badges =
+                listOf(
+                    Badge("unit:home-basics:eggs", BadgeKind.UnitDone("Home basics", "Eggs"), earned = true),
+                    Badge("streak:2", BadgeKind.Streak(2), earned = false),
+                )
+            every { progressUseCases.observeBadges() } returns flowOf(DataResult.Success(badges))
+            sut = MeViewModel(progressUseCases, settingsRepository, progressRepository)
+
+            sut.state.test {
+                // then
+                assertThat(expectMostRecentItem().badges).isEqualTo(badges)
+                cancelAndIgnoreRemainingEvents()
             }
         }
 }

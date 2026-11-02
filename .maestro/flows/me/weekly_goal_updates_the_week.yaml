@@ -9,11 +9,23 @@ tags:
 - extendedWaitUntil:
     visible: "This week: 0 of 4 cooks.*"
     timeout: 10000
+- scrollUntilVisible:
+    element:
+      id: "me_goal_plus"
+    direction: DOWN
 - tapOn:
     id: "me_goal_plus"
-- assertVisible: "This week: 0 of 5 cooks.*"
+- scrollUntilVisible:
+    element: "This week: 0 of 5 cooks.*"
+    direction: UP
+- scrollUntilVisible:
+    element:
+      id: "me_goal_minus"
+    direction: DOWN
 - tapOn:
     id: "me_goal_minus"
 - tapOn:
     id: "me_goal_minus"
-- assertVisible: "This week: 0 of 3 cooks.*"
+- scrollUntilVisible:
+    element: "This week: 0 of 3 cooks.*"
+    direction: UP

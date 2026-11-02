@@ -74,4 +74,5 @@
     <string name="cook_lock_message">Allow full-screen alarms so a timer that ends lights up the screen with Stop and +1 min, even when the phone is locked.</string>
     <string name="cook_lock_confirm">Allow</string>
     <string name="cook_lock_dismiss">Not now</string>
+    <string name="finish_new_badge">New badge!</string>
 </resources>

@@ -13,8 +13,10 @@ tags:
 - extendedWaitUntil:
     visible: "Total XP: 20"
     timeout: 10000
-- assertVisible:
-    id: "me_history_0"
+- scrollUntilVisible:
+    element:
+      id: "me_history_0"
+    direction: DOWN
 - scrollUntilVisible:
     element:
       id: "me_start_over"

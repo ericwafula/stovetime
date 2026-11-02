@@ -11,6 +11,8 @@ import com.ericwathome.stovetime.core.data.model.settings.CookSettings
 import com.ericwathome.stovetime.core.data.repo.cook.CookRepository
 import com.ericwathome.stovetime.core.data.repo.progress.ProgressRepository
 import com.ericwathome.stovetime.core.data.repo.settings.SettingsRepository
+import com.ericwathome.stovetime.core.domain.model.Badge
+import com.ericwathome.stovetime.core.domain.model.BadgeKind
 import com.ericwathome.stovetime.core.domain.model.Progress
 import com.ericwathome.stovetime.core.domain.model.WeekProgress
 import com.ericwathome.stovetime.core.domain.useCase.ProgressUseCases
@@ -48,6 +50,9 @@ class FinishViewModelTest {
 
     private val args = FinishArgs(CookKind.Lesson, "jammy-eggs-on-toast", startedAt = 1_000, finishedAt = 841_000)
     private val savedStateHandle = SavedStateHandle()
+    private val badges = MutableStateFlow<DataResult<List<Badge>>>(DataResult.Success(listOf(unitBadge(earned = false))))
+
+    private fun unitBadge(earned: Boolean) = Badge("unit:home-basics:eggs", BadgeKind.UnitDone("Home basics", "Eggs"), earned)
     private val progress = MutableStateFlow<DataResult<Progress>>(DataResult.Success(progressWith(cooks = 2, history = emptyList())))
 
     private fun progressWith(
@@ -85,6 +90,7 @@ class FinishViewModelTest {
         coEvery { cookRepository.getCookPlan(any(), any()) } returns
             DataResult.Success(CookPlan(CookKind.Lesson, "jammy-eggs-on-toast", "Jammy eggs on toast", "lesson_jammy_eggs_on_toast", 30, emptyList()))
         every { progressUseCases.observeProgress() } returns progress
+        every { progressUseCases.observeBadges() } returns badges
         every { progressUseCases.calculateCookXp(any(), any(), any()) } answers { if (thirdArg()) 10 else secondArg() }
         every { settingsRepository.observeCookSettings() } returns flowOf(CookSettings(weeklyGoal = 4))
         coEvery { progressRepository.saveCook(any()) } returns DataResult.Success(7L)
@@ -220,6 +226,38 @@ class FinishViewModelTest {
 
                 // then
                 assertThat(expectMostRecentItem().rating).isNull()
+                cancelAndIgnoreRemainingEvents()
+            }
+        }
+
+    @Test
+    fun a_badge_earned_by_this_cook_is_celebrated() =
+        runTest {
+            // given
+            val sut = createViewModel()
+
+            sut.state.test {
+                skipItems(1)
+
+                // when
+                badges.value = DataResult.Success(listOf(unitBadge(earned = true)))
+
+                // then
+                assertThat(expectMostRecentItem().newBadges.map { it.id }).containsExactly("unit:home-basics:eggs")
+                cancelAndIgnoreRemainingEvents()
+            }
+        }
+
+    @Test
+    fun a_badge_earned_before_this_cook_is_not_celebrated_again() =
+        runTest {
+            // given
+            badges.value = DataResult.Success(listOf(unitBadge(earned = true)))
+            val sut = createViewModel()
+
+            sut.state.test {
+                // then
+                assertThat(expectMostRecentItem().newBadges).isEmpty()
                 cancelAndIgnoreRemainingEvents()
             }
         }

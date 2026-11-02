@@ -26,7 +26,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.heading
+import androidx.compose.ui.semantics.liveRegion
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -35,6 +37,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ericwathome.stovetime.core.common.result.DataError
 import com.ericwathome.stovetime.core.data.model.progress.CookKind
 import com.ericwathome.stovetime.core.data.model.progress.Rating
+import com.ericwathome.stovetime.core.domain.model.Badge
+import com.ericwathome.stovetime.core.domain.model.BadgeKind
 import com.ericwathome.stovetime.core.domain.model.Progress
 import com.ericwathome.stovetime.core.domain.model.WeekDay
 import com.ericwathome.stovetime.core.domain.model.WeekProgress
@@ -46,6 +50,7 @@ import com.ericwathome.stovetime.design.components.StoveChoice
 import com.ericwathome.stovetime.design.components.StoveText
 import com.ericwathome.stovetime.design.theme.StovetimeTheme
 import com.ericwathome.stovetime.features.lessons.R
+import com.ericwathome.stovetime.ui.components.BadgeCard
 import com.ericwathome.stovetime.ui.components.DishPhoto
 import com.ericwathome.stovetime.ui.components.WeekRow
 import com.ericwathome.stovetime.ui.components.WeekRowDay
@@ -167,6 +172,10 @@ private fun FinishDetails(
                 modifier = Modifier.testTag("finish_message"),
             )
         }
+        if (state.newBadges.isNotEmpty()) {
+            Spacer(Modifier.height(spacing.s20))
+            NewBadges(badges = state.newBadges)
+        }
         Spacer(Modifier.height(spacing.s24))
         Row(horizontalArrangement = Arrangement.spacedBy(spacing.s8), modifier = Modifier.fillMaxWidth()) {
             StatTile(
@@ -212,6 +221,28 @@ private fun FinishDetails(
                     onClick = { onAction(FinishAction.OnSelectRating(rating)) },
                     modifier = Modifier.weight(1f).testTag("finish_rating_${rating.name}"),
                 )
+            }
+        }
+    }
+}
+
+@Composable
+private fun NewBadges(badges: List<Badge>) {
+    Column(
+        modifier = Modifier.fillMaxWidth().testTag("finish_new_badge"),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(StovetimeTheme.spacing.s8),
+    ) {
+        StoveText(
+            text = stringResource(R.string.finish_new_badge),
+            style = StovetimeTheme.typography.heading,
+            color = StovetimeTheme.colors.xpContent,
+            modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite },
+        )
+        badges.forEach { badge ->
+            when (val kind = badge.kind) {
+                is BadgeKind.UnitDone -> BadgeCard(unitTitle = kind.unitTitle, streakWeeks = null, earned = true, modifier = Modifier.fillMaxWidth())
+                is BadgeKind.Streak -> BadgeCard(unitTitle = null, streakWeeks = kind.weeks, earned = true, modifier = Modifier.fillMaxWidth())
             }
         }
     }

@@ -13,6 +13,7 @@ import com.ericwathome.stovetime.core.data.model.progress.Rating
 import com.ericwathome.stovetime.core.data.repo.cook.CookRepository
 import com.ericwathome.stovetime.core.data.repo.progress.ProgressRepository
 import com.ericwathome.stovetime.core.data.repo.settings.SettingsRepository
+import com.ericwathome.stovetime.core.domain.model.Badge
 import com.ericwathome.stovetime.core.domain.model.Progress
 import com.ericwathome.stovetime.core.domain.useCase.ProgressUseCases
 import com.ericwathome.stovetime.ui.helpers.MviViewModel
@@ -55,6 +56,7 @@ data class FinishState(
     val dish: ViewState<FinishedDish> = ViewState.Initial,
     val progress: Progress? = null,
     val rating: Rating? = null,
+    val newBadges: List<Badge> = emptyList(),
 ) {
     val goalJustMet: Boolean
         get() = progress?.thisWeek?.let { it.cooks == it.goal } == true
@@ -69,6 +71,7 @@ class FinishViewModel(
     private val progressUseCases: ProgressUseCases,
 ) : MviViewModel<FinishAction, FinishState, FinishEvent>(FinishState()) {
     private var started = false
+    private var earnedBefore: Set<String>? = null
 
     override fun onStateSubscription() {
         if (started) return
@@ -109,6 +112,7 @@ class FinishViewModel(
             showDish(plan, savedXp)
             return
         }
+        earnedBefore = progressUseCases.observeBadges().first().getOrNull()?.filter { it.earned }?.map { it.id }?.toSet()
         val history = progressUseCases.observeProgress().first().getOrNull()?.history.orEmpty()
         val cookedBefore = history.any { it.kind == args.kind && it.dishId == args.dishId }
         val xp = progressUseCases.calculateCookXp(args.kind, plan.baseXp, cookedBefore)
@@ -131,6 +135,7 @@ class FinishViewModel(
                 savedStateHandle[COOK_ID_KEY] = result.data
                 savedStateHandle[XP_KEY] = xp
                 showDish(plan, xp)
+                observeNewBadges()
             }
 
             is DataResult.Error -> {
@@ -151,6 +156,17 @@ class FinishViewModel(
                 cookMillis = (args.finishedAt - args.startedAt).coerceAtLeast(0),
             )
         updateState { it.copy(dish = ViewState.Success(dish)) }
+    }
+
+    private fun observeNewBadges() {
+        val before = earnedBefore ?: return
+        viewModelScope.launch {
+            progressUseCases.observeBadges().collect { result ->
+                result.onSuccess { badges ->
+                    updateState { state -> state.copy(newBadges = badges.filter { it.earned && it.id !in before }) }
+                }
+            }
+        }
     }
 
     private fun observeProgress() {

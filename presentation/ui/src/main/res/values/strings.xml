@@ -36,4 +36,11 @@
     <string name="course_sheet_title">Courses</string>
     <string name="course_progress">%1$d of %2$d cooked</string>
     <string name="course_current">Current course</string>
+    <string name="badge_unit_title">Unit done</string>
+    <string name="badge_unit_caption">Cook every lesson in %1$s</string>
+    <string name="badge_streak_title">%1$d-week streak</string>
+    <string name="badge_streak_caption">Hit your weekly goal %1$d weeks in a row</string>
+    <string name="badge_earned">earned</string>
+    <string name="badge_not_earned">not earned yet</string>
+    <string name="badge_description">%1$s, %2$s. %3$s</string>
 </resources>
