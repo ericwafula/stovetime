@@ -59,11 +59,11 @@ Teach people to cook at home, **one recipe at a time**. Stovetime is a learning 
 
 | Phase | Name | Goal | Status |
 |---|---|---|---|
-| 0 | Foundations | Modules, navigation, storage and the TheMealDB client the features build on | 🟨 |
-| 1 | The Path | Pick the next lesson, learn it, cook it step by step, earn XP and keep the streak | ⬜ |
-| 2 | Timers | Timers that keep running and ring with the app closed, and a Timers tab | ⬜ |
-| 3 | Recipes | Sync TheMealDB to the phone, browse and search it offline, and cook any recipe | ⬜ |
-| 4 | Me | Progress, history, the weekly goal and settings | ⬜ |
+| 0 | Foundations | Modules, navigation, storage and the TheMealDB client the features build on | ✅ |
+| 1 | The Path | Pick the next lesson, learn it, cook it step by step, earn XP and keep the streak | ✅ |
+| 2 | Timers | Timers that keep running and ring with the app closed, and a Timers tab | ✅ |
+| 3 | Recipes | Sync TheMealDB to the phone, browse and search it offline, and cook any recipe | ✅ |
+| 4 | Me | Progress, history, the weekly goal and settings | ✅ |
 | 5 | Later | More courses, badges, reminders, dark mode, widgets | ⬜ |
 
 The **Path screen (1.2)** is the screen built live in the workshop.
@@ -95,7 +95,7 @@ The **Path screen (1.2)** is the screen built live in the workshop.
 ### Phase 2 — Timers
 | ID | Item | Status |
 |---|---|---|
-| 2.1 | Timer engine: several timers at once, a foreground service, survives the app being closed | ⬜ |
+| 2.1 | Timer engine: several timers at once, a foreground service, survives the app being closed | ✅ |
 | 2.2 | Step timers run on the engine and keep going when you leave cook mode | ✅ |
 | 2.3 | Alarm: rings and vibrates, with Stop and "+1 min", over the lock screen | ✅ |
 | 2.4 | Timers tab: running timers and a quick named timer | ✅ |

@@ -1,0 +1,32 @@
+appId: com.ericwathome.stovetime
+name: A quick timer with no name starts as Timer 1 and can be paused and resumed
+tags:
+  - timers
+---
+- launchApp:
+    clearState: true
+    permissions:
+      notifications: allow
+- tapOn: "Timers"
+- extendedWaitUntil:
+    visible:
+      id: "timers_new_quick_timer"
+    timeout: 10000
+- tapOn:
+    id: "timers_new_quick_timer"
+- tapOn:
+    id: "quick_timer_start"
+- runFlow:
+    when:
+      visible: "Not now"
+    commands:
+      - tapOn: "Not now"
+- extendedWaitUntil:
+    visible:
+      id: "timer_card_0"
+    timeout: 5000
+- assertVisible: "Timer 1.*"
+- tapOn: "Pause"
+- assertVisible: "Resume"
+- tapOn: "Resume"
+- assertVisible: "Pause"

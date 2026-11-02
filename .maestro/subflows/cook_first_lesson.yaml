@@ -1,0 +1,24 @@
+appId: com.ericwathome.stovetime
+---
+- extendedWaitUntil:
+    visible:
+      id: "path_start"
+    timeout: 10000
+- tapOn:
+    id: "path_start"
+- extendedWaitUntil:
+    visible:
+      id: "intro_start"
+    timeout: 10000
+- tapOn:
+    id: "intro_start"
+- repeat:
+    while:
+      notVisible: "Dish done!"
+    commands:
+      - tapOn:
+          id: "cook_next"
+      - waitForAnimationToEnd:
+          timeout: 2000
+- tapOn:
+    id: "finish_continue"

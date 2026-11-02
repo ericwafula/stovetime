@@ -1,0 +1,19 @@
+appId: com.ericwathome.stovetime
+name: Raising the weekly goal shows straight away in the week row
+tags:
+  - me
+---
+- launchApp:
+    clearState: true
+- tapOn: "Me"
+- extendedWaitUntil:
+    visible: "This week: 0 of 4 cooks.*"
+    timeout: 10000
+- tapOn:
+    id: "me_goal_plus"
+- assertVisible: "This week: 0 of 5 cooks.*"
+- tapOn:
+    id: "me_goal_minus"
+- tapOn:
+    id: "me_goal_minus"
+- assertVisible: "This week: 0 of 3 cooks.*"

@@ -2,7 +2,7 @@
 
 **Order:** 2.1 → 2.2 → 2.3 → 2.4
 
-## 2.1 Timer engine
+## 2.1 Timer engine ✅
 
 **Size:** L · **Depends on:** 0.4
 
@@ -10,13 +10,13 @@
 The part every timer runs on. Any number of timers at once, each with a name, kept alive by a foreground service with one ongoing notification, and set to ring at the right moment even if the app is closed or the phone is locked.
 
 ### Acceptance Criteria
-- [ ] Start, pause, resume, add a minute and cancel work for several timers at once
-- [ ] Times are based on when a timer should end, so it stays accurate after the app is closed and reopened
-- [ ] One ongoing notification lists every running timer while any is running, and goes away when none are
-- [ ] A timer that ends rings even with the app swiped away or the screen locked
-- [ ] Running timers come back after the app is killed and after the phone restarts
-- [ ] The notification permission is asked the first time a timer starts, with a short explanation first
-- [ ] Tests cover: two timers end in the right order, pause and resume keep the time left, restore after the app is killed, a timer that ended while the app was dead rings straight away on restore
+- [x] Start, pause, resume, add a minute and cancel work for several timers at once
+- [x] Times are based on when a timer should end, so it stays accurate after the app is closed and reopened
+- [x] One ongoing notification lists every running timer while any is running, and goes away when none are
+- [x] A timer that ends rings even with the app swiped away or the screen locked
+- [x] Running timers come back after the app is killed and after the phone restarts
+- [x] The notification permission is asked the first time a timer starts, with a short explanation first
+- [x] Tests cover: two timers end in the right order, pause and resume keep the time left, restore after the app is killed, a timer that ended while the app was dead rings straight away on restore
 
 ### Edge cases
 - The notification permission is refused: timers still run while the app is open, and a note explains what's missing.

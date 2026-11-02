@@ -1,0 +1,36 @@
+appId: com.ericwathome.stovetime
+name: Start over clears XP and history and puts the Path back on the first lesson
+tags:
+  - me
+  - path
+---
+- launchApp:
+    clearState: true
+    permissions:
+      notifications: allow
+- runFlow: ../../subflows/cook_first_lesson.yaml
+- tapOn: "Me"
+- extendedWaitUntil:
+    visible: "Total XP: 20"
+    timeout: 10000
+- assertVisible:
+    id: "me_history_0"
+- scrollUntilVisible:
+    element:
+      id: "me_start_over"
+    direction: DOWN
+- tapOn:
+    id: "me_start_over"
+- tapOn: "Keep my progress"
+- assertVisible:
+    id: "me_history_0"
+- tapOn:
+    id: "me_start_over"
+- tapOn: "Delete my progress"
+- scrollUntilVisible:
+    element: "Total XP: 0"
+    direction: UP
+- assertNotVisible:
+    id: "me_history_0"
+- tapOn: "Path"
+- assertVisible: "Boiled eggs, up next"

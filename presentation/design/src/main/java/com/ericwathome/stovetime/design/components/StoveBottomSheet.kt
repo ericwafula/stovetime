@@ -19,6 +19,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ericwathome.stovetime.design.theme.StovetimeTheme
@@ -61,6 +63,7 @@ private fun StoveSheetBody(content: @Composable ColumnScope.() -> Unit) {
     Column(
         Modifier
             .fillMaxWidth()
+            .semantics { testTagsAsResourceId = true }
             .windowInsetsPadding(WindowInsets.navigationBars)
             .padding(horizontal = 24.dp)
             .padding(top = 8.dp, bottom = 24.dp),

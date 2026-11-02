@@ -49,4 +49,6 @@ Run them in order. Paste one, wait for it to finish, look at the commits, then r
 
 ## Blocked
 
-Nothing yet.
+Nothing blocked. One check was done off the device:
+
+- 2.1 "running timers come back after the phone restarts": the boot receiver runs the same restore as a killed process, which was checked on the phone (a timer killed mid-run rang on time over the lock screen). The phone itself wasn't rebooted, because it has a secure lock screen that needs the owner to unlock it.
