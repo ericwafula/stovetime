@@ -1,0 +1,16 @@
+<resources>
+    <string name="recipes_title">Recipes</string>
+    <string name="recipes_synced">Synced %1$s · works offline</string>
+    <string name="recipes_not_synced">Not synced yet</string>
+    <string name="recipes_search_placeholder">Search recipes</string>
+    <string name="recipes_category_all">All</string>
+    <string name="recipes_pull_to_sync">Pull to sync</string>
+    <string name="recipes_syncing">Syncing recipes…</string>
+    <string name="recipes_loading">Getting recipes ready…</string>
+    <string name="recipes_empty_title">No recipes yet</string>
+    <string name="recipes_empty_offline">Recipes download the first time you\'re online. Connect to Wi-Fi or mobile data, then try again.</string>
+    <string name="recipes_empty_failed">We couldn\'t download recipes just now. Check your connection and try again.</string>
+    <string name="recipes_retry">Try again</string>
+    <string name="recipes_no_matches">No recipes match \'%1$s\'</string>
+    <string name="recipes_category_empty">Nothing in this category yet</string>
+</resources>

@@ -8,6 +8,8 @@ import com.ericwathome.stovetime.core.data.repo.course.CourseRepository
 import com.ericwathome.stovetime.core.data.repo.course.CourseRepositoryImpl
 import com.ericwathome.stovetime.core.data.repo.course.GetCourseRepository
 import com.ericwathome.stovetime.core.data.repo.course.GetCourseRepositoryImpl
+import com.ericwathome.stovetime.core.data.helpers.ObserveConnectivity
+import com.ericwathome.stovetime.core.data.helpers.ObserveConnectivityImpl
 import com.ericwathome.stovetime.core.data.repo.progress.ClearProgressRepository
 import com.ericwathome.stovetime.core.data.repo.progress.ClearProgressRepositoryImpl
 import com.ericwathome.stovetime.core.data.repo.progress.ObserveCooksRepository
@@ -148,7 +150,14 @@ internal val RepositoryModule =
         includes(CookRepositoryModule, CourseRepositoryModule, ProgressRepositoryModule, SettingsRepositoryModule, TimersRepositoryModule, RecipesRepositoryModule)
     }
 
+internal val HelperModule =
+    module {
+        singleOf(::ObserveConnectivityImpl) {
+            bind<ObserveConnectivity>()
+        }
+    }
+
 val CoreDataModule =
     module {
-        includes(LocalModule, NetworkModule, RepositoryModule, WorkerModule)
+        includes(LocalModule, NetworkModule, RepositoryModule, WorkerModule, HelperModule)
     }

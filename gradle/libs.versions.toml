@@ -34,6 +34,7 @@ turbine = "1.2.1"
 kotlinx-datetime = "0.7.1"
 gmsLocation = "21.3.0"
 modulegraph = "0.13.0"
+coil = "3.3.0"
 
 [libraries]
 # gradle
@@ -129,6 +130,10 @@ kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime",
 # location
 google-android-gms-play-services-location = { module = "com.google.android.gms:play-services-location", version.ref = "gmsLocation"}
 
+# coil
+coil-compose = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref = "coil" }
+coil-network-ktor3 = { group = "io.coil-kt.coil3", name = "coil-network-ktor3", version.ref = "coil" }
+
 # module graph
 modulegraph = { module = "dev.iurysouza.modulegraph:dev.iurysouza.modulegraph.gradle.plugin", version.ref = "modulegraph" }
 
@@ -156,4 +161,5 @@ stovetime-jvm-library = { id = "stovetime.jvm.library", version = "unspecified" 
 navigation3 = ["androidx-navigation3-runtime", "androidx-navigation3-ui", "androidx-lifecycle-viewmodel-navigation3"]
 koin = ["koin-core", "koin-android"]
 koin-compose = ["koin-androidx-compose", "koin-compose", "koin-compose-viewmodel"]
+coil = ["coil-compose", "coil-network-ktor3", "ktor-cio"]
 ktor = ["ktor-cio", "ktor-content-negotiation", "ktor-kotlin-serialization-json", "ktor-client-logging", "ktor", "koin-ktor"]

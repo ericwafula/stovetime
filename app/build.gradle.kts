@@ -14,6 +14,7 @@ dependencies {
     implementation(projects.features.lessons)
     implementation(projects.sdk.timer)
     implementation(libs.timber)
+    implementation(projects.features.recipes)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)

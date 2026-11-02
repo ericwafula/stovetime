@@ -40,12 +40,12 @@ Keep a copy of TheMealDB's catalogue on the phone: every category and the meals 
 The Recipes tab: category chips across the top, a grid of meal cards with photos, and a search box. Everything comes from the synced catalogue, so it works offline. Pull down to sync now.
 
 ### Acceptance Criteria
-- [ ] The tab opens on "All" with every stored meal, newest sync first
-- [ ] Tapping a category shows only its meals
-- [ ] Typing in search filters by meal name as you type, ignoring case and accents
-- [ ] Pull to refresh runs a sync and shows when it last synced
+- [x] The tab opens on "All" with every stored meal, newest sync first
+- [x] Tapping a category shows only its meals
+- [x] Typing in search filters by meal name as you type, ignoring case and accents
+- [x] Pull to refresh runs a sync and shows when it last synced
 - [ ] Tapping a card opens its recipe page (3.3)
-- [ ] Tests cover: category filter, search ignoring case and accents, empty search result, pull to refresh starts a sync
+- [x] Tests cover: category filter, search ignoring case and accents, empty search result, pull to refresh starts a sync
 
 ### Edge cases
 - Nothing synced yet and no connection: an empty state that explains why, with a retry.
