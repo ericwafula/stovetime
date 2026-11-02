@@ -19,7 +19,7 @@ The plan is `.ai/roadmap/ROADMAP.md` plus `backlog/phase-*.md`: *what* to build 
 1. **New requirement** ("users want to time poached eggs"): dispatch `planner`. Show the user its draft step and acceptance criteria. Once they approve, re-invoke `planner` to write it.
 2. **Building a step or a screen:**
    1. Read the step's acceptance criteria and its **Design:** link. If there's a Figma link, read the frame with the Figma MCP instead of guessing from a screenshot.
-   2. Build bottom-up with the skills: `add-viewmodel` → `new-compose-screen`, writing tests with `generate-unit-test` as you go.
+   2. Build bottom-up with the skills, creating modules with `add-feature-module` the first time a layer needs one: `add-datasource` → `add-repository` → `add-usecase` (only for shared logic) → `add-viewmodel` → `new-compose-screen` with `implement-design` → `add-navigation`. Write tests with `generate-unit-test` as you go. The `architecture` skill decides where each piece lives.
    3. Run `checks` and fix failures at the source.
    4. Install the app and check the screen on the emulator with the Mobile MCP. For journeys that must never break, add a flow with `maestro`.
    5. Dispatch `code-reviewer` with the list of changed files. Fix confirmed issues; say which you skipped and why.
