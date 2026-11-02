@@ -33,6 +33,7 @@ import com.ericwathome.stovetime.design.theme.StovetimeTheme
 import com.ericwathome.stovetime.navigation.entry.navigationCook
 import com.ericwathome.stovetime.navigation.entry.navigationFinish
 import com.ericwathome.stovetime.navigation.entry.navigationLessonIntro
+import com.ericwathome.stovetime.navigation.entry.navigationMe
 import com.ericwathome.stovetime.navigation.entry.navigationPath
 import com.ericwathome.stovetime.navigation.entry.navigationPlaceholder
 import com.ericwathome.stovetime.navigation.entry.navigationRecipe
@@ -95,7 +96,13 @@ fun StovetimeNavHost(
                                 navigator.navigate(Destination.Cook(kind = kind.name, dishId = dishId, startedAt = startedAt, step = step))
                             },
                         )
-                    Destination.Me -> navigationPlaceholder(destination, R.string.tab_me)
+                    Destination.Me ->
+                        navigationMe(
+                            Destination.Me,
+                            onOpenLesson = { lessonId -> navigator.navigate(Destination.LessonIntro(lessonId)) },
+                            onOpenRecipe = { recipeId -> navigator.navigate(Destination.Recipe(recipeId)) },
+                            onOpenPath = { navigator.selectTab(Destination.Path) },
+                        )
                     is Destination.LessonIntro ->
                         navigationLessonIntro(
                             destination,

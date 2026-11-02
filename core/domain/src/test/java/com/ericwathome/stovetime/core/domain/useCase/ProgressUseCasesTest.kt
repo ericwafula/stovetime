@@ -134,4 +134,18 @@ class ProgressUseCasesTest {
         assertThat(progress.thisWeek.days.first().cooked).isTrue()
         assertThat(progress.thisWeek.cooks).isEqualTo(1)
     }
+
+    @Test
+    fun the_history_lists_the_newest_cook_first() {
+        // given
+        val monday = cookAt(LocalDateTime(2026, 11, 2, 18, 0)).copy(id = 1)
+        val wednesdayCook = cookAt(LocalDateTime(2026, 11, 4, 12, 0)).copy(id = 2)
+        val tuesday = cookAt(LocalDateTime(2026, 11, 3, 9, 0)).copy(id = 3)
+
+        // when
+        val progress = progressOf(listOf(monday, wednesdayCook, tuesday), goal = 4, today = wednesday)
+
+        // then
+        assertThat(progress.history.map { it.id }).containsExactly(2L, 3L, 1L).inOrder()
+    }
 }

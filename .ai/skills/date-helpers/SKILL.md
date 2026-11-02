@@ -34,6 +34,8 @@ None exist yet. These are the first ones the app needs; create each in its file 
 | `dayText(today)`, `durationText()`, `streakText()` | `presentation:ui` | Composable wrappers with string resources |
 | `elapsedBetween(thenMillis, nowMillis)` | `core:common` (`ElapsedRules.kt`) | `Elapsed`: just now, minutes, hours or days since a moment |
 | `Elapsed.agoText()` | `presentation:ui` (`ElapsedText.kt`) | "just now", "2 hours ago", "3 days ago" from plurals |
+| `relativeDay(date, today)` | `core:common` (`CalendarRules.kt`) | `RelativeDay`: today, yesterday, a weekday earlier this calendar week, or an earlier date |
+| `dayText(date, today)`, `monthText(date, today)` | `presentation:ui` (`DayText.kt`) | "Today", "Yesterday", "Wednesday", "Oct 12"; "October" or "October 2025" |
 
 Add a row when you add a helper.
 

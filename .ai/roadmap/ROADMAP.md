@@ -112,7 +112,7 @@ The **Path screen (1.2)** is the screen built live in the workshop.
 ### Phase 4 — Me
 | ID | Item | Status |
 |---|---|---|
-| 4.1 | Me screen: total XP, current and best streak, recipes cooked, cook history | ⬜ |
+| 4.1 | Me screen: total XP, current and best streak, recipes cooked, cook history | ✅ |
 | 4.2 | Settings: weekly goal, keep screen on while cooking | ⬜ |
 | 4.3 | Start over: reset all progress, with a confirmation | ⬜ |
 
@@ -273,6 +273,11 @@ These rules live in `:core:domain` and are covered by tests with fixed dates.
 | 2026-11-02 | The quick timer sheet sets seconds with a second row of "−10 s" / "+10 s" pills under the frame's "−1 min / 5:00 / +1 min" row; it opens at 5:00 and stays between 10 seconds and 3 hours | The frame shows minutes only and the spec asks for minutes and seconds; pills fit the frame better than a tap-to-edit field |
 | 2026-11-02 | An unnamed quick timer takes "Timer N" with the lowest N that no current timer is named; the number comes from a localised "Timer %d" the screen passes in | Numbers are reused once a timer ends, so they stay small |
 | 2026-11-02 | `StoveTextField` (with `StoveSearchField` built on it) and `StoveStepButton` join `:presentation:design` | The quick timer sheet's name field and −/+ pills, with 48 dp touch targets |
+| 2026-11-02 | Me's subline is the month of the first cook ("Home cook since October", with the year once it isn't this year); before any cook it reads "Ready for your first cook" | The frame only shows the filled line; the month comes from the oldest cook in the history |
+| 2026-11-02 | The best streak shows as a caption under the three stat tiles ("Best streak: 5 weeks") | The Me frame has no slot for it and a fourth tile doesn't fit a 360 dp screen |
+| 2026-11-02 | History dates read Today, Yesterday, the weekday for earlier days of this calendar week, and a short date before that | Matches the frame ("Today", "Wednesday") and the week row above it; `relativeDay` in `:core:common` holds the rule |
+| 2026-11-02 | `StoveCard` takes a `shape`; Me's history and settings cards use the medium radius with the usual ledge | The frame's cards are 16 dp; history items are pressable, so they keep the ledge |
+| 2026-11-02 | Empty Me history is a card with "Go to the Path"; while progress loads nothing is drawn, and a failed load shows Try again | The frame shows only the filled state; same pattern as the Path tab |
 
 ---
 

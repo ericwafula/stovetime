@@ -2,7 +2,7 @@
 
 **Order:** 4.1 → 4.2 → 4.3
 
-## 4.1 Me screen
+## 4.1 Me screen ✅
 
 **Size:** M · **Depends on:** 1.5, 0.3
 **Design:** [Figma › Me](https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=81-73)
@@ -11,11 +11,11 @@
 Your progress at a glance: total XP, the current and best week streak, lessons and recipes cooked, this week's cooks against the goal, and a history of everything you've cooked, newest first, with its date, rating and XP.
 
 ### Acceptance Criteria
-- [ ] Total XP, current streak, best streak and number of cooks match the progress rules
-- [ ] This week's row shows the same dots and "N of goal cooks" as the finish screen
-- [ ] The history lists every cook, newest first, with the dish name, photo, date, rating and XP
-- [ ] Tapping a history item opens that lesson's intro or that recipe's page
-- [ ] Tests cover: totals on a fresh install, totals after several cooks, best streak stays after a reset, history order
+- [x] Total XP, current streak, best streak and number of cooks match the progress rules
+- [x] This week's row shows the same dots and "N of goal cooks" as the finish screen
+- [x] The history lists every cook, newest first, with the dish name, photo, date, rating and XP
+- [x] Tapping a history item opens that lesson's intro or that recipe's page
+- [x] Tests cover: totals on a fresh install, totals after several cooks, best streak stays after a reset, history order
 
 ### Edge cases
 - Nothing cooked yet: an empty history that points back to the Path.

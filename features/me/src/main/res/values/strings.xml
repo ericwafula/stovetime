@@ -1,0 +1,24 @@
+<resources>
+    <string name="me_title">Me</string>
+    <string name="me_cooking_since">Home cook since %1$s</string>
+    <string name="me_nothing_cooked_yet">Ready for your first cook</string>
+    <string name="me_total_xp">Total XP</string>
+    <string name="me_week_streak">Week streak</string>
+    <string name="me_dishes_cooked">Dishes cooked</string>
+    <plurals name="me_best_streak">
+        <item quantity="one">Best streak: %d week</item>
+        <item quantity="other">Best streak: %d weeks</item>
+    </plurals>
+    <string name="me_history">History</string>
+    <string name="me_history_caption">%1$s · %2$s</string>
+    <string name="me_history_xp">+%1$d XP</string>
+    <string name="me_history_description">%1$s, %2$s, %3$s</string>
+    <string name="me_rating_overdone">Overdone</string>
+    <string name="me_rating_pretty_good">Pretty good</string>
+    <string name="me_rating_nailed_it">Nailed it</string>
+    <string name="me_history_empty_title">Nothing cooked yet</string>
+    <string name="me_history_empty_message">Every dish you finish shows up here. Your first lesson is waiting on the Path.</string>
+    <string name="me_history_empty_action">Go to the Path</string>
+    <string name="me_error_title">We couldn\'t load your progress</string>
+    <string name="me_retry">Try again</string>
+</resources>
