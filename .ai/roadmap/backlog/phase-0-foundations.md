@@ -22,7 +22,7 @@ The look of the app in one module: colours, type, spacing, shapes and the shared
 
 ---
 
-## 0.2 Module structure and shared basics
+## 0.2 Module structure and shared basics ✅
 
 **Size:** M · **Depends on:** 0.1
 
@@ -30,11 +30,11 @@ The look of the app in one module: colours, type, spacing, shapes and the shared
 Lay out the modules from roadmap §5 that Phase 1 needs first, with the pieces every feature shares: one result type for data calls, coroutine dispatchers, and the ViewModel base every screen uses.
 
 ### Acceptance Criteria
-- [ ] The app still builds, runs and shows the same first screen after the split
-- [ ] Data calls return a success or a typed error; an error never crashes the app
-- [ ] Screens get their state from a ViewModel that takes user actions and sends one-off events (navigate, show a sheet)
-- [ ] Dependency injection is set up once in the app, and each module adds its own pieces
-- [ ] Tests cover: a failed data call becomes a typed error, a cancelled call is not turned into an error, a ViewModel action changes state
+- [x] The app still builds, runs and shows the same first screen after the split
+- [x] Data calls return a success or a typed error; an error never crashes the app
+- [x] Screens get their state from a ViewModel that takes user actions and sends one-off events (navigate, show a sheet)
+- [x] Dependency injection is set up once in the app, and each module adds its own pieces
+- [x] Tests cover: a failed data call becomes a typed error, a cancelled call is not turned into an error, a ViewModel action changes state
 
 ### Edge cases
 - A module nothing uses yet isn't created; it's added by the first step that needs it.
