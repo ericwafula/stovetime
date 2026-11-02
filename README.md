@@ -59,7 +59,7 @@ Install these before the Level 3 steps. Everything else comes with the repo.
 | [uv](https://docs.astral.sh/uv/) | Running code-review-graph and memsearch (they need Python 3.10+) | `brew install uv`, then `uv tool update-shell` and open a new terminal |
 | [context-mode](https://github.com/mksglu/context-mode) | Keeping big command output out of context | Comes with the repo: `.claude/settings.json` enables the plugin. Approve it on first run |
 | [memsearch](https://github.com/zilliztech/memsearch) | Memory across sessions | Comes with the repo, the same way. Memories go to `.memsearch/` |
-| [code-review-graph](https://github.com/tirth8205/code-review-graph) | A map of the code, so Claude opens fewer files | `uv tool install code-review-graph`, then `code-review-graph install --platform claude-code --no-instructions` and `code-review-graph build` |
+| [code-review-graph](https://github.com/tirth8205/code-review-graph) | A map of the code, so Claude opens fewer files | `uv tool install code-review-graph`, then `code-review-graph build`. Skip `code-review-graph install`: its MCP server, hooks and skills are already in the repo, and it would rewrite `.mcp.json` with your own path |
 | [RTK](https://github.com/rtk-ai/rtk) | Shorter command output | Optional, see its README |
 | [ctxline](https://github.com/ericwafula/ctxline) | A status line with context used and the 5-hour and weekly limits | Optional. See below |
 

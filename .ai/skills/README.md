@@ -57,6 +57,17 @@ The playbooks Claude Code follows to build Stovetime. Each lives in `.ai/skills/
 | [`github-cleanup-branches`](./github-cleanup-branches/SKILL.md) | Delete merged branches safely. |
 | [`github-sync-base`](./github-sync-base/SKILL.md) | Bring a branch up to date with `main`. |
 
+## Code graph
+
+From [code-review-graph](https://github.com/tirth8205/code-review-graph) (MIT), copied in so nobody needs to run `code-review-graph install`. They use its MCP server; run `code-review-graph build` once after cloning.
+
+| Skill | What it does |
+|---|---|
+| [`explore-codebase`](./explore-codebase/SKILL.md) | Find your way around through the graph instead of opening files. |
+| [`debug-issue`](./debug-issue/SKILL.md) | Trace a bug through callers and dependencies. |
+| [`refactor-safely`](./refactor-safely/SKILL.md) | Check what depends on code before changing it. |
+| [`review-changes`](./review-changes/SKILL.md) | Review a diff with risk levels and blast radius from the graph. |
+
 ## Writing
 
 | Skill | What it does |
