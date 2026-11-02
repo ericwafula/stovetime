@@ -9,7 +9,10 @@ import com.ericwathome.stovetime.core.data.repo.recipes.RecipesRepository
 import com.ericwathome.stovetime.testing.MainDispatcherRule
 import com.ericwathome.stovetime.ui.helpers.ViewState
 import com.google.common.truth.Truth.assertThat
+import com.ericwathome.stovetime.core.data.model.progress.CookKind
+import com.ericwathome.stovetime.core.domain.useCase.ProgressUseCases
 import io.mockk.MockKAnnotations
+import io.mockk.every
 import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.CompletableDeferred
@@ -24,6 +27,9 @@ class RecipeViewModelTest {
 
     @MockK
     private lateinit var recipesRepository: RecipesRepository
+
+    @MockK
+    private lateinit var progressUseCases: ProgressUseCases
 
     private lateinit var sut: RecipeViewModel
 
@@ -41,8 +47,9 @@ class RecipeViewModelTest {
     @Before
     fun setup() {
         MockKAnnotations.init(this, relaxed = true)
+        every { progressUseCases.calculateCookXp(CookKind.Recipe, any(), any()) } returns 10
         coEvery { recipesRepository.getRecipe("52772") } returns DataResult.Success(recipe)
-        sut = RecipeViewModel(recipeId = "52772", recipesRepository = recipesRepository)
+        sut = RecipeViewModel(recipeId = "52772", recipesRepository = recipesRepository, progressUseCases = progressUseCases)
     }
 
     @Test

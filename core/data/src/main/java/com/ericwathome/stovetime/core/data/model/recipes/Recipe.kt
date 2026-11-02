@@ -1,7 +1,5 @@
 package com.ericwathome.stovetime.core.data.model.recipes
 
-const val RECIPE_COOK_XP = 10
-
 data class Recipe(
     val id: String,
     val name: String,

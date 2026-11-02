@@ -106,7 +106,7 @@ The **Path screen (1.2)** is the screen built live in the workshop.
 | 3.1 | Recipe sync: TheMealDB's catalogue kept on the phone, refreshed in the background | ✅ |
 | 3.2 | Browse by category and search, from the phone's copy | ✅ |
 | 3.3 | Recipe page: fetched on first open, kept for offline | ✅ |
-| 3.4 | Cook any recipe: steps split from the instructions, times turned into timers, XP | ⬜ |
+| 3.4 | Cook any recipe: steps split from the instructions, times turned into timers, XP | ✅ |
 | 3.5 | Offline and sync states: last synced, stale data, retry | ✅ |
 
 ### Phase 4 — Me

@@ -106,7 +106,16 @@ fun StovetimeNavHost(
                             },
                         )
                     is Destination.CookDone -> navigationFinish(destination, onContinue = navigator::backward)
-                    is Destination.Recipe -> navigationRecipe(destination, onBack = navigator::backward, onStartCooking = {})
+                    is Destination.Recipe ->
+                        navigationRecipe(
+                            destination,
+                            onBack = navigator::backward,
+                            onStartCooking = { recipeId ->
+                                navigator.navigate(
+                                    Destination.Cook(kind = CookKind.Recipe.name, dishId = recipeId, startedAt = System.currentTimeMillis()),
+                                )
+                            },
+                        )
                 }
             },
         )

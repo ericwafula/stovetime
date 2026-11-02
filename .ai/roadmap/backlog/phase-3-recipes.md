@@ -70,7 +70,7 @@ A recipe from TheMealDB in the same layout as a lesson intro: photo, name, categ
 - [x] A recipe opened before shows straight away, even offline
 - [x] A recipe never opened before shows a loading state, then the recipe
 - [x] Each ingredient shows with its measure, and can be ticked off like the lesson intro
-- [ ] Start cooking opens cook mode for this recipe (3.4)
+- [x] Start cooking opens cook mode for this recipe (3.4)
 - [x] Tests cover: opened before and offline, first open online, first open offline
 
 ### Edge cases
@@ -82,7 +82,7 @@ A recipe from TheMealDB in the same layout as a lesson intro: photo, name, categ
 
 ---
 
-## 3.4 Cook any recipe
+## 3.4 Cook any recipe ✅
 
 **Size:** M · **Depends on:** 3.3, 1.4, 1.5
 
@@ -90,11 +90,11 @@ A recipe from TheMealDB in the same layout as a lesson intro: photo, name, categ
 Cook a TheMealDB recipe in the same cook mode as a lesson. Its instructions are split into steps, and any time in a step ("simmer for 20 minutes") becomes a timer. Finishing it earns XP and counts towards the weekly goal.
 
 ### Acceptance Criteria
-- [ ] Instructions are split into steps on line breaks, or on sentences when there are none
-- [ ] A step that mentions a time ("20 minutes", "1 hour", "1½ hours", "30-40 mins") gets a timer set to it (the lower number for a range)
-- [ ] Finishing earns +10 XP and counts as a cook for the week and the streak
-- [ ] The finish screen and Me history show the recipe's name and photo
-- [ ] Tests cover: splitting on line breaks, splitting on sentences, each time format, a range, a step with no time
+- [x] Instructions are split into steps on line breaks, or on sentences when there are none
+- [x] A step that mentions a time ("20 minutes", "1 hour", "1½ hours", "30-40 mins") gets a timer set to it (the lower number for a range)
+- [x] Finishing earns +10 XP and counts as a cook for the week and the streak
+- [x] The finish screen and Me history show the recipe's name and photo
+- [x] Tests cover: splitting on line breaks, splitting on sentences, each time format, a range, a step with no time
 
 ### Edge cases
 - Instructions that are one long paragraph with no full stops: one step with the whole text.
