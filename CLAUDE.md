@@ -1,6 +1,6 @@
 # Stovetime
 
-Android app: recipes and cooking timers. Before any structural change, read `.ai/skills/architecture/SKILL.md`. The playbooks for building things are in `.ai/skills/`, and the plan is in `.ai/roadmap/`.
+Android app: a learning path for home cooks, with cook mode, timers, XP and a weekly streak. Before any structural change, read `.ai/skills/architecture/SKILL.md`. The playbooks for building things are in `.ai/skills/`, and the plan is in `.ai/roadmap/`.
 
 ## Rules for every session and agent
 

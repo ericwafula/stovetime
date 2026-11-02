@@ -15,7 +15,7 @@ Review the files the caller names. Read enough of the surrounding code to unders
 
 1. **Correctness.** Logic errors, empty and loading states, coroutine and Flow misuse, state that doesn't survive rotation.
 2. **Structure.** Route → Screen → Content, only `Route` public, `Content` stateless, one ViewModel per screen, Koin bindings present.
-3. **Our conventions.** Hardcoded colours or sizes instead of `MaterialTheme`, user-facing strings outside `strings.xml`, missing previews, `collectAsState` instead of `collectAsStateWithLifecycle`, comments that restate the code.
+3. **Our conventions.** Hardcoded colours or sizes instead of `StovetimeTheme` tokens, Material components or `MaterialTheme` in a screen, user-facing strings outside `strings.xml`, missing previews, `collectAsState` instead of `collectAsStateWithLifecycle`, comments that restate the code.
 4. **Tests.** Changed logic without tests, and untested empty or error paths.
 
 Skip formatting and anything ktlint enforces.

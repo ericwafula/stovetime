@@ -1,83 +1,114 @@
 # Phase 0 — Foundations
 
-**Order:** 0.2 → 0.1 → 0.3 → 0.4 → 0.5
+**Order:** 0.1 ✅ → 0.2 → 0.3 → 0.4 → 0.5
 
-## 0.1 Navigation and bottom bar
+## 0.1 Design system ✅
+
+**Size:** L · **Depends on:** —
+**Design:** [Figma › Components](https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN) and the "Home palette", "Home theme" and "Home size" variable collections
+
+### Description
+The look of the app in one module: colours, type, spacing, shapes and the shared components (button, path node, stat chip, timer chip, pill, progress bar, nav bar, card), so every screen looks the same without repeating values.
+
+### Acceptance Criteria
+- [x] Every colour, type style, spacing and radius from Figma is available in code, defined once
+- [x] Components: button (primary, success, secondary), path node (done, current, locked), stat chip, timer chip, pill, progress bar, nav bar, card
+- [x] Pressable components drop onto their ledge when pressed
+- [x] Every component has a preview
+- [x] Using a component outside the theme fails with a clear message
+
+### Out of scope
+- Dark mode (Phase 5)
+
+---
+
+## 0.2 Module structure and shared basics
+
+**Size:** M · **Depends on:** 0.1
+
+### Description
+Lay out the modules from roadmap §5 that Phase 1 needs first, with the pieces every feature shares: one result type for data calls, coroutine dispatchers, and the ViewModel base every screen uses.
+
+### Acceptance Criteria
+- [ ] The app still builds, runs and shows the same first screen after the split
+- [ ] Data calls return a success or a typed error; an error never crashes the app
+- [ ] Screens get their state from a ViewModel that takes user actions and sends one-off events (navigate, show a sheet)
+- [ ] Dependency injection is set up once in the app, and each module adds its own pieces
+- [ ] Tests cover: a failed data call becomes a typed error, a cancelled call is not turned into an error, a ViewModel action changes state
+
+### Edge cases
+- A module nothing uses yet isn't created; it's added by the first step that needs it.
+
+### Out of scope
+- `:sdk:timer` (2.1), `:datasources:network` (0.5)
+
+---
+
+## 0.3 Navigation and the bottom bar
+
+**Size:** M · **Depends on:** 0.2
+**Design:** [Figma › Home — Path](https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=70-98) (the floating nav bar)
+
+### Description
+The four areas of the app, Path, Recipes, Timers and Me, reachable from the floating bottom bar. Each tab is a placeholder screen until its phase lands. The app draws edge to edge with dark status-bar icons on the cream background.
+
+### Acceptance Criteria
+- [ ] The app opens on Path
+- [ ] Tapping a tab opens its screen and highlights the tab
+- [ ] Back from any other tab returns to Path; back on Path closes the app
+- [ ] Rotation and coming back from the background keep the same tab
+- [ ] Status-bar icons are dark and readable on the cream background, in light and dark phone settings
+- [ ] Screens opened from a tab (lesson intro, cook mode) hide the bar
+- [ ] Tests cover: start on Path, switching tabs, back returns to Path
+
+### Edge cases
+- The phone is in dark mode: the app stays in its light theme and the status bar stays readable.
+
+### Out of scope
+- The real content of each tab (Phases 1–4)
+
+---
+
+## 0.4 Local storage
 
 **Size:** M · **Depends on:** 0.2
 
 ### Description
-Give the app its four main areas: Timers, Recipes, Shopping and Cookbook, reachable from a bottom bar. Each tab is a placeholder screen for now.
+Store progress on the phone: which lessons and recipes were cooked, when, how long it took, the rating and the XP earned. Store settings separately: the weekly goal and "keep screen on".
 
 ### Acceptance Criteria
-- [ ] The app opens on Timers
-- [ ] Tapping each tab opens its screen, and the selected tab is highlighted
-- [ ] Back from any tab returns to Timers; back on Timers closes the app
-- [ ] Rotation and returning from the background keep the user on the same tab
-- [ ] Routes are type-safe and defined in one place; feature modules don't depend on each other
-- [ ] Tests cover: start on Timers, switching tabs, back returns to Timers
+- [ ] Progress and settings survive closing the app and restarting the phone
+- [ ] Screens see progress change live, without reopening them
+- [ ] A fresh install has no progress, a weekly goal of 4 and "keep screen on" switched on
+- [ ] The database schema is exported, so later versions can migrate without losing progress
+- [ ] Tests cover: save and read back a cook, a settings change is seen straight away, a fresh install's defaults
+
+### Edge cases
+- Two cooks of the same lesson are two separate records, not one.
+
+### Out of scope
+- Cloud backup or sync (no account in v1)
 
 ---
 
-## 0.2 Design system
+## 0.5 TheMealDB client
 
-**Size:** L · **Depends on:** —
-**Design:** [Figma › Components v3](https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=23-105) and the "Stovetime palette" and "Stovetime theme" variable collections (see roadmap §11)
-
-### Description
-Create `:presentation:design` with the colours, type, spacing and shapes from the Figma file, plus the first shared components: button, ticket (rail, order and step), category, chip, list row, nav bar and empty state.
-
-### Acceptance Criteria
-- [ ] Every token in the Figma file is available in code, and colour values are defined in one place only
-- [ ] Colours follow the two layers in Figma: palette values in one file, Material 3 roles in `ColorScheme` for light and dark, and the extended roles (success, highlight, ticket, hero) in a `StovetimeColors` class provided through a CompositionLocal
-- [ ] Light and dark themes both work
-- [ ] Each component has a preview of every variant and state
-- [ ] Previews render at font scale 1.5 without clipping
-- [ ] Tests cover: theme missing fails with a clear message, disabled button ignores taps
-
----
-
-## 0.3 Local database and preferences
-
-**Size:** M · **Depends on:** —
+**Size:** M · **Depends on:** 0.2
 
 ### Description
-Add Room for timers, recipes, the shopping list and the cookbook, and DataStore for small settings (units, sound, keep screen on).
+Talk to TheMealDB: list categories, list the meals in a category, search by name, and look up one meal. This is what the Recipes tab (Phase 3) is built on.
 
 ### Acceptance Criteria
-- [ ] `:datasources:local` holds the Room database and DataStore, with schemas exported for migrations
-- [ ] Repositories in `:core:data` expose flows; nothing above them touches Room directly
-- [ ] Settings survive a restart
-- [ ] Tests cover: insert and read back, a settings change is emitted, migration from version 1 (once version 2 exists)
+- [ ] Categories, meals in a category, search by name and look up by id all return data
+- [ ] "Nothing found" (`{"meals": null}`) is an empty result, not an error
+- [ ] No connection, a timeout and a server error each come back as their own typed error
+- [ ] Ingredients and measures (up to 20 of each) come back as a clean list with empty slots dropped
+- [ ] The base URL and key are configured in one place
+- [ ] Tests cover: a normal response, `{"meals": null}`, ingredient pairing with gaps, no connection, a server error
 
----
+### Edge cases
+- An ingredient with no measure keeps the ingredient with an empty measure.
+- Search text with spaces or accents is encoded properly.
 
-## 0.4 Timer engine
-
-**Size:** L · **Depends on:** 0.3
-
-### Description
-Create `:sdk:timer`, the part everything else builds on. It runs any number of timers, keeps them alive in a foreground service with one ongoing notification, rings when a timer ends even if the app was swiped away, and restores running timers after the process is killed.
-
-### Acceptance Criteria
-- [ ] Start, pause, resume, add time and cancel work for any number of timers at once
-- [ ] Times are based on the wall clock, so a timer stays accurate after the app is killed and restarted
-- [ ] One ongoing notification lists every running timer and updates every second while visible
-- [ ] When a timer ends, it rings and vibrates even with the app closed or the screen locked
-- [ ] Running timers are restored after process death and after a reboot
-- [ ] The notification permission is asked for the first time a timer starts, with an explanation first
-- [ ] Tests cover: two timers end in the right order, pause/resume keeps the remaining time, restore after process death, a timer that ended while the app was dead rings immediately on restore
-
----
-
-## 0.5 CI and README
-
-**Size:** S · **Depends on:** 0.1
-
-### Description
-Run the quality checks on every pull request, and write a README that lets anyone clone, build and run the app, and copy the agent setup in `.ai/`.
-
-### Acceptance Criteria
-- [ ] A GitHub Action runs build, unit tests and ktlint on pull requests
-- [ ] The README covers setup, modules, the roadmap and how the `.ai/` skills and agents are used
-- [ ] A new developer can clone, build and run the app by following the README alone
+### Out of scope
+- Caching (3.4) and any screen (3.1)

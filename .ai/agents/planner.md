@@ -33,6 +33,12 @@ You run as a subagent, so you work in **two passes**:
 ### Acceptance Criteria
 - [ ] <one testable condition per line>
 - [ ] Tests cover: <the cases that prove it>
+
+### Edge cases
+- <a situation that would otherwise be decided mid-build, and the answer>
+
+### Out of scope
+- <what this step deliberately doesn't do, and where it happens instead>
 ```
 
 Then list any questions that would change the step, and end with `Needs approval`.
@@ -41,6 +47,8 @@ Then list any questions that would change the step, and end with `Needs approval
 
 - Acceptance criteria describe behaviour the user can check, not implementation ("The timer keeps running after rotation", not "Use a StateFlow").
 - Every criterion is testable. Don't repeat the definition of done.
+- Edge cases answer the questions a builder would otherwise guess at. Out of scope names what's deliberately left for later.
+- A step never names classes, files or libraries; the skills cover how.
 - Titles are plain language. No AI attribution anywhere.
 
 ## Write pass (approved only)

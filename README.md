@@ -1,8 +1,8 @@
 # Stovetime
 
-**Recipes & timers for home cooks.** Know exactly when to flip, stir and rest.
+**Learn to cook, one dish at a time.**
 
-Stovetime answers "how long do I cook this?" with cooking guides and timers that keep running while you cook several things at once, then grows into a recipe app with cook mode, a shopping list and your own cookbook.
+Stovetime is a learning path for home cooks. Short units of real recipes, cooked one step at a time with timers built in, plus XP and a weekly streak to keep you going. A Recipes tab brings in thousands more from TheMealDB.
 
 ## Requirements
 
