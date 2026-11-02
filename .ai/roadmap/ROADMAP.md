@@ -97,7 +97,7 @@ The **Path screen (1.2)** is the screen built live in the workshop.
 |---|---|---|
 | 2.1 | Timer engine: several timers at once, a foreground service, survives the app being closed | ⬜ |
 | 2.2 | Step timers run on the engine and keep going when you leave cook mode | ✅ |
-| 2.3 | Alarm: rings and vibrates, with Stop and "+1 min", over the lock screen | ⬜ |
+| 2.3 | Alarm: rings and vibrates, with Stop and "+1 min", over the lock screen | ✅ |
 | 2.4 | Timers tab: running timers and a quick named timer | ⬜ |
 
 ### Phase 3 — Recipes (TheMealDB)
@@ -265,6 +265,9 @@ These rules live in `:core:domain` and are covered by tests with fixed dates.
 | 2026-11-02 | Start cooking on the recipe page sends its event but `StovetimeNavHost` wires it to an empty lambda until cook mode exists | 3.4 builds cook mode for recipes on top of 1.4 |
 | 2026-11-02 | Offline, the Recipes header line becomes "Offline · last synced …"; a sync that has kept failing for over a week shows a yolk note with Try again | The note stays small and only appears when the copy is really old |
 | 2026-11-02 | Coming back online starts a sync from the Recipes tab when the last one is over a day old; elsewhere the daily periodic work catches up once a connection returns | Keeps the app start-up free of coroutines; WorkManager already runs an overdue periodic sync when its network constraint is met |
+| 2026-11-02 | The alarm is `AlarmActivity` in `:app` (single instance, own task, excluded from recents); a new alarm for another timer switches it to that timer, and stopping or snoozing the shown one moves on to any other timer still ringing before it closes | One alarm screen over the lock screen at a time; each timer keeps its own alarm notification, so none is lost |
+| 2026-11-02 | The alarm's detail line is "Take them out now" + the step's doneness; a timer with no doneness (a quick timer) shows only its name | Matches the frame's copy for a step timer without inventing text for quick timers |
+| 2026-11-02 | `StoveIconDisc` joins `:presentation:design` for the alarm's white disc with a ledge | Keeps the ledge in `LedgeSurface` instead of hand-rolled offsets in the screen |
 
 ---
 

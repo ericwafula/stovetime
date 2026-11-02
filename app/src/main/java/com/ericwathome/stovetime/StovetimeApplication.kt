@@ -20,7 +20,7 @@ class StovetimeApplication : Application() {
                 TimerConfig(
                     smallIcon = R.drawable.ic_stat_timer,
                     openAppIntent = { payload -> MainActivity.timerIntent(this, payload) },
-                    alarmActivity = null,
+                    alarmActivity = AlarmActivity::class.java,
                 ),
         )
         val koin =

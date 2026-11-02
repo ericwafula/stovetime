@@ -45,7 +45,7 @@ Timers started from cook mode run on the engine, so they keep going and still ri
 
 ---
 
-## 2.3 Alarm
+## 2.3 Alarm ✅
 
 **Size:** M · **Depends on:** 2.1
 **Design:** [Figma › Timer — Alarm](https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=81-178)
@@ -54,12 +54,12 @@ Timers started from cook mode run on the engine, so they keep going and still ri
 When a timer ends: sound, vibration and a full-screen alarm over the lock screen (or a heads-up notification when the phone is in use) with the timer's name, Stop and "+1 min".
 
 ### Acceptance Criteria
-- [ ] The alarm shows over the lock screen with the timer's name
-- [ ] Stop silences it and clears the timer
-- [ ] "+1 min" silences it and restarts that timer for one minute
-- [ ] With the phone unlocked and in use, a heads-up notification with the same actions shows instead
-- [ ] An alarm nobody stops keeps ringing for one minute, then stays as a notification
-- [ ] Tests cover: Stop, "+1 min", two timers ending together each get their own alarm
+- [x] The alarm shows over the lock screen with the timer's name
+- [x] Stop silences it and clears the timer
+- [x] "+1 min" silences it and restarts that timer for one minute
+- [x] With the phone unlocked and in use, a heads-up notification with the same actions shows instead
+- [x] An alarm nobody stops keeps ringing for one minute, then stays as a notification
+- [x] Tests cover: Stop, "+1 min", two timers ending together each get their own alarm
 
 ### Edge cases
 - Do Not Disturb: the alarm follows the phone's alarm settings, like a clock alarm.

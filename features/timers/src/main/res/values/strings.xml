@@ -1,0 +1,7 @@
+<resources>
+    <string name="alarm_times_up">Time’s up</string>
+    <string name="alarm_detail">Take them out now %1$s</string>
+    <string name="alarm_stop">Stop</string>
+    <string name="alarm_plus_minute">+1 min</string>
+    <string name="alarm_plus_minute_description">Ring again in a minute</string>
+</resources>
