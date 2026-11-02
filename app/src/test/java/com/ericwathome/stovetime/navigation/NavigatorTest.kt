@@ -91,4 +91,42 @@ class NavigatorTest {
         sut.backward()
         assertThat(backStack).containsExactly(Destination.Path, Destination.Recipes).inOrder()
     }
+
+    @Test
+    fun a_notification_for_a_cook_step_opens_it_on_top_of_the_current_screen() {
+        // given
+        sut.selectTab(Destination.Me)
+        val cook = Destination.Cook(kind = "Lesson", dishId = "boiled-eggs", startedAt = 1_000, step = 1)
+
+        // when
+        sut.open(cook)
+
+        // then
+        assertThat(backStack).containsExactly(Destination.Path, Destination.Me, cook).inOrder()
+    }
+
+    @Test
+    fun a_notification_for_the_timers_tab_switches_to_it() {
+        // given
+        sut.selectTab(Destination.Me)
+
+        // when
+        sut.open(Destination.Timers)
+
+        // then
+        assertThat(backStack).containsExactly(Destination.Path, Destination.Timers).inOrder()
+    }
+
+    @Test
+    fun a_notification_for_the_screen_already_open_does_nothing() {
+        // given
+        val cook = Destination.Cook(kind = "Lesson", dishId = "boiled-eggs", startedAt = 1_000, step = 1)
+        sut.navigate(cook)
+
+        // when
+        sut.open(cook)
+
+        // then
+        assertThat(backStack).containsExactly(Destination.Path, cook).inOrder()
+    }
 }

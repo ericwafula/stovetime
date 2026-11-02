@@ -3,6 +3,7 @@ package com.ericwathome.stovetime.features.recipes.recipe
 import androidx.lifecycle.viewModelScope
 import com.ericwathome.stovetime.core.common.result.onError
 import com.ericwathome.stovetime.core.common.result.onSuccess
+import com.ericwathome.stovetime.core.data.helpers.Now
 import com.ericwathome.stovetime.core.data.model.progress.CookKind
 import com.ericwathome.stovetime.core.data.model.recipes.Recipe
 import com.ericwathome.stovetime.core.data.repo.recipes.RecipesRepository
@@ -24,6 +25,7 @@ sealed interface RecipeAction {
 sealed interface RecipeEvent {
     data class StartCooking(
         val recipeId: String,
+        val startedAt: Long,
     ) : RecipeEvent
 }
 
@@ -75,7 +77,7 @@ class RecipeViewModel(
 
     private fun onClickStartCooking() {
         if (!currentState.isStartEnabled) return
-        sendEvent { RecipeEvent.StartCooking(recipeId) }
+        sendEvent { RecipeEvent.StartCooking(recipeId = recipeId, startedAt = Now.toEpochMilliseconds()) }
     }
 
     private fun onToggleIngredient(index: Int) {

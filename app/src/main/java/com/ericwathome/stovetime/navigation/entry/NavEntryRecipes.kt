@@ -14,7 +14,7 @@ fun navigationRecipesBrowse(
 fun navigationRecipe(
     key: Destination.Recipe,
     onBack: () -> Unit,
-    onStartCooking: (recipeId: String) -> Unit,
+    onStartCooking: (recipeId: String, startedAt: Long) -> Unit,
 ): NavEntry<NavKey> =
     NavEntry(key) {
         RecipeRoute(

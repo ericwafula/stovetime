@@ -53,7 +53,7 @@ private const val PHOTO_ASPECT_RATIO = 360f / 250f
 fun RecipeRoute(
     recipeId: String,
     onBack: () -> Unit,
-    onStartCooking: (recipeId: String) -> Unit,
+    onStartCooking: (recipeId: String, startedAt: Long) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     RecipeScreen(
@@ -67,7 +67,7 @@ fun RecipeRoute(
 @Composable
 internal fun RecipeScreen(
     onBack: () -> Unit,
-    onStartCooking: (recipeId: String) -> Unit,
+    onStartCooking: (recipeId: String, startedAt: Long) -> Unit,
     viewModel: RecipeViewModel,
     modifier: Modifier = Modifier,
 ) {
@@ -75,7 +75,7 @@ internal fun RecipeScreen(
 
     CollectOneTimeEvent(viewModel.event) { event ->
         when (event) {
-            is RecipeEvent.StartCooking -> onStartCooking(event.recipeId)
+            is RecipeEvent.StartCooking -> onStartCooking(event.recipeId, event.startedAt)
         }
     }
 

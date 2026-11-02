@@ -133,7 +133,9 @@ class RecipeViewModelTest {
                     sut.onAction(RecipeAction.OnClickStartCooking)
 
                     // then
-                    assertThat(awaitItem()).isEqualTo(RecipeEvent.StartCooking("52772"))
+                    val event = awaitItem() as RecipeEvent.StartCooking
+                    assertThat(event.recipeId).isEqualTo("52772")
+                    assertThat(event.startedAt).isGreaterThan(0L)
                 }
                 cancelAndIgnoreRemainingEvents()
             }

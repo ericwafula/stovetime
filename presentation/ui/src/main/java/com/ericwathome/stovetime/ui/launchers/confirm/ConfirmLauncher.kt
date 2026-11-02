@@ -9,6 +9,8 @@ import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.Saver
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -31,6 +33,23 @@ data class ConfirmRequest(
     val tag: String = "",
 )
 
+private val ConfirmRequestSaver =
+    Saver<ConfirmRequest?, ArrayList<String>>(
+        save = { request ->
+            request?.let { arrayListOf(it.title, it.message, it.confirmLabel, it.dismissLabel, it.destructive.toString(), it.tag) }
+        },
+        restore = { values ->
+            ConfirmRequest(
+                title = values[0],
+                message = values[1],
+                confirmLabel = values[2],
+                dismissLabel = values[3],
+                destructive = values[4].toBoolean(),
+                tag = values[5],
+            )
+        },
+    )
+
 class ConfirmLauncher internal constructor(
     private val onLaunch: (ConfirmRequest) -> Unit,
 ) {
@@ -45,7 +64,7 @@ fun rememberConfirmLauncher(
     onSecondary: (ConfirmRequest) -> Unit = {},
     onDismiss: (ConfirmRequest) -> Unit = {},
 ): ConfirmLauncher {
-    var request by remember { mutableStateOf<ConfirmRequest?>(null) }
+    var request by rememberSaveable(stateSaver = ConfirmRequestSaver) { mutableStateOf<ConfirmRequest?>(null) }
     val currentOnConfirm by rememberUpdatedState(onConfirm)
     val currentOnSecondary by rememberUpdatedState(onSecondary)
     val currentOnDismiss by rememberUpdatedState(onDismiss)

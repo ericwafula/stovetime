@@ -114,12 +114,13 @@ internal class TimerEngineImpl(
 
     private fun refreshSound() {
         val now = now()
-        val silenced = soundingUntil.filterValues { it <= now }.keys
+        val plan = soundPlan(soundingUntil, now)
+        val silenced = plan.silenced
         silenced.forEach(soundingUntil::remove)
         book.timers.filter { it.id in silenced }.forEach { notifications.showAlarm(it, sounding = false) }
 
         handler.removeCallbacks(silenceDueAlarms)
-        val nextSilence = soundingUntil.values.minOrNull()
+        val nextSilence = plan.nextSilenceAt
         if (nextSilence == null) {
             sound.stop()
         } else {

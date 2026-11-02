@@ -10,6 +10,7 @@ import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
@@ -53,7 +54,7 @@ fun rememberQuickTimerLauncher(
     onAdjust: (deltaSeconds: Int) -> Unit,
     onStart: () -> Unit,
 ): QuickTimerLauncher {
-    var isVisible by remember { mutableStateOf(false) }
+    var isVisible by rememberSaveable { mutableStateOf(false) }
     val keyboard = LocalSoftwareKeyboardController.current
     val scope = rememberCoroutineScope()
     val currentOnStart by rememberUpdatedState(onStart)

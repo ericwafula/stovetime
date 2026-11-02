@@ -16,10 +16,9 @@ internal class AlarmScheduler(
         before: List<CookTimer>,
         after: List<CookTimer>,
     ) {
-        val wasScheduled = before.scheduledEnds()
-        val shouldBeScheduled = after.scheduledEnds()
-        (wasScheduled.keys - shouldBeScheduled.keys).forEach(::cancel)
-        shouldBeScheduled.filter { (id, endsAt) -> wasScheduled[id] != endsAt }.forEach { (id, endsAt) -> schedule(id, endsAt) }
+        val changes = alarmChanges(before, after)
+        changes.cancel.forEach(::cancel)
+        changes.schedule.forEach { (id, endsAt) -> schedule(id, endsAt) }
     }
 
     private fun schedule(
@@ -40,7 +39,4 @@ internal class AlarmScheduler(
     private fun cancel(id: String) {
         alarmManager.cancel(TimerIntents.alarm(context, id))
     }
-
-    private fun List<CookTimer>.scheduledEnds(): Map<String, Long> =
-        filter { !it.ringing && it.endsAtMillis != null }.associate { it.id to it.endsAtMillis!! }
 }
