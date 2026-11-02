@@ -50,6 +50,8 @@ import com.ericwathome.stovetime.datasources.local.sources.recipes.recipe.SaveRe
 import com.ericwathome.stovetime.datasources.local.sources.recipes.recipe.SaveRecipeLocalDatasourceImpl
 import com.ericwathome.stovetime.datasources.local.sources.settings.RecipeSyncLocalDatasource
 import com.ericwathome.stovetime.datasources.local.sources.settings.RecipeSyncLocalDatasourceImpl
+import com.ericwathome.stovetime.datasources.local.sources.settings.WeeklyReminderLocalDatasource
+import com.ericwathome.stovetime.datasources.local.sources.settings.WeeklyReminderLocalDatasourceImpl
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.plus
 import org.koin.android.ext.koin.androidContext
@@ -178,6 +180,12 @@ internal val PreferencesLocalDatasourceModule =
         single<RecipeSyncLocalDatasource> {
             RecipeSyncLocalDatasourceImpl(
                 dataStore = get(named(PreferencesFile.RecipeSync.fileName)),
+                dispatchers = get(),
+            )
+        }
+        single<WeeklyReminderLocalDatasource> {
+            WeeklyReminderLocalDatasourceImpl(
+                dataStore = get(named(PreferencesFile.WeeklyReminder.fileName)),
                 dispatchers = get(),
             )
         }

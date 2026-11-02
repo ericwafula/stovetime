@@ -344,6 +344,31 @@ private fun SettingsCard(
                 )
                 StoveSwitch(checked = settings.keepScreenOn, onCheckedChange = null)
             }
+            Box(Modifier.fillMaxWidth().height(2.dp).background(StovetimeTheme.colors.border))
+            Row(
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .heightIn(min = 48.dp)
+                        .toggleable(
+                            value = settings.weeklyReminder,
+                            role = Role.Switch,
+                            onValueChange = { onAction(MeAction.OnWeeklyReminderChange(it)) },
+                        ).padding(vertical = spacing.s12)
+                        .testTag("me_weekly_reminder"),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(spacing.s12),
+            ) {
+                Column(modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
+                    StoveText(text = stringResource(R.string.me_weekly_reminder), style = StovetimeTheme.typography.bodyStrong)
+                    StoveText(
+                        text = stringResource(R.string.me_weekly_reminder_hint),
+                        style = StovetimeTheme.typography.caption,
+                        color = StovetimeTheme.colors.textSecondary,
+                    )
+                }
+                StoveSwitch(checked = settings.weeklyReminder, onCheckedChange = null)
+            }
         }
     }
 }

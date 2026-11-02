@@ -51,7 +51,7 @@ Small rewards for real cooking: a badge for finishing every lesson in a unit, an
 
 ---
 
-## 5.3 Weekly goal reminder
+## 5.3 Weekly goal reminder ✅
 
 **Size:** M · **Depends on:** 1.5, 4.2
 
@@ -59,12 +59,12 @@ Small rewards for real cooking: a badge for finishing every lesson in a unit, an
 One gentle nudge when the week's goal is in reach: on Saturday evening, if you're one or two cooks short, a notification says how many cooks are left to keep the streak. Never on other days, never when the goal is already met, and it can be switched off in Me.
 
 ### Acceptance Criteria
-- [ ] A background check runs once a day and posts at most one reminder a week, on Saturday after 17:00 in the phone's time zone
-- [ ] The reminder only shows when the week has 1 or 2 cooks left to reach the goal
-- [ ] Its text says how many cooks are left ("One more cook keeps your 3-week streak going"), and tapping it opens the Path
-- [ ] Me has a "Weekly reminder" switch, on by default; switching it off stops reminders
-- [ ] No reminder without the notification permission; nothing asks for it just for reminders
-- [ ] Tests cover: the reminder rule (day, time, cooks left, goal met, already sent this week), the switch, the text with and without a streak
+- [x] A background check runs once a day and posts at most one reminder a week, on Saturday after 17:00 in the phone's time zone
+- [x] The reminder only shows when the week has 1 or 2 cooks left to reach the goal
+- [x] Its text says how many cooks are left ("One more cook keeps your 3-week streak going"), and tapping it opens the Path
+- [x] Me has a "Weekly reminder" switch, on by default; switching it off stops reminders
+- [x] No reminder without the notification permission; nothing asks for it just for reminders
+- [x] Tests cover: the reminder rule (day, time, cooks left, goal met, already sent this week), the switch, the text with and without a streak
 
 ### Out of scope
 - Daily reminders or choosing the reminder time

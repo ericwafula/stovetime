@@ -36,6 +36,14 @@ import com.ericwathome.stovetime.core.data.repo.settings.SaveKeepScreenOnReposit
 import com.ericwathome.stovetime.core.data.repo.settings.SaveKeepScreenOnRepositoryImpl
 import com.ericwathome.stovetime.core.data.repo.settings.SaveWeeklyGoalRepository
 import com.ericwathome.stovetime.core.data.repo.settings.SaveWeeklyGoalRepositoryImpl
+import com.ericwathome.stovetime.core.data.repo.settings.SaveWeeklyReminderRepository
+import com.ericwathome.stovetime.core.data.repo.settings.SaveWeeklyReminderRepositoryImpl
+import com.ericwathome.stovetime.core.data.repo.reminder.GetLastReminderWeekRepository
+import com.ericwathome.stovetime.core.data.repo.reminder.GetLastReminderWeekRepositoryImpl
+import com.ericwathome.stovetime.core.data.repo.reminder.ReminderRepository
+import com.ericwathome.stovetime.core.data.repo.reminder.ReminderRepositoryImpl
+import com.ericwathome.stovetime.core.data.repo.reminder.SaveLastReminderWeekRepository
+import com.ericwathome.stovetime.core.data.repo.reminder.SaveLastReminderWeekRepositoryImpl
 import com.ericwathome.stovetime.core.data.repo.settings.SettingsRepository
 import com.ericwathome.stovetime.core.data.repo.settings.SettingsRepositoryImpl
 import com.ericwathome.stovetime.core.data.repo.settings.TimerPromptsRepository
@@ -86,6 +94,24 @@ internal val SettingsRepositoryModule =
         }
         singleOf(::SaveKeepScreenOnRepositoryImpl) {
             bind<SaveKeepScreenOnRepository>()
+        }
+        singleOf(::SaveWeeklyReminderRepositoryImpl) {
+            bind<SaveWeeklyReminderRepository>()
+        }
+    }
+
+internal val ReminderRepositoryModule =
+    module {
+        // parent
+        singleOf(::ReminderRepositoryImpl) {
+            bind<ReminderRepository>()
+        }
+        // children
+        singleOf(::GetLastReminderWeekRepositoryImpl) {
+            bind<GetLastReminderWeekRepository>()
+        }
+        singleOf(::SaveLastReminderWeekRepositoryImpl) {
+            bind<SaveLastReminderWeekRepository>()
         }
     }
 
@@ -147,7 +173,7 @@ internal val RecipesRepositoryModule =
 
 internal val RepositoryModule =
     module {
-        includes(CookRepositoryModule, CourseRepositoryModule, ProgressRepositoryModule, SettingsRepositoryModule, TimersRepositoryModule, RecipesRepositoryModule)
+        includes(CookRepositoryModule, CourseRepositoryModule, ProgressRepositoryModule, ReminderRepositoryModule, SettingsRepositoryModule, TimersRepositoryModule, RecipesRepositoryModule)
     }
 
 internal val HelperModule =

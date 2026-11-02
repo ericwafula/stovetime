@@ -35,6 +35,10 @@ sealed interface MeAction {
         val keepScreenOn: Boolean,
     ) : MeAction
 
+    data class OnWeeklyReminderChange(
+        val enabled: Boolean,
+    ) : MeAction
+
     data object OnClickStartOver : MeAction
 
     data object OnConfirmStartOver : MeAction
@@ -117,6 +121,10 @@ class MeViewModel(
                 onKeepScreenOnChange(action.keepScreenOn)
             }
 
+            is MeAction.OnWeeklyReminderChange -> {
+                onWeeklyReminderChange(action.enabled)
+            }
+
             MeAction.OnClickStartOver -> {
                 sendEvent { MeEvent.AskToStartOver }
             }
@@ -164,6 +172,14 @@ class MeViewModel(
         updateState { it.copy(settings = settings.copy(keepScreenOn = keepScreenOn)) }
         viewModelScope.launch {
             settingsRepository.saveKeepScreenOn(keepScreenOn).onError { onSaveFailed(settings) }
+        }
+    }
+
+    private fun onWeeklyReminderChange(enabled: Boolean) {
+        val settings = currentState.settings ?: return
+        updateState { it.copy(settings = settings.copy(weeklyReminder = enabled)) }
+        viewModelScope.launch {
+            settingsRepository.saveWeeklyReminder(enabled).onError { onSaveFailed(settings) }
         }
     }
 

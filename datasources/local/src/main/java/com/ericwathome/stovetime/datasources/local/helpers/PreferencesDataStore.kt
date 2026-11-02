@@ -14,6 +14,7 @@ internal enum class PreferencesFile(
     CookSettings("cook_settings"),
     TimerPrompts("timer_prompts"),
     RecipeSync("recipe_sync"),
+    WeeklyReminder("weekly_reminder"),
 }
 
 internal fun createPreferencesDataStore(

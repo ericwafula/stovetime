@@ -121,7 +121,7 @@ The **Path screen (1.2)** is the screen built live in the workshop.
 |---|---|---|
 | 5.1 | More courses: "Rice & grains", "One-pan dinners", "Kenyan favourites" (pilau, chapati, sukuma wiki), switched from the course chip | ⬜ |
 | 5.2 | Badges for finishing a unit or a long streak | ⬜ |
-| 5.3 | A gentle reminder when the week's goal is close | ⬜ |
+| 5.3 | A gentle reminder when the week's goal is close | ✅ |
 | 5.4 | Dark mode | ⬜ |
 | 5.5 | Home-screen widget with running timers | ✅ |
 
@@ -287,6 +287,13 @@ These rules live in `:core:domain` and are covered by tests with fixed dates.
 | 2026-11-02 | A setting changed in Me shows straight away and is saved in the background; if saving fails it goes back and a toast says so | DataStore is fast, so the stepper shouldn't wait on it; the Path, finish screen and Me all read the goal through `observeProgress` |
 | 2026-11-02 | Start over confirms in the shared `ConfirmLauncher` sheet ("Delete my progress" / "Keep my progress") and deletes only the cooks table; the Path and Me recompute from the empty history | Settings live in DataStore and recipes in their own tables, so both survive; the frame shows only the link |
 | 2026-11-02 | `StoveTextButton` joins `:presentation:design` for the red "Start over" link | A text-only action with a 48 dp touch target, keeping sizes out of the feature |
+| 2026-11-02 | The weekly reminder rule is a pure function in `:core:domain` (`weeklyReminder` in `ReminderRules.kt`) behind `CheckWeeklyReminderUseCase`, fed by `ObserveProgressUseCase` | The week, goal and streak rules already live there; the reminder reuses them instead of counting again |
+| 2026-11-02 | `WeeklyReminderWorker`, its schedule and the reminder notification live in `:app` (`reminders/`), not `:core:data` | The worker needs a `:core:domain` use case, which `:core:data` can't see, and the notification opens `MainActivity`; the worker itself holds no rules |
+| 2026-11-02 | The reminder check is unique daily periodic work (`KEEP`) first set for 18:00 local; it posts only on Saturday from 17:00 when 1 or 2 cooks are left, the switch is on and this week wasn't reminded yet | Once a day keeps it gentle; an hour of slack past 17:00 lets WorkManager run late and still land on Saturday evening |
+| 2026-11-02 | The week of the last reminder is saved (as the week's Monday) in its own `weekly_reminder` DataStore file before the notification is posted | Saving first means a retry after a failed save can never post twice in a week |
+| 2026-11-02 | The reminder has its own low-importance "Weekly reminder" channel and only posts when notifications are allowed; nothing asks for the permission on its behalf | Encourage, don't nag; timers already ask for the permission when it matters |
+| 2026-11-02 | Tapping the reminder opens `MainActivity` with an "open Path" extra, which selects the Path tab even when the app is already open on another tab | Launching the activity plainly would leave a running app on whatever tab it was on |
+| 2026-11-02 | Me's settings card gets a "Weekly reminder" switch under "Keep screen on", on by default, saved with the other cook settings | Same save-then-revert pattern as the other settings |
 
 ---
 

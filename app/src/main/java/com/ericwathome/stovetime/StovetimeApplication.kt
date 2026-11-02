@@ -3,6 +3,7 @@ package com.ericwathome.stovetime
 import android.app.Application
 import com.ericwathome.stovetime.core.data.workers.recipes.ScheduleRecipeSyncWork
 import com.ericwathome.stovetime.di.AppModule
+import com.ericwathome.stovetime.reminders.ScheduleWeeklyReminderWork
 import com.ericwathome.stovetime.sdk.timer.StovetimeTimers
 import com.ericwathome.stovetime.sdk.timer.TimerConfig
 import com.ericwathome.stovetime.widget.TimersWidgetUpdater
@@ -32,5 +33,6 @@ class StovetimeApplication : Application() {
             }.koin
         koin.get<ScheduleRecipeSyncWork>().invoke()
         koin.get<TimersWidgetUpdater>().start()
+        koin.get<ScheduleWeeklyReminderWork>().invoke()
     }
 }

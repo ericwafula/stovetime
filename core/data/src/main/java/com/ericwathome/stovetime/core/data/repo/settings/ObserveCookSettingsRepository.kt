@@ -16,11 +16,13 @@ internal class ObserveCookSettingsRepositoryImpl(
         combine(
             cookSettingsLocalDatasource.weeklyGoal.observe(),
             cookSettingsLocalDatasource.keepScreenOn.observe(),
-        ) { weeklyGoal, keepScreenOn ->
+            cookSettingsLocalDatasource.weeklyReminder.observe(),
+        ) { weeklyGoal, keepScreenOn, weeklyReminder ->
             val defaults = CookSettings()
             CookSettings(
                 weeklyGoal = weeklyGoal?.coerceIn(CookSettings.MIN_WEEKLY_GOAL, CookSettings.MAX_WEEKLY_GOAL) ?: defaults.weeklyGoal,
                 keepScreenOn = keepScreenOn ?: defaults.keepScreenOn,
+                weeklyReminder = weeklyReminder ?: defaults.weeklyReminder,
             )
         }
 }

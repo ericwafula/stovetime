@@ -3,6 +3,7 @@ package com.ericwathome.stovetime.core.data.model.settings
 data class CookSettings(
     val weeklyGoal: Int = DEFAULT_WEEKLY_GOAL,
     val keepScreenOn: Boolean = true,
+    val weeklyReminder: Boolean = true,
 ) {
     companion object {
         const val DEFAULT_WEEKLY_GOAL = 4

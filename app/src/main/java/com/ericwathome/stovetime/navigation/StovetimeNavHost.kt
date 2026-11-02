@@ -47,6 +47,8 @@ private const val CROSSFADE_MILLIS = 180
 fun StovetimeNavHost(
     timerPayload: String?,
     onTimerPayloadOpened: () -> Unit,
+    openPath: Boolean,
+    onPathOpened: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val backStack = rememberNavBackStack(Destination.Path)
@@ -55,6 +57,11 @@ fun StovetimeNavHost(
         timerPayload ?: return@LaunchedEffect
         navigator.open(TimerTarget.decode(timerPayload).toDestination())
         onTimerPayloadOpened()
+    }
+    LaunchedEffect(openPath) {
+        if (!openPath) return@LaunchedEffect
+        navigator.open(Destination.Path)
+        onPathOpened()
     }
     val crossfade = fadeIn(tween(CROSSFADE_MILLIS)) togetherWith fadeOut(tween(CROSSFADE_MILLIS))
 

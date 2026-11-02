@@ -18,6 +18,7 @@ class ObserveCookSettingsRepositoryImplTest {
 
     private val weeklyGoal = MutableStateFlow<Int?>(null)
     private val keepScreenOn = MutableStateFlow<Boolean?>(null)
+    private val weeklyReminder = MutableStateFlow<Boolean?>(null)
     private lateinit var sut: ObserveCookSettingsRepositoryImpl
 
     @Before
@@ -25,15 +26,16 @@ class ObserveCookSettingsRepositoryImplTest {
         MockKAnnotations.init(this, relaxed = true)
         every { cookSettingsLocalDatasource.weeklyGoal.observe() } returns weeklyGoal
         every { cookSettingsLocalDatasource.keepScreenOn.observe() } returns keepScreenOn
+        every { cookSettingsLocalDatasource.weeklyReminder.observe() } returns weeklyReminder
         sut = ObserveCookSettingsRepositoryImpl(cookSettingsLocalDatasource)
     }
 
     @Test
-    fun a_fresh_install_has_a_goal_of_four_and_keeps_the_screen_on() =
+    fun a_fresh_install_has_a_goal_of_four_keeps_the_screen_on_and_reminds() =
         runTest {
             sut().test {
                 // then
-                assertThat(awaitItem()).isEqualTo(CookSettings(weeklyGoal = 4, keepScreenOn = true))
+                assertThat(awaitItem()).isEqualTo(CookSettings(weeklyGoal = 4, keepScreenOn = true, weeklyReminder = true))
             }
         }
 
@@ -46,9 +48,10 @@ class ObserveCookSettingsRepositoryImplTest {
                 // when
                 weeklyGoal.value = 6
                 keepScreenOn.value = false
+                weeklyReminder.value = false
 
                 // then
-                assertThat(expectMostRecentItem()).isEqualTo(CookSettings(weeklyGoal = 6, keepScreenOn = false))
+                assertThat(expectMostRecentItem()).isEqualTo(CookSettings(weeklyGoal = 6, keepScreenOn = false, weeklyReminder = false))
             }
         }
 

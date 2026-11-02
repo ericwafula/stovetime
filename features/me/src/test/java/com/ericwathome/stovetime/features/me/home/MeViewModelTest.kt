@@ -91,6 +91,10 @@ class MeViewModelTest {
             settings.value = settings.value.copy(keepScreenOn = firstArg())
             DataResult.Success(true)
         }
+        coEvery { settingsRepository.saveWeeklyReminder(any()) } answers {
+            settings.value = settings.value.copy(weeklyReminder = firstArg())
+            DataResult.Success(true)
+        }
         coEvery { progressRepository.clearProgress() } answers {
             progress.value = DataResult.Success(progressOf(emptyList()))
             DataResult.Success(true)
@@ -291,6 +295,47 @@ class MeViewModelTest {
                 // then
                 assertThat(expectMostRecentItem().settings?.keepScreenOn).isFalse()
                 coVerify { settingsRepository.saveKeepScreenOn(false) }
+            }
+        }
+
+    @Test
+    fun the_weekly_reminder_is_on_by_default() =
+        runTest {
+            sut.state.test {
+                // then
+                assertThat(expectMostRecentItem().settings?.weeklyReminder).isTrue()
+            }
+        }
+
+    @Test
+    fun switching_the_weekly_reminder_off_saves_it() =
+        runTest {
+            sut.state.test {
+                skipItems(1)
+
+                // when
+                sut.onAction(MeAction.OnWeeklyReminderChange(false))
+
+                // then
+                assertThat(expectMostRecentItem().settings?.weeklyReminder).isFalse()
+                coVerify { settingsRepository.saveWeeklyReminder(false) }
+            }
+        }
+
+    @Test
+    fun a_weekly_reminder_switch_that_fails_to_save_goes_back_on() =
+        runTest {
+            coEvery { settingsRepository.saveWeeklyReminder(any()) } returns DataResult.Error(DataError.Unknown("disk"))
+            sut.state.test {
+                skipItems(1)
+                sut.event.test {
+                    // when
+                    sut.onAction(MeAction.OnWeeklyReminderChange(false))
+
+                    // then
+                    assertThat(awaitItem()).isEqualTo(MeEvent.ShowSaveFailed)
+                }
+                assertThat(expectMostRecentItem().settings?.weeklyReminder).isTrue()
             }
         }
 

@@ -11,6 +11,7 @@ import com.ericwathome.stovetime.datasources.local.helpers.preference
 interface CookSettingsLocalDatasource {
     val weeklyGoal: PreferenceStore<Int>
     val keepScreenOn: PreferenceStore<Boolean>
+    val weeklyReminder: PreferenceStore<Boolean>
 }
 
 internal class CookSettingsLocalDatasourceImpl(
@@ -19,4 +20,5 @@ internal class CookSettingsLocalDatasourceImpl(
 ) : CookSettingsLocalDatasource {
     override val weeklyGoal = dataStore.preference(intPreferencesKey("weekly_goal"), dispatchers)
     override val keepScreenOn = dataStore.preference(booleanPreferencesKey("keep_screen_on"), dispatchers)
+    override val weeklyReminder = dataStore.preference(booleanPreferencesKey("weekly_reminder"), dispatchers)
 }

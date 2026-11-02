@@ -10,4 +10,10 @@
     <string name="widget_paused">Paused %1$s</string>
     <string name="widget_times_up">Time\'s up</string>
     <string name="widget_description">Your running cooking timers, counting down</string>
+    <string name="reminder_channel_name">Weekly reminder</string>
+    <string name="reminder_channel_description">One nudge on Saturday evening when your weekly goal is close</string>
+    <string name="reminder_one_more_cook_streak">One more cook keeps your %1$d-week streak going</string>
+    <string name="reminder_two_more_cooks_streak">Two more cooks keep your %1$d-week streak going</string>
+    <string name="reminder_one_more_cook_goal">One more cook hits this week\'s goal</string>
+    <string name="reminder_two_more_cooks_goal">Two more cooks hit this week\'s goal</string>
 </resources>

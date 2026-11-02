@@ -15,6 +15,8 @@
     <string name="me_weekly_goal_lower">Lower the weekly goal</string>
     <string name="me_weekly_goal_raise">Raise the weekly goal</string>
     <string name="me_keep_screen_on">Keep screen on while cooking</string>
+    <string name="me_weekly_reminder">Weekly reminder</string>
+    <string name="me_weekly_reminder_hint">A nudge on Saturday evening when you\'re close to your goal</string>
     <string name="me_save_failed">Couldn\'t save that setting. Try again.</string>
     <string name="me_history">History</string>
     <string name="me_history_caption">%1$s · %2$s</string>

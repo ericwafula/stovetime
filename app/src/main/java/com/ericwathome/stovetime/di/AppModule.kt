@@ -17,5 +17,5 @@ internal val WidgetModule =
 
 val AppModule =
     module {
-        includes(CommonModule, CoreDataModule, LessonsModule, RecipesModule, TimersModule, MeModule, WidgetModule)
+        includes(CommonModule, CoreDataModule, LessonsModule, RecipesModule, TimersModule, MeModule, WidgetModule, ReminderModule)
     }
