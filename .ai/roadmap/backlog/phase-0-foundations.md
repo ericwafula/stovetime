@@ -69,7 +69,7 @@ The four areas of the app, Path, Recipes, Timers and Me, reachable from the floa
 
 ---
 
-## 0.4 Local storage
+## 0.4 Local storage ✅
 
 **Size:** M · **Depends on:** 0.2
 
@@ -77,11 +77,11 @@ The four areas of the app, Path, Recipes, Timers and Me, reachable from the floa
 Store progress on the phone: which lessons and recipes were cooked, when, how long it took, the rating and the XP earned. Store settings separately: the weekly goal and "keep screen on".
 
 ### Acceptance Criteria
-- [ ] Progress and settings survive closing the app and restarting the phone
-- [ ] Screens see progress change live, without reopening them
-- [ ] A fresh install has no progress, a weekly goal of 4 and "keep screen on" switched on
-- [ ] The database schema is exported, so later versions can migrate without losing progress
-- [ ] Tests cover: save and read back a cook, a settings change is seen straight away, a fresh install's defaults
+- [x] Progress and settings survive closing the app and restarting the phone
+- [x] Screens see progress change live, without reopening them
+- [x] A fresh install has no progress, a weekly goal of 4 and "keep screen on" switched on
+- [x] The database schema is exported, so later versions can migrate without losing progress
+- [x] Tests cover: save and read back a cook, a settings change is seen straight away, a fresh install's defaults
 
 ### Edge cases
 - Two cooks of the same lesson are two separate records, not one.
