@@ -34,6 +34,12 @@ flows:
 
 Until then, run folders or files directly.
 
+Only one process can drive the phone's UI automation at a time. If the Mobile MCP was used on the device, its `com.mobilenext.mobilecli.DeviceServer` keeps it for 30 minutes, and Maestro fails with "driver did not start up in time" or "UiAutomationService already registered". Stop it first; the MCP starts it again the next time it needs it:
+
+```bash
+adb shell 'kill $(pidof app_process)'   # or kill the PID shown by: adb shell ps -A | grep DeviceServer
+```
+
 ## What to run
 
 Test what you changed and what depends on it, not the whole app.

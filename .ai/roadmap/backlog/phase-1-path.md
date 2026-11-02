@@ -163,7 +163,7 @@ The reward. The dish photo in a green ring, "Dish done!" and a short encouraging
 
 ---
 
-## 1.7 End-to-end journey
+## 1.7 End-to-end journey ✅
 
 **Size:** S · **Depends on:** 1.6
 
@@ -171,10 +171,10 @@ The reward. The dish photo in a green ring, "Dish done!" and a short encouraging
 Lock the core loop in with a Maestro flow that runs on a real phone: open the app, start the next lesson, go through every step, finish with a rating, and see the next lesson unlocked with more XP.
 
 ### Acceptance Criteria
-- [ ] A flow goes Path → intro → every cook step → finish → Path, and checks the XP went up and the next node is current
-- [ ] A second flow checks a locked node can't be opened
-- [ ] Both flows pass on the test phone from a fresh install
-- [ ] The flows are tagged so they can run alone
+- [x] A flow goes Path → intro → every cook step → finish → Path, and checks the XP went up and the next node is current
+- [x] A second flow checks a locked node can't be opened
+- [x] Both flows pass on the test phone from a fresh install
+- [x] The flows are tagged so they can run alone
 
 ### Out of scope
 - Instrumented Compose tests (added per screen as needed)
