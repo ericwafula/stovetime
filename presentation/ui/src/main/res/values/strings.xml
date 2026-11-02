@@ -12,4 +12,9 @@
         <item quantity="one">%d day ago</item>
         <item quantity="other">%d days ago</item>
     </plurals>
+    <plurals name="week_row_summary">
+        <item quantity="one">This week: %1$d of %2$d cook</item>
+        <item quantity="other">This week: %1$d of %2$d cooks</item>
+    </plurals>
+    <string name="week_row_description">%1$s. Cooked on %2$d days so far.</string>
 </resources>
