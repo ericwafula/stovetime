@@ -93,7 +93,7 @@ A dark version of the tactile flat look that follows the phone's dark theme: war
 
 ---
 
-## 5.5 Running timers widget
+## 5.5 Running timers widget ✅
 
 **Size:** M · **Depends on:** 2.1
 
@@ -101,11 +101,11 @@ A dark version of the tactile flat look that follows the phone's dark theme: war
 A home-screen widget that shows the running timers, soonest first, with each one's name and time left counting down, and a button for a new quick timer. Tapping a timer opens it like its notification does.
 
 ### Acceptance Criteria
-- [ ] The widget lists up to three running or paused timers, soonest-ending first, with name and a live countdown (or "Paused" / "Time's up")
-- [ ] With no timers it shows "No timers running" and a "Quick timer" button that opens the Timers tab
-- [ ] Tapping a timer opens its cook step or the Timers tab, the same as tapping its notification
-- [ ] The widget updates as soon as a timer starts, changes or ends, without the app open
-- [ ] Tests cover: the widget's list (order, the three-timer cap, empty), the tap targets
+- [x] The widget lists up to three running or paused timers, soonest-ending first, with name and a live countdown (or "Paused" / "Time's up")
+- [x] With no timers it shows "No timers running" and a "Quick timer" button that opens the Timers tab
+- [x] Tapping a timer opens its cook step or the Timers tab, the same as tapping its notification
+- [x] The widget updates as soon as a timer starts, changes or ends, without the app open
+- [x] Tests cover: the widget's list (order, the three-timer cap, empty), the tap targets
 
 ### Out of scope
 - Starting or pausing timers from the widget
