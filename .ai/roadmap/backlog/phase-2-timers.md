@@ -27,7 +27,7 @@ The part every timer runs on. Any number of timers at once, each with a name, ke
 
 ---
 
-## 2.2 Step timers on the engine
+## 2.2 Step timers on the engine ✅
 
 **Size:** S · **Depends on:** 2.1, 1.4
 
@@ -35,10 +35,10 @@ The part every timer runs on. Any number of timers at once, each with a name, ke
 Timers started from cook mode run on the engine, so they keep going and still ring when you leave cook mode, lock the phone or close the app.
 
 ### Acceptance Criteria
-- [ ] Start timer in cook mode creates an engine timer named after the step ("Jammy eggs · Step 2")
-- [ ] Coming back to cook mode shows the timer's real time left
-- [ ] Finishing or leaving the cook asks whether to keep or cancel any timers still running
-- [ ] Tests cover: the timer's name, coming back shows the real time, leaving with a timer running asks first
+- [x] Start timer in cook mode creates an engine timer named after the step ("Jammy eggs · Step 2")
+- [x] Coming back to cook mode shows the timer's real time left
+- [x] Finishing or leaving the cook asks whether to keep or cancel any timers still running
+- [x] Tests cover: the timer's name, coming back shows the real time, leaving with a timer running asks first
 
 ### Out of scope
 - Changing a step timer's length

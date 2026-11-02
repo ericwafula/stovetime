@@ -96,7 +96,7 @@ The **Path screen (1.2)** is the screen built live in the workshop.
 | ID | Item | Status |
 |---|---|---|
 | 2.1 | Timer engine: several timers at once, a foreground service, survives the app being closed | ⬜ |
-| 2.2 | Step timers run on the engine and keep going when you leave cook mode | ⬜ |
+| 2.2 | Step timers run on the engine and keep going when you leave cook mode | ✅ |
 | 2.3 | Alarm: rings and vibrates, with Stop and "+1 min", over the lock screen | ⬜ |
 | 2.4 | Timers tab: running timers and a quick named timer | ⬜ |
 
