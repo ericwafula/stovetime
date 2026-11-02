@@ -5,9 +5,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.ericwathome.stovetime.design.theme.StovetimeLedge
+import com.ericwathome.stovetime.design.theme.StovetimePreviewTheme
 import com.ericwathome.stovetime.design.theme.StovetimeTheme
 
 enum class StoveButtonStyle { Primary, Success, Secondary }
@@ -44,10 +45,10 @@ fun StoveButton(
     }
 }
 
-@Preview(showBackground = true, backgroundColor = 0xFFFBF6EC)
+@PreviewLightDark
 @Composable
 private fun StoveButtonPreview() {
-    StovetimeTheme {
+    StovetimePreviewTheme {
         Column(Modifier.padding(16.dp)) {
             StoveButton(text = "Start cooking", onClick = {}, modifier = Modifier.fillMaxWidth())
             StoveButton(text = "Continue", onClick = {}, style = StoveButtonStyle.Success, modifier = Modifier.padding(top = 12.dp))

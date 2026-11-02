@@ -170,7 +170,7 @@ internal fun TimersScreen(viewModel: TimersViewModel = koinViewModel()) {
 
 ## Previews
 
-Preview `[Name]LauncherContent`, not `remember[Name]Launcher`, with `@Preview(showBackground = true, backgroundColor = 0xFFFBF6EC)` inside `StovetimeTheme`: sample state, no-op callbacks, and the important states (empty, filled, saving, error, unsaved changes).
+Preview `[Name]LauncherContent`, not `remember[Name]Launcher`, with `@PreviewLightDark` inside `StovetimePreviewTheme`: sample state, no-op callbacks, and the important states (empty, filled, saving, error, unsaved changes).
 
 ## Tests
 

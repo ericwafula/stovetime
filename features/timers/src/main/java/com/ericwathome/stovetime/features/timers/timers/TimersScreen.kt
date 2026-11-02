@@ -300,7 +300,7 @@ private fun TimerCard(
                 StoveText(
                     text = stringResource(R.string.timers_times_up),
                     style = StovetimeTheme.typography.title,
-                    color = colors.primary,
+                    color = colors.primaryContent,
                     modifier = Modifier.clearAndSetSemantics {},
                 )
             } else {

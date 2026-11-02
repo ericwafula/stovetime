@@ -7,8 +7,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.liveRegion
 import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
+import com.ericwathome.stovetime.design.theme.StovetimePreviewTheme
 import com.ericwathome.stovetime.design.theme.StovetimeTheme
 
 @Composable
@@ -19,7 +20,7 @@ fun StoveToast(
     StoveText(
         text = text,
         style = StovetimeTheme.typography.label,
-        color = StovetimeTheme.colors.onAccent,
+        color = StovetimeTheme.colors.surface,
         modifier =
             modifier
                 .semantics { liveRegion = LiveRegionMode.Polite }
@@ -28,10 +29,10 @@ fun StoveToast(
     )
 }
 
-@Preview(showBackground = true, backgroundColor = 0xFFFBF6EC)
+@PreviewLightDark
 @Composable
 private fun StoveToastPreview() {
-    StovetimeTheme {
+    StovetimePreviewTheme {
         StoveToast(text = "Finish the previous lesson first", modifier = Modifier.padding(16.dp))
     }
 }

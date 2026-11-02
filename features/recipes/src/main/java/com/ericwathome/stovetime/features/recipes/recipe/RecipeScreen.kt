@@ -26,7 +26,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ericwathome.stovetime.core.common.result.DataError
 import com.ericwathome.stovetime.core.data.model.recipes.Ingredient
@@ -37,6 +37,7 @@ import com.ericwathome.stovetime.design.components.StoveCheckRow
 import com.ericwathome.stovetime.design.components.StoveIconButton
 import com.ericwathome.stovetime.design.components.StoveIcons
 import com.ericwathome.stovetime.design.components.StoveText
+import com.ericwathome.stovetime.design.theme.StovetimePreviewTheme
 import com.ericwathome.stovetime.design.theme.StovetimeTheme
 import com.ericwathome.stovetime.features.recipes.R
 import com.ericwathome.stovetime.ui.components.RemotePhoto
@@ -210,7 +211,7 @@ private fun RecipePills(
         Pill(
             text = stringResource(R.string.recipe_xp, xp),
             background = StovetimeTheme.colors.xpSoft,
-            color = StovetimeTheme.colors.xpShade,
+            color = StovetimeTheme.colors.xpContent,
         )
     }
 }
@@ -257,10 +258,10 @@ private val sampleRecipe =
             ),
     )
 
-@Preview(showBackground = true, backgroundColor = 0xFFFBF6EC)
+@PreviewLightDark
 @Composable
 private fun RecipeContentPreview() {
-    StovetimeTheme {
+    StovetimePreviewTheme {
         RecipeContent(
             state = RecipeState(recipe = ViewState.Success(sampleRecipe), checkedIngredients = setOf(1)),
             onAction = {},
@@ -269,18 +270,18 @@ private fun RecipeContentPreview() {
     }
 }
 
-@Preview(showBackground = true, backgroundColor = 0xFFFBF6EC)
+@PreviewLightDark
 @Composable
 private fun RecipeLoadingPreview() {
-    StovetimeTheme {
+    StovetimePreviewTheme {
         RecipeContent(state = RecipeState(recipe = ViewState.Loading), onAction = {}, onBack = {})
     }
 }
 
-@Preview(showBackground = true, backgroundColor = 0xFFFBF6EC)
+@PreviewLightDark
 @Composable
 private fun RecipeNeedsConnectionPreview() {
-    StovetimeTheme {
+    StovetimePreviewTheme {
         RecipeContent(state = RecipeState(recipe = ViewState.Error(DataError.NoConnection)), onAction = {}, onBack = {})
     }
 }

@@ -1,5 +1,6 @@
 package com.ericwathome.stovetime.design.theme
 
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.text.selection.LocalTextSelectionColors
 import androidx.compose.foundation.text.selection.TextSelectionColors
 import androidx.compose.runtime.Composable
@@ -15,13 +16,17 @@ internal val LocalStovetimeSpacing = staticCompositionLocalOf<StovetimeSpacing> 
 internal val LocalStovetimeShapes = staticCompositionLocalOf<StovetimeShapes> { missingTheme() }
 
 @Composable
-fun StovetimeTheme(content: @Composable () -> Unit) {
+fun StovetimeTheme(
+    darkTheme: Boolean = isSystemInDarkTheme(),
+    content: @Composable () -> Unit,
+) {
+    val colors = if (darkTheme) DarkColors else LightColors
     CompositionLocalProvider(
-        LocalStovetimeColors provides LightColors,
+        LocalStovetimeColors provides colors,
         LocalStovetimeTypography provides DefaultTypography,
         LocalStovetimeSpacing provides StovetimeSpacing(),
         LocalStovetimeShapes provides StovetimeShapes(),
-        LocalTextSelectionColors provides TextSelectionColors(LightColors.primary, LightColors.primarySoft),
+        LocalTextSelectionColors provides TextSelectionColors(colors.primary, colors.primarySoft),
         content = content,
     )
 }

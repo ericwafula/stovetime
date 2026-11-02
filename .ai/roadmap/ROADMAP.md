@@ -124,6 +124,9 @@ The **Path screen (1.2)** is the screen built live in the workshop.
 | 5.3 | A gentle reminder when the week's goal is close | ✅ |
 | 5.4 | Dark mode | ⬜ |
 | 5.5 | Home-screen widget with running timers | ✅ |
+| 5.3 | A gentle reminder when the week's goal is close | ⬜ |
+| 5.4 | Dark mode | ✅ |
+| 5.5 | Home-screen widget with running timers | ⬜ |
 
 ---
 
@@ -294,6 +297,11 @@ These rules live in `:core:domain` and are covered by tests with fixed dates.
 | 2026-11-02 | The reminder has its own low-importance "Weekly reminder" channel and only posts when notifications are allowed; nothing asks for the permission on its behalf | Encourage, don't nag; timers already ask for the permission when it matters |
 | 2026-11-02 | Tapping the reminder opens `MainActivity` with an "open Path" extra, which selects the Path tab even when the app is already open on another tab | Launching the activity plainly would leave a running app on whatever tab it was on |
 | 2026-11-02 | Me's settings card gets a "Weekly reminder" switch under "Keep screen on", on by default, saved with the other cook settings | Same save-then-revert pattern as the other settings |
+| 2026-11-02 | Dark mode follows the phone: `DarkColors` uses warm espresso surfaces: canvas Roast `#211A14`, surface Walnut `#2E251D`, sunken Char `#17120E`, border and ledge Bark `#4E4034` — with text Oat `#F2EADB` and Biscuit `#A6937C`, locked Clay `#3A3028` / Taupe `#7D6E5E`, and a black 60% scrim | Figma has light frames only; not pure black so the flat look stays warm, sunken stays darker than canvas so recesses read, and Bark keeps ledges and borders visible (1.7:1 on canvas) |
+| 2026-11-02 | The tomato, basil and yolk faces and ledges are the same in both themes; the soft fills darken to Tomato900 `#4A1F21`, Basil900 `#1F3A27`, Yolk900 `#3F3115` | Accents stay recognisable and white text stays on tomato and basil; pale soft fills would glare on dark |
+| 2026-11-02 | New tokens `primaryContent`, `successContent`, `xpContent` (accent text and icons on plain or soft backgrounds; dark Tomato300 `#FF8A82`, Basil300 `#7DC98E`, Yolk300 `#F7C75A`, light unchanged), `onXp` (Espresso text on the yolk banner) and `scrim` | `*Shade` was both a ledge and a text colour; a ledge must be darker than its face but text on a dark soft fill must be light, so the two meanings split |
+| 2026-11-02 | Light Tomato500 `#E2333D` → `#E12B36`, Basil500 `#3F9A55` → `#36854A` (Basil700 `#2C7440` → `#256135` to keep the ledge step) and Cocoa `#7A6857` → `#786655` | White on tomato was 4.40:1, white on basil 3.52:1 and Cocoa on Oat 4.45:1; each now passes 4.5:1, and `StovetimeColorsTest` keeps every text pair at 4.5:1 in both themes |
+| 2026-11-02 | The window theme is `Theme.Stovetime` (`values` / `values-night`) with `stovetime_canvas` as its background; `MainActivity` handles `uiMode` and re-applies `SystemBarStyle.auto` and the background on a theme switch; the alarm is forced light | No white flash on a dark launch and no recreation (state kept) when the phone switches theme; the alarm stays red with white text and light bar icons |
 
 ---
 
@@ -317,4 +325,4 @@ Screens are in Figma: **[Stovetime](https://www.figma.com/design/4hJuAVOMHyuF0hE
 
 The recipe page (3.3) reuses the Recipe — Intro layout. The lesson photos are exported to `.ai/roadmap/content/photos/`.
 
-**The look: tactile flat.** Flat colour with no gradients or shadows, but every pressable thing sits on a darker "ledge" and drops into it when pressed. Primary is tomato (`#E2333D`); success is basil green; XP is yolk yellow. Type is Gabarito for headings and numbers, Rubik for text. The food photos are AI-generated placeholders; replace them with real photography before launch.
+**The look: tactile flat.** Flat colour with no gradients or shadows, but every pressable thing sits on a darker "ledge" and drops into it when pressed. Primary is tomato (`#E12B36`); success is basil green; XP is yolk yellow. Dark mode keeps the same accents on warm espresso surfaces and follows the phone. Type is Gabarito for headings and numbers, Rubik for text. The food photos are AI-generated placeholders; replace them with real photography before launch.

@@ -13,9 +13,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.painter.ColorPainter
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.ericwathome.stovetime.design.theme.StovetimeLedge
+import com.ericwathome.stovetime.design.theme.StovetimePreviewTheme
 import com.ericwathome.stovetime.design.theme.StovetimeTheme
 
 enum class PathNodeState { Done, Current, Locked }
@@ -61,10 +62,10 @@ fun PathNode(
     }
 }
 
-@Preview(showBackground = true, backgroundColor = 0xFFFBF6EC)
+@PreviewLightDark
 @Composable
 private fun PathNodePreview() {
-    StovetimeTheme {
+    StovetimePreviewTheme {
         Row(Modifier.padding(16.dp)) {
             PathNode(PathNodeState.Done, contentDescription = "Boiled eggs, cooked", onClick = {})
             PathNode(PathNodeState.Current, contentDescription = "Jammy eggs, up next", onClick = {}, modifier = Modifier.padding(start = 16.dp))

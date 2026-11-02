@@ -18,11 +18,11 @@ import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTagsAsResourceId
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
+import com.ericwathome.stovetime.design.theme.StovetimePreviewTheme
 import com.ericwathome.stovetime.design.theme.StovetimeTheme
 
 private val SheetShape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp)
@@ -39,7 +39,7 @@ fun StoveBottomSheet(
         sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
         shape = SheetShape,
         containerColor = StovetimeTheme.colors.canvas,
-        scrimColor = StovetimeTheme.colors.textPrimary.copy(alpha = 0.35f),
+        scrimColor = StovetimeTheme.colors.scrim,
         dragHandle = { SheetHandle() },
         contentWindowInsets = { WindowInsets(0) },
         modifier = modifier,
@@ -71,11 +71,11 @@ private fun StoveSheetBody(content: @Composable ColumnScope.() -> Unit) {
     )
 }
 
-@Preview(showBackground = true, backgroundColor = 0xFFFBF6EC)
+@PreviewLightDark
 @Composable
 private fun StoveSheetBodyPreview() {
-    StovetimeTheme {
-        Column(Modifier.background(Color.Transparent), horizontalAlignment = Alignment.CenterHorizontally) {
+    StovetimePreviewTheme {
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
             SheetHandle()
             StoveSheetBody {
                 StoveText(text = "Quick timer", style = StovetimeTheme.typography.title)

@@ -79,10 +79,10 @@ private fun RecipeIntroContent(
     }
 }
 
-@Preview(showBackground = true, backgroundColor = 0xFFFBF6EC)
+@PreviewLightDark
 @Composable
 private fun RecipeIntroContentPreview() {
-    StovetimeTheme {
+    StovetimePreviewTheme {
         RecipeIntroContent(
             state = RecipeIntroState(recipe = ViewState.Success(sampleRecipe)),
             onAction = {},

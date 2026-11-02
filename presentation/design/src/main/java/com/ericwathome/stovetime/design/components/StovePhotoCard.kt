@@ -17,8 +17,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
+import com.ericwathome.stovetime.design.theme.StovetimePreviewTheme
 import com.ericwathome.stovetime.design.theme.StovetimeTheme
 
 private const val PHOTO_ASPECT_RATIO = 148f / 100f
@@ -66,10 +67,10 @@ fun StovePhotoCard(
     }
 }
 
-@Preview(showBackground = true, backgroundColor = 0xFFFBF6EC)
+@PreviewLightDark
 @Composable
 private fun StovePhotoCardPreview() {
-    StovetimeTheme {
+    StovetimePreviewTheme {
         Row(Modifier.padding(16.dp), horizontalArrangement = Arrangement.spacedBy(16.dp)) {
             StovePhotoCard(title = "Chicken Handi", caption = "Chicken", onClick = {}, modifier = Modifier.width(148.dp)) {}
             StovePhotoCard(title = "Beef and Mustard Pie", caption = "Beef", onClick = {}, modifier = Modifier.width(148.dp)) {}

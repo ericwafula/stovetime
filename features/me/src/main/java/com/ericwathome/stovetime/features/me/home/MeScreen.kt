@@ -403,7 +403,7 @@ private fun HistoryItem(
                 StoveText(text = cook.name, style = StovetimeTheme.typography.bodyStrong, maxLines = 2)
                 StoveText(text = caption, style = StovetimeTheme.typography.caption, color = StovetimeTheme.colors.textSecondary, maxLines = 1)
             }
-            Pill(text = xp, background = StovetimeTheme.colors.xpSoft, color = StovetimeTheme.colors.xpShade)
+            Pill(text = xp, background = StovetimeTheme.colors.xpSoft, color = StovetimeTheme.colors.xpContent)
         }
     }
 }

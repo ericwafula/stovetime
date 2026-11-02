@@ -17,8 +17,9 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.liveRegion
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
+import com.ericwathome.stovetime.design.theme.StovetimePreviewTheme
 import com.ericwathome.stovetime.design.theme.StovetimeTheme
 
 private val StepTouchSize = 48.dp
@@ -95,10 +96,10 @@ private fun StepButton(
     }
 }
 
-@Preview(showBackground = true, backgroundColor = 0xFFFFFFFF)
+@PreviewLightDark
 @Composable
 private fun StoveStepperPreview() {
-    StovetimeTheme {
+    StovetimePreviewTheme(background = { it.surface }) {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
             StoveStepper(value = "4", onDecrease = {}, onIncrease = {}, decreaseLabel = "Fewer", increaseLabel = "More")
             StoveStepper(value = "1", onDecrease = {}, onIncrease = {}, decreaseLabel = "Fewer", increaseLabel = "More", canDecrease = false)

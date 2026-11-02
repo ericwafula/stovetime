@@ -35,7 +35,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ericwathome.stovetime.core.common.helpers.Elapsed
 import com.ericwathome.stovetime.core.data.model.recipes.Catalogue
@@ -50,6 +50,7 @@ import com.ericwathome.stovetime.design.components.StoveNavBarClearance
 import com.ericwathome.stovetime.design.components.StovePhotoCard
 import com.ericwathome.stovetime.design.components.StoveSearchField
 import com.ericwathome.stovetime.design.components.StoveText
+import com.ericwathome.stovetime.design.theme.StovetimePreviewTheme
 import com.ericwathome.stovetime.design.theme.StovetimeTheme
 import com.ericwathome.stovetime.features.recipes.R
 import com.ericwathome.stovetime.ui.components.RemotePhoto
@@ -332,26 +333,26 @@ private val sampleState =
         lastSynced = Elapsed.Hours(2),
     )
 
-@Preview(showBackground = true, backgroundColor = 0xFFFBF6EC)
+@PreviewLightDark
 @Composable
 private fun RecipesBrowseContentPreview() {
-    StovetimeTheme {
+    StovetimePreviewTheme {
         RecipesBrowseContent(state = sampleState, onAction = {})
     }
 }
 
-@Preview(showBackground = true, backgroundColor = 0xFFFBF6EC)
+@PreviewLightDark
 @Composable
 private fun RecipesBrowseLoadingPreview() {
-    StovetimeTheme {
+    StovetimePreviewTheme {
         RecipesBrowseContent(state = RecipesBrowseState(), onAction = {})
     }
 }
 
-@Preview(showBackground = true, backgroundColor = 0xFFFBF6EC)
+@PreviewLightDark
 @Composable
 private fun RecipesBrowseEmptyOfflinePreview() {
-    StovetimeTheme {
+    StovetimePreviewTheme {
         RecipesBrowseContent(
             state =
                 RecipesBrowseState(
@@ -363,18 +364,18 @@ private fun RecipesBrowseEmptyOfflinePreview() {
     }
 }
 
-@Preview(showBackground = true, backgroundColor = 0xFFFBF6EC)
+@PreviewLightDark
 @Composable
 private fun RecipesBrowseOfflineStalePreview() {
-    StovetimeTheme {
+    StovetimePreviewTheme {
         RecipesBrowseContent(state = sampleState.copy(isOnline = false, lastSynced = Elapsed.Days(9), keepsFailing = true), onAction = {})
     }
 }
 
-@Preview(showBackground = true, backgroundColor = 0xFFFBF6EC)
+@PreviewLightDark
 @Composable
 private fun RecipesBrowseNoMatchesPreview() {
-    StovetimeTheme {
+    StovetimePreviewTheme {
         RecipesBrowseContent(
             state =
                 sampleState.copy(

@@ -16,8 +16,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
+import com.ericwathome.stovetime.design.theme.StovetimePreviewTheme
 import com.ericwathome.stovetime.design.theme.StovetimeTheme
 
 private val CheckShape = RoundedCornerShape(6.dp)
@@ -69,10 +70,10 @@ fun StoveCheckRow(
     }
 }
 
-@Preview(showBackground = true, backgroundColor = 0xFFFBF6EC)
+@PreviewLightDark
 @Composable
 private fun StoveCheckRowPreview() {
-    StovetimeTheme {
+    StovetimePreviewTheme {
         Column(Modifier.padding(16.dp)) {
             StoveCheckRow(text = "2 eggs, straight from the fridge", checked = false, onCheckedChange = {})
             StoveCheckRow(text = "1 thick slice of sourdough", checked = true, onCheckedChange = {})

@@ -31,7 +31,7 @@ class AlarmActivity : ComponentActivity() {
             return
         }
         setContent {
-            StovetimeTheme {
+            StovetimeTheme(darkTheme = false) {
                 timerId?.let { id -> AlarmRoute(timerId = id, onDismiss = ::finish) }
             }
         }

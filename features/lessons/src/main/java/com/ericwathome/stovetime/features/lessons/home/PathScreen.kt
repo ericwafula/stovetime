@@ -214,9 +214,10 @@ private fun UnitBanner(
         StoveText(
             text = stringResource(R.string.path_unit_eyebrow, unit.number, unit.id).uppercase(),
             style = StovetimeTheme.typography.label,
+            color = colors.onXp,
         )
         Spacer(Modifier.height(4.dp))
-        StoveText(text = unit.title, style = StovetimeTheme.typography.title)
+        StoveText(text = unit.title, style = StovetimeTheme.typography.title, color = colors.onXp)
         Spacer(Modifier.height(12.dp))
         Row(verticalAlignment = Alignment.CenterVertically) {
             StoveProgressBar(
@@ -233,6 +234,7 @@ private fun UnitBanner(
                         stringResource(R.string.path_unit_progress, cooked, unit.lessons.size)
                     },
                 style = StovetimeTheme.typography.caption,
+                color = colors.onXp,
             )
         }
     }

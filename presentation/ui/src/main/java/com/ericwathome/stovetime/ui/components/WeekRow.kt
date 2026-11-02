@@ -11,10 +11,11 @@ import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.ericwathome.stovetime.design.components.DayDot
 import com.ericwathome.stovetime.design.components.StoveText
+import com.ericwathome.stovetime.design.theme.StovetimePreviewTheme
 import com.ericwathome.stovetime.design.theme.StovetimeTheme
 import com.ericwathome.stovetime.ui.R
 import com.ericwathome.stovetime.ui.helpers.narrowDayName
@@ -53,10 +54,10 @@ fun WeekRow(
     }
 }
 
-@Preview(showBackground = true, backgroundColor = 0xFFFBF6EC)
+@PreviewLightDark
 @Composable
 private fun WeekRowPreview() {
-    StovetimeTheme {
+    StovetimePreviewTheme {
         WeekRow(
             days =
                 (2..8).map { day ->

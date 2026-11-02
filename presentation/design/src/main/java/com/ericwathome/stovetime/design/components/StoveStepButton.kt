@@ -16,8 +16,9 @@ import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.onClick
 import androidx.compose.ui.semantics.role
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
+import com.ericwathome.stovetime.design.theme.StovetimePreviewTheme
 import com.ericwathome.stovetime.design.theme.StovetimeTheme
 
 private val StepShape = RoundedCornerShape(12.dp)
@@ -55,10 +56,10 @@ fun StoveStepButton(
     }
 }
 
-@Preview(showBackground = true, backgroundColor = 0xFFFBF6EC)
+@PreviewLightDark
 @Composable
 private fun StoveStepButtonPreview() {
-    StovetimeTheme {
+    StovetimePreviewTheme {
         Row(Modifier.padding(16.dp), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
             StoveStepButton(text = "−1 min", contentDescription = "One minute less", onClick = {})
             StoveStepButton(text = "+1 min", contentDescription = "One minute more", onClick = {})

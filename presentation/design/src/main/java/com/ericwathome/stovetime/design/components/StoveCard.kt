@@ -9,10 +9,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.ericwathome.stovetime.design.theme.StovetimeLedge
+import com.ericwathome.stovetime.design.theme.StovetimePreviewTheme
 import com.ericwathome.stovetime.design.theme.StovetimeTheme
 
 @Composable
@@ -45,10 +46,10 @@ fun StoveCard(
     }
 }
 
-@Preview(showBackground = true, backgroundColor = 0xFFFBF6EC)
+@PreviewLightDark
 @Composable
 private fun StoveCardPreview() {
-    StovetimeTheme {
+    StovetimePreviewTheme {
         StoveCard(modifier = Modifier.padding(16.dp).fillMaxWidth()) {
             StoveText("Up next · 15 min", style = StovetimeTheme.typography.caption, color = StovetimeTheme.colors.textSecondary)
             StoveText("Jammy eggs on toast", style = StovetimeTheme.typography.heading)

@@ -154,7 +154,7 @@ private fun IntroDetails(
                 StoveText(
                     text = stringResource(R.string.intro_position, intro.unitNumber, intro.pathLesson.position, intro.unitSize).uppercase(),
                     style = StovetimeTheme.typography.label,
-                    color = colors.primary,
+                    color = colors.primaryContent,
                 )
                 Spacer(Modifier.height(spacing.s12))
                 StoveText(text = lesson.title, style = StovetimeTheme.typography.display, modifier = Modifier.semantics { heading() })
@@ -165,7 +165,7 @@ private fun IntroDetails(
                     Pill(
                         text = stringResource(R.string.intro_xp, intro.pathLesson.nextCookXp),
                         background = colors.xpSoft,
-                        color = colors.xpShade,
+                        color = colors.xpContent,
                     )
                 }
                 Spacer(Modifier.height(spacing.s20))
@@ -210,7 +210,7 @@ private fun LearnCard(points: List<String>) {
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-        StoveText(text = stringResource(R.string.intro_learn), style = StovetimeTheme.typography.label, color = colors.successShade)
+        StoveText(text = stringResource(R.string.intro_learn), style = StovetimeTheme.typography.label, color = colors.successContent)
         points.forEach { point ->
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                 StoveIcon(StoveIcons.Check, contentDescription = null, tint = colors.success, size = 18.dp)

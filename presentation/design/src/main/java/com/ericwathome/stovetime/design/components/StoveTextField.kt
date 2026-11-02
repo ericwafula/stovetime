@@ -19,8 +19,9 @@ import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
+import com.ericwathome.stovetime.design.theme.StovetimePreviewTheme
 import com.ericwathome.stovetime.design.theme.StovetimeTheme
 
 private val FieldShape = RoundedCornerShape(14.dp)
@@ -86,10 +87,10 @@ fun StoveSearchField(
     )
 }
 
-@Preview(showBackground = true, backgroundColor = 0xFFFBF6EC)
+@PreviewLightDark
 @Composable
 private fun StoveTextFieldPreview() {
-    StovetimeTheme {
+    StovetimePreviewTheme {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
             StoveSearchField(value = "", onValueChange = {}, placeholder = "Search recipes")
             StoveSearchField(value = "chicken", onValueChange = {}, placeholder = "Search recipes")

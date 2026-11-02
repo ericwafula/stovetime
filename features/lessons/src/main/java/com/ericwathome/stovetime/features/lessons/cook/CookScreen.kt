@@ -268,7 +268,7 @@ private fun ColumnScope.CookStepBody(
         StoveText(
             text = stringResource(R.string.cook_step, state.step + 1).uppercase(),
             style = StovetimeTheme.typography.label,
-            color = colors.primary,
+            color = colors.primaryContent,
         )
         Spacer(Modifier.height(spacing.s12))
         StoveText(
@@ -343,7 +343,7 @@ private fun TimerCard(
     val description = stringResource(R.string.cook_timer_description, timerName, time)
     StoveCard(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally, padding = 20.dp) {
         if (timer?.ringing == true) {
-            StoveText(text = stringResource(R.string.cook_times_up), style = StovetimeTheme.typography.title, color = colors.primary)
+            StoveText(text = stringResource(R.string.cook_times_up), style = StovetimeTheme.typography.title, color = colors.primaryContent)
         } else {
             StoveText(
                 text = time,
@@ -410,7 +410,7 @@ private fun TipCard(tip: String) {
             .padding(16.dp),
         horizontalArrangement = Arrangement.spacedBy(12.dp),
     ) {
-        StoveIcon(StoveIcons.Star, contentDescription = null, tint = colors.xpShade, size = 20.dp)
+        StoveIcon(StoveIcons.Star, contentDescription = null, tint = colors.xpContent, size = 20.dp)
         StoveText(text = tip, style = StovetimeTheme.typography.caption)
     }
 }

@@ -71,7 +71,7 @@ One gentle nudge when the week's goal is in reach: on Saturday evening, if you'r
 
 ---
 
-## 5.4 Dark mode
+## 5.4 Dark mode ✅
 
 **Size:** M · **Depends on:** 0.1
 
@@ -79,11 +79,11 @@ One gentle nudge when the week's goal is in reach: on Saturday evening, if you'r
 A dark version of the tactile flat look that follows the phone's dark theme: warm dark surfaces, the same tomato, basil and yolk accents, and ledges that still read. Status and navigation bar icons switch to light on dark.
 
 ### Acceptance Criteria
-- [ ] Every colour token has a dark value, defined once in `:presentation:design`; the app follows the phone's light or dark setting
-- [ ] Text keeps at least 4.5:1 contrast on its background in both themes
-- [ ] Status-bar and navigation-bar icons are readable in both themes, and the alarm stays red with white text
-- [ ] Every component preview also renders in dark
-- [ ] Tests cover: every light token has a dark counterpart, contrast of text tokens on their backgrounds in both themes
+- [x] Every colour token has a dark value, defined once in `:presentation:design`; the app follows the phone's light or dark setting
+- [x] Text keeps at least 4.5:1 contrast on its background in both themes
+- [x] Status-bar and navigation-bar icons are readable in both themes, and the alarm stays red with white text
+- [x] Every component preview also renders in dark
+- [x] Tests cover: every light token has a dark counterpart, contrast of text tokens on their backgrounds in both themes
 
 ### Edge cases
 - Switching the phone's theme while the app is open updates it without losing state.

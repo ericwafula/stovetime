@@ -16,8 +16,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
+import com.ericwathome.stovetime.design.theme.StovetimePreviewTheme
 import com.ericwathome.stovetime.design.theme.StovetimeTheme
 
 private val TrackWidth = 48.dp
@@ -52,15 +53,15 @@ fun StoveSwitch(
             Modifier
                 .offset(x = thumbOffset)
                 .size(ThumbSize)
-                .background(colors.surface, CircleShape),
+                .background(colors.onAccent, CircleShape),
         )
     }
 }
 
-@Preview(showBackground = true, backgroundColor = 0xFFFBF6EC)
+@PreviewLightDark
 @Composable
 private fun StoveSwitchPreview() {
-    StovetimeTheme {
+    StovetimePreviewTheme {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
             StoveSwitch(checked = true, onCheckedChange = {})
             StoveSwitch(checked = false, onCheckedChange = {})

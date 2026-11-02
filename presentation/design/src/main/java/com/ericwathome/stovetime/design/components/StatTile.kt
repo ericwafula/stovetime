@@ -11,8 +11,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
+import com.ericwathome.stovetime.design.theme.StovetimePreviewTheme
 import com.ericwathome.stovetime.design.theme.StovetimeTheme
 
 enum class StatTone { Xp, Success, Primary }
@@ -27,9 +28,9 @@ fun StatTile(
     val colors = StovetimeTheme.colors
     val (background, content) =
         when (tone) {
-            StatTone.Xp -> colors.xpSoft to colors.xpShade
-            StatTone.Success -> colors.successSoft to colors.successShade
-            StatTone.Primary -> colors.primarySoft to colors.primary
+            StatTone.Xp -> colors.xpSoft to colors.xpContent
+            StatTone.Success -> colors.successSoft to colors.successContent
+            StatTone.Primary -> colors.primarySoft to colors.primaryContent
         }
     Column(
         modifier =
@@ -45,10 +46,10 @@ fun StatTile(
     }
 }
 
-@Preview(showBackground = true, backgroundColor = 0xFFFBF6EC)
+@PreviewLightDark
 @Composable
 private fun StatTilePreview() {
-    StovetimeTheme {
+    StovetimePreviewTheme {
         Row(Modifier.padding(16.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             StatTile(value = "+30", label = "XP earned", tone = StatTone.Xp, modifier = Modifier.weight(1f))
             StatTile(value = "14m", label = "Cook time", tone = StatTone.Success, modifier = Modifier.weight(1f))

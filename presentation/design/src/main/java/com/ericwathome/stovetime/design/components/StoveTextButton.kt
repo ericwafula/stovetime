@@ -9,8 +9,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
+import com.ericwathome.stovetime.design.theme.StovetimePreviewTheme
 import com.ericwathome.stovetime.design.theme.StovetimeTheme
 
 @Composable
@@ -18,7 +19,7 @@ fun StoveTextButton(
     text: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    color: Color = StovetimeTheme.colors.primary,
+    color: Color = StovetimeTheme.colors.primaryContent,
 ) {
     Box(
         modifier =
@@ -32,10 +33,10 @@ fun StoveTextButton(
     }
 }
 
-@Preview(showBackground = true, backgroundColor = 0xFFFBF6EC)
+@PreviewLightDark
 @Composable
 private fun StoveTextButtonPreview() {
-    StovetimeTheme {
+    StovetimePreviewTheme {
         StoveTextButton(text = "Start over", onClick = {}, modifier = Modifier.padding(16.dp))
     }
 }

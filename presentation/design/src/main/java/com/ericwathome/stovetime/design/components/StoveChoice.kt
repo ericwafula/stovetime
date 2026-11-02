@@ -9,9 +9,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.ericwathome.stovetime.design.theme.StovetimeLedge
+import com.ericwathome.stovetime.design.theme.StovetimePreviewTheme
 import com.ericwathome.stovetime.design.theme.StovetimeTheme
 
 @Composable
@@ -33,7 +34,7 @@ fun StoveChoice(
         StoveText(
             text = text,
             style = StovetimeTheme.typography.label,
-            color = if (selected) colors.successShade else colors.textPrimary,
+            color = if (selected) colors.successContent else colors.textPrimary,
             textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.padding(horizontal = 8.dp, vertical = 12.dp),
@@ -41,10 +42,10 @@ fun StoveChoice(
     }
 }
 
-@Preview(showBackground = true, backgroundColor = 0xFFFBF6EC)
+@PreviewLightDark
 @Composable
 private fun StoveChoicePreview() {
-    StovetimeTheme {
+    StovetimePreviewTheme {
         Row(Modifier.padding(16.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             StoveChoice(text = "Overdone", selected = false, onClick = {}, modifier = Modifier.weight(1f))
             StoveChoice(text = "Pretty good", selected = true, onClick = {}, modifier = Modifier.weight(1f))
