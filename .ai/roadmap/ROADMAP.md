@@ -113,7 +113,7 @@ The **Path screen (1.2)** is the screen built live in the workshop.
 | ID | Item | Status |
 |---|---|---|
 | 4.1 | Me screen: total XP, current and best streak, recipes cooked, cook history | ✅ |
-| 4.2 | Settings: weekly goal, keep screen on while cooking | ⬜ |
+| 4.2 | Settings: weekly goal, keep screen on while cooking | ✅ |
 | 4.3 | Start over: reset all progress, with a confirmation | ⬜ |
 
 ### Phase 5 — Later (evidence-driven)
@@ -278,6 +278,8 @@ These rules live in `:core:domain` and are covered by tests with fixed dates.
 | 2026-11-02 | History dates read Today, Yesterday, the weekday for earlier days of this calendar week, and a short date before that | Matches the frame ("Today", "Wednesday") and the week row above it; `relativeDay` in `:core:common` holds the rule |
 | 2026-11-02 | `StoveCard` takes a `shape`; Me's history and settings cards use the medium radius with the usual ledge | The frame's cards are 16 dp; history items are pressable, so they keep the ledge |
 | 2026-11-02 | Empty Me history is a card with "Go to the Path"; while progress loads nothing is drawn, and a failed load shows Try again | The frame shows only the filled state; same pattern as the Path tab |
+| 2026-11-02 | `StoveSwitch` and `StoveStepper` join `:presentation:design` (with a new `Minus` icon); the stepper's 36 dp buttons sit in 48 dp touch targets and dim at 1 and 7 | The Me frame needs both and there was no switch or stepper; no Material components |
+| 2026-11-02 | A setting changed in Me shows straight away and is saved in the background; if saving fails it goes back and a toast says so | DataStore is fast, so the stepper shouldn't wait on it; the Path, finish screen and Me all read the goal through `observeProgress` |
 
 ---
 

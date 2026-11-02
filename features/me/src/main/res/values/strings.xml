@@ -9,6 +9,13 @@
         <item quantity="one">Best streak: %d week</item>
         <item quantity="other">Best streak: %d weeks</item>
     </plurals>
+    <string name="me_settings">Settings</string>
+    <string name="me_weekly_goal">Weekly goal</string>
+    <string name="me_weekly_goal_hint">Cooks a week for your streak</string>
+    <string name="me_weekly_goal_lower">Lower the weekly goal</string>
+    <string name="me_weekly_goal_raise">Raise the weekly goal</string>
+    <string name="me_keep_screen_on">Keep screen on while cooking</string>
+    <string name="me_save_failed">Couldn\'t save that setting. Try again.</string>
     <string name="me_history">History</string>
     <string name="me_history_caption">%1$s · %2$s</string>
     <string name="me_history_xp">+%1$d XP</string>

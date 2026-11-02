@@ -26,7 +26,7 @@ Your progress at a glance: total XP, the current and best week streak, lessons a
 
 ---
 
-## 4.2 Settings
+## 4.2 Settings ✅
 
 **Size:** S · **Depends on:** 4.1
 **Design:** [Figma › Me](https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=81-73) (the Settings card)
@@ -35,10 +35,10 @@ Your progress at a glance: total XP, the current and best week streak, lessons a
 Two settings in Me: the weekly cook goal (1 to 7) and "keep screen on while cooking".
 
 ### Acceptance Criteria
-- [ ] The weekly goal can be set from 1 to 7 and shows straight away on the Path, finish screen and Me
-- [ ] "Keep screen on while cooking" switches cook mode's screen-on behaviour
-- [ ] Both settings survive restarting the app
-- [ ] Tests cover: changing the goal updates the week row, the goal can't go below 1 or above 7, the screen-on setting is read by cook mode
+- [x] The weekly goal can be set from 1 to 7 and shows straight away on the Path, finish screen and Me
+- [x] "Keep screen on while cooking" switches cook mode's screen-on behaviour
+- [x] Both settings survive restarting the app
+- [x] Tests cover: changing the goal updates the week row, the goal can't go below 1 or above 7, the screen-on setting is read by cook mode
 
 ### Edge cases
 - Lowering the goal so this week is already met: this week counts as met straight away.

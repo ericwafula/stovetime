@@ -92,6 +92,19 @@ class CookViewModelTest {
         }
 
     @Test
+    fun cook_mode_reads_the_keep_screen_on_setting() =
+        runTest {
+            // given
+            every { settingsRepository.observeCookSettings() } returns flowOf(CookSettings(keepScreenOn = false))
+            sut = createViewModel()
+
+            sut.state.test {
+                // then
+                assertThat(expectMostRecentItem().keepScreenOn).isFalse()
+            }
+        }
+
+    @Test
     fun back_goes_to_the_previous_step() =
         runTest {
             sut.state.test {

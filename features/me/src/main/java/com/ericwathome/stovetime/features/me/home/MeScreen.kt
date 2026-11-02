@@ -1,6 +1,18 @@
 package com.ericwathome.stovetime.features.me.home
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.selection.toggleable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.semantics.Role
+import com.ericwathome.stovetime.core.data.model.settings.CookSettings
+import com.ericwathome.stovetime.design.components.StoveStepper
+import com.ericwathome.stovetime.design.components.StoveSwitch
+import com.ericwathome.stovetime.design.components.StoveToast
+import kotlinx.coroutines.delay
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -67,6 +79,7 @@ import kotlinx.datetime.atTime
 import kotlinx.datetime.toInstant
 import org.koin.compose.viewmodel.koinViewModel
 
+private const val TOAST_MILLIS = 2_500L
 private val HistoryPhotoSize = 48.dp
 
 @Composable
@@ -93,16 +106,30 @@ internal fun MeScreen(
     viewModel: MeViewModel = koinViewModel(),
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+    var saveFailures by remember { mutableIntStateOf(0) }
 
     CollectOneTimeEvent(viewModel.event) { event ->
         when (event) {
             is MeEvent.OpenLesson -> onOpenLesson(event.lessonId)
             is MeEvent.OpenRecipe -> onOpenRecipe(event.recipeId)
             MeEvent.OpenPath -> onOpenPath()
+            MeEvent.ShowSaveFailed -> saveFailures++
         }
     }
 
-    MeContent(state = state, onAction = viewModel::onAction, modifier = modifier)
+    Box(modifier.fillMaxSize()) {
+        MeContent(state = state, onAction = viewModel::onAction)
+        if (saveFailures > 0) {
+            LaunchedEffect(saveFailures) {
+                delay(TOAST_MILLIS)
+                saveFailures = 0
+            }
+            StoveToast(
+                text = stringResource(R.string.me_save_failed),
+                modifier = Modifier.align(Alignment.BottomCenter).padding(bottom = StoveNavBarClearance),
+            )
+        }
+    }
 }
 
 @Composable
@@ -150,6 +177,15 @@ private fun MeDetails(
             goal = progress.thisWeek.goal,
             modifier = Modifier.fillMaxWidth(),
         )
+        state.settings?.let { settings ->
+            SectionHeading(text = stringResource(R.string.me_settings))
+            SettingsCard(
+                settings = settings,
+                canLowerGoal = state.canLowerGoal,
+                canRaiseGoal = state.canRaiseGoal,
+                onAction = onAction,
+            )
+        }
         SectionHeading(text = stringResource(R.string.me_history))
         if (progress.history.isEmpty()) {
             EmptyHistory(onGoToPath = { onAction(MeAction.OnClickGoToPath) })
@@ -222,6 +258,67 @@ private fun MeStats(progress: Progress) {
             color = StovetimeTheme.colors.textSecondary,
             modifier = Modifier.testTag("me_best_streak"),
         )
+    }
+}
+
+@Composable
+private fun SettingsCard(
+    settings: CookSettings,
+    canLowerGoal: Boolean,
+    canRaiseGoal: Boolean,
+    onAction: (MeAction) -> Unit,
+) {
+    val spacing = StovetimeTheme.spacing
+    StoveCard(shape = StovetimeTheme.shapes.medium, padding = 0.dp, modifier = Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(horizontal = spacing.s16, vertical = spacing.s4)) {
+            Row(
+                modifier = Modifier.fillMaxWidth().padding(vertical = spacing.s8),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(spacing.s12),
+            ) {
+                Column(modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
+                    StoveText(text = stringResource(R.string.me_weekly_goal), style = StovetimeTheme.typography.bodyStrong)
+                    StoveText(
+                        text = stringResource(R.string.me_weekly_goal_hint),
+                        style = StovetimeTheme.typography.caption,
+                        color = StovetimeTheme.colors.textSecondary,
+                    )
+                }
+                StoveStepper(
+                    value = countText(settings.weeklyGoal),
+                    onDecrease = { onAction(MeAction.OnClickLowerGoal) },
+                    onIncrease = { onAction(MeAction.OnClickRaiseGoal) },
+                    decreaseLabel = stringResource(R.string.me_weekly_goal_lower),
+                    increaseLabel = stringResource(R.string.me_weekly_goal_raise),
+                    canDecrease = canLowerGoal,
+                    canIncrease = canRaiseGoal,
+                    decreaseModifier = Modifier.testTag("me_goal_minus"),
+                    increaseModifier = Modifier.testTag("me_goal_plus"),
+                )
+            }
+            Box(Modifier.fillMaxWidth().height(2.dp).background(StovetimeTheme.colors.border))
+            Row(
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .heightIn(min = 48.dp)
+                        .toggleable(
+                            value = settings.keepScreenOn,
+                            role = Role.Switch,
+                            onValueChange = { onAction(MeAction.OnKeepScreenOnChange(it)) },
+                        ).padding(vertical = spacing.s12)
+                        .testTag("me_keep_screen_on"),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(spacing.s12),
+            ) {
+                StoveText(
+                    text = stringResource(R.string.me_keep_screen_on),
+                    style = StovetimeTheme.typography.bodyStrong,
+                    modifier = Modifier.weight(1f),
+                )
+                StoveSwitch(checked = settings.keepScreenOn, onCheckedChange = null)
+            }
+        }
     }
 }
 
@@ -368,6 +465,7 @@ private fun MeContentPreview() {
                             ),
                         ),
                     today = PreviewToday,
+                    settings = CookSettings(),
                 ),
             onAction = {},
         )
