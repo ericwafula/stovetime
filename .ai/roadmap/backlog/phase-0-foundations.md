@@ -91,7 +91,7 @@ Store progress on the phone: which lessons and recipes were cooked, when, how lo
 
 ---
 
-## 0.5 TheMealDB client
+## 0.5 TheMealDB client ✅
 
 **Size:** M · **Depends on:** 0.2
 
@@ -99,12 +99,12 @@ Store progress on the phone: which lessons and recipes were cooked, when, how lo
 Talk to TheMealDB: list categories, list the meals in a category, search by name, and look up one meal. This is what the Recipes tab (Phase 3) is built on.
 
 ### Acceptance Criteria
-- [ ] Categories, meals in a category, search by name and look up by id all return data
-- [ ] "Nothing found" (`{"meals": null}`) is an empty result, not an error
-- [ ] No connection, a timeout and a server error each come back as their own typed error
-- [ ] Ingredients and measures (up to 20 of each) come back as a clean list with empty slots dropped
-- [ ] The base URL and key are configured in one place
-- [ ] Tests cover: a normal response, `{"meals": null}`, ingredient pairing with gaps, no connection, a server error
+- [x] Categories, meals in a category, search by name and look up by id all return data
+- [x] "Nothing found" (`{"meals": null}`) is an empty result, not an error
+- [x] No connection, a timeout and a server error each come back as their own typed error
+- [x] Ingredients and measures (up to 20 of each) come back as a clean list with empty slots dropped
+- [x] The base URL and key are configured in one place
+- [x] Tests cover: a normal response, `{"meals": null}`, ingredient pairing with gaps, no connection, a server error
 
 ### Edge cases
 - An ingredient with no measure keeps the ingredient with an empty measure.
