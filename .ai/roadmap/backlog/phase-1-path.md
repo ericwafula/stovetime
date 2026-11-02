@@ -29,7 +29,7 @@ Write the first course, "Home basics", with Unit 1 "Crack it: five ways with egg
 
 ---
 
-## 1.2 Path screen
+## 1.2 Path screen ✅
 
 **Size:** L · **Depends on:** 1.1, 1.5, 0.3, 0.4
 **Design:** [Figma › Home — Path](https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=70-98)
@@ -38,15 +38,15 @@ Write the first course, "Home basics", with Unit 1 "Crack it: five ways with egg
 The home screen. At the top, the course chip ("Home basics"), the week streak and total XP. Below it, the unit banner with how many lessons are cooked, then the lessons as a winding path of nodes: done, current or locked. The current lesson has an "Up next" card with its time and a Start button showing the XP it's worth.
 
 ### Acceptance Criteria
-- [ ] The streak and XP chips show the real week streak and total XP
-- [ ] The unit banner shows the unit number, title and "N of 5 cooked", with a matching progress bar
-- [ ] Cooked lessons show as done, the next one as current with its photo, and the rest as locked
-- [ ] The "Up next" card shows the current lesson's title, minutes and "Start · +N XP"
-- [ ] Tapping Start or the current node opens the lesson intro (1.3)
-- [ ] Tapping a done node opens its intro to cook it again
-- [ ] Tapping a locked node says "Finish the previous lesson first" and opens nothing
-- [ ] Progress updates as soon as you come back from a finished cook, without a reload
-- [ ] Tests cover: a fresh install (first lesson current, the rest locked), mid-unit progress, a finished unit, tapping a locked node
+- [x] The streak and XP chips show the real week streak and total XP
+- [x] The unit banner shows the unit number, title and "N of 5 cooked", with a matching progress bar
+- [x] Cooked lessons show as done, the next one as current with its photo, and the rest as locked
+- [x] The "Up next" card shows the current lesson's title, minutes and "Start · +N XP"
+- [x] Tapping Start or the current node opens the lesson intro (1.3)
+- [x] Tapping a done node opens its intro to cook it again
+- [x] Tapping a locked node says "Finish the previous lesson first" and opens nothing
+- [x] Progress updates as soon as you come back from a finished cook, without a reload
+- [x] Tests cover: a fresh install (first lesson current, the rest locked), mid-unit progress, a finished unit, tapping a locked node
 
 ### Edge cases
 - A fresh install: streak 0 and 0 XP show as "0", never blank.

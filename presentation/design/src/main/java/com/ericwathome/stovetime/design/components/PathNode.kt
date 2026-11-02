@@ -40,7 +40,7 @@ fun PathNode(
         ledge = ledge,
         shape = CircleShape,
         ledgeHeight = StovetimeLedge.Large,
-        onClick = onClick.takeIf { state != PathNodeState.Locked },
+        onClick = onClick,
         modifier = modifier.size(width = 76.dp, height = 82.dp),
     ) {
         when (state) {

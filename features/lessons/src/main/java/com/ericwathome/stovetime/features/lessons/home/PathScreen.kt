@@ -212,7 +212,7 @@ private fun UnitBanner(
     val colors = StovetimeTheme.colors
     StoveCard(color = colors.xp, ledge = colors.xpShade, bordered = false, padding = 20.dp, modifier = Modifier.fillMaxWidth()) {
         StoveText(
-            text = stringResource(R.string.path_unit_eyebrow, unit.number, unit.id.uppercase()),
+            text = stringResource(R.string.path_unit_eyebrow, unit.number, unit.id).uppercase(),
             style = StovetimeTheme.typography.label,
         )
         Spacer(Modifier.height(4.dp))
