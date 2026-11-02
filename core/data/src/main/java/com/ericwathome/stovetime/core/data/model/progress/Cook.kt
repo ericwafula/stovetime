@@ -14,6 +14,7 @@ data class Cook(
     val finishedAt: Long,
     val xp: Int,
     val rating: Rating?,
+    val weeklyGoal: Int,
 )
 
 data class NewCook(
@@ -24,5 +25,6 @@ data class NewCook(
     val startedAt: Long,
     val finishedAt: Long,
     val xp: Int,
+    val weeklyGoal: Int,
     val rating: Rating? = null,
 )

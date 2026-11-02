@@ -35,6 +35,7 @@ class CookRepositoriesTest {
             startedAt = 1_000,
             finishedAt = 841_000,
             xp = 30,
+            weeklyGoal = 4,
         )
 
     private val cache =
@@ -48,6 +49,7 @@ class CookRepositoriesTest {
             finishedAt = 841_000,
             xp = 30,
             rating = "PrettyGood",
+            weeklyGoal = 4,
         )
 
     @Before
@@ -103,6 +105,7 @@ class CookRepositoriesTest {
                                 finishedAt = 841_000,
                                 xp = 30,
                                 rating = Rating.PrettyGood,
+                                weeklyGoal = 4,
                             ),
                         ),
                     ),

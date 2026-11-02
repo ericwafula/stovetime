@@ -15,6 +15,7 @@ internal data class CookEntity(
     val finishedAt: Long,
     val xp: Int,
     val rating: String?,
+    val weeklyGoal: Int,
 )
 
 data class CookCache(
@@ -27,4 +28,5 @@ data class CookCache(
     val finishedAt: Long,
     val xp: Int,
     val rating: String?,
+    val weeklyGoal: Int,
 )

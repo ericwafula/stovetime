@@ -40,6 +40,7 @@ class CookDaoTest {
             finishedAt = finishedAt,
             xp = 30,
             rating = null,
+            weeklyGoal = 4,
         )
 
     @Test

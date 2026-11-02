@@ -14,6 +14,7 @@ internal fun CookEntity.toCache(): CookCache =
         finishedAt = finishedAt,
         xp = xp,
         rating = rating,
+        weeklyGoal = weeklyGoal,
     )
 
 internal fun CookCache.toEntity(): CookEntity =
@@ -27,4 +28,5 @@ internal fun CookCache.toEntity(): CookEntity =
         finishedAt = finishedAt,
         xp = xp,
         rating = rating,
+        weeklyGoal = weeklyGoal,
     )

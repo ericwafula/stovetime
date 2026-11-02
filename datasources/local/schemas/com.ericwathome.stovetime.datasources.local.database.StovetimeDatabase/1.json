@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "7acb4f1e4731988e704dd62c180bc044",
+    "identityHash": "6ba85050eb3b154406e4f1d71a319452",
     "entities": [
       {
         "tableName": "CookEntity",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `dishId` TEXT NOT NULL, `kind` TEXT NOT NULL, `name` TEXT NOT NULL, `photo` TEXT, `startedAt` INTEGER NOT NULL, `finishedAt` INTEGER NOT NULL, `xp` INTEGER NOT NULL, `rating` TEXT)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `dishId` TEXT NOT NULL, `kind` TEXT NOT NULL, `name` TEXT NOT NULL, `photo` TEXT, `startedAt` INTEGER NOT NULL, `finishedAt` INTEGER NOT NULL, `xp` INTEGER NOT NULL, `rating` TEXT, `weeklyGoal` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -59,6 +59,12 @@
             "fieldPath": "rating",
             "columnName": "rating",
             "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "weeklyGoal",
+            "columnName": "weeklyGoal",
+            "affinity": "INTEGER",
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -71,7 +77,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '7acb4f1e4731988e704dd62c180bc044')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '6ba85050eb3b154406e4f1d71a319452')"
     ]
   }
 }

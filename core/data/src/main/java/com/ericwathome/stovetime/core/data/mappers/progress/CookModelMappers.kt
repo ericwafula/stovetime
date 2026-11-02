@@ -17,6 +17,7 @@ internal fun CookCache.toData(): Cook =
         finishedAt = finishedAt,
         xp = xp,
         rating = rating.toRating(),
+        weeklyGoal = weeklyGoal,
     )
 
 internal fun NewCook.toCache(): CookCache =
@@ -30,6 +31,7 @@ internal fun NewCook.toCache(): CookCache =
         finishedAt = finishedAt,
         xp = xp,
         rating = rating?.name,
+        weeklyGoal = weeklyGoal,
     )
 
 internal fun String?.toRating(): Rating? = Rating.entries.firstOrNull { it.name == this }
