@@ -4,7 +4,9 @@ import androidx.datastore.preferences.preferencesDataStoreFile
 import androidx.room.Room
 import com.ericwathome.stovetime.core.common.helpers.ApplicationScope
 import com.ericwathome.stovetime.core.common.helpers.StovetimeDispatchers
+import com.ericwathome.stovetime.datasources.local.daos.CatalogueDao
 import com.ericwathome.stovetime.datasources.local.daos.CookDao
+import com.ericwathome.stovetime.datasources.local.daos.RecipeDao
 import com.ericwathome.stovetime.datasources.local.database.StovetimeDatabase
 import com.ericwathome.stovetime.datasources.local.helpers.AssetContentReader
 import com.ericwathome.stovetime.datasources.local.helpers.BundledContentReader
@@ -28,6 +30,26 @@ import com.ericwathome.stovetime.datasources.local.sources.settings.CookSettings
 import com.ericwathome.stovetime.datasources.local.sources.settings.CookSettingsLocalDatasourceImpl
 import com.ericwathome.stovetime.datasources.local.sources.settings.TimerPromptsLocalDatasource
 import com.ericwathome.stovetime.datasources.local.sources.settings.TimerPromptsLocalDatasourceImpl
+import com.ericwathome.stovetime.datasources.local.sources.progress.cook.GetCookedRecipeIdsLocalDatasource
+import com.ericwathome.stovetime.datasources.local.sources.progress.cook.GetCookedRecipeIdsLocalDatasourceImpl
+import com.ericwathome.stovetime.datasources.local.sources.recipes.catalogue.CatalogueLocalDatasource
+import com.ericwathome.stovetime.datasources.local.sources.recipes.catalogue.CatalogueLocalDatasourceImpl
+import com.ericwathome.stovetime.datasources.local.sources.recipes.catalogue.ObserveCategoriesLocalDatasource
+import com.ericwathome.stovetime.datasources.local.sources.recipes.catalogue.ObserveCategoriesLocalDatasourceImpl
+import com.ericwathome.stovetime.datasources.local.sources.recipes.catalogue.ObserveCatalogueMealsLocalDatasource
+import com.ericwathome.stovetime.datasources.local.sources.recipes.catalogue.ObserveCatalogueMealsLocalDatasourceImpl
+import com.ericwathome.stovetime.datasources.local.sources.recipes.catalogue.GetCatalogueMealsLocalDatasource
+import com.ericwathome.stovetime.datasources.local.sources.recipes.catalogue.GetCatalogueMealsLocalDatasourceImpl
+import com.ericwathome.stovetime.datasources.local.sources.recipes.catalogue.ReplaceCatalogueLocalDatasource
+import com.ericwathome.stovetime.datasources.local.sources.recipes.catalogue.ReplaceCatalogueLocalDatasourceImpl
+import com.ericwathome.stovetime.datasources.local.sources.recipes.recipe.RecipeLocalDatasource
+import com.ericwathome.stovetime.datasources.local.sources.recipes.recipe.RecipeLocalDatasourceImpl
+import com.ericwathome.stovetime.datasources.local.sources.recipes.recipe.GetRecipeLocalDatasource
+import com.ericwathome.stovetime.datasources.local.sources.recipes.recipe.GetRecipeLocalDatasourceImpl
+import com.ericwathome.stovetime.datasources.local.sources.recipes.recipe.SaveRecipeLocalDatasource
+import com.ericwathome.stovetime.datasources.local.sources.recipes.recipe.SaveRecipeLocalDatasourceImpl
+import com.ericwathome.stovetime.datasources.local.sources.settings.RecipeSyncLocalDatasource
+import com.ericwathome.stovetime.datasources.local.sources.settings.RecipeSyncLocalDatasourceImpl
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.plus
 import org.koin.android.ext.koin.androidContext
@@ -49,6 +71,9 @@ internal val DaoModule =
     module {
         // progress DAOs
         single<CookDao> { get<StovetimeDatabase>().cookDao }
+        // recipes DAOs
+        single<CatalogueDao> { get<StovetimeDatabase>().catalogueDao }
+        single<RecipeDao> { get<StovetimeDatabase>().recipeDao }
     }
 
 internal val CookLocalDatasourceModule =
@@ -69,6 +94,45 @@ internal val CookLocalDatasourceModule =
         }
         singleOf(::DeleteAllCooksLocalDatasourceImpl) {
             bind<DeleteAllCooksLocalDatasource>()
+        }
+        singleOf(::GetCookedRecipeIdsLocalDatasourceImpl) {
+            bind<GetCookedRecipeIdsLocalDatasource>()
+        }
+    }
+
+internal val CatalogueLocalDatasourceModule =
+    module {
+        // parent
+        singleOf(::CatalogueLocalDatasourceImpl) {
+            bind<CatalogueLocalDatasource>()
+        }
+        // children
+        singleOf(::ObserveCategoriesLocalDatasourceImpl) {
+            bind<ObserveCategoriesLocalDatasource>()
+        }
+        singleOf(::ObserveCatalogueMealsLocalDatasourceImpl) {
+            bind<ObserveCatalogueMealsLocalDatasource>()
+        }
+        singleOf(::GetCatalogueMealsLocalDatasourceImpl) {
+            bind<GetCatalogueMealsLocalDatasource>()
+        }
+        singleOf(::ReplaceCatalogueLocalDatasourceImpl) {
+            bind<ReplaceCatalogueLocalDatasource>()
+        }
+    }
+
+internal val RecipeLocalDatasourceModule =
+    module {
+        // parent
+        singleOf(::RecipeLocalDatasourceImpl) {
+            bind<RecipeLocalDatasource>()
+        }
+        // children
+        singleOf(::GetRecipeLocalDatasourceImpl) {
+            bind<GetRecipeLocalDatasource>()
+        }
+        singleOf(::SaveRecipeLocalDatasourceImpl) {
+            bind<SaveRecipeLocalDatasource>()
         }
     }
 
@@ -111,11 +175,23 @@ internal val PreferencesLocalDatasourceModule =
                 dispatchers = get(),
             )
         }
+        single<RecipeSyncLocalDatasource> {
+            RecipeSyncLocalDatasourceImpl(
+                dataStore = get(named(PreferencesFile.RecipeSync.fileName)),
+                dispatchers = get(),
+            )
+        }
     }
 
 internal val SourcesModule =
     module {
-        includes(CookLocalDatasourceModule, CourseLocalDatasourceModule, PreferencesLocalDatasourceModule)
+        includes(
+            CookLocalDatasourceModule,
+            CourseLocalDatasourceModule,
+            CatalogueLocalDatasourceModule,
+            RecipeLocalDatasourceModule,
+            PreferencesLocalDatasourceModule,
+        )
     }
 
 val LocalModule =

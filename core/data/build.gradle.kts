@@ -11,4 +11,9 @@ dependencies {
     api(projects.core.common)
     implementation(projects.datasources.local)
     api(projects.sdk.timer)
+    implementation(projects.datasources.network)
+
+    // libraries
+    implementation(libs.work.manager)
+    implementation(libs.koin.androidx.workmanager)
 }

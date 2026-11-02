@@ -20,6 +20,9 @@ internal interface CookDao {
     @Query("SELECT * FROM cookentity ORDER BY finishedAt DESC, id DESC")
     fun observeCooks(): Flow<List<CookEntity>>
 
+    @Query("SELECT DISTINCT dishId FROM cookentity WHERE kind = 'Recipe'")
+    suspend fun getCookedRecipeIds(): List<String>
+
     @Query("DELETE FROM cookentity")
     suspend fun deleteAllCooks()
 }

@@ -4,7 +4,7 @@
 
 The phone's database is the source of truth: the Recipes tab only reads recipes from the phone, and a background sync keeps them fresh. Full recipes are fetched the first time one is opened and kept after that.
 
-## 3.1 Recipe sync
+## 3.1 Recipe sync ✅
 
 **Size:** L · **Depends on:** 0.4, 0.5
 
@@ -12,13 +12,13 @@ The phone's database is the source of truth: the Recipes tab only reads recipes 
 Keep a copy of TheMealDB's catalogue on the phone: every category and the meals in it (name, photo, category). It syncs in the background on first launch and about once a day, so browsing and search work without a connection and open instantly.
 
 ### Acceptance Criteria
-- [ ] The first launch with a connection fills the catalogue in the background, without blocking the app
-- [ ] After that, the catalogue refreshes about once a day, only when the phone has a connection
-- [ ] A failed sync retries later on its own and never shows an error unless the user is on the Recipes tab with nothing stored
-- [ ] A sync updates changed meals and adds new ones, without duplicates
-- [ ] Meals that disappear from TheMealDB are removed, unless the user has cooked them
-- [ ] The time of the last successful sync is stored
-- [ ] Tests cover: first sync fills the catalogue, a second sync updates without duplicating, a removed meal is deleted, a cooked meal is kept, a failed sync keeps the old data
+- [x] The first launch with a connection fills the catalogue in the background, without blocking the app
+- [x] After that, the catalogue refreshes about once a day, only when the phone has a connection
+- [x] A failed sync retries later on its own and never shows an error unless the user is on the Recipes tab with nothing stored
+- [x] A sync updates changed meals and adds new ones, without duplicates
+- [x] Meals that disappear from TheMealDB are removed, unless the user has cooked them
+- [x] The time of the last successful sync is stored
+- [x] Tests cover: first sync fills the catalogue, a second sync updates without duplicating, a removed meal is deleted, a cooked meal is kept, a failed sync keeps the old data
 
 ### Edge cases
 - The app is closed or the phone restarts mid-sync: the next run starts again cleanly.

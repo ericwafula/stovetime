@@ -18,6 +18,16 @@ import com.ericwathome.stovetime.core.data.repo.progress.RateCookRepository
 import com.ericwathome.stovetime.core.data.repo.progress.RateCookRepositoryImpl
 import com.ericwathome.stovetime.core.data.repo.progress.SaveCookRepository
 import com.ericwathome.stovetime.core.data.repo.progress.SaveCookRepositoryImpl
+import com.ericwathome.stovetime.core.data.repo.recipes.GetRecipeRepository
+import com.ericwathome.stovetime.core.data.repo.recipes.GetRecipeRepositoryImpl
+import com.ericwathome.stovetime.core.data.repo.recipes.ObserveCatalogueRepository
+import com.ericwathome.stovetime.core.data.repo.recipes.ObserveCatalogueRepositoryImpl
+import com.ericwathome.stovetime.core.data.repo.recipes.ObserveRecipeSyncStatusRepository
+import com.ericwathome.stovetime.core.data.repo.recipes.ObserveRecipeSyncStatusRepositoryImpl
+import com.ericwathome.stovetime.core.data.repo.recipes.RecipesRepository
+import com.ericwathome.stovetime.core.data.repo.recipes.RecipesRepositoryImpl
+import com.ericwathome.stovetime.core.data.repo.recipes.SyncCatalogueRepository
+import com.ericwathome.stovetime.core.data.repo.recipes.SyncCatalogueRepositoryImpl
 import com.ericwathome.stovetime.core.data.repo.settings.ObserveCookSettingsRepository
 import com.ericwathome.stovetime.core.data.repo.settings.ObserveCookSettingsRepositoryImpl
 import com.ericwathome.stovetime.core.data.repo.settings.SaveKeepScreenOnRepository
@@ -31,7 +41,9 @@ import com.ericwathome.stovetime.core.data.repo.settings.TimerPromptsRepositoryI
 import com.ericwathome.stovetime.core.data.repo.timers.TimersRepository
 import com.ericwathome.stovetime.core.data.repo.timers.TimersRepositoryImpl
 import com.ericwathome.stovetime.sdk.timer.StovetimeTimers
+import com.ericwathome.stovetime.core.data.workers.WorkerModule
 import com.ericwathome.stovetime.datasources.local.di.LocalModule
+import com.ericwathome.stovetime.datasources.network.di.NetworkModule
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
@@ -110,12 +122,33 @@ internal val TimersRepositoryModule =
         }
     }
 
+internal val RecipesRepositoryModule =
+    module {
+        // parent
+        singleOf(::RecipesRepositoryImpl) {
+            bind<RecipesRepository>()
+        }
+        // children
+        singleOf(::SyncCatalogueRepositoryImpl) {
+            bind<SyncCatalogueRepository>()
+        }
+        singleOf(::ObserveCatalogueRepositoryImpl) {
+            bind<ObserveCatalogueRepository>()
+        }
+        singleOf(::ObserveRecipeSyncStatusRepositoryImpl) {
+            bind<ObserveRecipeSyncStatusRepository>()
+        }
+        singleOf(::GetRecipeRepositoryImpl) {
+            bind<GetRecipeRepository>()
+        }
+    }
+
 internal val RepositoryModule =
     module {
-        includes(CookRepositoryModule, CourseRepositoryModule, ProgressRepositoryModule, SettingsRepositoryModule, TimersRepositoryModule)
+        includes(CookRepositoryModule, CourseRepositoryModule, ProgressRepositoryModule, SettingsRepositoryModule, TimersRepositoryModule, RecipesRepositoryModule)
     }
 
 val CoreDataModule =
     module {
-        includes(LocalModule, RepositoryModule)
+        includes(LocalModule, NetworkModule, RepositoryModule, WorkerModule)
     }

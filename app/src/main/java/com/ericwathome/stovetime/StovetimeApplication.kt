@@ -1,11 +1,12 @@
 package com.ericwathome.stovetime
 
 import android.app.Application
-import android.content.Intent
+import com.ericwathome.stovetime.core.data.workers.recipes.ScheduleRecipeSyncWork
 import com.ericwathome.stovetime.di.AppModule
 import com.ericwathome.stovetime.sdk.timer.StovetimeTimers
 import com.ericwathome.stovetime.sdk.timer.TimerConfig
 import org.koin.android.ext.koin.androidContext
+import org.koin.androidx.workmanager.koin.workManagerFactory
 import org.koin.core.context.startKoin
 import timber.log.Timber
 
@@ -22,9 +23,12 @@ class StovetimeApplication : Application() {
                     alarmActivity = null,
                 ),
         )
-        startKoin {
-            androidContext(this@StovetimeApplication)
-            modules(AppModule)
-        }
+        val koin =
+            startKoin {
+                androidContext(this@StovetimeApplication)
+                workManagerFactory()
+                modules(AppModule)
+            }.koin
+        koin.get<ScheduleRecipeSyncWork>().invoke()
     }
 }

@@ -20,6 +20,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.bundles.navigation3)
     implementation(libs.kotlinx.serialization.json)
+    implementation(libs.koin.androidx.workmanager)
     testImplementation(libs.junit)
     testImplementation(libs.google.truth)
     testImplementation(libs.coroutines.test)

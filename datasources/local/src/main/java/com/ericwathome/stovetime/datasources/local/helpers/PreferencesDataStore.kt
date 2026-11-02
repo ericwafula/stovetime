@@ -13,6 +13,7 @@ internal enum class PreferencesFile(
 ) {
     CookSettings("cook_settings"),
     TimerPrompts("timer_prompts"),
+    RecipeSync("recipe_sync"),
 }
 
 internal fun createPreferencesDataStore(

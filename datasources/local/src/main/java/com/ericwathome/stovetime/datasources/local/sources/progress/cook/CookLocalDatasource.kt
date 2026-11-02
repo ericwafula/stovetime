@@ -5,6 +5,7 @@ interface CookLocalDatasource {
     val rateCook: RateCookLocalDatasource
     val observeCooks: ObserveCooksLocalDatasource
     val deleteAllCooks: DeleteAllCooksLocalDatasource
+    val getCookedRecipeIds: GetCookedRecipeIdsLocalDatasource
 }
 
 internal class CookLocalDatasourceImpl(
@@ -12,4 +13,5 @@ internal class CookLocalDatasourceImpl(
     override val rateCook: RateCookLocalDatasource,
     override val observeCooks: ObserveCooksLocalDatasource,
     override val deleteAllCooks: DeleteAllCooksLocalDatasource,
+    override val getCookedRecipeIds: GetCookedRecipeIdsLocalDatasource,
 ) : CookLocalDatasource
