@@ -227,4 +227,52 @@ class SyncCatalogueRepositoryImplTest {
             // then
             coVerify(exactly = 1) { recipesRemoteDatasource.getCategories() }
         }
+
+    @Test
+    fun a_second_caller_gets_the_failure_of_the_sync_it_waited_for() =
+        runTest {
+            // given
+            coEvery { recipesRemoteDatasource.getCategories() } coAnswers {
+                delay(1_000)
+                NetworkResult.Error(NetworkError.Timeout)
+            }
+
+            // when
+            val first = async { sut() }
+            val second = async { sut() }
+
+            // then
+            assertThat(first.await()).isEqualTo(DataResult.Error(DataError.Timeout))
+            assertThat(second.await()).isEqualTo(DataResult.Error(DataError.Timeout))
+        }
+
+    @Test
+    fun an_empty_catalogue_from_themealdb_keeps_the_stored_one() =
+        runTest {
+            // given
+            givenStored(stored("1", "Beef Wellington", "Beef"))
+            coEvery { recipesRemoteDatasource.getCategories() } returns NetworkResult.Success(CategoriesResponseDto(emptyList()))
+
+            // when
+            val result = sut()
+
+            // then
+            assertThat(result).isInstanceOf(DataResult.Error::class.java)
+            coVerify(exactly = 0) { catalogueLocalDatasource.replaceCatalogue(any(), any(), any()) }
+        }
+
+    @Test
+    fun categories_with_no_meals_at_all_keep_the_stored_catalogue() =
+        runTest {
+            // given
+            givenStored(stored("1", "Beef Wellington", "Beef"))
+            givenRemote("Beef" to null, "Goat" to null)
+
+            // when
+            val result = sut()
+
+            // then
+            assertThat(result).isInstanceOf(DataResult.Error::class.java)
+            coVerify(exactly = 0) { catalogueLocalDatasource.replaceCatalogue(any(), any(), any()) }
+        }
 }

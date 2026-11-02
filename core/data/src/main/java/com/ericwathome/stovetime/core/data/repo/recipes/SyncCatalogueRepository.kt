@@ -1,5 +1,6 @@
 package com.ericwathome.stovetime.core.data.repo.recipes
 
+import com.ericwathome.stovetime.core.common.result.DataError
 import com.ericwathome.stovetime.core.common.result.DataResult
 import com.ericwathome.stovetime.core.data.helpers.Now
 import com.ericwathome.stovetime.core.data.helpers.mapToData
@@ -16,6 +17,8 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 
+private const val EMPTY_CATALOGUE = "TheMealDB sent an empty catalogue"
+
 fun interface SyncCatalogueRepository {
     suspend operator fun invoke(): DataResult<Unit>
 }
@@ -27,15 +30,16 @@ internal class SyncCatalogueRepositoryImpl(
     private val recipeSyncLocalDatasource: RecipeSyncLocalDatasource,
 ) : SyncCatalogueRepository {
     private val mutex = Mutex()
+    private var lastResult: DataResult<Unit> = DataResult.Success(Unit)
 
     override suspend fun invoke(): DataResult<Unit> {
         if (!mutex.tryLock()) {
-            mutex.withLock { }
-            return DataResult.Success(Unit)
+            return mutex.withLock { lastResult }
         }
         return try {
             val syncedAt = Now.toEpochMilliseconds()
             sync(syncedAt).also { result ->
+                lastResult = result
                 when (result) {
                     is DataResult.Success -> recipeSyncLocalDatasource.lastSyncedAt.save(syncedAt)
                     is DataResult.Error -> recipeSyncLocalDatasource.lastFailedAt.save(syncedAt)
@@ -57,12 +61,14 @@ internal class SyncCatalogueRepositoryImpl(
                 is DataResult.Success -> result.data
                 is DataResult.Error -> return result
             }
+        if (categories.isEmpty()) return DataResult.Error(DataError.Unknown(EMPTY_CATALOGUE))
 
         val freshMeals =
             when (val result = fetchMeals(categories, syncedAt)) {
                 is DataResult.Success -> result.data
                 is DataResult.Error -> return result
             }
+        if (freshMeals.isEmpty()) return DataResult.Error(DataError.Unknown(EMPTY_CATALOGUE))
         val storedMeals =
             when (val result = catalogueLocalDatasource.getMeals().mapToData { it }) {
                 is DataResult.Success -> result.data
