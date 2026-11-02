@@ -21,7 +21,7 @@ These override "ask before committing" in `CLAUDE.md` and the orchestrator, for 
 4. **Commit each step, never push.** One commit per step on `workshop/level-3-complete`, straight on the branch (no feature branches or PRs): `feature/<scope>: <what it adds> (<step id>)`. Only after `checks` is green. Never push, amend or force-push.
 5. **When something is unclear,** pick the option that best fits the spec and the design, write it in the roadmap's decision log with the date, and keep going. Only stop for something that can't be decided from the roadmap, the skills or Figma.
 6. **When something is blocked** (a test you can't make pass, a missing permission, the phone gone), write it under "Blocked" at the bottom of this file with what you tried, and move on to the next step that doesn't depend on it.
-7. **Stay in scope.** Don't build anything a step marks out of scope, and don't start Phase 5.
+7. **Stay in scope.** Don't build anything a step marks out of scope. Phase 5 is built from `backlog/phase-5-later.md` once Phases 0–4 are done.
 
 ## Goals, one per phase
 

@@ -64,7 +64,7 @@ Teach people to cook at home, **one recipe at a time**. Stovetime is a learning 
 | 2 | Timers | Timers that keep running and ring with the app closed, and a Timers tab | ✅ |
 | 3 | Recipes | Sync TheMealDB to the phone, browse and search it offline, and cook any recipe | ✅ |
 | 4 | Me | Progress, history, the weekly goal and settings | ✅ |
-| 5 | Later | More courses, badges, reminders, dark mode, widgets | ⬜ |
+| 5 | Later | More courses, badges, reminders, dark mode, widgets | 🟨 |
 
 The **Path screen (1.2)** is the screen built live in the workshop.
 
@@ -116,12 +116,14 @@ The **Path screen (1.2)** is the screen built live in the workshop.
 | 4.2 | Settings: weekly goal, keep screen on while cooking | ✅ |
 | 4.3 | Start over: reset all progress, with a confirmation | ✅ |
 
-### Phase 5 — Later (evidence-driven)
-- More courses: "Rice & grains", "One-pan dinners", "Kenyan favourites" (pilau, chapati, sukuma wiki)
-- Badges for finishing a unit or a long streak
-- A gentle reminder when the week's goal is close
-- Dark mode
-- Home-screen widget with running timers
+### Phase 5 — Later
+| ID | Item | Status |
+|---|---|---|
+| 5.1 | More courses: "Rice & grains", "One-pan dinners", "Kenyan favourites" (pilau, chapati, sukuma wiki), switched from the course chip | ⬜ |
+| 5.2 | Badges for finishing a unit or a long streak | ⬜ |
+| 5.3 | A gentle reminder when the week's goal is close | ⬜ |
+| 5.4 | Dark mode | ⬜ |
+| 5.5 | Home-screen widget with running timers | ⬜ |
 
 ---
 
@@ -247,6 +249,7 @@ These rules live in `:core:domain` and are covered by tests with fixed dates.
 | 2026-11-02 | The Timers tab shows running timers and quick timers | Cooking often has two things on at once |
 | 2026-11-02 | Weeks start on Monday, device time zone | Simple and predictable; one constant if it ever changes |
 | 2026-11-02 | Frames added for Recipes, Timers, the quick timer sheet, the alarm and Me; old v1–v3 designs removed from Figma | Every UI step has a frame to build from |
+| 2026-11-02 | Phase 5 becomes five steps (5.1–5.5) in `backlog/phase-5-later.md` now that Phases 0–4 have shipped | The roadmap held Phase 5 at roadmap level only until 0–4 shipped; each idea gets acceptance criteria before it is built |
 | 2026-11-02 | Recipes are synced offline-first: Room is the source of truth, WorkManager pulls the catalogue daily, details are fetched on open | Browse and search work offline; the free API isn't hammered; the same pattern Fumi uses |
 | 2026-11-02 | Each cook stores the weekly goal that was set when it was cooked | A past week is judged by the goal it had, so changing the goal never rewrites past weeks; the current week uses today's goal |
 | 2026-11-02 | The best streak counts runs of finished weeks that met their goal, plus this week once it's met | Me shows it next to the current streak, and it survives a missed week |

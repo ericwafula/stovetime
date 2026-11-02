@@ -9,8 +9,8 @@ The [roadmap](../ROADMAP.md) broken into **segments** (one per phase) and **step
 | 2 — Timers | [phase-2-timers.md](phase-2-timers.md) | 4 | Timers that keep running and ring with the app closed |
 | 3 — Recipes | [phase-3-recipes.md](phase-3-recipes.md) | 5 | Sync TheMealDB to the phone, browse it offline and cook any recipe |
 | 4 — Me | [phase-4-me.md](phase-4-me.md) | 3 | Progress, history and settings |
+| 5 — Later | [phase-5-later.md](phase-5-later.md) | 5 | More courses, badges, a weekly reminder, dark mode and a timers widget |
 
-Phase 5 (Later) stays at roadmap level until Phases 0–4 ship.
 
 ## How to use
 
