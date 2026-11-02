@@ -23,13 +23,15 @@ class StovetimeColorsTest {
             { c: StovetimeColors -> c.surface } to { c: StovetimeColors -> c.textPrimary },
         )
 
-    private val darkAccentTextPairs: List<Pair<(StovetimeColors) -> Color, (StovetimeColors) -> Color>> =
+    private val accentTextPairs: List<Pair<(StovetimeColors) -> Color, (StovetimeColors) -> Color>> =
         listOf(
             { c: StovetimeColors -> c.primaryContent } to { c: StovetimeColors -> c.canvas },
             { c: StovetimeColors -> c.primaryContent } to { c: StovetimeColors -> c.surface },
             { c: StovetimeColors -> c.primaryContent } to { c: StovetimeColors -> c.primarySoft },
             { c: StovetimeColors -> c.successContent } to { c: StovetimeColors -> c.successSoft },
             { c: StovetimeColors -> c.xpContent } to { c: StovetimeColors -> c.xpSoft },
+            { c: StovetimeColors -> c.xpContent } to { c: StovetimeColors -> c.canvas },
+            { c: StovetimeColors -> c.successContent } to { c: StovetimeColors -> c.canvas },
             { c: StovetimeColors -> c.textPrimary } to { c: StovetimeColors -> c.xpSoft },
         )
 
@@ -74,9 +76,10 @@ class StovetimeColorsTest {
     }
 
     @Test
-    fun accent_text_stays_readable_on_dark_backgrounds() {
+    fun accent_text_stays_readable_in_both_themes() {
         // given
-        val ratios = darkAccentTextPairs.map { (text, background) -> contrastRatio(text(DarkColors), background(DarkColors)) }
+        val ratios =
+            themes.flatMap { (_, colors) -> accentTextPairs.map { (text, background) -> contrastRatio(text(colors), background(colors)) } }
 
         // when
         val failing = ratios.filter { it < MIN_TEXT_CONTRAST }

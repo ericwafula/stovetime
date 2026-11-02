@@ -44,7 +44,7 @@ internal val LightColors =
         primary = Palette.Tomato500,
         primaryShade = Palette.Tomato700,
         primarySoft = Palette.Tomato100,
-        primaryContent = Palette.Tomato500,
+        primaryContent = Palette.Tomato700,
         success = Palette.Basil500,
         successShade = Palette.Basil700,
         successSoft = Palette.Basil100,
@@ -52,7 +52,7 @@ internal val LightColors =
         xp = Palette.Yolk500,
         xpShade = Palette.Yolk700,
         xpSoft = Palette.Yolk100,
-        xpContent = Palette.Yolk700,
+        xpContent = Palette.Yolk800,
         lockedFill = Palette.Ash,
         lockedContent = Palette.Pebble,
     )

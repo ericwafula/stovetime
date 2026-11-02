@@ -32,6 +32,7 @@ internal object Palette {
     val Yolk300 = Color(0xFFF7C75A)
     val Yolk500 = Color(0xFFF5B82E)
     val Yolk700 = Color(0xFFC98D12)
+    val Yolk800 = Color(0xFF7F5300)
     val Yolk100 = Color(0xFFFCEFCC)
     val Yolk900 = Color(0xFF3F3115)
 }

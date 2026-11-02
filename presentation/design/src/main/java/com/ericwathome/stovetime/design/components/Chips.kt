@@ -24,9 +24,11 @@ fun StatChip(
     contentDescription: String,
     modifier: Modifier = Modifier,
 ) {
-    val color = if (kind == StatKind.Streak) StovetimeTheme.colors.primaryContent else StovetimeTheme.colors.xp
+    val colors = StovetimeTheme.colors
+    val iconTint = if (kind == StatKind.Streak) colors.primary else colors.xp
+    val color = if (kind == StatKind.Streak) colors.primaryContent else colors.xpContent
     Row(modifier = modifier, verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-        StoveIcon(if (kind == StatKind.Streak) StoveIcons.Flame else StoveIcons.Star, contentDescription, tint = color)
+        StoveIcon(if (kind == StatKind.Streak) StoveIcons.Flame else StoveIcons.Star, contentDescription, tint = iconTint)
         StoveText(value, style = StovetimeTheme.typography.heading, color = color)
     }
 }
