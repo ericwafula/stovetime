@@ -70,6 +70,8 @@ sealed interface TimersEvent {
 
     data object ExplainLateAlarms : TimersEvent
 
+    data object ExplainLockScreenAlarms : TimersEvent
+
     data class OpenCookStep(
         val kind: CookKind,
         val dishId: String,
@@ -214,11 +216,16 @@ class TimersViewModel(
     private fun startQuickTimer(quickTimer: PendingQuickTimer) {
         pendingQuickTimer = null
         timersRepository.start(name = quickTimer.name, durationMillis = quickTimer.durationMillis, detail = null, target = TimerTarget.Quick)
-        if (!timersRepository.exactAlarmsAllowed) {
-            viewModelScope.launch {
-                if (!timerPromptsRepository.wasLateAlarmsExplained()) {
+        viewModelScope.launch {
+            when {
+                !timersRepository.exactAlarmsAllowed && !timerPromptsRepository.wasLateAlarmsExplained() -> {
                     sendEvent { TimersEvent.ExplainLateAlarms }
                     timerPromptsRepository.markLateAlarmsExplained()
+                }
+
+                !timersRepository.fullScreenAlarmsAllowed && !timerPromptsRepository.wasLockScreenAlarmsExplained() -> {
+                    sendEvent { TimersEvent.ExplainLockScreenAlarms }
+                    timerPromptsRepository.markLockScreenAlarmsExplained()
                 }
             }
         }

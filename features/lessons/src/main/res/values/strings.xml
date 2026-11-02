@@ -69,4 +69,8 @@
     <string name="finish_nailed_it">Nailed it</string>
     <string name="finish_continue">Continue</string>
     <string name="finish_error">We couldn\'t save this cook</string>
+    <string name="cook_lock_title">Show the alarm over the lock screen</string>
+    <string name="cook_lock_message">Allow full-screen alarms so a timer that ends lights up the screen with Stop and +1 min, even when the phone is locked.</string>
+    <string name="cook_lock_confirm">Allow</string>
+    <string name="cook_lock_dismiss">Not now</string>
 </resources>

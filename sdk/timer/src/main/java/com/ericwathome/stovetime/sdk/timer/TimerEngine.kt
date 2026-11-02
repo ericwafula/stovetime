@@ -5,6 +5,7 @@ import kotlinx.coroutines.flow.StateFlow
 interface TimerEngine {
     val timers: StateFlow<List<CookTimer>>
     val exactAlarmsAllowed: Boolean
+    val fullScreenAlarmsAllowed: Boolean
 
     fun start(
         name: String,

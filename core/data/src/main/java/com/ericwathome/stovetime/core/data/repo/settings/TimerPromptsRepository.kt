@@ -13,6 +13,10 @@ interface TimerPromptsRepository {
     suspend fun wasLateAlarmsExplained(): Boolean
 
     suspend fun markLateAlarmsExplained(): DataResult<Boolean>
+
+    suspend fun wasLockScreenAlarmsExplained(): Boolean
+
+    suspend fun markLockScreenAlarmsExplained(): DataResult<Boolean>
 }
 
 internal class TimerPromptsRepositoryImpl(
@@ -29,4 +33,10 @@ internal class TimerPromptsRepositoryImpl(
 
     override suspend fun markLateAlarmsExplained(): DataResult<Boolean> =
         timerPromptsLocalDatasource.lateAlarmsExplained.save(true).mapToData { it }
+
+    override suspend fun wasLockScreenAlarmsExplained(): Boolean =
+        timerPromptsLocalDatasource.lockScreenAlarmsExplained.get().mapToData { it == true }.getOrNull() == true
+
+    override suspend fun markLockScreenAlarmsExplained(): DataResult<Boolean> =
+        timerPromptsLocalDatasource.lockScreenAlarmsExplained.save(true).mapToData { it }
 }

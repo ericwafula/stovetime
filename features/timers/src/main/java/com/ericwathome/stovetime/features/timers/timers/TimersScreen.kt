@@ -52,6 +52,7 @@ import com.ericwathome.stovetime.ui.helpers.CollectOneTimeEvent
 import com.ericwathome.stovetime.ui.helpers.countdownText
 import com.ericwathome.stovetime.ui.helpers.hasNotificationPermission
 import com.ericwathome.stovetime.ui.helpers.openExactAlarmSettings
+import com.ericwathome.stovetime.ui.helpers.openFullScreenAlarmSettings
 import com.ericwathome.stovetime.ui.helpers.rememberNotificationPermissionRequest
 import com.ericwathome.stovetime.ui.helpers.rememberTickingNow
 import com.ericwathome.stovetime.ui.launchers.confirm.ConfirmRequest
@@ -61,6 +62,7 @@ import org.koin.compose.viewmodel.koinViewModel
 
 private const val NOTIFICATIONS = "notifications"
 private const val LATE = "late"
+private const val LOCK_SCREEN = "lock_screen"
 
 @Composable
 fun TimersRoute(
@@ -94,6 +96,7 @@ internal fun TimersScreen(
                 when (request.tag) {
                     NOTIFICATIONS -> viewModel.onAction(TimersAction.OnNotificationsExplained)
                     LATE -> context.openExactAlarmSettings()
+                    LOCK_SCREEN -> context.openFullScreenAlarmSettings()
                 }
             },
             onSecondary = { request ->
@@ -112,6 +115,8 @@ internal fun TimersScreen(
             R.string.timers_notifications_dismiss,
         )
     val lateRequest = timersRequest(LATE, R.string.timers_late_title, R.string.timers_late_message, R.string.timers_late_confirm, R.string.timers_late_dismiss)
+    val lockScreenRequest =
+        timersRequest(LOCK_SCREEN, R.string.timers_lock_title, R.string.timers_lock_message, R.string.timers_lock_confirm, R.string.timers_lock_dismiss)
     val defaultNameFormat = stringResource(R.string.timers_default_name)
     val quickTimerLauncher =
         rememberQuickTimerLauncher(
@@ -131,6 +136,7 @@ internal fun TimersScreen(
             TimersEvent.ExplainNotifications -> confirmLauncher.launch(notificationsRequest)
             TimersEvent.RequestNotificationPermission -> permissionRequest.launch()
             TimersEvent.ExplainLateAlarms -> confirmLauncher.launch(lateRequest)
+            TimersEvent.ExplainLockScreenAlarms -> confirmLauncher.launch(lockScreenRequest)
             is TimersEvent.OpenCookStep -> onOpenCookStep(event.kind, event.dishId, event.startedAt, event.step)
         }
     }

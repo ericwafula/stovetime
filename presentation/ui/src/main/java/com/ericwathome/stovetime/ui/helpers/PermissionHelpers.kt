@@ -44,6 +44,15 @@ fun rememberNotificationPermissionRequest(onResult: (granted: Boolean) -> Unit):
     }
 }
 
+fun Context.openFullScreenAlarmSettings() {
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.UPSIDE_DOWN_CAKE) return
+    val intent =
+        Intent(Settings.ACTION_MANAGE_APP_USE_FULL_SCREEN_INTENT)
+            .setData(Uri.fromParts("package", packageName, null))
+            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+    runCatching { startActivity(intent) }
+}
+
 fun Context.openExactAlarmSettings() {
     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S) return
     val intent =

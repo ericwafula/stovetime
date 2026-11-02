@@ -10,6 +10,7 @@ import com.ericwathome.stovetime.datasources.local.helpers.preference
 interface TimerPromptsLocalDatasource {
     val notificationsExplained: PreferenceStore<Boolean>
     val lateAlarmsExplained: PreferenceStore<Boolean>
+    val lockScreenAlarmsExplained: PreferenceStore<Boolean>
 }
 
 internal class TimerPromptsLocalDatasourceImpl(
@@ -18,4 +19,5 @@ internal class TimerPromptsLocalDatasourceImpl(
 ) : TimerPromptsLocalDatasource {
     override val notificationsExplained = dataStore.preference(booleanPreferencesKey("notifications_explained"), dispatchers)
     override val lateAlarmsExplained = dataStore.preference(booleanPreferencesKey("late_alarms_explained"), dispatchers)
+    override val lockScreenAlarmsExplained = dataStore.preference(booleanPreferencesKey("lock_screen_alarms_explained"), dispatchers)
 }

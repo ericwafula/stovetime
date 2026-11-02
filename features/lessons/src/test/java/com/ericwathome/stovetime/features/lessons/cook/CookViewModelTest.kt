@@ -16,6 +16,7 @@ import com.ericwathome.stovetime.testing.MainDispatcherRule
 import com.google.common.truth.Truth.assertThat
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
+import io.mockk.coVerify
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.flow.flowOf
@@ -335,5 +336,27 @@ class CookViewModelTest {
                 }
                 cancelAndIgnoreRemainingEvents()
             }
+        }
+
+    @Test
+    fun a_phone_that_blocks_full_screen_alarms_explains_it_once_after_the_timer_starts() =
+        runTest {
+            // given
+            timersRepository.fullScreenAlarmsAllowed = false
+            coEvery { timerPromptsRepository.wasLockScreenAlarmsExplained() } returns false
+            sut = createViewModel(step = 1)
+
+            sut.state.test {
+                sut.event.test {
+                    // when
+                    sut.onAction(CookAction.OnClickStartTimer(name = "Step 2", notificationsAllowed = true))
+
+                    // then
+                    assertThat(awaitItem()).isEqualTo(CookEvent.ExplainLockScreenAlarms)
+                    assertThat(timersRepository.timers.value).hasSize(1)
+                }
+                cancelAndIgnoreRemainingEvents()
+            }
+            coVerify { timerPromptsRepository.markLockScreenAlarmsExplained() }
         }
 }

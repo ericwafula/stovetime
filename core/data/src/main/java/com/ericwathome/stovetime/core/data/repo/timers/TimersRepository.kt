@@ -10,6 +10,8 @@ import kotlinx.coroutines.flow.map
 interface TimersRepository {
     val exactAlarmsAllowed: Boolean
 
+    val fullScreenAlarmsAllowed: Boolean
+
     fun observeTimers(): Flow<List<RunningTimer>>
 
     fun start(
@@ -37,6 +39,9 @@ internal class TimersRepositoryImpl(
 ) : TimersRepository {
     override val exactAlarmsAllowed: Boolean
         get() = engine.exactAlarmsAllowed
+
+    override val fullScreenAlarmsAllowed: Boolean
+        get() = engine.fullScreenAlarmsAllowed
 
     override fun observeTimers(): Flow<List<RunningTimer>> = engine.timers.map { timers -> timers.map { it.toData() } }
 

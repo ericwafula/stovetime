@@ -1,8 +1,10 @@
 package com.ericwathome.stovetime.sdk.timer
 
 import android.app.Notification
+import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import androidx.core.content.ContextCompat
@@ -30,6 +32,10 @@ internal class TimerEngineImpl(
     override val timers: StateFlow<List<CookTimer>> = _timers.asStateFlow()
 
     override val exactAlarmsAllowed: Boolean get() = alarms.exactAllowed
+    override val fullScreenAlarmsAllowed: Boolean
+        get() =
+            Build.VERSION.SDK_INT < Build.VERSION_CODES.UPSIDE_DOWN_CAKE ||
+                context.getSystemService(NotificationManager::class.java).canUseFullScreenIntent()
 
     override fun start(
         name: String,

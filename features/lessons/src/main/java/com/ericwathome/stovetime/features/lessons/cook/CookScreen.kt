@@ -63,6 +63,7 @@ import com.ericwathome.stovetime.ui.helpers.ViewState
 import com.ericwathome.stovetime.ui.helpers.countdownText
 import com.ericwathome.stovetime.ui.helpers.hasNotificationPermission
 import com.ericwathome.stovetime.ui.helpers.openExactAlarmSettings
+import com.ericwathome.stovetime.ui.helpers.openFullScreenAlarmSettings
 import com.ericwathome.stovetime.ui.helpers.rememberTickingNow
 import com.ericwathome.stovetime.ui.helpers.rememberNotificationPermissionRequest
 import com.ericwathome.stovetime.ui.launchers.confirm.ConfirmRequest
@@ -75,6 +76,7 @@ private const val KEEP_ON_LEAVE = "keep_on_leave"
 private const val KEEP_ON_FINISH = "keep_on_finish"
 private const val NOTIFICATIONS = "notifications"
 private const val LATE = "late"
+private const val LOCK_SCREEN = "lock_screen"
 
 @Composable
 fun CookRoute(
@@ -125,6 +127,7 @@ internal fun CookScreen(
                     KEEP_ON_FINISH -> viewModel.onAction(CookAction.OnConfirmFinish(keepTimers = true))
                     NOTIFICATIONS -> viewModel.onAction(CookAction.OnNotificationsExplained)
                     LATE -> context.openExactAlarmSettings()
+                    LOCK_SCREEN -> context.openFullScreenAlarmSettings()
                 }
             },
             onSecondary = { request ->
@@ -150,6 +153,8 @@ internal fun CookScreen(
             R.string.cook_notifications_dismiss,
         )
     val lateRequest = cookRequest(LATE, R.string.cook_late_title, R.string.cook_late_message, R.string.cook_late_confirm, R.string.cook_late_dismiss)
+    val lockScreenRequest =
+        cookRequest(LOCK_SCREEN, R.string.cook_lock_title, R.string.cook_lock_message, R.string.cook_lock_confirm, R.string.cook_lock_dismiss)
 
     CollectOneTimeEvent(viewModel.event) { event ->
         when (event) {
@@ -159,6 +164,7 @@ internal fun CookScreen(
             CookEvent.ExplainNotifications -> confirmLauncher.launch(notificationsRequest)
             CookEvent.RequestNotificationPermission -> permissionRequest.launch()
             CookEvent.ExplainLateAlarms -> confirmLauncher.launch(lateRequest)
+            CookEvent.ExplainLockScreenAlarms -> confirmLauncher.launch(lockScreenRequest)
             CookEvent.Close -> onClose()
             is CookEvent.Finish -> onFinish(event.kind, event.dishId, event.startedAt, event.finishedAt)
         }

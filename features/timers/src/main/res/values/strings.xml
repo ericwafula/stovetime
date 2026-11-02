@@ -32,4 +32,8 @@
     <string name="timers_late_message">Stovetime isn\'t allowed to set exact alarms on this phone, so a timer can ring a little late. Allow alarms so it rings right on time.</string>
     <string name="timers_late_confirm">Allow alarms</string>
     <string name="timers_late_dismiss">Not now</string>
+    <string name="timers_lock_title">Show the alarm over the lock screen</string>
+    <string name="timers_lock_message">Allow full-screen alarms so a timer that ends lights up the screen with Stop and +1 min, even when the phone is locked.</string>
+    <string name="timers_lock_confirm">Allow</string>
+    <string name="timers_lock_dismiss">Not now</string>
 </resources>

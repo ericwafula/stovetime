@@ -88,6 +88,8 @@ sealed interface CookEvent {
 
     data object ExplainLateAlarms : CookEvent
 
+    data object ExplainLockScreenAlarms : CookEvent
+
     data object Close : CookEvent
 
     data class Finish(
@@ -332,11 +334,16 @@ class CookViewModel(
             detail = cookStep.doneness,
             target = TimerTarget.CookStep(kind = args.kind, dishId = args.dishId, startedAt = args.startedAt, step = step),
         )
-        if (!timersRepository.exactAlarmsAllowed) {
-            viewModelScope.launch {
-                if (!timerPromptsRepository.wasLateAlarmsExplained()) {
+        viewModelScope.launch {
+            when {
+                !timersRepository.exactAlarmsAllowed && !timerPromptsRepository.wasLateAlarmsExplained() -> {
                     sendEvent { CookEvent.ExplainLateAlarms }
                     timerPromptsRepository.markLateAlarmsExplained()
+                }
+
+                !timersRepository.fullScreenAlarmsAllowed && !timerPromptsRepository.wasLockScreenAlarmsExplained() -> {
+                    sendEvent { CookEvent.ExplainLockScreenAlarms }
+                    timerPromptsRepository.markLockScreenAlarmsExplained()
                 }
             }
         }

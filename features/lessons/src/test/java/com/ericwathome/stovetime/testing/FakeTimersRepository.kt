@@ -12,6 +12,7 @@ class FakeTimersRepository(
 ) : TimersRepository {
     val timers = MutableStateFlow<List<RunningTimer>>(emptyList())
     override var exactAlarmsAllowed: Boolean = true
+    override var fullScreenAlarmsAllowed: Boolean = true
     private var nextId = 0
 
     override fun observeTimers(): Flow<List<RunningTimer>> = timers
