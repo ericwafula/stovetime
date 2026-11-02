@@ -2,15 +2,17 @@ package com.ericwathome.stovetime.features.lessons.di
 
 import com.ericwathome.stovetime.core.domain.di.UseCaseModule
 import com.ericwathome.stovetime.features.lessons.home.PathViewModel
+import com.ericwathome.stovetime.features.lessons.intro.LessonIntroViewModel
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 
-internal val PathViewModelModule =
+internal val LessonsViewModelModule =
     module {
         viewModelOf(::PathViewModel)
+        viewModelOf(::LessonIntroViewModel)
     }
 
-val PathModule =
+val LessonsModule =
     module {
-        includes(PathViewModelModule, UseCaseModule)
+        includes(LessonsViewModelModule, UseCaseModule)
     }

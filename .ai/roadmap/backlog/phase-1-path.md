@@ -59,7 +59,7 @@ The home screen. At the top, the course chip ("Home basics"), the week streak an
 
 ---
 
-## 1.3 Lesson intro
+## 1.3 Lesson intro ✅
 
 **Size:** M · **Depends on:** 1.2
 **Design:** [Figma › Recipe — Intro](https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=72-120)
@@ -68,12 +68,12 @@ The home screen. At the top, the course chip ("Home basics"), the week streak an
 Everything to know before you start: a big photo, "Unit 1 · Recipe 3 of 5", the title, time, difficulty and XP pills, "What you'll learn" and "You'll need" as a checklist you can tick while you gather things. Start cooking opens cook mode.
 
 ### Acceptance Criteria
-- [ ] Shows the lesson's photo, position in the unit, title, minutes, difficulty and XP
-- [ ] "What you'll learn" lists every point from the lesson
-- [ ] Each "You'll need" item can be ticked and unticked; ticks are kept while the screen is open, including rotation
-- [ ] Start cooking opens cook mode on step 1 and records the start time
-- [ ] The close button returns to the Path
-- [ ] Tests cover: the content shown, ticking an ingredient, Start opens step 1, close goes back
+- [x] Shows the lesson's photo, position in the unit, title, minutes, difficulty and XP
+- [x] "What you'll learn" lists every point from the lesson
+- [x] Each "You'll need" item can be ticked and unticked; ticks are kept while the screen is open, including rotation
+- [x] Start cooking opens cook mode on step 1 and records the start time
+- [x] The close button returns to the Path
+- [x] Tests cover: the content shown, ticking an ingredient, Start opens step 1, close goes back
 
 ### Edge cases
 - Start cooking works with nothing ticked; the list is a helper, not a gate.

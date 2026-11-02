@@ -23,9 +23,11 @@ import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
 import com.ericwathome.stovetime.R
+import com.ericwathome.stovetime.core.data.model.progress.CookKind
 import com.ericwathome.stovetime.design.components.StoveNavBar
 import com.ericwathome.stovetime.design.components.StoveNavItem
 import com.ericwathome.stovetime.design.theme.StovetimeTheme
+import com.ericwathome.stovetime.navigation.entry.navigationLessonIntro
 import com.ericwathome.stovetime.navigation.entry.navigationPath
 import com.ericwathome.stovetime.navigation.entry.navigationPlaceholder
 
@@ -66,7 +68,15 @@ fun StovetimeNavHost(modifier: Modifier = Modifier) {
                     Destination.Recipes -> navigationPlaceholder(destination, R.string.tab_recipes)
                     Destination.Timers -> navigationPlaceholder(destination, R.string.tab_timers)
                     Destination.Me -> navigationPlaceholder(destination, R.string.tab_me)
-                    is Destination.LessonIntro -> navigationPlaceholder(destination, R.string.app_name)
+                    is Destination.LessonIntro ->
+                        navigationLessonIntro(
+                            destination,
+                            onClose = navigator::backward,
+                            onOpenCook = { lessonId, startedAt ->
+                                navigator.replace(Destination.Cook(kind = CookKind.Lesson.name, dishId = lessonId, startedAt = startedAt))
+                            },
+                        )
+                    is Destination.Cook -> navigationPlaceholder(destination, R.string.app_name)
                 }
             },
         )

@@ -12,4 +12,16 @@
     <string name="path_node_locked">%1$s, locked</string>
     <string name="path_error_title">We couldn\'t load your lessons</string>
     <string name="path_retry">Try again</string>
+    <string name="intro_close">Close</string>
+    <string name="intro_position">Unit %1$d • Recipe %2$d of %3$d</string>
+    <string name="intro_minutes">%1$d min</string>
+    <string name="intro_easy">Easy</string>
+    <string name="intro_medium">Medium</string>
+    <string name="intro_hard">Hard</string>
+    <string name="intro_xp">+%1$d XP</string>
+    <string name="intro_learn">What you\'ll learn</string>
+    <string name="intro_need">You\'ll need</string>
+    <string name="intro_start">Start cooking</string>
+    <string name="intro_cook_again">Cook again • +%1$d XP</string>
+    <string name="intro_error">We couldn\'t open this lesson</string>
 </resources>
