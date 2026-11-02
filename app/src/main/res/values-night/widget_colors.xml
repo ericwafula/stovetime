@@ -1,0 +1,9 @@
+<resources>
+    <color name="widget_background">#FF221A14</color>
+    <color name="widget_row">#FF2F251D</color>
+    <color name="widget_border">#FF4A3C30</color>
+    <color name="widget_text_primary">#FFF6EEE2</color>
+    <color name="widget_text_secondary">#FFC9B8A4</color>
+    <color name="widget_primary">#FFF0545C</color>
+    <color name="widget_on_primary">#FFFFFFFF</color>
+</resources>

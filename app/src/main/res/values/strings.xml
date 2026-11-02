@@ -4,4 +4,10 @@
     <string name="tab_recipes">Recipes</string>
     <string name="tab_timers">Timers</string>
     <string name="tab_me">Me</string>
+    <string name="widget_title">Timers</string>
+    <string name="widget_empty">No timers running</string>
+    <string name="widget_quick_timer">Quick timer</string>
+    <string name="widget_paused">Paused %1$s</string>
+    <string name="widget_times_up">Time\'s up</string>
+    <string name="widget_description">Your running cooking timers, counting down</string>
 </resources>

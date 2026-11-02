@@ -5,6 +5,7 @@ import com.ericwathome.stovetime.core.data.workers.recipes.ScheduleRecipeSyncWor
 import com.ericwathome.stovetime.di.AppModule
 import com.ericwathome.stovetime.sdk.timer.StovetimeTimers
 import com.ericwathome.stovetime.sdk.timer.TimerConfig
+import com.ericwathome.stovetime.widget.TimersWidgetUpdater
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.workmanager.koin.workManagerFactory
 import org.koin.core.context.startKoin
@@ -30,5 +31,6 @@ class StovetimeApplication : Application() {
                 modules(AppModule)
             }.koin
         koin.get<ScheduleRecipeSyncWork>().invoke()
+        koin.get<TimersWidgetUpdater>().start()
     }
 }
