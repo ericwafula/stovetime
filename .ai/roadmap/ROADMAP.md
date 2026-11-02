@@ -122,11 +122,8 @@ The **Path screen (1.2)** is the screen built live in the workshop.
 | 5.1 | More courses: "Rice & grains", "One-pan dinners", "Kenyan favourites" (pilau, chapati, sukuma wiki), switched from the course chip | ✅ |
 | 5.2 | Badges for finishing a unit or a long streak | ✅ |
 | 5.3 | A gentle reminder when the week's goal is close | ✅ |
-| 5.4 | Dark mode | ⬜ |
-| 5.5 | Home-screen widget with running timers | ✅ |
-| 5.3 | A gentle reminder when the week's goal is close | ⬜ |
 | 5.4 | Dark mode | ✅ |
-| 5.5 | Home-screen widget with running timers | ⬜ |
+| 5.5 | Home-screen widget with running timers | ✅ |
 
 ---
 
