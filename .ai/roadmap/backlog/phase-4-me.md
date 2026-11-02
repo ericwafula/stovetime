@@ -48,7 +48,7 @@ Two settings in Me: the weekly cook goal (1 to 7) and "keep screen on while cook
 
 ---
 
-## 4.3 Start over
+## 4.3 Start over ✅
 
 **Size:** S · **Depends on:** 4.1
 **Design:** [Figma › Me](https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=81-73) (the "Start over" link at the bottom)
@@ -57,11 +57,11 @@ Two settings in Me: the weekly cook goal (1 to 7) and "keep screen on while cook
 Reset all progress, for someone handing over their phone or wanting a fresh start.
 
 ### Acceptance Criteria
-- [ ] "Start over" asks for confirmation, saying it deletes all XP, streaks and history
-- [ ] Confirming clears progress; the Path goes back to the first lesson and everything shows 0
-- [ ] Settings and the synced recipes are kept
-- [ ] Cancelling changes nothing
-- [ ] Tests cover: confirm clears progress, cancel keeps it, settings and recipes survive
+- [x] "Start over" asks for confirmation, saying it deletes all XP, streaks and history
+- [x] Confirming clears progress; the Path goes back to the first lesson and everything shows 0
+- [x] Settings and the synced recipes are kept
+- [x] Cancelling changes nothing
+- [x] Tests cover: confirm clears progress, cancel keeps it, settings and recipes survive
 
 ### Out of scope
 - Undo after confirming

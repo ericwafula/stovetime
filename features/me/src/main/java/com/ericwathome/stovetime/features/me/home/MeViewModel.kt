@@ -7,6 +7,7 @@ import com.ericwathome.stovetime.core.data.helpers.Today
 import com.ericwathome.stovetime.core.data.helpers.asLocalDate
 import com.ericwathome.stovetime.core.data.model.progress.CookKind
 import com.ericwathome.stovetime.core.data.model.settings.CookSettings
+import com.ericwathome.stovetime.core.data.repo.progress.ProgressRepository
 import com.ericwathome.stovetime.core.data.repo.settings.SettingsRepository
 import com.ericwathome.stovetime.core.domain.model.Progress
 import com.ericwathome.stovetime.core.domain.useCase.ProgressUseCases
@@ -33,6 +34,10 @@ sealed interface MeAction {
     data class OnKeepScreenOnChange(
         val keepScreenOn: Boolean,
     ) : MeAction
+
+    data object OnClickStartOver : MeAction
+
+    data object OnConfirmStartOver : MeAction
 }
 
 sealed interface MeEvent {
@@ -47,6 +52,10 @@ sealed interface MeEvent {
     data object OpenPath : MeEvent
 
     data object ShowSaveFailed : MeEvent
+
+    data object AskToStartOver : MeEvent
+
+    data object ShowStartOverFailed : MeEvent
 }
 
 data class MeState(
@@ -72,6 +81,7 @@ data class MeState(
 class MeViewModel(
     private val progressUseCases: ProgressUseCases,
     private val settingsRepository: SettingsRepository,
+    private val progressRepository: ProgressRepository,
 ) : MviViewModel<MeAction, MeState, MeEvent>(MeState()) {
     private var observeJob: Job? = null
     private var settingsJob: Job? = null
@@ -105,6 +115,14 @@ class MeViewModel(
 
             is MeAction.OnKeepScreenOnChange -> {
                 onKeepScreenOnChange(action.keepScreenOn)
+            }
+
+            MeAction.OnClickStartOver -> {
+                sendEvent { MeEvent.AskToStartOver }
+            }
+
+            MeAction.OnConfirmStartOver -> {
+                onConfirmStartOver()
             }
         }
     }
@@ -152,6 +170,12 @@ class MeViewModel(
     private fun onSaveFailed(previous: CookSettings) {
         updateState { it.copy(settings = previous) }
         sendEvent { MeEvent.ShowSaveFailed }
+    }
+
+    private fun onConfirmStartOver() {
+        viewModelScope.launch {
+            progressRepository.clearProgress().onError { sendEvent { MeEvent.ShowStartOverFailed } }
+        }
     }
 
     private fun onClickCook(cookId: Long) {

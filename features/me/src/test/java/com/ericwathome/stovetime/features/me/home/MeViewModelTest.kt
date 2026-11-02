@@ -7,6 +7,7 @@ import com.ericwathome.stovetime.core.data.helpers.asLocalDate
 import com.ericwathome.stovetime.core.data.model.progress.Cook
 import com.ericwathome.stovetime.core.data.model.progress.CookKind
 import com.ericwathome.stovetime.core.data.model.settings.CookSettings
+import com.ericwathome.stovetime.core.data.repo.progress.ProgressRepository
 import com.ericwathome.stovetime.core.data.repo.settings.SettingsRepository
 import com.ericwathome.stovetime.core.domain.model.Progress
 import com.ericwathome.stovetime.core.domain.model.WeekProgress
@@ -36,6 +37,9 @@ class MeViewModelTest {
 
     @MockK
     private lateinit var settingsRepository: SettingsRepository
+
+    @MockK
+    private lateinit var progressRepository: ProgressRepository
 
     private val settings = MutableStateFlow(CookSettings())
 
@@ -87,7 +91,11 @@ class MeViewModelTest {
             settings.value = settings.value.copy(keepScreenOn = firstArg())
             DataResult.Success(true)
         }
-        sut = MeViewModel(progressUseCases, settingsRepository)
+        coEvery { progressRepository.clearProgress() } answers {
+            progress.value = DataResult.Success(progressOf(emptyList()))
+            DataResult.Success(true)
+        }
+        sut = MeViewModel(progressUseCases, settingsRepository, progressRepository)
     }
 
     @Test
@@ -222,7 +230,7 @@ class MeViewModelTest {
     fun changing_the_goal_updates_the_week_row() =
         runTest {
             every { progressUseCases.observeProgress() } returns settings.map { DataResult.Success(progressOf(emptyList(), goal = it.weeklyGoal)) }
-            sut = MeViewModel(progressUseCases, settingsRepository)
+            sut = MeViewModel(progressUseCases, settingsRepository, progressRepository)
             sut.state.test {
                 skipItems(1)
 
@@ -300,6 +308,82 @@ class MeViewModelTest {
                     assertThat(awaitItem()).isEqualTo(MeEvent.ShowSaveFailed)
                 }
                 assertThat(expectMostRecentItem().settings?.weeklyGoal).isEqualTo(4)
+            }
+        }
+
+    @Test
+    fun start_over_asks_first_and_clears_nothing_until_confirmed() =
+        runTest {
+            sut.event.test {
+                // when
+                sut.onAction(MeAction.OnClickStartOver)
+
+                // then
+                assertThat(awaitItem()).isEqualTo(MeEvent.AskToStartOver)
+                coVerify(exactly = 0) { progressRepository.clearProgress() }
+            }
+        }
+
+    @Test
+    fun cancelling_start_over_keeps_the_progress() =
+        runTest {
+            progress.value = DataResult.Success(progressOf(listOf(cook(1)), weekStreak = 1, bestWeekStreak = 1))
+            sut.state.test {
+                // when
+                sut.onAction(MeAction.OnClickStartOver)
+
+                // then
+                val shown = expectMostRecentItem().progress.dataOrNull()!!
+                assertThat(shown.totalXp).isEqualTo(30)
+                assertThat(shown.history).hasSize(1)
+                coVerify(exactly = 0) { progressRepository.clearProgress() }
+            }
+        }
+
+    @Test
+    fun confirming_start_over_clears_the_progress() =
+        runTest {
+            progress.value = DataResult.Success(progressOf(listOf(cook(2), cook(1)), weekStreak = 1, bestWeekStreak = 2))
+            sut.state.test {
+                skipItems(1)
+
+                // when
+                sut.onAction(MeAction.OnConfirmStartOver)
+
+                // then
+                val shown = expectMostRecentItem().progress.dataOrNull()!!
+                assertThat(shown.totalXp).isEqualTo(0)
+                assertThat(shown.bestWeekStreak).isEqualTo(0)
+                assertThat(shown.history).isEmpty()
+                coVerify(exactly = 1) { progressRepository.clearProgress() }
+            }
+        }
+
+    @Test
+    fun starting_over_keeps_the_settings() =
+        runTest {
+            settings.value = CookSettings(weeklyGoal = 6, keepScreenOn = false)
+            sut.state.test {
+                // when
+                sut.onAction(MeAction.OnConfirmStartOver)
+
+                // then
+                assertThat(expectMostRecentItem().settings).isEqualTo(CookSettings(weeklyGoal = 6, keepScreenOn = false))
+                coVerify(exactly = 0) { settingsRepository.saveWeeklyGoal(any()) }
+                coVerify(exactly = 0) { settingsRepository.saveKeepScreenOn(any()) }
+            }
+        }
+
+    @Test
+    fun a_start_over_that_fails_says_so() =
+        runTest {
+            coEvery { progressRepository.clearProgress() } returns DataResult.Error(DataError.Unknown("disk"))
+            sut.event.test {
+                // when
+                sut.onAction(MeAction.OnConfirmStartOver)
+
+                // then
+                assertThat(awaitItem()).isEqualTo(MeEvent.ShowStartOverFailed)
             }
         }
 }

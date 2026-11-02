@@ -26,6 +26,12 @@
     <string name="me_history_empty_title">Nothing cooked yet</string>
     <string name="me_history_empty_message">Every dish you finish shows up here. Your first lesson is waiting on the Path.</string>
     <string name="me_history_empty_action">Go to the Path</string>
+    <string name="me_start_over">Start over</string>
+    <string name="me_start_over_title">Start over?</string>
+    <string name="me_start_over_message">This deletes all your XP, streaks and cook history, and the Path goes back to the first lesson. Your settings and downloaded recipes stay.</string>
+    <string name="me_start_over_confirm">Delete my progress</string>
+    <string name="me_start_over_cancel">Keep my progress</string>
+    <string name="me_start_over_failed">Couldn\'t clear your progress. Try again.</string>
     <string name="me_error_title">We couldn\'t load your progress</string>
     <string name="me_retry">Try again</string>
 </resources>

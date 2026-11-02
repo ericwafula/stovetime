@@ -13,6 +13,9 @@ import com.ericwathome.stovetime.design.components.StoveStepper
 import com.ericwathome.stovetime.design.components.StoveSwitch
 import com.ericwathome.stovetime.design.components.StoveToast
 import kotlinx.coroutines.delay
+import com.ericwathome.stovetime.design.components.StoveTextButton
+import com.ericwathome.stovetime.ui.launchers.confirm.ConfirmRequest
+import com.ericwathome.stovetime.ui.launchers.confirm.rememberConfirmLauncher
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -106,26 +109,44 @@ internal fun MeScreen(
     viewModel: MeViewModel = koinViewModel(),
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
-    var saveFailures by remember { mutableIntStateOf(0) }
+    var toasts by remember { mutableIntStateOf(0) }
+    var toastText by remember { mutableIntStateOf(R.string.me_save_failed) }
+    val startOverLauncher = rememberConfirmLauncher(onConfirm = { viewModel.onAction(MeAction.OnConfirmStartOver) })
+    val startOverRequest =
+        ConfirmRequest(
+            title = stringResource(R.string.me_start_over_title),
+            message = stringResource(R.string.me_start_over_message),
+            confirmLabel = stringResource(R.string.me_start_over_confirm),
+            dismissLabel = stringResource(R.string.me_start_over_cancel),
+            destructive = true,
+        )
 
     CollectOneTimeEvent(viewModel.event) { event ->
         when (event) {
             is MeEvent.OpenLesson -> onOpenLesson(event.lessonId)
             is MeEvent.OpenRecipe -> onOpenRecipe(event.recipeId)
             MeEvent.OpenPath -> onOpenPath()
-            MeEvent.ShowSaveFailed -> saveFailures++
+            MeEvent.AskToStartOver -> startOverLauncher.launch(startOverRequest)
+            MeEvent.ShowSaveFailed -> {
+                toastText = R.string.me_save_failed
+                toasts++
+            }
+            MeEvent.ShowStartOverFailed -> {
+                toastText = R.string.me_start_over_failed
+                toasts++
+            }
         }
     }
 
     Box(modifier.fillMaxSize()) {
         MeContent(state = state, onAction = viewModel::onAction)
-        if (saveFailures > 0) {
-            LaunchedEffect(saveFailures) {
+        if (toasts > 0) {
+            LaunchedEffect(toasts) {
                 delay(TOAST_MILLIS)
-                saveFailures = 0
+                toasts = 0
             }
             StoveToast(
-                text = stringResource(R.string.me_save_failed),
+                text = stringResource(toastText),
                 modifier = Modifier.align(Alignment.BottomCenter).padding(bottom = StoveNavBarClearance),
             )
         }
@@ -201,6 +222,11 @@ private fun MeDetails(
                 }
             }
         }
+        StoveTextButton(
+            text = stringResource(R.string.me_start_over),
+            onClick = { onAction(MeAction.OnClickStartOver) },
+            modifier = Modifier.align(Alignment.CenterHorizontally).testTag("me_start_over"),
+        )
     }
 }
 
