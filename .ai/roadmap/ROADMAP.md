@@ -98,7 +98,7 @@ The **Path screen (1.2)** is the screen built live in the workshop.
 | 2.1 | Timer engine: several timers at once, a foreground service, survives the app being closed | ⬜ |
 | 2.2 | Step timers run on the engine and keep going when you leave cook mode | ✅ |
 | 2.3 | Alarm: rings and vibrates, with Stop and "+1 min", over the lock screen | ✅ |
-| 2.4 | Timers tab: running timers and a quick named timer | ⬜ |
+| 2.4 | Timers tab: running timers and a quick named timer | ✅ |
 
 ### Phase 3 — Recipes (TheMealDB)
 | ID | Item | Status |
@@ -268,6 +268,11 @@ These rules live in `:core:domain` and are covered by tests with fixed dates.
 | 2026-11-02 | The alarm is `AlarmActivity` in `:app` (single instance, own task, excluded from recents); a new alarm for another timer switches it to that timer, and stopping or snoozing the shown one moves on to any other timer still ringing before it closes | One alarm screen over the lock screen at a time; each timer keeps its own alarm notification, so none is lost |
 | 2026-11-02 | The alarm's detail line is "Take them out now" + the step's doneness; a timer with no doneness (a quick timer) shows only its name | Matches the frame's copy for a step timer without inventing text for quick timers |
 | 2026-11-02 | `StoveIconDisc` joins `:presentation:design` for the alarm's white disc with a ledge | Keeps the ledge in `LedgeSurface` instead of hand-rolled offsets in the screen |
+| 2026-11-02 | The Timers list puts ringing timers first, then running ones soonest-ending first, then paused ones; the header counts every timer ("2 running" includes paused ones, as in the frame) | Matches the frame and the engine's own order |
+| 2026-11-02 | A ringing timer's card shows "Time's up" with Stop and "+1 min" in place of Pause; tapping a card opens cook mode only for a step timer | The frame has no ringing card; these are the alarm's own actions |
+| 2026-11-02 | The quick timer sheet sets seconds with a second row of "−10 s" / "+10 s" pills under the frame's "−1 min / 5:00 / +1 min" row; it opens at 5:00 and stays between 10 seconds and 3 hours | The frame shows minutes only and the spec asks for minutes and seconds; pills fit the frame better than a tap-to-edit field |
+| 2026-11-02 | An unnamed quick timer takes "Timer N" with the lowest N that no current timer is named; the number comes from a localised "Timer %d" the screen passes in | Numbers are reused once a timer ends, so they stay small |
+| 2026-11-02 | `StoveTextField` (with `StoveSearchField` built on it) and `StoveStepButton` join `:presentation:design` | The quick timer sheet's name field and −/+ pills, with 48 dp touch targets |
 
 ---
 

@@ -69,7 +69,7 @@ When a timer ends: sound, vibration and a full-screen alarm over the lock screen
 
 ---
 
-## 2.4 Timers tab
+## 2.4 Timers tab ✅
 
 **Size:** M · **Depends on:** 2.1, 0.3
 **Design:** [Figma › Timers](https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=80-110) and [Timers — Quick timer](https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=81-194)
@@ -78,11 +78,11 @@ When a timer ends: sound, vibration and a full-screen alarm over the lock screen
 Every running timer in one list, with time left, pause, "+1 min" and cancel. A quick timer button: give it a name and a time and start it, for cooking that isn't in a lesson.
 
 ### Acceptance Criteria
-- [ ] Every running and paused timer shows with its name and time left, soonest first
-- [ ] Pause, resume, "+1 min" and cancel work from the list
-- [ ] A quick timer can be started with a name (optional) and minutes and seconds
-- [ ] Tapping a step timer opens its cook mode at that step
-- [ ] Tests cover: the list order, each action, a quick timer with and without a name
+- [x] Every running and paused timer shows with its name and time left, soonest first
+- [x] Pause, resume, "+1 min" and cancel work from the list
+- [x] A quick timer can be started with a name (optional) and minutes and seconds
+- [x] Tapping a step timer opens its cook mode at that step
+- [x] Tests cover: the list order, each action, a quick timer with and without a name
 
 ### Edge cases
 - No timers: an empty state with the quick timer button.

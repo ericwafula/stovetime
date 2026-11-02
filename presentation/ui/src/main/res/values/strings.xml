@@ -19,4 +19,16 @@
     <string name="week_row_description">%1$s. Cooked on %2$d days so far.</string>
     <string name="cook_time_minutes">%1$dm</string>
     <string name="cook_time_hours">%1$dh %2$sm</string>
+    <string name="quick_timer_title">Quick timer</string>
+    <string name="quick_timer_name_placeholder">Name it, e.g. Rice (optional)</string>
+    <string name="quick_timer_minus_minute">−1 min</string>
+    <string name="quick_timer_plus_minute">+1 min</string>
+    <string name="quick_timer_minus_seconds">−10 s</string>
+    <string name="quick_timer_plus_seconds">+10 s</string>
+    <string name="quick_timer_minus_minute_description">One minute less</string>
+    <string name="quick_timer_plus_minute_description">One minute more</string>
+    <string name="quick_timer_minus_seconds_description">Ten seconds less</string>
+    <string name="quick_timer_plus_seconds_description">Ten seconds more</string>
+    <string name="quick_timer_length_description">Timer length %1$s</string>
+    <string name="quick_timer_start">Start timer</string>
 </resources>

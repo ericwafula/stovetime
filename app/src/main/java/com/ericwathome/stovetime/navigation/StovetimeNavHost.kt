@@ -37,6 +37,7 @@ import com.ericwathome.stovetime.navigation.entry.navigationPath
 import com.ericwathome.stovetime.navigation.entry.navigationPlaceholder
 import com.ericwathome.stovetime.navigation.entry.navigationRecipe
 import com.ericwathome.stovetime.navigation.entry.navigationRecipesBrowse
+import com.ericwathome.stovetime.navigation.entry.navigationTimers
 import com.ericwathome.stovetime.ui.helpers.isKeyboardOpen
 
 private const val CROSSFADE_MILLIS = 180
@@ -87,7 +88,13 @@ fun StovetimeNavHost(
                             Destination.Recipes,
                             onOpenRecipe = { recipeId -> navigator.navigate(Destination.Recipe(recipeId)) },
                         )
-                    Destination.Timers -> navigationPlaceholder(destination, R.string.tab_timers)
+                    Destination.Timers ->
+                        navigationTimers(
+                            Destination.Timers,
+                            onOpenCookStep = { kind, dishId, startedAt, step ->
+                                navigator.navigate(Destination.Cook(kind = kind.name, dishId = dishId, startedAt = startedAt, step = step))
+                            },
+                        )
                     Destination.Me -> navigationPlaceholder(destination, R.string.tab_me)
                     is Destination.LessonIntro ->
                         navigationLessonIntro(

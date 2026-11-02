@@ -23,14 +23,17 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ericwathome.stovetime.design.theme.StovetimeTheme
 
-private val SearchShape = RoundedCornerShape(14.dp)
+private val FieldShape = RoundedCornerShape(14.dp)
 
 @Composable
-fun StoveSearchField(
+fun StoveTextField(
     value: String,
     onValueChange: (String) -> Unit,
     placeholder: String,
     modifier: Modifier = Modifier,
+    leadingIcon: StoveIcons? = null,
+    capitalization: KeyboardCapitalization = KeyboardCapitalization.Sentences,
+    imeAction: ImeAction = ImeAction.Done,
 ) {
     val colors = StovetimeTheme.colors
     val focusManager = LocalFocusManager.current
@@ -40,20 +43,20 @@ fun StoveSearchField(
         singleLine = true,
         textStyle = StovetimeTheme.typography.body.copy(color = colors.textPrimary),
         cursorBrush = SolidColor(colors.primary),
-        keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.None, imeAction = ImeAction.Search),
-        keyboardActions = KeyboardActions(onSearch = { focusManager.clearFocus() }),
+        keyboardOptions = KeyboardOptions(capitalization = capitalization, imeAction = imeAction),
+        keyboardActions = KeyboardActions(onAny = { focusManager.clearFocus() }),
         modifier = modifier.fillMaxWidth(),
         decorationBox = { innerTextField ->
             Row(
                 modifier =
                     Modifier
-                        .background(colors.surface, SearchShape)
-                        .border(2.dp, colors.border, SearchShape)
+                        .background(colors.surface, FieldShape)
+                        .border(2.dp, colors.border, FieldShape)
                         .padding(horizontal = 14.dp, vertical = 12.dp),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(10.dp),
             ) {
-                StoveIcon(StoveIcons.Search, contentDescription = null, tint = colors.textSecondary, size = 20.dp)
+                leadingIcon?.let { StoveIcon(it, contentDescription = null, tint = colors.textSecondary, size = 20.dp) }
                 Box(Modifier.weight(1f)) {
                     if (value.isEmpty()) {
                         StoveText(text = placeholder, color = colors.textSecondary, maxLines = 1)
@@ -65,13 +68,33 @@ fun StoveSearchField(
     )
 }
 
+@Composable
+fun StoveSearchField(
+    value: String,
+    onValueChange: (String) -> Unit,
+    placeholder: String,
+    modifier: Modifier = Modifier,
+) {
+    StoveTextField(
+        value = value,
+        onValueChange = onValueChange,
+        placeholder = placeholder,
+        modifier = modifier,
+        leadingIcon = StoveIcons.Search,
+        capitalization = KeyboardCapitalization.None,
+        imeAction = ImeAction.Search,
+    )
+}
+
 @Preview(showBackground = true, backgroundColor = 0xFFFBF6EC)
 @Composable
-private fun StoveSearchFieldPreview() {
+private fun StoveTextFieldPreview() {
     StovetimeTheme {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
             StoveSearchField(value = "", onValueChange = {}, placeholder = "Search recipes")
             StoveSearchField(value = "chicken", onValueChange = {}, placeholder = "Search recipes")
+            StoveTextField(value = "", onValueChange = {}, placeholder = "Name it, e.g. Rice (optional)")
+            StoveTextField(value = "Rice", onValueChange = {}, placeholder = "Name it, e.g. Rice (optional)")
         }
     }
 }
