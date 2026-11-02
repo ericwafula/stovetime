@@ -38,3 +38,5 @@ data class StepTimer(
     val seconds: Int,
     val doneness: String?,
 )
+
+const val HOME_BASICS_COURSE_ID = "home-basics"

@@ -3,7 +3,13 @@ package com.ericwathome.stovetime.datasources.local.helpers
 import android.content.Context
 import kotlinx.serialization.json.Json
 
-internal const val HOME_BASICS_COURSE_ASSET = "courses/home_basics.json"
+internal val COURSE_ASSETS =
+    listOf(
+        "courses/home_basics.json",
+        "courses/rice_and_grains.json",
+        "courses/one_pan_dinners.json",
+        "courses/kenyan_favourites.json",
+    )
 
 internal val contentJson = Json { ignoreUnknownKeys = true }
 

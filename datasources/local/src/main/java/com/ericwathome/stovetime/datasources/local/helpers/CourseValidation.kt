@@ -30,3 +30,17 @@ internal fun CourseCache.problems(): List<String> {
         }
     }
 }
+
+internal fun List<CourseCache>.problems(): List<String> {
+    val duplicateCourseIds = groupBy { it.id }.filterValues { it.size > 1 }.keys
+    val sharedLessonIds =
+        flatMap { course -> course.units.flatMap { it.lessons }.map { it.id }.distinct() }
+            .groupBy { it }
+            .filterValues { it.size > 1 }
+            .keys
+    return buildList {
+        duplicateCourseIds.forEach { add("course id $it is used more than once") }
+        sharedLessonIds.forEach { add("lesson id $it is used in more than one course") }
+        this@problems.forEach { addAll(it.problems()) }
+    }
+}

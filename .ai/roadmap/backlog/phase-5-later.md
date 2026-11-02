@@ -4,7 +4,7 @@
 
 Phases 0–4 shipped on 2026-11-02, so the Phase 5 ideas from the roadmap become steps. Each one builds on what's there and keeps the principles: cooking first, encourage don't nag, and the Path works offline.
 
-## 5.1 More courses
+## 5.1 More courses ✅
 
 **Size:** L · **Depends on:** 1.1, 1.2
 **Design:** follow [Figma › Home — Path](https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=70-98); the course switcher reuses the bottom sheet from [Timers — Quick timer](https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=81-194)
@@ -13,13 +13,13 @@ Phases 0–4 shipped on 2026-11-02, so the Phase 5 ideas from the roadmap become
 Three more courses next to "Home basics": "Rice & grains", "One-pan dinners" and "Kenyan favourites" (pilau, chapati, sukuma wiki). Tapping the course chip on the Path opens a sheet listing every course with how many lessons are cooked; choosing one shows its path. Each course unlocks in order on its own; XP and the week streak count every cook.
 
 ### Acceptance Criteria
-- [ ] Four courses ship inside the app in the format of roadmap §6, each with one unit of at least three lessons, every lesson meeting the 1.1 content rules
-- [ ] "Kenyan favourites" has pilau, chapati and sukuma wiki
-- [ ] Tapping the course chip opens a sheet with every course, its title and "N of M cooked"; choosing one shows that course's path and the chip shows its title
-- [ ] Each course unlocks its own lessons in order; cooking in one course never unlocks lessons in another
-- [ ] The chosen course is remembered across app restarts
-- [ ] A lesson with no bundled photo shows a plain placeholder, never a broken image
-- [ ] Tests cover: every course file passes the content rules, lesson ids are unique across courses, per-course unlocking, switching course, the remembered course
+- [x] Four courses ship inside the app in the format of roadmap §6, each with one unit of at least three lessons, every lesson meeting the 1.1 content rules
+- [x] "Kenyan favourites" has pilau, chapati and sukuma wiki
+- [x] Tapping the course chip opens a sheet with every course, its title and "N of M cooked"; choosing one shows that course's path and the chip shows its title
+- [x] Each course unlocks its own lessons in order; cooking in one course never unlocks lessons in another
+- [x] The chosen course is remembered across app restarts
+- [x] A lesson with no bundled photo shows a plain placeholder, never a broken image
+- [x] Tests cover: every course file passes the content rules, lesson ids are unique across courses, per-course unlocking, switching course, the remembered course
 
 ### Edge cases
 - A stored course id that no longer exists falls back to "Home basics".

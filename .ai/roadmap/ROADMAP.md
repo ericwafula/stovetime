@@ -119,7 +119,7 @@ The **Path screen (1.2)** is the screen built live in the workshop.
 ### Phase 5 — Later
 | ID | Item | Status |
 |---|---|---|
-| 5.1 | More courses: "Rice & grains", "One-pan dinners", "Kenyan favourites" (pilau, chapati, sukuma wiki), switched from the course chip | ⬜ |
+| 5.1 | More courses: "Rice & grains", "One-pan dinners", "Kenyan favourites" (pilau, chapati, sukuma wiki), switched from the course chip | ✅ |
 | 5.2 | Badges for finishing a unit or a long streak | ⬜ |
 | 5.3 | A gentle reminder when the week's goal is close | ✅ |
 | 5.4 | Dark mode | ⬜ |
@@ -302,6 +302,13 @@ These rules live in `:core:domain` and are covered by tests with fixed dates.
 | 2026-11-02 | New tokens `primaryContent`, `successContent`, `xpContent` (accent text and icons on plain or soft backgrounds; dark Tomato300 `#FF8A82`, Basil300 `#7DC98E`, Yolk300 `#F7C75A`, light unchanged), `onXp` (Espresso text on the yolk banner) and `scrim` | `*Shade` was both a ledge and a text colour; a ledge must be darker than its face but text on a dark soft fill must be light, so the two meanings split |
 | 2026-11-02 | Light Tomato500 `#E2333D` → `#E12B36`, Basil500 `#3F9A55` → `#36854A` (Basil700 `#2C7440` → `#256135` to keep the ledge step) and Cocoa `#7A6857` → `#786655` | White on tomato was 4.40:1, white on basil 3.52:1 and Cocoa on Oat 4.45:1; each now passes 4.5:1, and `StovetimeColorsTest` keeps every text pair at 4.5:1 in both themes |
 | 2026-11-02 | The window theme is `Theme.Stovetime` (`values` / `values-night`) with `stovetime_canvas` as its background; `MainActivity` handles `uiMode` and re-applies `SystemBarStyle.auto` and the background on a theme switch; the alarm is forced light | No white flash on a dark launch and no recreation (state kept) when the phone switches theme; the alarm stays red with white text and light bar icons |
+| 2026-11-02 | Each course is its own JSON file under `assets/courses/`, loaded in a fixed order from one list with Home basics first; a test fails if a file there isn't in the list | Adding a course is one file and one line, and the order on the sheet doesn't depend on file names |
+| 2026-11-02 | Lesson ids are unique across every course, and a test checks it | A cook stores only the lesson id, so unlocking stays per course and the intro, cook mode and Me history can find a lesson in any course without a course id on the cook |
+| 2026-11-02 | The chosen course id lives in its own DataStore file (`course_choice`); a missing or unknown id falls back to Home basics | Survives restarts, and a course removed in a later release can't leave the Path empty |
+| 2026-11-02 | The lesson intro looks the lesson up in every course and shows its position in that course's own unit | Me history can open a lesson from a course that isn't on the Path right now |
+| 2026-11-02 | The course sheet shows one card per course (title and "N of M cooked"), the current one in basil with a check; N counts different lessons cooked, so cooking one again doesn't raise it | Figma only has the sheet itself (from the quick timer), not its rows; the cards reuse `StoveCard` and the selected look of `StoveChoice` |
+| 2026-11-02 | The course chip sits in a 48 dp tap area and reads "Change course" to screen readers | The chip itself is shorter than a touch target and the frame keeps its size |
+| 2026-11-02 | The new courses name their photos (`lesson_<id>`) but don't bundle them yet; only Home basics is checked for bundled photos | Photography is out of scope for 5.1, and the Path, intro and finish screens already fall back to a plain placeholder |
 
 ---
 

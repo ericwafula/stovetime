@@ -3,6 +3,8 @@ package com.ericwathome.stovetime.features.lessons.home
 import app.cash.turbine.test
 import com.ericwathome.stovetime.core.common.result.DataResult
 import com.ericwathome.stovetime.core.data.model.course.CourseUnit
+import com.ericwathome.stovetime.core.data.repo.course.CourseRepository
+import com.ericwathome.stovetime.core.domain.model.CourseSummary
 import com.ericwathome.stovetime.core.domain.model.LessonState
 import com.ericwathome.stovetime.core.domain.model.PathLesson
 import com.ericwathome.stovetime.core.domain.model.PathProgress
@@ -14,6 +16,8 @@ import com.ericwathome.stovetime.ui.helpers.ViewState
 import com.ericwathome.stovetime.core.common.result.DataError
 import com.google.common.truth.Truth.assertThat
 import io.mockk.MockKAnnotations
+import io.mockk.coEvery
+import io.mockk.coVerify
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -29,8 +33,20 @@ class PathViewModelTest {
     @MockK
     private lateinit var progressUseCases: ProgressUseCases
 
+    @MockK
+    private lateinit var courseRepository: CourseRepository
+
     private val lessons = listOf("boiled-eggs", "scrambled-eggs", "jammy-eggs-on-toast", "french-omelette", "shakshuka")
     private val path = MutableStateFlow<DataResult<PathProgress>>(DataResult.Success(pathWith(cooked = 0)))
+    private val courses =
+        MutableStateFlow<DataResult<List<CourseSummary>>>(
+            DataResult.Success(
+                listOf(
+                    CourseSummary("home-basics", "Home basics", cookedCount = 0, lessonCount = 5, isChosen = true),
+                    CourseSummary("kenyan-favourites", "Kenyan favourites", cookedCount = 0, lessonCount = 4, isChosen = false),
+                ),
+            ),
+        )
     private lateinit var sut: PathViewModel
 
     private fun pathWith(
@@ -39,6 +55,7 @@ class PathViewModelTest {
     ): PathProgress {
         val models = lessons.map { sampleLesson(it, it) }
         return PathProgress(
+            courseId = "home-basics",
             courseTitle = "Home basics",
             unit = CourseUnit(id = "eggs", number = 1, title = "Eggs", lessons = models),
             lessons =
@@ -59,7 +76,9 @@ class PathViewModelTest {
     fun setup() {
         MockKAnnotations.init(this, relaxed = true)
         every { progressUseCases.observePath() } returns path
-        sut = PathViewModel(progressUseCases)
+        every { progressUseCases.observeCourses() } returns courses
+        coEvery { courseRepository.chooseCourse(any()) } returns DataResult.Success(true)
+        sut = PathViewModel(progressUseCases, courseRepository)
     }
 
     @Test
@@ -170,6 +189,47 @@ class PathViewModelTest {
 
                 // then
                 assertThat(expectMostRecentItem().path).isInstanceOf(ViewState.Success::class.java)
+            }
+        }
+
+    @Test
+    fun the_courses_are_listed_with_the_chosen_one_marked() =
+        runTest {
+            sut.state.test {
+                // then
+                val shown = expectMostRecentItem().courses
+                assertThat(shown.map { it.id }).containsExactly("home-basics", "kenyan-favourites").inOrder()
+                assertThat(shown.single { it.isChosen }.id).isEqualTo("home-basics")
+            }
+        }
+
+    @Test
+    fun choosing_a_course_saves_it() =
+        runTest {
+            sut.state.test {
+                skipItems(1)
+
+                // when
+                sut.onAction(PathAction.OnChooseCourse("kenyan-favourites"))
+
+                // then
+                coVerify(exactly = 1) { courseRepository.chooseCourse("kenyan-favourites") }
+                cancelAndIgnoreRemainingEvents()
+            }
+        }
+
+    @Test
+    fun choosing_the_current_course_changes_nothing() =
+        runTest {
+            sut.state.test {
+                skipItems(1)
+
+                // when
+                sut.onAction(PathAction.OnChooseCourse("home-basics"))
+
+                // then
+                coVerify(exactly = 0) { courseRepository.chooseCourse(any()) }
+                cancelAndIgnoreRemainingEvents()
             }
         }
 }

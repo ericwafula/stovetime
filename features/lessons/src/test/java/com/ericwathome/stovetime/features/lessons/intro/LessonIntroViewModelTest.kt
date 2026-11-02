@@ -33,6 +33,7 @@ class LessonIntroViewModelTest {
     private fun path(cookedBefore: Boolean): PathProgress {
         val lessons = listOf(sampleLesson("boiled-eggs", "Boiled eggs", xp = 20), sampleLesson("scrambled-eggs", "Scrambled eggs"))
         return PathProgress(
+            courseId = "home-basics",
             courseTitle = "Home basics",
             unit = CourseUnit("eggs", 1, "Eggs", lessons),
             lessons =
@@ -47,7 +48,7 @@ class LessonIntroViewModelTest {
     @Before
     fun setup() {
         MockKAnnotations.init(this, relaxed = true)
-        every { progressUseCases.observePath() } returns flowOf(DataResult.Success(path(cookedBefore = false)))
+        every { progressUseCases.observeLessonPath(any()) } returns flowOf(DataResult.Success(path(cookedBefore = false)))
         sut = LessonIntroViewModel("scrambled-eggs", progressUseCases)
     }
 
@@ -68,7 +69,7 @@ class LessonIntroViewModelTest {
     fun a_lesson_cooked_before_offers_practice_xp() =
         runTest {
             // given
-            every { progressUseCases.observePath() } returns flowOf(DataResult.Success(path(cookedBefore = true)))
+            every { progressUseCases.observeLessonPath(any()) } returns flowOf(DataResult.Success(path(cookedBefore = true)))
             sut = LessonIntroViewModel("scrambled-eggs", progressUseCases)
 
             sut.state.test {

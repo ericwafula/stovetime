@@ -1,9 +1,9 @@
 package com.ericwathome.stovetime.datasources.local.sources.course
 
 interface CourseLocalDatasource {
-    val getCourse: GetCourseLocalDatasource
+    val getCourses: GetCoursesLocalDatasource
 }
 
 internal class CourseLocalDatasourceImpl(
-    override val getCourse: GetCourseLocalDatasource,
+    override val getCourses: GetCoursesLocalDatasource,
 ) : CourseLocalDatasource

@@ -4,6 +4,10 @@ import com.ericwathome.stovetime.core.domain.useCase.CalculateCookXpUseCase
 import com.ericwathome.stovetime.core.domain.useCase.CalculateCookXpUseCaseImpl
 import com.ericwathome.stovetime.core.domain.useCase.CheckWeeklyReminderUseCase
 import com.ericwathome.stovetime.core.domain.useCase.CheckWeeklyReminderUseCaseImpl
+import com.ericwathome.stovetime.core.domain.useCase.ObserveCoursesUseCase
+import com.ericwathome.stovetime.core.domain.useCase.ObserveCoursesUseCaseImpl
+import com.ericwathome.stovetime.core.domain.useCase.ObserveLessonPathUseCase
+import com.ericwathome.stovetime.core.domain.useCase.ObserveLessonPathUseCaseImpl
 import com.ericwathome.stovetime.core.domain.useCase.ObservePathUseCase
 import com.ericwathome.stovetime.core.domain.useCase.ObservePathUseCaseImpl
 import com.ericwathome.stovetime.core.domain.useCase.ObserveProgressUseCase
@@ -28,6 +32,12 @@ internal val ProgressUseCaseModule =
         }
         singleOf(::ObservePathUseCaseImpl) {
             bind<ObservePathUseCase>()
+        }
+        singleOf(::ObserveLessonPathUseCaseImpl) {
+            bind<ObserveLessonPathUseCase>()
+        }
+        singleOf(::ObserveCoursesUseCaseImpl) {
+            bind<ObserveCoursesUseCase>()
         }
         singleOf(::CalculateCookXpUseCaseImpl) {
             bind<CalculateCookXpUseCase>()

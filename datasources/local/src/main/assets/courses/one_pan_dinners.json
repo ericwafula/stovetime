@@ -1,0 +1,161 @@
+{
+  "id": "one-pan-dinners",
+  "title": "One-pan dinners",
+  "units": [
+    {
+      "id": "one-pan",
+      "number": 1,
+      "title": "One pan, less washing up",
+      "lessons": [
+        {
+          "id": "chickpea-spinach-curry",
+          "title": "Chickpea and spinach curry",
+          "minutes": 30,
+          "difficulty": "easy",
+          "xp": 30,
+          "photo": "lesson_chickpea_spinach_curry",
+          "learn": ["Cooking spices in oil to wake them up", "Simmering a sauce until it thickens"],
+          "ingredients": [
+            "1 onion, chopped",
+            "2 garlic cloves and a thumb of ginger, grated",
+            "2 tsp curry powder",
+            "400 g tin of chopped tomatoes",
+            "400 g tin of chickpeas, drained",
+            "200 ml coconut milk",
+            "100 g spinach",
+            "1 tbsp oil and salt"
+          ],
+          "steps": [
+            {
+              "text": "Soften the onion in the oil over a medium heat",
+              "timer": { "seconds": 480, "doneness": "until soft and golden at the edges" }
+            },
+            {
+              "text": "Stir in the garlic, ginger and curry powder",
+              "timer": { "seconds": 60, "doneness": "until it smells fragrant" },
+              "tip": "Keep stirring. Spices burn quickly and turn bitter."
+            },
+            {
+              "text": "Add the tomatoes, chickpeas and coconut milk and simmer",
+              "timer": { "seconds": 900, "doneness": "until the sauce has thickened and coats the back of a spoon" }
+            },
+            {
+              "text": "Stir in the spinach",
+              "timer": { "seconds": 120, "doneness": "until the leaves have wilted" }
+            },
+            { "text": "Taste, add salt and serve with rice or chapati" }
+          ]
+        },
+        {
+          "id": "one-pan-tomato-pasta",
+          "title": "One-pan tomato pasta",
+          "minutes": 25,
+          "difficulty": "easy",
+          "xp": 30,
+          "photo": "lesson_one_pan_tomato_pasta",
+          "learn": ["Cooking pasta in its own sauce", "Turning starchy water into a glossy sauce"],
+          "ingredients": [
+            "250 g spaghetti or linguine",
+            "250 g cherry tomatoes, halved",
+            "1 onion, thinly sliced",
+            "3 garlic cloves, sliced",
+            "2 tbsp olive oil",
+            "½ tsp chilli flakes",
+            "900 ml water",
+            "A handful of basil, grated parmesan and salt"
+          ],
+          "steps": [
+            {
+              "text": "Put everything except the basil and parmesan into a wide pan with 1 tsp salt",
+              "detail": "Lay the pasta flat. Snap it in half if it doesn't fit."
+            },
+            {
+              "text": "Bring it to the boil over a high heat",
+              "timer": { "seconds": 420, "doneness": "until it's bubbling hard all over" }
+            },
+            {
+              "text": "Keep it boiling, turning the pasta with tongs every minute or so",
+              "timer": { "seconds": 600, "doneness": "until the pasta is tender and the water has become a glossy sauce" },
+              "tip": "If it dries out before the pasta is done, add a splash of water."
+            },
+            { "text": "Stir in the basil and parmesan, taste for salt and serve" }
+          ]
+        },
+        {
+          "id": "sausage-traybake",
+          "title": "Sausage and veg traybake",
+          "minutes": 55,
+          "difficulty": "easy",
+          "xp": 30,
+          "photo": "lesson_sausage_traybake",
+          "learn": ["Giving potatoes a head start in the oven", "Knowing when a sausage is cooked through"],
+          "ingredients": [
+            "6 pork sausages",
+            "400 g small potatoes, halved",
+            "2 red onions, cut into wedges",
+            "2 peppers, cut into chunks",
+            "2 tbsp olive oil",
+            "1 tsp dried rosemary and salt"
+          ],
+          "steps": [
+            {
+              "text": "Heat the oven to 200°C (180°C fan)",
+              "timer": { "seconds": 600, "doneness": "until the oven is fully hot" }
+            },
+            {
+              "text": "Toss the potatoes with half the oil and a pinch of salt in a large tray and roast",
+              "timer": { "seconds": 900, "doneness": "until the edges start to turn golden" }
+            },
+            {
+              "text": "Add the sausages, onions, peppers, rosemary and the rest of the oil, toss and roast",
+              "detail": "Turn the sausages halfway through so they brown all over.",
+              "timer": { "seconds": 1500, "doneness": "until the sausages are browned, firm and no longer pink in the middle" },
+              "tip": "Not sure? Cut the thickest one open, or check it reads 75°C on a thermometer."
+            },
+            { "text": "Give everything a stir and serve straight from the tray" }
+          ]
+        },
+        {
+          "id": "lemon-garlic-chicken-thighs",
+          "title": "Lemon garlic chicken thighs",
+          "minutes": 45,
+          "difficulty": "medium",
+          "xp": 40,
+          "photo": "lesson_lemon_garlic_chicken_thighs",
+          "learn": ["Crisping chicken skin from a cold pan", "Checking chicken is cooked all the way to the bone"],
+          "ingredients": [
+            "4 bone-in, skin-on chicken thighs",
+            "4 garlic cloves, lightly crushed",
+            "1 lemon, half sliced and half juiced",
+            "150 ml chicken stock",
+            "200 g green beans",
+            "1 tbsp oil, salt and black pepper"
+          ],
+          "steps": [
+            {
+              "text": "Pat the chicken dry and season it all over",
+              "tip": "Dry skin crisps. Wet skin steams."
+            },
+            {
+              "text": "Lay the thighs skin side down in a large cold pan with the oil, then set it over a medium heat",
+              "timer": { "seconds": 720, "doneness": "until the skin is deep golden and crisp and lets go of the pan" }
+            },
+            {
+              "text": "Turn the thighs over, add the garlic, lemon slices and stock, cover and simmer",
+              "timer": {
+                "seconds": 1080,
+                "doneness": "until the juices run clear and the thickest part reads 75°C, with no pink near the bone"
+              },
+              "tip": "No thermometer? Cut into the thickest thigh next to the bone and look."
+            },
+            {
+              "text": "Take the lid off, add the green beans around the chicken and squeeze in the lemon juice",
+              "timer": { "seconds": 300, "doneness": "until the beans are bright green and just tender" }
+            },
+            { "text": "Spoon the pan juices over the chicken and serve" }
+          ]
+        }
+      ]
+    }
+  ]
+}

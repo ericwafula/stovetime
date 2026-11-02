@@ -12,6 +12,7 @@
     <string name="path_node_locked">%1$s, locked</string>
     <string name="path_error_title">We couldn\'t load your lessons</string>
     <string name="path_retry">Try again</string>
+    <string name="path_course_change">Change course</string>
     <string name="intro_close">Close</string>
     <string name="intro_position">Unit %1$d • Recipe %2$d of %3$d</string>
     <string name="intro_minutes">%1$d min</string>

@@ -33,4 +33,7 @@
     <string name="quick_timer_start">Start timer</string>
     <string name="day_today">Today</string>
     <string name="day_yesterday">Yesterday</string>
+    <string name="course_sheet_title">Courses</string>
+    <string name="course_progress">%1$d of %2$d cooked</string>
+    <string name="course_current">Current course</string>
 </resources>

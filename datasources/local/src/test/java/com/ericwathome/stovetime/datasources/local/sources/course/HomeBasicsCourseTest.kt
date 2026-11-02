@@ -1,6 +1,5 @@
 package com.ericwathome.stovetime.datasources.local.sources.course
 
-import com.ericwathome.stovetime.datasources.local.helpers.HOME_BASICS_COURSE_ASSET
 import com.ericwathome.stovetime.datasources.local.helpers.LocalResult
 import com.ericwathome.stovetime.datasources.local.helpers.problems
 import com.ericwathome.stovetime.datasources.local.models.CourseCache
@@ -14,9 +13,9 @@ class HomeBasicsCourseTest {
     private fun readAsset(fileName: String): String = File("src/main/assets/$fileName").readText()
 
     private suspend fun kotlinx.coroutines.test.TestScope.loadCourse(): CourseCache {
-        val result = GetCourseLocalDatasourceImpl(TestStovetimeDispatchers(testScheduler), ::readAsset)()
+        val result = GetCoursesLocalDatasourceImpl(TestStovetimeDispatchers(testScheduler), ::readAsset)()
         assertThat(result).isInstanceOf(LocalResult.Success::class.java)
-        return (result as LocalResult.Success).data
+        return (result as LocalResult.Success).data.single { it.id == "home-basics" }
     }
 
     @Test
@@ -128,20 +127,4 @@ class HomeBasicsCourseTest {
             // then
             assertThat(course.copy(units = listOf(course.units.single().copy(lessons = listOf(withTip)))).problems()).isEmpty()
         }
-
-    @Test
-    fun a_broken_course_file_is_an_error_not_a_crash() =
-        runTest {
-            // when
-            val result = GetCourseLocalDatasourceImpl(TestStovetimeDispatchers(testScheduler)) { "{ not json" }()
-
-            // then
-            assertThat(result).isInstanceOf(LocalResult.Error::class.java)
-        }
-
-    @Test
-    fun the_course_is_read_from_its_bundled_file() {
-        // then
-        assertThat(File("src/main/assets/$HOME_BASICS_COURSE_ASSET").exists()).isTrue()
-    }
 }

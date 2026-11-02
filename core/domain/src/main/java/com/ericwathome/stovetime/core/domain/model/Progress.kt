@@ -42,6 +42,7 @@ data class PathLesson(
 )
 
 data class PathProgress(
+    val courseId: String,
     val courseTitle: String,
     val unit: CourseUnit,
     val lessons: List<PathLesson>,
@@ -56,3 +57,11 @@ data class PathProgress(
     val isUnitDone: Boolean
         get() = nextLesson == null
 }
+
+data class CourseSummary(
+    val id: String,
+    val title: String,
+    val cookedCount: Int,
+    val lessonCount: Int,
+    val isChosen: Boolean,
+)

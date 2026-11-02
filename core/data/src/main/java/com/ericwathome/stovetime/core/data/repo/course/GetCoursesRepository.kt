@@ -8,21 +8,21 @@ import com.ericwathome.stovetime.datasources.local.sources.course.CourseLocalDat
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 
-fun interface GetCourseRepository {
-    suspend operator fun invoke(): DataResult<Course>
+fun interface GetCoursesRepository {
+    suspend operator fun invoke(): DataResult<List<Course>>
 }
 
-internal class GetCourseRepositoryImpl(
+internal class GetCoursesRepositoryImpl(
     private val courseLocalDatasource: CourseLocalDatasource,
-) : GetCourseRepository {
+) : GetCoursesRepository {
     private val mutex = Mutex()
-    private var course: Course? = null
+    private var courses: List<Course>? = null
 
-    override suspend fun invoke(): DataResult<Course> =
+    override suspend fun invoke(): DataResult<List<Course>> =
         mutex.withLock {
-            course?.let { return@withLock DataResult.Success(it) }
-            courseLocalDatasource.getCourse().mapToData { it.toData() }.also { result ->
-                if (result is DataResult.Success) course = result.data
+            courses?.let { return@withLock DataResult.Success(it) }
+            courseLocalDatasource.getCourses().mapToData { caches -> caches.map { it.toData() } }.also { result ->
+                if (result is DataResult.Success) courses = result.data
             }
         }
 }

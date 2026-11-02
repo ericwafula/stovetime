@@ -3,6 +3,8 @@ package com.ericwathome.stovetime.features.lessons.home
 import androidx.lifecycle.viewModelScope
 import com.ericwathome.stovetime.core.common.result.onError
 import com.ericwathome.stovetime.core.common.result.onSuccess
+import com.ericwathome.stovetime.core.data.repo.course.CourseRepository
+import com.ericwathome.stovetime.core.domain.model.CourseSummary
 import com.ericwathome.stovetime.core.domain.model.LessonState
 import com.ericwathome.stovetime.core.domain.model.PathProgress
 import com.ericwathome.stovetime.core.domain.useCase.ProgressUseCases
@@ -20,6 +22,10 @@ sealed interface PathAction {
     data object OnClickStart : PathAction
 
     data object OnClickRetry : PathAction
+
+    data class OnChooseCourse(
+        val courseId: String,
+    ) : PathAction
 }
 
 sealed interface PathEvent {
@@ -32,15 +38,19 @@ sealed interface PathEvent {
 
 data class PathState(
     val path: ViewState<PathProgress> = ViewState.Initial,
+    val courses: List<CourseSummary> = emptyList(),
 )
 
 class PathViewModel(
     private val progressUseCases: ProgressUseCases,
+    private val courseRepository: CourseRepository,
 ) : MviViewModel<PathAction, PathState, PathEvent>(PathState()) {
     private var observeJob: Job? = null
+    private var coursesJob: Job? = null
 
     override fun onStateSubscription() {
         if (observeJob == null) observePath()
+        if (coursesJob == null) observeCourses()
     }
 
     override fun onAction(action: PathAction) {
@@ -56,6 +66,10 @@ class PathViewModel(
             PathAction.OnClickRetry -> {
                 observePath()
             }
+
+            is PathAction.OnChooseCourse -> {
+                onChooseCourse(action.courseId)
+            }
         }
     }
 
@@ -70,6 +84,20 @@ class PathViewModel(
                         .onError { error -> updateState { it.copy(path = ViewState.Error(error)) } }
                 }
             }
+    }
+
+    private fun observeCourses() {
+        coursesJob =
+            viewModelScope.launch {
+                progressUseCases.observeCourses().collect { result ->
+                    result.onSuccess { courses -> updateState { it.copy(courses = courses) } }
+                }
+            }
+    }
+
+    private fun onChooseCourse(courseId: String) {
+        if (currentState.courses.firstOrNull { it.isChosen }?.id == courseId) return
+        viewModelScope.launch { courseRepository.chooseCourse(courseId) }
     }
 
     private fun onClickLesson(lessonId: String) {

@@ -19,10 +19,10 @@ import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
 
-class GetCourseRepositoryImplTest {
+class GetCoursesRepositoryImplTest {
     @MockK
     private lateinit var courseLocalDatasource: CourseLocalDatasource
-    private lateinit var sut: GetCourseRepositoryImpl
+    private lateinit var sut: GetCoursesRepositoryImpl
 
     private val cache =
         CourseCache(
@@ -59,17 +59,17 @@ class GetCourseRepositoryImplTest {
     @Before
     fun setup() {
         MockKAnnotations.init(this, relaxed = true)
-        sut = GetCourseRepositoryImpl(courseLocalDatasource)
+        sut = GetCoursesRepositoryImpl(courseLocalDatasource)
     }
 
     @Test
-    fun the_course_maps_to_models() =
+    fun the_courses_map_to_models() =
         runTest {
             // given
-            coEvery { courseLocalDatasource.getCourse() } returns LocalResult.Success(cache)
+            coEvery { courseLocalDatasource.getCourses() } returns LocalResult.Success(listOf(cache))
 
             // when
-            val lesson = (sut() as DataResult.Success).data.units.single().lessons.single()
+            val lesson = (sut() as DataResult.Success).data.single().units.single().lessons.single()
 
             // then
             assertThat(lesson.difficulty).isEqualTo(Difficulty.Medium)
@@ -77,24 +77,24 @@ class GetCourseRepositoryImplTest {
         }
 
     @Test
-    fun the_course_is_read_once() =
+    fun the_courses_are_read_once() =
         runTest {
             // given
-            coEvery { courseLocalDatasource.getCourse() } returns LocalResult.Success(cache)
+            coEvery { courseLocalDatasource.getCourses() } returns LocalResult.Success(listOf(cache))
 
             // when
             sut()
             sut()
 
             // then
-            coVerify(exactly = 1) { courseLocalDatasource.getCourse() }
+            coVerify(exactly = 1) { courseLocalDatasource.getCourses() }
         }
 
     @Test
-    fun a_broken_course_is_an_error() =
+    fun a_broken_course_file_is_an_error() =
         runTest {
             // given
-            coEvery { courseLocalDatasource.getCourse() } returns LocalResult.Error(LocalError.Unknown("bad json"))
+            coEvery { courseLocalDatasource.getCourses() } returns LocalResult.Error(LocalError.Unknown("bad json"))
 
             // when
             val result = sut()

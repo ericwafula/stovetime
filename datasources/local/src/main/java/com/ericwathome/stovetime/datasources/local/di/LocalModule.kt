@@ -14,8 +14,8 @@ import com.ericwathome.stovetime.datasources.local.helpers.PreferencesFile
 import com.ericwathome.stovetime.datasources.local.helpers.createPreferencesDataStore
 import com.ericwathome.stovetime.datasources.local.sources.course.CourseLocalDatasource
 import com.ericwathome.stovetime.datasources.local.sources.course.CourseLocalDatasourceImpl
-import com.ericwathome.stovetime.datasources.local.sources.course.GetCourseLocalDatasource
-import com.ericwathome.stovetime.datasources.local.sources.course.GetCourseLocalDatasourceImpl
+import com.ericwathome.stovetime.datasources.local.sources.course.GetCoursesLocalDatasource
+import com.ericwathome.stovetime.datasources.local.sources.course.GetCoursesLocalDatasourceImpl
 import com.ericwathome.stovetime.datasources.local.sources.progress.cook.CookLocalDatasource
 import com.ericwathome.stovetime.datasources.local.sources.progress.cook.CookLocalDatasourceImpl
 import com.ericwathome.stovetime.datasources.local.sources.progress.cook.DeleteAllCooksLocalDatasource
@@ -27,6 +27,8 @@ import com.ericwathome.stovetime.datasources.local.sources.progress.cook.RateCoo
 import com.ericwathome.stovetime.datasources.local.sources.progress.cook.SaveCookLocalDatasource
 import com.ericwathome.stovetime.datasources.local.sources.progress.cook.SaveCookLocalDatasourceImpl
 import com.ericwathome.stovetime.datasources.local.sources.settings.CookSettingsLocalDatasource
+import com.ericwathome.stovetime.datasources.local.sources.settings.CourseChoiceLocalDatasource
+import com.ericwathome.stovetime.datasources.local.sources.settings.CourseChoiceLocalDatasourceImpl
 import com.ericwathome.stovetime.datasources.local.sources.settings.CookSettingsLocalDatasourceImpl
 import com.ericwathome.stovetime.datasources.local.sources.settings.TimerPromptsLocalDatasource
 import com.ericwathome.stovetime.datasources.local.sources.settings.TimerPromptsLocalDatasourceImpl
@@ -146,8 +148,8 @@ internal val CourseLocalDatasourceModule =
             bind<CourseLocalDatasource>()
         }
         // children
-        singleOf(::GetCourseLocalDatasourceImpl) {
-            bind<GetCourseLocalDatasource>()
+        singleOf(::GetCoursesLocalDatasourceImpl) {
+            bind<GetCoursesLocalDatasource>()
         }
     }
 
@@ -186,6 +188,12 @@ internal val PreferencesLocalDatasourceModule =
         single<WeeklyReminderLocalDatasource> {
             WeeklyReminderLocalDatasourceImpl(
                 dataStore = get(named(PreferencesFile.WeeklyReminder.fileName)),
+                dispatchers = get(),
+            )
+        }
+        single<CourseChoiceLocalDatasource> {
+            CourseChoiceLocalDatasourceImpl(
+                dataStore = get(named(PreferencesFile.CourseChoice.fileName)),
                 dispatchers = get(),
             )
         }

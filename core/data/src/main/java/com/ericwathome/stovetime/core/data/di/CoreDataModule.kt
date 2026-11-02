@@ -6,8 +6,12 @@ import com.ericwathome.stovetime.core.data.repo.cook.GetCookPlanRepository
 import com.ericwathome.stovetime.core.data.repo.cook.GetCookPlanRepositoryImpl
 import com.ericwathome.stovetime.core.data.repo.course.CourseRepository
 import com.ericwathome.stovetime.core.data.repo.course.CourseRepositoryImpl
-import com.ericwathome.stovetime.core.data.repo.course.GetCourseRepository
-import com.ericwathome.stovetime.core.data.repo.course.GetCourseRepositoryImpl
+import com.ericwathome.stovetime.core.data.repo.course.ChooseCourseRepository
+import com.ericwathome.stovetime.core.data.repo.course.ChooseCourseRepositoryImpl
+import com.ericwathome.stovetime.core.data.repo.course.GetCoursesRepository
+import com.ericwathome.stovetime.core.data.repo.course.GetCoursesRepositoryImpl
+import com.ericwathome.stovetime.core.data.repo.course.ObserveChosenCourseRepository
+import com.ericwathome.stovetime.core.data.repo.course.ObserveChosenCourseRepositoryImpl
 import com.ericwathome.stovetime.core.data.helpers.ObserveConnectivity
 import com.ericwathome.stovetime.core.data.helpers.ObserveConnectivityImpl
 import com.ericwathome.stovetime.core.data.repo.progress.ClearProgressRepository
@@ -122,8 +126,14 @@ internal val CourseRepositoryModule =
             bind<CourseRepository>()
         }
         // children
-        singleOf(::GetCourseRepositoryImpl) {
-            bind<GetCourseRepository>()
+        singleOf(::GetCoursesRepositoryImpl) {
+            bind<GetCoursesRepository>()
+        }
+        singleOf(::ObserveChosenCourseRepositoryImpl) {
+            bind<ObserveChosenCourseRepository>()
+        }
+        singleOf(::ChooseCourseRepositoryImpl) {
+            bind<ChooseCourseRepository>()
         }
     }
 

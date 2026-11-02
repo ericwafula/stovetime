@@ -2,6 +2,7 @@ package com.ericwathome.stovetime.features.lessons.home
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -11,6 +12,7 @@ import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBars
@@ -27,6 +29,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
@@ -57,12 +60,15 @@ import com.ericwathome.stovetime.ui.helpers.CollectOneTimeEvent
 import com.ericwathome.stovetime.ui.helpers.ViewState
 import com.ericwathome.stovetime.ui.helpers.bundledPhotoPainter
 import com.ericwathome.stovetime.ui.helpers.countText
+import com.ericwathome.stovetime.ui.launchers.course.CourseOption
+import com.ericwathome.stovetime.ui.launchers.course.rememberCourseLauncher
 import kotlinx.coroutines.delay
 import org.koin.compose.viewmodel.koinViewModel
 
 private const val LOCKED_MESSAGE_MILLIS = 2_500L
 private val NodeSwing = 64.dp
 private val NavBarClearance = 120.dp
+private val MinTouchTarget = 48.dp
 
 @Composable
 fun PathRoute(
@@ -80,6 +86,15 @@ internal fun PathScreen(
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     var lockedMessages by remember { mutableIntStateOf(0) }
+    val courseOptions =
+        remember(state.courses) {
+            state.courses.map { CourseOption(it.id, it.title, it.cookedCount, it.lessonCount, isCurrent = it.isChosen) }
+        }
+    val courseLauncher =
+        rememberCourseLauncher(
+            courses = courseOptions,
+            onChoose = { viewModel.onAction(PathAction.OnChooseCourse(it)) },
+        )
 
     CollectOneTimeEvent(viewModel.event) { event ->
         when (event) {
@@ -89,7 +104,7 @@ internal fun PathScreen(
     }
 
     Box(modifier.fillMaxSize()) {
-        PathContent(state = state, onAction = viewModel::onAction)
+        PathContent(state = state, onAction = viewModel::onAction, onClickCourse = courseLauncher::launch)
         if (lockedMessages > 0) {
             LaunchedEffect(lockedMessages) {
                 delay(LOCKED_MESSAGE_MILLIS)
@@ -107,6 +122,7 @@ internal fun PathScreen(
 private fun PathContent(
     state: PathState,
     onAction: (PathAction) -> Unit,
+    onClickCourse: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Box(
@@ -118,7 +134,7 @@ private fun PathContent(
         when (val path = state.path) {
             ViewState.Initial, ViewState.Loading -> Unit
             is ViewState.Error -> PathError(onRetry = { onAction(PathAction.OnClickRetry) })
-            is ViewState.Success -> PathDetails(path = path.data, onAction = onAction)
+            is ViewState.Success -> PathDetails(path = path.data, onAction = onAction, onClickCourse = onClickCourse)
         }
     }
 }
@@ -127,6 +143,7 @@ private fun PathContent(
 private fun PathDetails(
     path: PathProgress,
     onAction: (PathAction) -> Unit,
+    onClickCourse: () -> Unit,
 ) {
     val spacing = StovetimeTheme.spacing
     Column(
@@ -136,7 +153,12 @@ private fun PathDetails(
             .padding(horizontal = spacing.s24)
             .padding(top = spacing.s20, bottom = NavBarClearance),
     ) {
-        PathHeader(courseTitle = path.courseTitle, streak = path.progress.weekStreak, xp = path.progress.totalXp)
+        PathHeader(
+            courseTitle = path.courseTitle,
+            streak = path.progress.weekStreak,
+            xp = path.progress.totalXp,
+            onClickCourse = onClickCourse,
+        )
         Spacer(Modifier.height(spacing.s20))
         UnitBanner(unit = path.unit, cooked = path.cookedCount, isDone = path.isUnitDone)
         Spacer(Modifier.height(spacing.s20))
@@ -172,18 +194,31 @@ private fun PathHeader(
     courseTitle: String,
     streak: Int,
     xp: Int,
+    onClickCourse: () -> Unit,
 ) {
     val colors = StovetimeTheme.colors
     Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()) {
-        StoveText(
-            text = courseTitle,
-            style = StovetimeTheme.typography.label,
+        Box(
+            contentAlignment = Alignment.Center,
             modifier =
                 Modifier
-                    .background(colors.surface, StovetimeTheme.shapes.small)
-                    .border(2.dp, colors.border, StovetimeTheme.shapes.small)
-                    .padding(horizontal = 12.dp, vertical = 9.dp),
-        )
+                    .heightIn(min = MinTouchTarget)
+                    .clickable(
+                        onClickLabel = stringResource(R.string.path_course_change),
+                        role = Role.Button,
+                        onClick = onClickCourse,
+                    ).testTag("path_course_chip"),
+        ) {
+            StoveText(
+                text = courseTitle,
+                style = StovetimeTheme.typography.label,
+                modifier =
+                    Modifier
+                        .background(colors.surface, StovetimeTheme.shapes.small)
+                        .border(2.dp, colors.border, StovetimeTheme.shapes.small)
+                        .padding(horizontal = 12.dp, vertical = 9.dp),
+            )
+        }
         Spacer(Modifier.weight(1f))
         val streakText = countText(streak)
         val xpText = countText(xp)
@@ -345,6 +380,7 @@ private fun pathForPreview(cooked: Int): PathProgress {
             sampleLesson("shakshuka", "Shakshuka"),
         )
     return PathProgress(
+        courseId = "home-basics",
         courseTitle = "Home basics",
         unit = CourseUnit(id = "eggs", number = 1, title = "Crack it: five ways with eggs", lessons = lessons),
         lessons =
@@ -365,7 +401,7 @@ private fun pathForPreview(cooked: Int): PathProgress {
 @Composable
 private fun PathContentPreview() {
     StovetimeTheme {
-        PathContent(state = PathState(path = ViewState.Success(pathForPreview(cooked = 2))), onAction = {})
+        PathContent(state = PathState(path = ViewState.Success(pathForPreview(cooked = 2))), onAction = {}, onClickCourse = {})
     }
 }
 
@@ -373,7 +409,7 @@ private fun PathContentPreview() {
 @Composable
 private fun PathContentDonePreview() {
     StovetimeTheme {
-        PathContent(state = PathState(path = ViewState.Success(pathForPreview(cooked = 5))), onAction = {})
+        PathContent(state = PathState(path = ViewState.Success(pathForPreview(cooked = 5))), onAction = {}, onClickCourse = {})
     }
 }
 
@@ -384,6 +420,7 @@ private fun PathErrorPreview() {
         PathContent(
             state = PathState(path = ViewState.Error(DataError.Unknown("broken"))),
             onAction = {},
+            onClickCourse = {},
         )
     }
 }

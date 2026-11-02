@@ -35,14 +35,14 @@ internal class GetCookPlanRepositoryImpl(
         recipesRepository.getRecipe(recipeId).map { recipe -> recipe.toCookPlan(xp = 0) }
 
     private suspend fun lessonPlan(lessonId: String): DataResult<CookPlan> =
-        when (val course = courseRepository.getCourse()) {
+        when (val courses = courseRepository.getCourses()) {
             is DataResult.Error -> {
-                course
+                courses
             }
 
             is DataResult.Success -> {
-                course.data.units
-                    .flatMap { it.lessons }
+                courses.data
+                    .flatMap { course -> course.units.flatMap { it.lessons } }
                     .firstOrNull { it.id == lessonId }
                     ?.let { DataResult.Success(it.toCookPlan()) }
                     ?: DataResult.Error(DataError.Unknown("No lesson $lessonId"))

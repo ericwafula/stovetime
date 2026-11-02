@@ -79,7 +79,7 @@ class LessonIntroViewModel(
         updateState { it.copy(intro = ViewState.Loading) }
         observeJob =
             viewModelScope.launch {
-                progressUseCases.observePath().collect { result ->
+                progressUseCases.observeLessonPath(lessonId).collect { result ->
                     result
                         .onSuccess { path ->
                             val lesson = path.lessons.firstOrNull { it.lesson.id == lessonId }

@@ -1,0 +1,170 @@
+{
+  "id": "rice-and-grains",
+  "title": "Rice & grains",
+  "units": [
+    {
+      "id": "grains",
+      "number": 1,
+      "title": "Good grains: four pots to know",
+      "lessons": [
+        {
+          "id": "fluffy-white-rice",
+          "title": "Fluffy white rice",
+          "minutes": 30,
+          "difficulty": "easy",
+          "xp": 20,
+          "photo": "lesson_fluffy_white_rice",
+          "learn": ["Cooking rice by the absorption method", "Resting rice so every grain is separate"],
+          "ingredients": ["200 g long-grain rice", "375 ml cold water", "½ tsp salt"],
+          "steps": [
+            {
+              "text": "Rinse the rice in a sieve under cold water",
+              "detail": "Rub the grains with your fingers and keep going until the water runs almost clear.",
+              "tip": "Rinsing washes off loose starch, which is what makes rice sticky and clumped."
+            },
+            {
+              "text": "Put the rice, water and salt in a pan with a tight lid and bring to the boil",
+              "timer": { "seconds": 300, "doneness": "until big bubbles break all over the surface" }
+            },
+            {
+              "text": "Turn the heat right down, cover and let it cook",
+              "detail": "Use the lowest setting on your smallest burner.",
+              "timer": { "seconds": 720, "doneness": "until the water has gone and little holes dot the surface" },
+              "tip": "Don't lift the lid. The steam trapped inside does half the cooking."
+            },
+            {
+              "text": "Take the pan off the heat and leave it covered",
+              "timer": { "seconds": 600, "doneness": "until the grains are tender and dry, with no water left at the bottom" }
+            },
+            {
+              "text": "Fluff the rice with a fork and serve",
+              "tip": "Cool any leftovers within an hour, keep them in the fridge and eat them within a day."
+            }
+          ]
+        },
+        {
+          "id": "lemon-herb-couscous",
+          "title": "Lemon herb couscous",
+          "minutes": 10,
+          "difficulty": "easy",
+          "xp": 20,
+          "photo": "lesson_lemon_herb_couscous",
+          "learn": ["Steeping couscous instead of boiling it", "Seasoning a plain grain so it tastes of something"],
+          "ingredients": [
+            "180 g couscous",
+            "250 ml hot vegetable stock or water",
+            "1 tbsp olive oil",
+            "½ lemon, zest and juice",
+            "A handful of parsley or mint, chopped",
+            "Salt"
+          ],
+          "steps": [
+            { "text": "Boil the kettle and make up 250 ml of hot stock" },
+            {
+              "text": "Stir the oil and a pinch of salt into the couscous, pour over the stock and cover the bowl with a plate",
+              "timer": { "seconds": 300, "doneness": "until all the liquid has soaked in and the grains are soft" }
+            },
+            {
+              "text": "Fluff it up with a fork",
+              "detail": "Rake through the whole bowl and break up any lumps."
+            },
+            {
+              "text": "Stir in the lemon and herbs, then taste and add salt",
+              "tip": "Couscous drinks up seasoning, so it usually needs more salt and lemon than you expect."
+            }
+          ]
+        },
+        {
+          "id": "egg-fried-rice",
+          "title": "Egg fried rice",
+          "minutes": 20,
+          "difficulty": "medium",
+          "xp": 40,
+          "photo": "lesson_egg_fried_rice",
+          "learn": ["Why yesterday's rice fries best", "Keeping a wok hot enough to fry, not steam"],
+          "ingredients": [
+            "About 400 g cooked rice, cold from the fridge",
+            "2 eggs, beaten",
+            "100 g frozen peas",
+            "2 spring onions, whites and greens sliced separately",
+            "2 tbsp vegetable oil",
+            "1 tbsp soy sauce",
+            "1 tsp sesame oil"
+          ],
+          "steps": [
+            {
+              "text": "Break up the cold rice with your fingers so there are no clumps",
+              "detail": "Rice cooked the day before is drier, so it fries instead of turning mushy.",
+              "tip": "Only use rice that went into the fridge within an hour of cooking and is no more than a day old."
+            },
+            {
+              "text": "Heat the oil in a wok or large frying pan over a high heat",
+              "timer": { "seconds": 90, "doneness": "until the oil shimmers and moves easily around the pan" }
+            },
+            {
+              "text": "Add the spring onion whites and the peas and stir-fry",
+              "timer": { "seconds": 120, "doneness": "until the peas are bright green and hot" }
+            },
+            {
+              "text": "Push everything to one side, pour in the eggs and scramble them",
+              "timer": { "seconds": 60, "doneness": "until the egg is just set but still soft" }
+            },
+            {
+              "text": "Tip in the rice and soy sauce and keep tossing",
+              "timer": { "seconds": 240, "doneness": "until every grain is steaming hot and starting to crackle" },
+              "tip": "Reheated rice has to be piping hot all the way through, so don't cut this short."
+            },
+            { "text": "Take it off the heat, stir in the sesame oil and spring onion greens and serve" }
+          ]
+        },
+        {
+          "id": "mushroom-risotto",
+          "title": "Mushroom risotto",
+          "minutes": 40,
+          "difficulty": "medium",
+          "xp": 50,
+          "photo": "lesson_mushroom_risotto",
+          "learn": ["Toasting rice before adding liquid", "Adding stock a ladle at a time for a creamy risotto"],
+          "ingredients": [
+            "150 g risotto rice, such as arborio",
+            "250 g mushrooms, sliced",
+            "1 onion, finely chopped",
+            "2 garlic cloves, finely chopped",
+            "750 ml hot vegetable stock",
+            "1 tbsp olive oil and 30 g butter",
+            "30 g parmesan, grated",
+            "Salt and black pepper"
+          ],
+          "steps": [
+            {
+              "text": "Pour the stock into a small pan and keep it hot on a low heat",
+              "tip": "Hot stock keeps the risotto at a simmer. Cold stock stops the cooking every time you add it."
+            },
+            {
+              "text": "Fry the mushrooms in the oil over a high heat, then scoop them out onto a plate",
+              "timer": { "seconds": 300, "doneness": "until golden and any liquid they let out has cooked away" }
+            },
+            {
+              "text": "Melt half the butter in the same pan and soften the onion over a medium heat",
+              "timer": { "seconds": 360, "doneness": "until soft and see-through, not brown" }
+            },
+            {
+              "text": "Add the garlic and the rice and stir to coat",
+              "timer": { "seconds": 60, "doneness": "until the edges of the grains look glassy" }
+            },
+            {
+              "text": "Add the stock one ladle at a time, stirring often",
+              "detail": "Add the next ladle when the last one has almost soaked in.",
+              "timer": { "seconds": 1080, "doneness": "until the rice is creamy and tender with a slight bite in the middle" }
+            },
+            {
+              "text": "Off the heat, stir in the mushrooms, the rest of the butter and the parmesan, then cover",
+              "timer": { "seconds": 120, "doneness": "until it settles into a loose ripple when you shake the pan" },
+              "tip": "If it's stiff, loosen it with a splash of the hot stock."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

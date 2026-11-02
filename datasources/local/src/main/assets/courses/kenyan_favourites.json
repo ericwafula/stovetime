@@ -1,0 +1,178 @@
+{
+  "id": "kenyan-favourites",
+  "title": "Kenyan favourites",
+  "units": [
+    {
+      "id": "kenyan",
+      "number": 1,
+      "title": "From the jiko: four Kenyan classics",
+      "lessons": [
+        {
+          "id": "sukuma-wiki",
+          "title": "Sukuma wiki",
+          "minutes": 20,
+          "difficulty": "easy",
+          "xp": 20,
+          "photo": "lesson_sukuma_wiki",
+          "learn": ["Slicing greens thin so they cook fast", "Keeping greens bright instead of overcooked"],
+          "ingredients": [
+            "1 bunch of sukuma (collard greens), about 300 g",
+            "1 onion, chopped",
+            "2 tomatoes, chopped",
+            "1 tbsp oil",
+            "Salt"
+          ],
+          "steps": [
+            {
+              "text": "Wash the leaves, cut out the thick stems, then roll the leaves up and slice them thinly",
+              "tip": "Thin ribbons cook in minutes and stay tender."
+            },
+            {
+              "text": "Fry the onion in the oil over a medium heat",
+              "timer": { "seconds": 300, "doneness": "until soft and just turning golden" }
+            },
+            {
+              "text": "Add the tomatoes and a pinch of salt",
+              "timer": { "seconds": 240, "doneness": "until they have broken down into a thick sauce" }
+            },
+            {
+              "text": "Add the greens and toss them through the sauce, uncovered",
+              "timer": { "seconds": 300, "doneness": "until the leaves are dark green and tender with a little bite" },
+              "tip": "Stop before they turn olive brown. Overcooked sukuma loses its taste."
+            },
+            { "text": "Taste for salt and serve with ugali or chapati" }
+          ]
+        },
+        {
+          "id": "ugali",
+          "title": "Ugali",
+          "minutes": 20,
+          "difficulty": "easy",
+          "xp": 30,
+          "photo": "lesson_ugali",
+          "learn": ["Adding maize flour without lumps", "Knowing when ugali is firm enough to turn out"],
+          "ingredients": ["About 300 g white maize flour (unga)", "750 ml water"],
+          "steps": [
+            {
+              "text": "Bring the water to the boil in a heavy pan",
+              "timer": { "seconds": 300, "doneness": "until it's boiling" }
+            },
+            {
+              "text": "Turn the heat to medium and whisk in about a third of the flour",
+              "timer": { "seconds": 120, "doneness": "until it thickens like porridge and starts to bubble" },
+              "tip": "Add it slowly while stirring and you won't get lumps."
+            },
+            {
+              "text": "Add the rest of the flour bit by bit, pressing and folding it with a wooden spoon",
+              "timer": { "seconds": 240, "doneness": "until it's stiff and smooth and pulls away from the sides" }
+            },
+            {
+              "text": "Shape it into a mound, turn the heat to low and leave it",
+              "detail": "Turn it over once halfway so both sides firm up.",
+              "timer": { "seconds": 180, "doneness": "until it smells toasty and a thin skin forms underneath" }
+            },
+            { "text": "Turn it out onto a plate and serve hot" }
+          ]
+        },
+        {
+          "id": "chapati",
+          "title": "Chapati",
+          "minutes": 70,
+          "difficulty": "medium",
+          "xp": 40,
+          "photo": "lesson_chapati",
+          "learn": ["Kneading and resting a soft dough", "Coiling the dough so the chapati comes out in layers"],
+          "ingredients": [
+            "375 g plain flour, plus extra for dusting",
+            "1 tsp salt and 1 tbsp sugar",
+            "250 ml warm water",
+            "4 tbsp vegetable oil"
+          ],
+          "steps": [
+            {
+              "text": "Mix the flour, salt and sugar, then add the warm water and 2 tbsp oil and bring it together into a soft dough"
+            },
+            {
+              "text": "Knead the dough on a floured worktop",
+              "timer": { "seconds": 600, "doneness": "until it's smooth and springs back when you press it" }
+            },
+            {
+              "text": "Cover the dough with a bowl and leave it to rest",
+              "timer": { "seconds": 1800, "doneness": "until it feels soft and stretches without tearing" },
+              "tip": "Resting relaxes the dough, so it rolls out thin without shrinking back."
+            },
+            {
+              "text": "Cut it into 8 pieces. Roll each one thin, brush with oil, roll it up like a rope and coil it into a snail",
+              "detail": "The oil between the coils is what gives you soft layers."
+            },
+            { "text": "Roll each coil out into a circle about 20 cm across" },
+            {
+              "text": "Cook a chapati in a dry pan over a medium-high heat",
+              "timer": { "seconds": 60, "doneness": "until bubbles rise and the underside has brown spots" }
+            },
+            {
+              "text": "Flip it, brush the top with a little oil and cook the other side",
+              "timer": { "seconds": 60, "doneness": "until both sides are golden with darker spots" },
+              "tip": "Stack the cooked chapatis under a clean towel so they stay soft while you cook the rest."
+            }
+          ]
+        },
+        {
+          "id": "beef-pilau",
+          "title": "Beef pilau",
+          "minutes": 100,
+          "difficulty": "hard",
+          "xp": 50,
+          "photo": "lesson_beef_pilau",
+          "learn": ["Browning onions deep for pilau's colour", "Cooking rice in a spiced broth until it's fluffy"],
+          "ingredients": [
+            "500 g stewing beef, cut into 3 cm pieces",
+            "400 g basmati rice, rinsed",
+            "2 onions, thinly sliced",
+            "4 garlic cloves and a thumb of ginger, crushed",
+            "2 tbsp pilau masala and 1 tsp cumin seeds",
+            "2 tomatoes, chopped",
+            "3 tbsp oil",
+            "1 tsp salt and about 1 litre of water"
+          ],
+          "steps": [
+            {
+              "text": "Simmer the beef with the salt in 1 litre of water in a covered pan",
+              "timer": { "seconds": 2700, "doneness": "until a piece breaks apart easily with a fork" },
+              "tip": "Keep the broth. It's the cooking liquid for the rice."
+            },
+            {
+              "text": "Lift out the beef and measure 750 ml of the broth, topping it up with water if needed"
+            },
+            {
+              "text": "Fry the onions in the oil in a heavy pan over a medium heat",
+              "timer": { "seconds": 900, "doneness": "until they're a deep golden brown" },
+              "tip": "Don't rush this. The browner the onions, the darker and tastier the pilau."
+            },
+            {
+              "text": "Stir in the cumin seeds, garlic, ginger and pilau masala",
+              "timer": { "seconds": 60, "doneness": "until it smells fragrant" }
+            },
+            {
+              "text": "Add the tomatoes",
+              "timer": { "seconds": 180, "doneness": "until they've softened into the spices" }
+            },
+            {
+              "text": "Add the beef, the rice and the 750 ml of broth, stir once and bring to the boil",
+              "timer": { "seconds": 300, "doneness": "until it's bubbling all over" }
+            },
+            {
+              "text": "Cover tightly, turn the heat right down and cook",
+              "timer": { "seconds": 1200, "doneness": "until the broth has been absorbed and the rice is tender" }
+            },
+            {
+              "text": "Take it off the heat and leave it covered",
+              "timer": { "seconds": 600, "doneness": "until the grains are dry and separate" },
+              "tip": "Fluff it with a fork before serving, and serve with kachumbari if you have it."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
