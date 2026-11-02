@@ -88,7 +88,7 @@ The **Path screen (1.2)** is the screen built live in the workshop.
 | 1.2 | Path screen: course chip, streak and XP, unit banner, lesson nodes, "Up next" card | ⬜ |
 | 1.3 | Lesson intro: photo, time, difficulty, XP, what you'll learn, what you'll need | ⬜ |
 | 1.4 | Cook mode: one step at a time, step timers, tips, screen stays on | ⬜ |
-| 1.5 | Progress rules: XP, unlocking, weekly goal and week streak | ⬜ |
+| 1.5 | Progress rules: XP, unlocking, weekly goal and week streak | ✅ |
 | 1.6 | Finish screen: XP, cook time, streak, the week's cooks, "How did it turn out?" | ⬜ |
 | 1.7 | End-to-end journey: Path → intro → cook → finish → next lesson unlocked | ⬜ |
 
@@ -248,6 +248,8 @@ These rules live in `:core:domain` and are covered by tests with fixed dates.
 | 2026-11-02 | Weeks start on Monday, device time zone | Simple and predictable; one constant if it ever changes |
 | 2026-11-02 | Frames added for Recipes, Timers, the quick timer sheet, the alarm and Me; old v1–v3 designs removed from Figma | Every UI step has a frame to build from |
 | 2026-11-02 | Recipes are synced offline-first: Room is the source of truth, WorkManager pulls the catalogue daily, details are fetched on open | Browse and search work offline; the free API isn't hammered; the same pattern Fumi uses |
+| 2026-11-02 | Each cook stores the weekly goal that was set when it was cooked | A past week is judged by the goal it had, so changing the goal never rewrites past weeks; the current week uses today's goal |
+| 2026-11-02 | The best streak counts runs of finished weeks that met their goal, plus this week once it's met | Me shows it next to the current streak, and it survives a missed week |
 
 ---
 

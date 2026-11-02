@@ -112,7 +112,7 @@ One step at a time. A progress bar with "2/5", the step number, the step in big 
 
 ---
 
-## 1.5 Progress rules
+## 1.5 Progress rules ✅
 
 **Size:** M · **Depends on:** 0.4
 
@@ -120,12 +120,12 @@ One step at a time. A progress bar with "2/5", the step number, the step in big 
 The rules from roadmap §8 in one place, so the Path, finish screen and Me always agree: how much XP a cook earns, which lessons are unlocked, how many cooks there are this week, and the week streak.
 
 ### Acceptance Criteria
-- [ ] A first cook of a lesson earns its XP; cooking it again earns +10
-- [ ] Lessons unlock in order: the next opens when the one before it is cooked
-- [ ] "This week" counts every cook from Monday 00:00 to Sunday 23:59 in the phone's time zone
-- [ ] The week streak counts weeks in a row that met the weekly goal, including this week once it's met
-- [ ] Total XP is the sum of every cook's XP
-- [ ] Tests cover, with fixed dates: first cook and repeat XP, unlock order, a cook at 23:59 on Sunday, a cook at 00:00 on Monday, a streak of 3, a missed week resets to 0, this week not yet met keeps last week's streak
+- [x] A first cook of a lesson earns its XP; cooking it again earns +10
+- [x] Lessons unlock in order: the next opens when the one before it is cooked
+- [x] "This week" counts every cook from Monday 00:00 to Sunday 23:59 in the phone's time zone
+- [x] The week streak counts weeks in a row that met the weekly goal, including this week once it's met
+- [x] Total XP is the sum of every cook's XP
+- [x] Tests cover, with fixed dates: first cook and repeat XP, unlock order, a cook at 23:59 on Sunday, a cook at 00:00 on Monday, a streak of 3, a missed week resets to 0, this week not yet met keeps last week's streak
 
 ### Edge cases
 - The weekly goal changes mid-week: the new goal applies to this week and later, never to past weeks.
