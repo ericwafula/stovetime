@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.stovetime.android.application.compose)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -13,6 +14,8 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation(libs.bundles.navigation3)
+    implementation(libs.kotlinx.serialization.json)
     testImplementation(libs.junit)
     testImplementation(libs.google.truth)
     testImplementation(libs.coroutines.test)

@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Stovetime</string>
+    <string name="tab_path">Path</string>
+    <string name="tab_recipes">Recipes</string>
+    <string name="tab_timers">Timers</string>
+    <string name="tab_me">Me</string>
 </resources>

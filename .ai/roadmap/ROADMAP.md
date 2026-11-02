@@ -77,7 +77,7 @@ The **Path screen (1.2)** is the screen built live in the workshop.
 |---|---|---|
 | 0.1 | Design system: `:presentation:design` with tokens and components from Figma | ✅ |
 | 0.2 | Module structure, shared results and the MVI ViewModel base | ✅ |
-| 0.3 | Navigation with the floating bottom bar (Path, Recipes, Timers, Me) and edge-to-edge | ⬜ |
+| 0.3 | Navigation with the floating bottom bar (Path, Recipes, Timers, Me) and edge-to-edge | ✅ |
 | 0.4 | Local storage: Room for progress, DataStore for settings | ⬜ |
 | 0.5 | TheMealDB client | ⬜ |
 

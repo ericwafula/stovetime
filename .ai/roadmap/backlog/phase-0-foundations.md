@@ -44,7 +44,7 @@ Lay out the modules from roadmap §5 that Phase 1 needs first, with the pieces e
 
 ---
 
-## 0.3 Navigation and the bottom bar
+## 0.3 Navigation and the bottom bar ✅
 
 **Size:** M · **Depends on:** 0.2
 **Design:** [Figma › Home — Path](https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=70-98) (the floating nav bar)
@@ -53,13 +53,13 @@ Lay out the modules from roadmap §5 that Phase 1 needs first, with the pieces e
 The four areas of the app, Path, Recipes, Timers and Me, reachable from the floating bottom bar. Each tab is a placeholder screen until its phase lands. The app draws edge to edge with dark status-bar icons on the cream background.
 
 ### Acceptance Criteria
-- [ ] The app opens on Path
-- [ ] Tapping a tab opens its screen and highlights the tab
-- [ ] Back from any other tab returns to Path; back on Path closes the app
-- [ ] Rotation and coming back from the background keep the same tab
-- [ ] Status-bar icons are dark and readable on the cream background, in light and dark phone settings
-- [ ] Screens opened from a tab (lesson intro, cook mode) hide the bar
-- [ ] Tests cover: start on Path, switching tabs, back returns to Path
+- [x] The app opens on Path
+- [x] Tapping a tab opens its screen and highlights the tab
+- [x] Back from any other tab returns to Path; back on Path closes the app
+- [x] Rotation and coming back from the background keep the same tab
+- [x] Status-bar icons are dark and readable on the cream background, in light and dark phone settings
+- [x] Screens opened from a tab (lesson intro, cook mode) hide the bar
+- [x] Tests cover: start on Path, switching tabs, back returns to Path
 
 ### Edge cases
 - The phone is in dark mode: the app stays in its light theme and the status bar stays readable.
