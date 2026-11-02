@@ -1,5 +1,9 @@
 package com.ericwathome.stovetime.core.data.di
 
+import com.ericwathome.stovetime.core.data.repo.course.CourseRepository
+import com.ericwathome.stovetime.core.data.repo.course.CourseRepositoryImpl
+import com.ericwathome.stovetime.core.data.repo.course.GetCourseRepository
+import com.ericwathome.stovetime.core.data.repo.course.GetCourseRepositoryImpl
 import com.ericwathome.stovetime.core.data.repo.progress.ClearProgressRepository
 import com.ericwathome.stovetime.core.data.repo.progress.ClearProgressRepositoryImpl
 import com.ericwathome.stovetime.core.data.repo.progress.ObserveCooksRepository
@@ -62,9 +66,21 @@ internal val SettingsRepositoryModule =
         }
     }
 
+internal val CourseRepositoryModule =
+    module {
+        // parent
+        singleOf(::CourseRepositoryImpl) {
+            bind<CourseRepository>()
+        }
+        // children
+        singleOf(::GetCourseRepositoryImpl) {
+            bind<GetCourseRepository>()
+        }
+    }
+
 internal val RepositoryModule =
     module {
-        includes(ProgressRepositoryModule, SettingsRepositoryModule)
+        includes(CourseRepositoryModule, ProgressRepositoryModule, SettingsRepositoryModule)
     }
 
 val CoreDataModule =

@@ -6,8 +6,14 @@ import com.ericwathome.stovetime.core.common.helpers.ApplicationScope
 import com.ericwathome.stovetime.core.common.helpers.StovetimeDispatchers
 import com.ericwathome.stovetime.datasources.local.daos.CookDao
 import com.ericwathome.stovetime.datasources.local.database.StovetimeDatabase
+import com.ericwathome.stovetime.datasources.local.helpers.AssetContentReader
+import com.ericwathome.stovetime.datasources.local.helpers.BundledContentReader
 import com.ericwathome.stovetime.datasources.local.helpers.PreferencesFile
 import com.ericwathome.stovetime.datasources.local.helpers.createPreferencesDataStore
+import com.ericwathome.stovetime.datasources.local.sources.course.CourseLocalDatasource
+import com.ericwathome.stovetime.datasources.local.sources.course.CourseLocalDatasourceImpl
+import com.ericwathome.stovetime.datasources.local.sources.course.GetCourseLocalDatasource
+import com.ericwathome.stovetime.datasources.local.sources.course.GetCourseLocalDatasourceImpl
 import com.ericwathome.stovetime.datasources.local.sources.progress.cook.CookLocalDatasource
 import com.ericwathome.stovetime.datasources.local.sources.progress.cook.CookLocalDatasourceImpl
 import com.ericwathome.stovetime.datasources.local.sources.progress.cook.DeleteAllCooksLocalDatasource
@@ -64,6 +70,19 @@ internal val CookLocalDatasourceModule =
         }
     }
 
+internal val CourseLocalDatasourceModule =
+    module {
+        single<BundledContentReader> { AssetContentReader(androidContext()) }
+        // parent
+        singleOf(::CourseLocalDatasourceImpl) {
+            bind<CourseLocalDatasource>()
+        }
+        // children
+        singleOf(::GetCourseLocalDatasourceImpl) {
+            bind<GetCourseLocalDatasource>()
+        }
+    }
+
 internal val PreferencesDataStoreModule =
     module {
         PreferencesFile.entries.forEach { file ->
@@ -88,7 +107,7 @@ internal val PreferencesLocalDatasourceModule =
 
 internal val SourcesModule =
     module {
-        includes(CookLocalDatasourceModule, PreferencesLocalDatasourceModule)
+        includes(CookLocalDatasourceModule, CourseLocalDatasourceModule, PreferencesLocalDatasourceModule)
     }
 
 val LocalModule =
