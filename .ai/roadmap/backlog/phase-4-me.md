@@ -5,7 +5,7 @@
 ## 4.1 Me screen
 
 **Size:** M · **Depends on:** 1.5, 0.3
-**Design:** needs a frame
+**Design:** [Figma › Me](https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=81-73)
 
 ### Description
 Your progress at a glance: total XP, the current and best week streak, lessons and recipes cooked, this week's cooks against the goal, and a history of everything you've cooked, newest first, with its date, rating and XP.
@@ -29,6 +29,7 @@ Your progress at a glance: total XP, the current and best week streak, lessons a
 ## 4.2 Settings
 
 **Size:** S · **Depends on:** 4.1
+**Design:** [Figma › Me](https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=81-73) (the Settings card)
 
 ### Description
 Two settings in Me: the weekly cook goal (1 to 7) and "keep screen on while cooking".
@@ -50,6 +51,7 @@ Two settings in Me: the weekly cook goal (1 to 7) and "keep screen on while cook
 ## 4.3 Start over
 
 **Size:** S · **Depends on:** 4.1
+**Design:** [Figma › Me](https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=81-73) (the "Start over" link at the bottom)
 
 ### Description
 Reset all progress, for someone handing over their phone or wanting a fresh start.

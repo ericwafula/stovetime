@@ -9,12 +9,13 @@
 **Size:** M · **Depends on:** 0.2
 
 ### Description
-Write the first course, "Home basics", with Unit 1 "Crack it: five ways with eggs": Boiled eggs, Scrambled eggs, Jammy eggs on toast, French omelette and Shakshuka. Each lesson has a photo, time, difficulty, XP, what you'll learn, what you'll need and its steps, with a timer and a doneness check on every timed step. It ships inside the app in the format of roadmap §6.
+Write the first course, "Home basics", with Unit 1 "Crack it: five ways with eggs": Boiled eggs, Scrambled eggs, Jammy eggs on toast, French omelette and Shakshuka. Each lesson has a photo, time, difficulty, XP, what you'll learn, what you'll need and its steps, with a timer and a doneness check on every timed step. It ships inside the app in the format of roadmap §6. The five lesson photos are ready in `.ai/roadmap/content/photos/`: move them into the resources of the module that owns the course content, keeping their names.
 
 ### Acceptance Criteria
 - [ ] The app can read the course, its unit and all five lessons, in order, with no connection
 - [ ] Every lesson has a title, photo, minutes, difficulty, XP, at least one "what you'll learn", ingredients and at least two steps
 - [ ] Every step that says to wait has a timer and says what done looks like
+- [ ] Each lesson's photo is its matching file from `.ai/roadmap/content/photos/`, and that folder is empty afterwards
 - [ ] Jammy eggs on toast matches the Figma frames (15 min, Easy, +30 XP, a 6:30 timer on step 2)
 - [ ] A broken course file fails a test, not the app at runtime
 - [ ] Tests cover: the course loads, lessons are in order, every timed step has a doneness check, lesson ids are unique

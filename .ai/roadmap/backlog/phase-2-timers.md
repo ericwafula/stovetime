@@ -48,7 +48,7 @@ Timers started from cook mode run on the engine, so they keep going and still ri
 ## 2.3 Alarm
 
 **Size:** M · **Depends on:** 2.1
-**Design:** needs a frame
+**Design:** [Figma › Timer — Alarm](https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=81-178)
 
 ### Description
 When a timer ends: sound, vibration and a full-screen alarm over the lock screen (or a heads-up notification when the phone is in use) with the timer's name, Stop and "+1 min".
@@ -72,7 +72,7 @@ When a timer ends: sound, vibration and a full-screen alarm over the lock screen
 ## 2.4 Timers tab
 
 **Size:** M · **Depends on:** 2.1, 0.3
-**Design:** needs a frame
+**Design:** [Figma › Timers](https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=80-110) and [Timers — Quick timer](https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=81-194)
 
 ### Description
 Every running timer in one list, with time left, pause, "+1 min" and cancel. A quick timer button: give it a name and a time and start it, for cooking that isn't in a lesson.

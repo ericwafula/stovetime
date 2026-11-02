@@ -18,6 +18,7 @@ Phase 5 (Later) stays at roadmap level until Phases 0–4 ship.
 - Step IDs match the roadmap (e.g. `1.2`). Use them in branch names and commits: branch `ew/feature/1.2-path-screen`, commit `feature/path: adds the path screen (1.2)`.
 - Tick criteria here as they're met, then update the status in the roadmap.
 - The skills say *how* to build each step. A step never names classes, files or libraries.
+- To build a whole phase unattended with `/goal`, follow [BUILD.md](../BUILD.md).
 
 ## Step format
 

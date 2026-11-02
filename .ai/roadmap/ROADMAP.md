@@ -167,7 +167,7 @@ Lessons are written by us and ship as JSON inside the app.
           "minutes": 15,
           "difficulty": "easy",
           "xp": 30,
-          "photo": "lesson_jammy_eggs",
+          "photo": "lesson_jammy_eggs_on_toast",
           "learn": ["Timing a soft yolk to the minute", "Stopping the cook with cold water"],
           "ingredients": ["2 eggs, straight from the fridge", "1 thick slice of sourdough", "Butter, salt, chilli flakes"],
           "steps": [
@@ -246,6 +246,7 @@ These rules live in `:core:domain` and are covered by tests with fixed dates.
 | 2026-11-02 | Streak = weeks in a row hitting a weekly cook goal (default 4) | Matches the finish screen; weekly is kinder than daily |
 | 2026-11-02 | The Timers tab shows running timers and quick timers | Cooking often has two things on at once |
 | 2026-11-02 | Weeks start on Monday, device time zone | Simple and predictable; one constant if it ever changes |
+| 2026-11-02 | Frames added for Recipes, Timers, the quick timer sheet, the alarm and Me; old v1–v3 designs removed from Figma | Every UI step has a frame to build from |
 | 2026-11-02 | Recipes are synced offline-first: Room is the source of truth, WorkManager pulls the catalogue daily, details are fetched on open | Browse and search work offline; the free API isn't hammered; the same pattern Fumi uses |
 
 ---
@@ -260,8 +261,14 @@ Screens are in Figma: **[Stovetime](https://www.figma.com/design/4hJuAVOMHyuF0hE
 | Recipe — Intro | [`72:120`](https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=72-120) | 1.3 |
 | Cook — Step | [`72:158`](https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=72-158) | 1.4 |
 | Cook — Done | [`72:184`](https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=72-184) | 1.6 |
+| Recipes — Browse | [`80:48`](https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=80-48) | 3.2 |
+| Timers | [`80:110`](https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=80-110) | 2.4 |
+| Timers — Quick timer | [`81:194`](https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=81-194) | 2.4 |
+| Timer — Alarm | [`81:178`](https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=81-178) | 2.3 |
+| Me | [`81:73`](https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=81-73) | 4.1, 4.2, 4.3 |
+| Photos (lesson and sample dish photos) | [`79:141`](https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=79-141) | 1.1, 3.2 |
 | Components (Button, PathNode, StatChip, TimerChip, Progress) and the Home palette, theme and size variables | — | 0.1 |
 
-Recipes, Timers and Me don't have frames yet; their steps say "needs a frame" until they do.
+The recipe page (3.3) reuses the Recipe — Intro layout. The lesson photos are exported to `.ai/roadmap/content/photos/`.
 
 **The look: tactile flat.** Flat colour with no gradients or shadows, but every pressable thing sits on a darker "ledge" and drops into it when pressed. Primary is tomato (`#E2333D`); success is basil green; XP is yolk yellow. Type is Gabarito for headings and numbers, Rubik for text. The food photos are AI-generated placeholders; replace them with real photography before launch.

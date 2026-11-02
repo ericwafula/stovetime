@@ -34,7 +34,7 @@ Keep a copy of TheMealDB's catalogue on the phone: every category and the meals 
 ## 3.2 Browse and search
 
 **Size:** M · **Depends on:** 3.1, 0.3
-**Design:** needs a frame
+**Design:** [Figma › Recipes — Browse](https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=80-48)
 
 ### Description
 The Recipes tab: category chips across the top, a grid of meal cards with photos, and a search box. Everything comes from the synced catalogue, so it works offline. Pull down to sync now.

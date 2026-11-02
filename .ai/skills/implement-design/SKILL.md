@@ -22,6 +22,12 @@ Frames on page "v4 — Home cook":
 | Recipe — Intro | `72:120` | `https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=72-120` |
 | Cook — Step | `72:158` | `https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=72-158` |
 | Cook — Done | `72:184` | `https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=72-184` |
+| Recipes — Browse | `80:48` | `https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=80-48` |
+| Timers | `80:110` | `https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=80-110` |
+| Timers — Quick timer | `81:194` | `https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=81-194` |
+| Timer — Alarm | `81:178` | `https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=81-178` |
+| Me | `81:73` | `https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=81-73` |
+| Photos | `79:141` | `https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=79-141` |
 
 A link's `node-id=70-98` is node id `70:98`. The code `get_design_context` returns is a reference to translate into the design system, not code to paste.
 
