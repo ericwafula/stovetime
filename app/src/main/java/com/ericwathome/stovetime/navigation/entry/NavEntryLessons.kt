@@ -4,6 +4,7 @@ import androidx.navigation3.runtime.NavEntry
 import androidx.navigation3.runtime.NavKey
 import com.ericwathome.stovetime.core.data.model.progress.CookKind
 import com.ericwathome.stovetime.features.lessons.cook.CookRoute
+import com.ericwathome.stovetime.features.lessons.finish.FinishRoute
 import com.ericwathome.stovetime.features.lessons.intro.LessonIntroRoute
 import com.ericwathome.stovetime.navigation.Destination
 
@@ -29,5 +30,19 @@ fun navigationCook(
             step = key.step,
             onClose = onClose,
             onFinish = onFinish,
+        )
+    }
+
+fun navigationFinish(
+    key: Destination.CookDone,
+    onContinue: () -> Unit,
+): NavEntry<NavKey> =
+    NavEntry(key) {
+        FinishRoute(
+            kind = CookKind.entries.firstOrNull { it.name == key.kind } ?: CookKind.Lesson,
+            dishId = key.dishId,
+            startedAt = key.startedAt,
+            finishedAt = key.finishedAt,
+            onContinue = onContinue,
         )
     }

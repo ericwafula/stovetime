@@ -17,4 +17,6 @@
         <item quantity="other">This week: %1$d of %2$d cooks</item>
     </plurals>
     <string name="week_row_description">%1$s. Cooked on %2$d days so far.</string>
+    <string name="cook_time_minutes">%1$dm</string>
+    <string name="cook_time_hours">%1$dh %2$sm</string>
 </resources>

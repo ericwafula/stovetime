@@ -55,4 +55,18 @@
     <string name="cook_late_confirm">Allow alarms</string>
     <string name="cook_late_dismiss">Not now</string>
     <string name="cook_error">We couldn\'t open this cook</string>
+    <string name="finish_title">Dish done!</string>
+    <string name="finish_goal_met">%1$d of %2$d, goal done this week. Nicely cooked!</string>
+    <string name="finish_above_goal">That\'s %1$d cooks this week, past your goal of %2$d. You\'re on a roll.</string>
+    <string name="finish_keep_going">That\'s %1$d of %2$d this week. Your cooking is getting good.</string>
+    <string name="finish_xp_value">+%1$d</string>
+    <string name="finish_xp_label">XP earned</string>
+    <string name="finish_time_label">Cook time</string>
+    <string name="finish_streak_label">Week streak</string>
+    <string name="finish_rating_title">How did it turn out?</string>
+    <string name="finish_overdone">Overdone</string>
+    <string name="finish_pretty_good">Pretty good</string>
+    <string name="finish_nailed_it">Nailed it</string>
+    <string name="finish_continue">Continue</string>
+    <string name="finish_error">We couldn\'t save this cook</string>
 </resources>

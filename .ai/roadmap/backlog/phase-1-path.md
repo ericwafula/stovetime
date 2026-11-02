@@ -136,7 +136,7 @@ The rules from roadmap §8 in one place, so the Path, finish screen and Me alway
 
 ---
 
-## 1.6 Finish screen
+## 1.6 Finish screen ✅
 
 **Size:** M · **Depends on:** 1.4, 1.5
 **Design:** [Figma › Cook — Done](https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=72-184)
@@ -145,13 +145,13 @@ The rules from roadmap §8 in one place, so the Path, finish screen and Me alway
 The reward. The dish photo in a green ring, "Dish done!" and a short encouraging line, three stats (XP earned, cook time, week streak), the week's cooks as Monday-to-Sunday dots with "This week: N of 4 cooks", and "How did it turn out?" with Overdone, Pretty good and Nailed it. Continue goes back to the Path with the next lesson unlocked.
 
 ### Acceptance Criteria
-- [ ] The cook is saved when this screen opens, with its time taken from Start cooking to Finish
-- [ ] XP earned, cook time and the week streak show the real values for this cook
-- [ ] The week row shows a flame on each day with a cook, highlights today, and says "This week: N of goal cooks"
-- [ ] Choosing a rating saves it with the cook; it can be changed until Continue
-- [ ] Continue returns to the Path, where the next lesson is now current
-- [ ] Back does the same as Continue; it never returns to cook mode
-- [ ] Tests cover: the cook is saved once, the stats, the week row, the rating is saved, Continue updates the Path
+- [x] The cook is saved when this screen opens, with its time taken from Start cooking to Finish
+- [x] XP earned, cook time and the week streak show the real values for this cook
+- [x] The week row shows a flame on each day with a cook, highlights today, and says "This week: N of goal cooks"
+- [x] Choosing a rating saves it with the cook; it can be changed until Continue
+- [x] Continue returns to the Path, where the next lesson is now current
+- [x] Back does the same as Continue; it never returns to cook mode
+- [x] Tests cover: the cook is saved once, the stats, the week row, the rating is saved, Continue updates the Path
 
 ### Edge cases
 - The rating is optional; leaving without one saves the cook without a rating.

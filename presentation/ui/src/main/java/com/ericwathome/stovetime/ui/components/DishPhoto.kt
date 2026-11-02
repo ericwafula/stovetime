@@ -22,3 +22,16 @@ fun BundledPhoto(
         Image(painter = painter, contentDescription = contentDescription, contentScale = ContentScale.Crop, modifier = modifier)
     }
 }
+
+@Composable
+fun DishPhoto(
+    photo: String?,
+    contentDescription: String?,
+    modifier: Modifier = Modifier,
+) {
+    if (photo?.startsWith("http") == true) {
+        RemotePhoto(url = photo, contentDescription = contentDescription, modifier = modifier)
+    } else {
+        BundledPhoto(name = photo, contentDescription = contentDescription, modifier = modifier)
+    }
+}

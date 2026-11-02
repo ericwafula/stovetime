@@ -31,6 +31,7 @@ import com.ericwathome.stovetime.design.components.StoveNavBar
 import com.ericwathome.stovetime.design.components.StoveNavItem
 import com.ericwathome.stovetime.design.theme.StovetimeTheme
 import com.ericwathome.stovetime.navigation.entry.navigationCook
+import com.ericwathome.stovetime.navigation.entry.navigationFinish
 import com.ericwathome.stovetime.navigation.entry.navigationLessonIntro
 import com.ericwathome.stovetime.navigation.entry.navigationPath
 import com.ericwathome.stovetime.navigation.entry.navigationPlaceholder
@@ -104,7 +105,7 @@ fun StovetimeNavHost(
                                 navigator.replace(Destination.CookDone(kind.name, dishId, startedAt, finishedAt))
                             },
                         )
-                    is Destination.CookDone -> navigationPlaceholder(destination, R.string.app_name)
+                    is Destination.CookDone -> navigationFinish(destination, onContinue = navigator::backward)
                     is Destination.Recipe -> navigationRecipe(destination, onBack = navigator::backward, onStartCooking = {})
                 }
             },
