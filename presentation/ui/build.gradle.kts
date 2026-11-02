@@ -15,5 +15,5 @@ dependencies {
     api(libs.androidx.lifecycle.viewmodel.ktx)
     api(libs.androidx.lifecycle.viewmodel.compose)
     api(libs.androidx.lifecycle.runtime.compose)
-    implementation(libs.androidx.activity.compose)
+    api(libs.androidx.activity.compose)
 }

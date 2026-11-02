@@ -10,4 +10,5 @@ dependencies {
     // modules
     api(projects.core.common)
     implementation(projects.datasources.local)
+    api(projects.sdk.timer)
 }

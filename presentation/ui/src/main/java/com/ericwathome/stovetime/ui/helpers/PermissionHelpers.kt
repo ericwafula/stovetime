@@ -2,6 +2,9 @@ package com.ericwathome.stovetime.ui.helpers
 
 import android.Manifest
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
+import android.provider.Settings
 import android.content.pm.PackageManager
 import android.os.Build
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -39,4 +42,13 @@ fun rememberNotificationPermissionRequest(onResult: (granted: Boolean) -> Unit):
             },
         )
     }
+}
+
+fun Context.openExactAlarmSettings() {
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S) return
+    val intent =
+        Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM)
+            .setData(Uri.fromParts("package", packageName, null))
+            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+    runCatching { startActivity(intent) }
 }

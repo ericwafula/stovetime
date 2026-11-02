@@ -12,6 +12,8 @@ dependencies {
     implementation(projects.core.common)
     implementation(projects.core.data)
     implementation(projects.features.lessons)
+    implementation(projects.sdk.timer)
+    implementation(libs.timber)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)

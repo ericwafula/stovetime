@@ -84,7 +84,7 @@ Everything to know before you start: a big photo, "Unit 1 · Recipe 3 of 5", the
 
 ---
 
-## 1.4 Cook mode
+## 1.4 Cook mode ✅
 
 **Size:** L · **Depends on:** 1.3
 **Design:** [Figma › Cook — Step](https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=72-158)
@@ -93,14 +93,14 @@ Everything to know before you start: a big photo, "Unit 1 · Recipe 3 of 5", the
 One step at a time. A progress bar with "2/5", the step number, the step in big text and its detail. A timed step has a timer card showing the time and what done looks like, with Start timer. A tip, if the step has one. Next step moves on; the last step's button is Finish. The screen stays on while cooking.
 
 ### Acceptance Criteria
-- [ ] The progress bar and "N/total" match the step you're on
-- [ ] Next step moves forward; back (system back or a back gesture) goes to the previous step, and from step 1 asks to leave
-- [ ] A timed step shows its time and doneness check; Start timer counts down on the card and turns into pause and reset
-- [ ] When a step timer ends, the phone rings and vibrates and the card says the time is up
-- [ ] The last step's button says Finish and opens the finish screen (1.6)
-- [ ] The close button asks "Leave this cook? Your progress on this recipe won't be saved" before leaving
-- [ ] The screen stays on while cook mode is open (if the setting is on), and the step survives rotation
-- [ ] Tests cover: next and back, the last step finishes, leaving asks first, a timer counts down and ends
+- [x] The progress bar and "N/total" match the step you're on
+- [x] Next step moves forward; back (system back or a back gesture) goes to the previous step, and from step 1 asks to leave
+- [x] A timed step shows its time and doneness check; Start timer counts down on the card and turns into pause and reset
+- [x] When a step timer ends, the phone rings and vibrates and the card says the time is up
+- [x] The last step's button says Finish and opens the finish screen (1.6)
+- [x] The close button asks "Leave this cook? Your progress on this recipe won't be saved" before leaving
+- [x] The screen stays on while cook mode is open (if the setting is on), and the step survives rotation
+- [x] Tests cover: next and back, the last step finishes, leaving asks first, a timer counts down and ends
 
 ### Edge cases
 - Moving to the next step while a timer runs keeps the timer running, shown as a small timer chip.

@@ -12,6 +12,7 @@ internal enum class PreferencesFile(
     val fileName: String,
 ) {
     CookSettings("cook_settings"),
+    TimerPrompts("timer_prompts"),
 }
 
 internal fun createPreferencesDataStore(

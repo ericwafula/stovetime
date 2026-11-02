@@ -42,10 +42,12 @@ class ConfirmLauncher internal constructor(
 @Composable
 fun rememberConfirmLauncher(
     onConfirm: (ConfirmRequest) -> Unit,
+    onSecondary: (ConfirmRequest) -> Unit = {},
     onDismiss: (ConfirmRequest) -> Unit = {},
 ): ConfirmLauncher {
     var request by remember { mutableStateOf<ConfirmRequest?>(null) }
     val currentOnConfirm by rememberUpdatedState(onConfirm)
+    val currentOnSecondary by rememberUpdatedState(onSecondary)
     val currentOnDismiss by rememberUpdatedState(onDismiss)
 
     request?.let { shown ->
@@ -61,9 +63,9 @@ fun rememberConfirmLauncher(
                     request = null
                     currentOnConfirm(shown)
                 },
-                onDismiss = {
+                onSecondary = {
                     request = null
-                    currentOnDismiss(shown)
+                    currentOnSecondary(shown)
                 },
             )
         }
@@ -76,7 +78,7 @@ fun rememberConfirmLauncher(
 private fun ConfirmLauncherContent(
     request: ConfirmRequest,
     onConfirm: () -> Unit,
-    onDismiss: () -> Unit,
+    onSecondary: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val spacing = StovetimeTheme.spacing
@@ -94,7 +96,7 @@ private fun ConfirmLauncherContent(
         Spacer(Modifier.height(spacing.s12))
         StoveButton(
             text = request.dismissLabel,
-            onClick = onDismiss,
+            onClick = onSecondary,
             style = StoveButtonStyle.Secondary,
             modifier = Modifier.fillMaxWidth(),
         )
@@ -115,7 +117,7 @@ private fun ConfirmLauncherContentPreview() {
                     destructive = true,
                 ),
             onConfirm = {},
-            onDismiss = {},
+            onSecondary = {},
         )
     }
 }

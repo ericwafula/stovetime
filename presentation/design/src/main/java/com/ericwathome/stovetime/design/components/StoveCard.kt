@@ -35,7 +35,11 @@ fun StoveCard(
         modifier = modifier,
         contentAlignment = Alignment.TopStart,
     ) {
-        Column(Modifier.padding(padding), horizontalAlignment = horizontalAlignment, content = content)
+        Column(
+            modifier = if (horizontalAlignment == Alignment.Start) Modifier.padding(padding) else Modifier.fillMaxWidth().padding(padding),
+            horizontalAlignment = horizontalAlignment,
+            content = content,
+        )
     }
 }
 

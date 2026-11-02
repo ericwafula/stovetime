@@ -87,7 +87,7 @@ The **Path screen (1.2)** is the screen built live in the workshop.
 | 1.1 | Course content: "Home basics", Unit 1 Eggs (5 lessons), bundled as JSON | ✅ |
 | 1.2 | Path screen: course chip, streak and XP, unit banner, lesson nodes, "Up next" card | ✅ |
 | 1.3 | Lesson intro: photo, time, difficulty, XP, what you'll learn, what you'll need | ✅ |
-| 1.4 | Cook mode: one step at a time, step timers, tips, screen stays on | ⬜ |
+| 1.4 | Cook mode: one step at a time, step timers, tips, screen stays on | ✅ |
 | 1.5 | Progress rules: XP, unlocking, weekly goal and week streak | ✅ |
 | 1.6 | Finish screen: XP, cook time, streak, the week's cooks, "How did it turn out?" | ⬜ |
 | 1.7 | End-to-end journey: Path → intro → cook → finish → next lesson unlocked | ⬜ |

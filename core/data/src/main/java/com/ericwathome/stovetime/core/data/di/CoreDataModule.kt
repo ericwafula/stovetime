@@ -1,5 +1,9 @@
 package com.ericwathome.stovetime.core.data.di
 
+import com.ericwathome.stovetime.core.data.repo.cook.CookRepository
+import com.ericwathome.stovetime.core.data.repo.cook.CookRepositoryImpl
+import com.ericwathome.stovetime.core.data.repo.cook.GetCookPlanRepository
+import com.ericwathome.stovetime.core.data.repo.cook.GetCookPlanRepositoryImpl
 import com.ericwathome.stovetime.core.data.repo.course.CourseRepository
 import com.ericwathome.stovetime.core.data.repo.course.CourseRepositoryImpl
 import com.ericwathome.stovetime.core.data.repo.course.GetCourseRepository
@@ -22,6 +26,11 @@ import com.ericwathome.stovetime.core.data.repo.settings.SaveWeeklyGoalRepositor
 import com.ericwathome.stovetime.core.data.repo.settings.SaveWeeklyGoalRepositoryImpl
 import com.ericwathome.stovetime.core.data.repo.settings.SettingsRepository
 import com.ericwathome.stovetime.core.data.repo.settings.SettingsRepositoryImpl
+import com.ericwathome.stovetime.core.data.repo.settings.TimerPromptsRepository
+import com.ericwathome.stovetime.core.data.repo.settings.TimerPromptsRepositoryImpl
+import com.ericwathome.stovetime.core.data.repo.timers.TimersRepository
+import com.ericwathome.stovetime.core.data.repo.timers.TimersRepositoryImpl
+import com.ericwathome.stovetime.sdk.timer.StovetimeTimers
 import com.ericwathome.stovetime.datasources.local.di.LocalModule
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.singleOf
@@ -78,9 +87,32 @@ internal val CourseRepositoryModule =
         }
     }
 
+internal val CookRepositoryModule =
+    module {
+        // parent
+        singleOf(::CookRepositoryImpl) {
+            bind<CookRepository>()
+        }
+        // children
+        singleOf(::GetCookPlanRepositoryImpl) {
+            bind<GetCookPlanRepository>()
+        }
+    }
+
+internal val TimersRepositoryModule =
+    module {
+        single { StovetimeTimers.engine }
+        singleOf(::TimersRepositoryImpl) {
+            bind<TimersRepository>()
+        }
+        singleOf(::TimerPromptsRepositoryImpl) {
+            bind<TimerPromptsRepository>()
+        }
+    }
+
 internal val RepositoryModule =
     module {
-        includes(CourseRepositoryModule, ProgressRepositoryModule, SettingsRepositoryModule)
+        includes(CookRepositoryModule, CourseRepositoryModule, ProgressRepositoryModule, SettingsRepositoryModule, TimersRepositoryModule)
     }
 
 val CoreDataModule =

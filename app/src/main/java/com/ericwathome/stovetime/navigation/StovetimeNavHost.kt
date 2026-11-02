@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -24,9 +25,12 @@ import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
 import com.ericwathome.stovetime.R
 import com.ericwathome.stovetime.core.data.model.progress.CookKind
+import com.ericwathome.stovetime.core.data.model.timers.TimerTarget
+import com.ericwathome.stovetime.notifications.toDestination
 import com.ericwathome.stovetime.design.components.StoveNavBar
 import com.ericwathome.stovetime.design.components.StoveNavItem
 import com.ericwathome.stovetime.design.theme.StovetimeTheme
+import com.ericwathome.stovetime.navigation.entry.navigationCook
 import com.ericwathome.stovetime.navigation.entry.navigationLessonIntro
 import com.ericwathome.stovetime.navigation.entry.navigationPath
 import com.ericwathome.stovetime.navigation.entry.navigationPlaceholder
@@ -34,9 +38,18 @@ import com.ericwathome.stovetime.navigation.entry.navigationPlaceholder
 private const val CROSSFADE_MILLIS = 180
 
 @Composable
-fun StovetimeNavHost(modifier: Modifier = Modifier) {
+fun StovetimeNavHost(
+    timerPayload: String?,
+    onTimerPayloadOpened: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
     val backStack = rememberNavBackStack(Destination.Path)
     val navigator = remember(backStack) { Navigator(backStack, TopLevelTab.destinations) }
+    LaunchedEffect(timerPayload) {
+        timerPayload ?: return@LaunchedEffect
+        navigator.open(TimerTarget.decode(timerPayload).toDestination())
+        onTimerPayloadOpened()
+    }
     val crossfade = fadeIn(tween(CROSSFADE_MILLIS)) togetherWith fadeOut(tween(CROSSFADE_MILLIS))
 
     Box(
@@ -76,7 +89,15 @@ fun StovetimeNavHost(modifier: Modifier = Modifier) {
                                 navigator.replace(Destination.Cook(kind = CookKind.Lesson.name, dishId = lessonId, startedAt = startedAt))
                             },
                         )
-                    is Destination.Cook -> navigationPlaceholder(destination, R.string.app_name)
+                    is Destination.Cook ->
+                        navigationCook(
+                            destination,
+                            onClose = navigator::backward,
+                            onFinish = { kind, dishId, startedAt, finishedAt ->
+                                navigator.replace(Destination.CookDone(kind.name, dishId, startedAt, finishedAt))
+                            },
+                        )
+                    is Destination.CookDone -> navigationPlaceholder(destination, R.string.app_name)
                 }
             },
         )

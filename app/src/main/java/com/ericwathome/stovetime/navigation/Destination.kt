@@ -29,4 +29,12 @@ sealed interface Destination : NavKey {
         val startedAt: Long,
         val step: Int = 0,
     ) : Destination
+
+    @Serializable
+    data class CookDone(
+        val kind: String,
+        val dishId: String,
+        val startedAt: Long,
+        val finishedAt: Long,
+    ) : Destination
 }

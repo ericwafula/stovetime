@@ -26,6 +26,8 @@ import com.ericwathome.stovetime.datasources.local.sources.progress.cook.SaveCoo
 import com.ericwathome.stovetime.datasources.local.sources.progress.cook.SaveCookLocalDatasourceImpl
 import com.ericwathome.stovetime.datasources.local.sources.settings.CookSettingsLocalDatasource
 import com.ericwathome.stovetime.datasources.local.sources.settings.CookSettingsLocalDatasourceImpl
+import com.ericwathome.stovetime.datasources.local.sources.settings.TimerPromptsLocalDatasource
+import com.ericwathome.stovetime.datasources.local.sources.settings.TimerPromptsLocalDatasourceImpl
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.plus
 import org.koin.android.ext.koin.androidContext
@@ -100,6 +102,12 @@ internal val PreferencesLocalDatasourceModule =
         single<CookSettingsLocalDatasource> {
             CookSettingsLocalDatasourceImpl(
                 dataStore = get(named(PreferencesFile.CookSettings.fileName)),
+                dispatchers = get(),
+            )
+        }
+        single<TimerPromptsLocalDatasource> {
+            TimerPromptsLocalDatasourceImpl(
+                dataStore = get(named(PreferencesFile.TimerPrompts.fileName)),
                 dispatchers = get(),
             )
         }
