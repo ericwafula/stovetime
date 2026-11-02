@@ -129,7 +129,7 @@ The **Path screen (1.2)** is the screen built live in the workshop.
 
 ```
 :app                    Koin wiring, navigation host, MainActivity
-:features:path          Path, lesson intro, cook mode, finish screen
+:features:lessons       Path, lesson intro, cook mode, finish screen
 :features:recipes       browse, search, recipe page
 :features:timers        Timers tab
 :features:me            Me tab and settings
@@ -250,6 +250,7 @@ These rules live in `:core:domain` and are covered by tests with fixed dates.
 | 2026-11-02 | Recipes are synced offline-first: Room is the source of truth, WorkManager pulls the catalogue daily, details are fetched on open | Browse and search work offline; the free API isn't hammered; the same pattern Fumi uses |
 | 2026-11-02 | Each cook stores the weekly goal that was set when it was cooked | A past week is judged by the goal it had, so changing the goal never rewrites past weeks; the current week uses today's goal |
 | 2026-11-02 | The best streak counts runs of finished weeks that met their goal, plus this week once it's met | Me shows it next to the current streak, and it survives a missed week |
+| 2026-11-02 | The Path feature module is `:features:lessons`, not `:features:path` | Gradle's type-safe project accessors can't generate `projects.features.path` (it clashes with `ProjectDependency.getPath()`) |
 
 ---
 

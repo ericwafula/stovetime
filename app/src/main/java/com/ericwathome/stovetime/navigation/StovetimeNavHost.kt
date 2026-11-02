@@ -16,6 +16,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
 import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
@@ -24,6 +26,7 @@ import com.ericwathome.stovetime.R
 import com.ericwathome.stovetime.design.components.StoveNavBar
 import com.ericwathome.stovetime.design.components.StoveNavItem
 import com.ericwathome.stovetime.design.theme.StovetimeTheme
+import com.ericwathome.stovetime.navigation.entry.navigationPath
 import com.ericwathome.stovetime.navigation.entry.navigationPlaceholder
 
 private const val CROSSFADE_MILLIS = 180
@@ -34,7 +37,13 @@ fun StovetimeNavHost(modifier: Modifier = Modifier) {
     val navigator = remember(backStack) { Navigator(backStack, TopLevelTab.destinations) }
     val crossfade = fadeIn(tween(CROSSFADE_MILLIS)) togetherWith fadeOut(tween(CROSSFADE_MILLIS))
 
-    Box(modifier = modifier.fillMaxSize().background(StovetimeTheme.colors.canvas)) {
+    Box(
+        modifier =
+            modifier
+                .fillMaxSize()
+                .background(StovetimeTheme.colors.canvas)
+                .semantics { testTagsAsResourceId = true },
+    ) {
         NavDisplay(
             backStack = backStack,
             modifier = Modifier.fillMaxSize(),
@@ -49,10 +58,15 @@ fun StovetimeNavHost(modifier: Modifier = Modifier) {
             predictivePopTransitionSpec = { crossfade },
             entryProvider = { key ->
                 when (val destination = key as Destination) {
-                    Destination.Path -> navigationPlaceholder(destination, R.string.tab_path)
+                    Destination.Path ->
+                        navigationPath(
+                            Destination.Path,
+                            onOpenLesson = { lessonId -> navigator.navigate(Destination.LessonIntro(lessonId)) },
+                        )
                     Destination.Recipes -> navigationPlaceholder(destination, R.string.tab_recipes)
                     Destination.Timers -> navigationPlaceholder(destination, R.string.tab_timers)
                     Destination.Me -> navigationPlaceholder(destination, R.string.tab_me)
+                    is Destination.LessonIntro -> navigationPlaceholder(destination, R.string.app_name)
                 }
             },
         )

@@ -8,6 +8,7 @@ import com.ericwathome.stovetime.core.domain.model.PathLesson
 import com.ericwathome.stovetime.core.domain.model.PathProgress
 import com.ericwathome.stovetime.core.domain.model.Progress
 import com.ericwathome.stovetime.core.domain.rules.lessonStates
+import com.ericwathome.stovetime.core.domain.rules.lessonXp
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
@@ -51,7 +52,14 @@ internal fun pathOf(
         unit = unit,
         lessons =
             unit.lessons.mapIndexed { index, lesson ->
-                PathLesson(lesson = lesson, state = states[index], position = index + 1, cookedBefore = lesson.id in cookedLessonIds)
+                val cookedBefore = lesson.id in cookedLessonIds
+                PathLesson(
+                    lesson = lesson,
+                    state = states[index],
+                    position = index + 1,
+                    cookedBefore = cookedBefore,
+                    nextCookXp = lessonXp(lessonXp = lesson.xp, cookedBefore = cookedBefore),
+                )
             },
         progress = progress,
     )

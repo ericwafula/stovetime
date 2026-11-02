@@ -1,0 +1,15 @@
+<resources>
+    <string name="path_streak_description">Week streak: %1$s</string>
+    <string name="path_xp_description">Total XP: %1$s</string>
+    <string name="path_unit_eyebrow">Unit %1$d • %2$s</string>
+    <string name="path_unit_progress">%1$d of %2$d cooked</string>
+    <string name="path_unit_done">Unit done. Every dish cooked!</string>
+    <string name="path_up_next">Up next • %1$d min</string>
+    <string name="path_start">Start • +%1$d XP</string>
+    <string name="path_locked">Finish the previous lesson first</string>
+    <string name="path_node_done">%1$s, cooked. Tap to cook it again</string>
+    <string name="path_node_current">%1$s, up next</string>
+    <string name="path_node_locked">%1$s, locked</string>
+    <string name="path_error_title">We couldn\'t load your lessons</string>
+    <string name="path_retry">Try again</string>
+</resources>

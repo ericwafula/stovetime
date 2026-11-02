@@ -38,6 +38,7 @@ data class PathLesson(
     val state: LessonState,
     val position: Int,
     val cookedBefore: Boolean,
+    val nextCookXp: Int,
 )
 
 data class PathProgress(

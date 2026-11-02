@@ -16,4 +16,9 @@ sealed interface Destination : NavKey {
 
     @Serializable
     data object Me : Destination
+
+    @Serializable
+    data class LessonIntro(
+        val lessonId: String,
+    ) : Destination
 }
