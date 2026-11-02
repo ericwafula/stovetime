@@ -13,6 +13,8 @@ import com.ericwathome.stovetime.core.data.repo.settings.SettingsRepository
 import com.ericwathome.stovetime.core.data.repo.settings.TimerPromptsRepository
 import com.ericwathome.stovetime.testing.FakeTimersRepository
 import com.ericwathome.stovetime.testing.MainDispatcherRule
+import com.ericwathome.stovetime.core.common.result.DataError
+import com.ericwathome.stovetime.ui.helpers.ViewState
 import com.google.common.truth.Truth.assertThat
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
@@ -358,5 +360,25 @@ class CookViewModelTest {
                 cancelAndIgnoreRemainingEvents()
             }
             coVerify { timerPromptsRepository.markLockScreenAlarmsExplained() }
+        }
+
+    @Test
+    fun a_plan_that_fails_to_load_shows_an_error_and_retry_loads_it() =
+        runTest {
+            // given
+            coEvery { cookRepository.getCookPlan(any(), any()) } returnsMany listOf(DataResult.Error(DataError.NoConnection), DataResult.Success(plan))
+            sut = createViewModel()
+
+            sut.state.test {
+                // then
+                assertThat(expectMostRecentItem().plan).isEqualTo(ViewState.Error(DataError.NoConnection))
+
+                // when
+                sut.onAction(CookAction.OnClickRetry)
+
+                // then
+                assertThat(expectMostRecentItem().plan).isInstanceOf(ViewState.Success::class.java)
+                cancelAndIgnoreRemainingEvents()
+            }
         }
 }

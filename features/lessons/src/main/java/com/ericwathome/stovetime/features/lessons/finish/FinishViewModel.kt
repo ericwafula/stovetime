@@ -163,7 +163,12 @@ class FinishViewModel(
 
     private fun onSelectRating(rating: Rating) {
         val cookId: Long = savedStateHandle[COOK_ID_KEY] ?: return
+        val previous = currentState.rating
         updateState { it.copy(rating = rating) }
-        viewModelScope.launch { progressRepository.rateCook(cookId, rating) }
+        viewModelScope.launch {
+            progressRepository.rateCook(cookId, rating).onError {
+                updateState { state -> if (state.rating == rating) state.copy(rating = previous) else state }
+            }
+        }
     }
 }

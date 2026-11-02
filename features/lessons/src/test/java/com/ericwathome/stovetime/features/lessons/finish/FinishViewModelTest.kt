@@ -16,6 +16,7 @@ import com.ericwathome.stovetime.core.domain.model.WeekProgress
 import com.ericwathome.stovetime.core.domain.useCase.ProgressUseCases
 import com.ericwathome.stovetime.testing.MainDispatcherRule
 import com.ericwathome.stovetime.ui.helpers.ViewState
+import com.ericwathome.stovetime.core.common.result.DataError
 import com.google.common.truth.Truth.assertThat
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
@@ -87,6 +88,7 @@ class FinishViewModelTest {
         every { progressUseCases.calculateCookXp(any(), any(), any()) } answers { if (thirdArg()) 10 else secondArg() }
         every { settingsRepository.observeCookSettings() } returns flowOf(CookSettings(weeklyGoal = 4))
         coEvery { progressRepository.saveCook(any()) } returns DataResult.Success(7L)
+        coEvery { progressRepository.rateCook(any(), any()) } returns DataResult.Success(true)
     }
 
     @Test
@@ -179,6 +181,46 @@ class FinishViewModelTest {
 
                 // then
                 assertThat(awaitItem()).isEqualTo(FinishEvent.Continue)
+            }
+        }
+
+    @Test
+    fun a_failed_save_shows_an_error_and_retry_saves_once() =
+        runTest {
+            // given
+            coEvery { progressRepository.saveCook(any()) } returnsMany listOf(DataResult.Error(DataError.StorageFull), DataResult.Success(7L))
+            val sut = createViewModel()
+
+            sut.state.test {
+                // then
+                assertThat(expectMostRecentItem().dish).isEqualTo(ViewState.Error(DataError.StorageFull))
+
+                // when
+                sut.onAction(FinishAction.OnClickRetry)
+
+                // then
+                assertThat(expectMostRecentItem().dish).isInstanceOf(ViewState.Success::class.java)
+                cancelAndIgnoreRemainingEvents()
+            }
+            coVerify(exactly = 2) { progressRepository.saveCook(any()) }
+        }
+
+    @Test
+    fun a_rating_that_fails_to_save_is_undone() =
+        runTest {
+            // given
+            coEvery { progressRepository.rateCook(any(), any()) } returns DataResult.Error(DataError.StorageFull)
+            val sut = createViewModel()
+
+            sut.state.test {
+                skipItems(1)
+
+                // when
+                sut.onAction(FinishAction.OnSelectRating(Rating.NailedIt))
+
+                // then
+                assertThat(expectMostRecentItem().rating).isNull()
+                cancelAndIgnoreRemainingEvents()
             }
         }
 }

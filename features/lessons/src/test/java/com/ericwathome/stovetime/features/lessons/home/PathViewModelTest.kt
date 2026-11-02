@@ -11,6 +11,7 @@ import com.ericwathome.stovetime.core.domain.model.WeekProgress
 import com.ericwathome.stovetime.core.domain.useCase.ProgressUseCases
 import com.ericwathome.stovetime.testing.MainDispatcherRule
 import com.ericwathome.stovetime.ui.helpers.ViewState
+import com.ericwathome.stovetime.core.common.result.DataError
 import com.google.common.truth.Truth.assertThat
 import io.mockk.MockKAnnotations
 import io.mockk.every
@@ -150,6 +151,25 @@ class PathViewModelTest {
                     assertThat(awaitItem()).isEqualTo(PathEvent.OpenLesson("boiled-eggs"))
                 }
                 cancelAndIgnoreRemainingEvents()
+            }
+        }
+
+    @Test
+    fun a_course_that_fails_to_load_shows_an_error_and_retry_loads_it() =
+        runTest {
+            // given
+            path.value = DataResult.Error(DataError.Unknown("broken"))
+
+            sut.state.test {
+                // then
+                assertThat(expectMostRecentItem().path).isEqualTo(ViewState.Error(DataError.Unknown("broken")))
+
+                // when
+                path.value = DataResult.Success(pathWith(cooked = 0))
+                sut.onAction(PathAction.OnClickRetry)
+
+                // then
+                assertThat(expectMostRecentItem().path).isInstanceOf(ViewState.Success::class.java)
             }
         }
 }

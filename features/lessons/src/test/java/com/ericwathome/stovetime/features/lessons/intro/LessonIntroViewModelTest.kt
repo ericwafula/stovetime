@@ -145,4 +145,16 @@ class LessonIntroViewModelTest {
                 assertThat(awaitItem()).isEqualTo(LessonIntroEvent.Close)
             }
         }
+
+    @Test
+    fun an_unknown_lesson_shows_an_error() =
+        runTest {
+            // given
+            sut = LessonIntroViewModel("no-such-lesson", progressUseCases)
+
+            sut.state.test {
+                // then
+                assertThat(expectMostRecentItem().intro).isInstanceOf(ViewState.Error::class.java)
+            }
+        }
 }
