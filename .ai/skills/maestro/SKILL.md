@@ -58,7 +58,7 @@ To test an unmerged branch on a device, build it in a temporary worktree (`git w
 One journey per file in `.maestro/flows/<area>/<what_it_proves>.yaml`.
 
 ```yaml
-appId: com.ericwathome.stovetime
+appId: com.ericwathome.stovetime.start
 name: A new cook finishes the first recipe on the path and sees the XP they earned
 tags:
   - cook      # the feature it lives under (its folder)
@@ -79,7 +79,7 @@ tags:
 # …
 ```
 
-The debug build has no application id suffix, so `appId` is `com.ericwathome.stovetime`.
+On `workshop/level-3-start` the app installs as "Stovetime Start", so `appId` is `com.ericwathome.stovetime.start` (on `workshop/level-3-complete` it's `com.ericwathome.stovetime`).
 
 Rules:
 

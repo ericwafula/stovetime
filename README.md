@@ -38,6 +38,8 @@ To check everything builds without installing:
 
 This branch is the finished app with a few pieces taken out, so you can build them live. Each gap is marked `TODO(workshop N)` and says what goes there; list them all with `grep -rn "TODO(workshop" .`. The `workshop` skill knows every step, and `workshop/level-3-complete` has the finished version of each piece.
 
+This branch installs as **Stovetime Start** (with a green START banner on its icon), next to the finished **Stovetime** from `workshop/level-3-complete`, so you can compare them on one phone.
+
 Before you start: `.ai/setup.sh`, then `code-review-graph build`, then `claude`. Approve the plugins and MCP servers it asks about, and in `/mcp` pick `figma` → **Authenticate**. Note your starting `/context` number.
 
 - [ ] **0. Make CLAUDE.md yours.** There's no `CLAUDE.md` yet. Run `/init`, read what it wrote, then:

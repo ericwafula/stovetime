@@ -5,6 +5,10 @@ plugins {
 
 android {
     namespace = "com.ericwathome.stovetime"
+
+    defaultConfig {
+        applicationId = "com.ericwathome.stovetime.start"
+    }
 }
 
 dependencies {

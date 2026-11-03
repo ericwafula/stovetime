@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path
+        android:fillColor="#FF36854A"
+        android:pathData="M0,74H108V87H0Z" />
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M38.80,76.50h1.6v1.6h-1.6z M40.40,76.50h1.6v1.6h-1.6z M42.00,76.50h1.6v1.6h-1.6z M38.80,78.10h1.6v1.6h-1.6z M38.80,79.70h1.6v1.6h-1.6z M40.40,79.70h1.6v1.6h-1.6z M42.00,79.70h1.6v1.6h-1.6z M42.00,81.30h1.6v1.6h-1.6z M38.80,82.90h1.6v1.6h-1.6z M40.40,82.90h1.6v1.6h-1.6z M42.00,82.90h1.6v1.6h-1.6z M45.20,76.50h1.6v1.6h-1.6z M46.80,76.50h1.6v1.6h-1.6z M48.40,76.50h1.6v1.6h-1.6z M46.80,78.10h1.6v1.6h-1.6z M46.80,79.70h1.6v1.6h-1.6z M46.80,81.30h1.6v1.6h-1.6z M46.80,82.90h1.6v1.6h-1.6z M53.20,76.50h1.6v1.6h-1.6z M51.60,78.10h1.6v1.6h-1.6z M54.80,78.10h1.6v1.6h-1.6z M51.60,79.70h1.6v1.6h-1.6z M53.20,79.70h1.6v1.6h-1.6z M54.80,79.70h1.6v1.6h-1.6z M51.60,81.30h1.6v1.6h-1.6z M54.80,81.30h1.6v1.6h-1.6z M51.60,82.90h1.6v1.6h-1.6z M54.80,82.90h1.6v1.6h-1.6z M58.00,76.50h1.6v1.6h-1.6z M59.60,76.50h1.6v1.6h-1.6z M58.00,78.10h1.6v1.6h-1.6z M61.20,78.10h1.6v1.6h-1.6z M58.00,79.70h1.6v1.6h-1.6z M59.60,79.70h1.6v1.6h-1.6z M58.00,81.30h1.6v1.6h-1.6z M61.20,81.30h1.6v1.6h-1.6z M58.00,82.90h1.6v1.6h-1.6z M61.20,82.90h1.6v1.6h-1.6z M64.40,76.50h1.6v1.6h-1.6z M66.00,76.50h1.6v1.6h-1.6z M67.60,76.50h1.6v1.6h-1.6z M66.00,78.10h1.6v1.6h-1.6z M66.00,79.70h1.6v1.6h-1.6z M66.00,81.30h1.6v1.6h-1.6z M66.00,82.90h1.6v1.6h-1.6z" />
+</vector>
