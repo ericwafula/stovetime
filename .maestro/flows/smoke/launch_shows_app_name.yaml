@@ -1,0 +1,15 @@
+appId: com.ericwathome.stovetime
+name: The app opens on the Path with the bottom bar
+tags:
+  - smoke
+  - navigation
+---
+- launchApp:
+    clearState: true
+- extendedWaitUntil:
+    visible: "Home basics"
+    timeout: 10000
+- assertVisible: "Path"
+- assertVisible: "Recipes"
+- assertVisible: "Timers"
+- assertVisible: "Me"

@@ -1,0 +1,178 @@
+{
+  "id": "home-basics",
+  "title": "Home basics",
+  "units": [
+    {
+      "id": "eggs",
+      "number": 1,
+      "title": "Crack it: five ways with eggs",
+      "lessons": [
+        {
+          "id": "boiled-eggs",
+          "title": "Boiled eggs",
+          "minutes": 15,
+          "difficulty": "easy",
+          "xp": 20,
+          "photo": "lesson_boiled_eggs",
+          "learn": ["Boiling an egg to the yolk you like", "Peeling eggs without tearing the white"],
+          "ingredients": ["4 eggs, straight from the fridge", "A pan of water", "A bowl of cold water"],
+          "steps": [
+            {
+              "text": "Bring a pan of water to the boil",
+              "detail": "Use enough water to cover the eggs by about 2 cm."
+            },
+            {
+              "text": "Lower the eggs in gently with a spoon",
+              "detail": "Turn the heat down to a steady boil so they don't knock against the pan.",
+              "timer": { "seconds": 540, "doneness": "for a firm white and a just-set yolk" },
+              "tip": "Like a fully hard yolk? Give them 11 minutes instead."
+            },
+            {
+              "text": "Move the eggs straight into the cold water",
+              "timer": { "seconds": 120, "doneness": "until they're cool enough to hold" },
+              "tip": "The cold water stops the cooking and makes the shells easier to peel."
+            },
+            {
+              "text": "Tap, roll and peel",
+              "detail": "Start at the wide end, where the air pocket is, and peel under a thin stream of water."
+            }
+          ]
+        },
+        {
+          "id": "scrambled-eggs",
+          "title": "Scrambled eggs",
+          "minutes": 10,
+          "difficulty": "easy",
+          "xp": 20,
+          "photo": "lesson_scrambled_eggs",
+          "learn": ["Low heat for soft, creamy curds", "Taking the pan off before they look done"],
+          "ingredients": ["3 eggs", "1 tbsp butter", "Salt and pepper", "Toast, to serve"],
+          "steps": [
+            {
+              "text": "Whisk the eggs with a pinch of salt",
+              "detail": "Keep going until there are no streaks of white left."
+            },
+            {
+              "text": "Melt the butter in a non-stick pan over low heat",
+              "timer": { "seconds": 60, "doneness": "until the butter is foaming but not brown" }
+            },
+            {
+              "text": "Pour in the eggs and stir slowly with a spatula",
+              "detail": "Push the eggs from the edges to the middle, folding as you go.",
+              "timer": { "seconds": 180, "doneness": "for soft curds that still look a little wet" },
+              "tip": "Eggs keep cooking off the heat. Take them off while they still look glossy."
+            },
+            {
+              "text": "Season with pepper and serve on toast"
+            }
+          ]
+        },
+        {
+          "id": "jammy-eggs-on-toast",
+          "title": "Jammy eggs on toast",
+          "minutes": 15,
+          "difficulty": "easy",
+          "xp": 30,
+          "photo": "lesson_jammy_eggs_on_toast",
+          "learn": ["Timing a soft yolk to the minute", "Stopping the cook with cold water"],
+          "ingredients": ["2 eggs, straight from the fridge", "1 thick slice of sourdough", "Butter, salt, chilli flakes"],
+          "steps": [
+            {
+              "text": "Bring a small pan of water to the boil"
+            },
+            {
+              "text": "Lower the eggs into the boiling water with a spoon",
+              "detail": "Keep it at a steady boil, not a rolling one, so the shells don't crack against the pan.",
+              "timer": { "seconds": 390, "doneness": "for a jammy, set-at-the-edges yolk" },
+              "tip": "Cold eggs crack in hot water. Lower them slowly and they'll stay whole."
+            },
+            {
+              "text": "Cool the eggs in cold water",
+              "timer": { "seconds": 120, "doneness": "until you can hold them comfortably" }
+            },
+            {
+              "text": "Toast and butter the bread",
+              "detail": "Toast it until deep golden so it holds up under the yolk."
+            },
+            {
+              "text": "Peel, halve and season",
+              "detail": "Lay the halves on the toast, then finish with salt and chilli flakes."
+            }
+          ]
+        },
+        {
+          "id": "french-omelette",
+          "title": "French omelette",
+          "minutes": 10,
+          "difficulty": "medium",
+          "xp": 40,
+          "photo": "lesson_french_omelette",
+          "learn": ["Keeping the eggs moving for small, soft curds", "Rolling an omelette out of the pan"],
+          "ingredients": ["3 eggs", "1 tbsp butter", "A pinch of salt", "Chopped chives"],
+          "steps": [
+            {
+              "text": "Beat the eggs with the salt until smooth",
+              "detail": "Beat with a fork for a good 30 seconds, until the yolks and whites are one colour."
+            },
+            {
+              "text": "Melt the butter in a non-stick pan over medium heat",
+              "timer": { "seconds": 60, "doneness": "until the butter stops foaming" }
+            },
+            {
+              "text": "Add the eggs, then stir quickly while you shake the pan",
+              "timer": { "seconds": 45, "doneness": "until mostly set but still soft on top" },
+              "tip": "Keep the spatula moving. Small curds make a smooth omelette."
+            },
+            {
+              "text": "Tilt the pan and roll the omelette onto a plate",
+              "detail": "Fold the near edge to the middle, then tip the pan so it rolls over onto the plate."
+            },
+            {
+              "text": "Scatter over the chives and eat straight away"
+            }
+          ]
+        },
+        {
+          "id": "shakshuka",
+          "title": "Shakshuka",
+          "minutes": 35,
+          "difficulty": "medium",
+          "xp": 50,
+          "photo": "lesson_shakshuka",
+          "learn": ["Building a rich tomato sauce", "Poaching eggs right in the sauce"],
+          "ingredients": [
+            "1 onion and 1 red pepper, sliced",
+            "2 garlic cloves, sliced",
+            "1 tsp cumin and 1 tsp paprika",
+            "1 tin of chopped tomatoes",
+            "4 eggs",
+            "Olive oil, salt and parsley"
+          ],
+          "steps": [
+            {
+              "text": "Soften the onion and pepper in a little oil",
+              "detail": "Use a wide pan with a lid over medium heat.",
+              "timer": { "seconds": 480, "doneness": "until soft and just starting to colour" }
+            },
+            {
+              "text": "Stir in the garlic, cumin and paprika",
+              "timer": { "seconds": 60, "doneness": "until it smells fragrant" }
+            },
+            {
+              "text": "Add the tomatoes with a pinch of salt and simmer",
+              "timer": { "seconds": 600, "doneness": "until the sauce is thick enough to hold a dip from a spoon" }
+            },
+            {
+              "text": "Make four wells, crack in the eggs and cover the pan",
+              "timer": { "seconds": 360, "doneness": "until the whites are set and the yolks still runny" },
+              "tip": "Spoon a little sauce over the whites to help them cook evenly."
+            },
+            {
+              "text": "Scatter over the parsley and serve with bread"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

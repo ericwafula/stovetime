@@ -1,0 +1,39 @@
+<resources>
+    <string name="alarm_times_up">Time’s up</string>
+    <string name="alarm_detail">Take them out now %1$s</string>
+    <string name="alarm_stop">Stop</string>
+    <string name="alarm_plus_minute">+1 min</string>
+    <string name="alarm_plus_minute_description">Ring again in a minute</string>
+    <string name="timers_title">Timers</string>
+    <plurals name="timers_running">
+        <item quantity="one">%d running</item>
+        <item quantity="other">%d running</item>
+    </plurals>
+    <string name="timers_empty">No timers running</string>
+    <string name="timers_new_quick_timer">New quick timer</string>
+    <string name="timers_paused">Paused</string>
+    <string name="timers_quick_timer">Quick timer</string>
+    <string name="timers_pause">Pause</string>
+    <string name="timers_resume">Resume</string>
+    <string name="timers_plus_minute">+1 min</string>
+    <string name="timers_stop">Stop</string>
+    <string name="timers_times_up">Time’s up</string>
+    <string name="timers_cancel_description">Cancel %1$s</string>
+    <string name="timers_card_running">%1$s, %2$s left</string>
+    <string name="timers_card_paused">%1$s, paused, %2$s left</string>
+    <string name="timers_card_ringing">%1$s, time’s up</string>
+    <string name="timers_default_name">Timer %1$d</string>
+    <string name="timers_notifications_title">Let Stovetime ring when time\'s up</string>
+    <string name="timers_notifications_message">Allow notifications so your timers can ring and show how long is left, even with the phone locked.</string>
+    <string name="timers_notifications_confirm">Continue</string>
+    <string name="timers_notifications_dismiss">Not now</string>
+    <string name="timers_notifications_off">Notifications are off, so timers can only ring while Stovetime is open.</string>
+    <string name="timers_late_title">Timers may ring a little late</string>
+    <string name="timers_late_message">Stovetime isn\'t allowed to set exact alarms on this phone, so a timer can ring a little late. Allow alarms so it rings right on time.</string>
+    <string name="timers_late_confirm">Allow alarms</string>
+    <string name="timers_late_dismiss">Not now</string>
+    <string name="timers_lock_title">Show the alarm over the lock screen</string>
+    <string name="timers_lock_message">Allow full-screen alarms so a timer that ends lights up the screen with Stop and +1 min, even when the phone is locked.</string>
+    <string name="timers_lock_confirm">Allow</string>
+    <string name="timers_lock_dismiss">Not now</string>
+</resources>

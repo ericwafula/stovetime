@@ -1,0 +1,35 @@
+appId: com.ericwathome.stovetime
+name: Cooking every lesson in a course celebrates its unit badge, which then shows as earned on Me
+tags:
+  - me
+  - path
+  - finish
+---
+- launchApp:
+    clearState: true
+    permissions:
+      notifications: allow
+- extendedWaitUntil:
+    visible:
+      id: "path_course_chip"
+    timeout: 10000
+- tapOn:
+    id: "path_course_chip"
+- tapOn:
+    id: "course_option_rice-and-grains"
+- repeat:
+    times: 3
+    commands:
+      - runFlow: ../../subflows/cook_current_lesson.yaml
+      - assertNotVisible:
+          id: "finish_new_badge"
+      - tapOn:
+          id: "finish_continue"
+- runFlow: ../../subflows/cook_current_lesson.yaml
+- assertVisible: "New badge!"
+- tapOn:
+    id: "finish_continue"
+- tapOn: "Me"
+- extendedWaitUntil:
+    visible: "Unit done, earned.*"
+    timeout: 10000

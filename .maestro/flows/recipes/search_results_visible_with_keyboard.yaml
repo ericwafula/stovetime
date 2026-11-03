@@ -1,0 +1,16 @@
+appId: com.ericwathome.stovetime
+name: Recipe search keeps results visible while the keyboard is open
+tags:
+  - recipes
+---
+- launchApp
+- tapOn: "Recipes"
+- extendedWaitUntil:
+    visible:
+      id: "recipes_first_card"
+    timeout: 60000
+- tapOn:
+    id: "recipes_search"
+- inputText: "chicken"
+- assertVisible:
+    id: "recipes_first_card"

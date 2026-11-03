@@ -25,6 +25,7 @@ enum class StoveIcons(
     Heart(R.drawable.ic_heart),
     Home(R.drawable.ic_home),
     Lock(R.drawable.ic_lock),
+    Minus(R.drawable.ic_minus),
     Pause(R.drawable.ic_pause),
     Play(R.drawable.ic_play),
     Plus(R.drawable.ic_plus),

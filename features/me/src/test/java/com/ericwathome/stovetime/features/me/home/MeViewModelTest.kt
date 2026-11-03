@@ -1,0 +1,456 @@
+package com.ericwathome.stovetime.features.me.home
+
+import app.cash.turbine.test
+import com.ericwathome.stovetime.core.common.result.DataError
+import com.ericwathome.stovetime.core.common.result.DataResult
+import com.ericwathome.stovetime.core.data.helpers.asLocalDate
+import com.ericwathome.stovetime.core.data.model.progress.Cook
+import com.ericwathome.stovetime.core.data.model.progress.CookKind
+import com.ericwathome.stovetime.core.data.model.settings.CookSettings
+import com.ericwathome.stovetime.core.data.repo.progress.ProgressRepository
+import com.ericwathome.stovetime.core.data.repo.settings.SettingsRepository
+import com.ericwathome.stovetime.core.domain.model.Progress
+import com.ericwathome.stovetime.core.domain.model.WeekProgress
+import com.ericwathome.stovetime.core.domain.useCase.ProgressUseCases
+import com.ericwathome.stovetime.testing.MainDispatcherRule
+import com.ericwathome.stovetime.ui.helpers.ViewState
+import com.ericwathome.stovetime.ui.helpers.dataOrNull
+import com.ericwathome.stovetime.core.domain.model.Badge
+import com.ericwathome.stovetime.core.domain.model.BadgeKind
+import kotlinx.coroutines.flow.flowOf
+import com.google.common.truth.Truth.assertThat
+import io.mockk.MockKAnnotations
+import io.mockk.coEvery
+import io.mockk.coVerify
+import io.mockk.every
+import io.mockk.impl.annotations.MockK
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.test.runTest
+import org.junit.Before
+import org.junit.Rule
+import org.junit.Test
+
+class MeViewModelTest {
+    @get:Rule
+    val mainDispatcherRule = MainDispatcherRule()
+
+    @MockK
+    private lateinit var progressUseCases: ProgressUseCases
+
+    @MockK
+    private lateinit var settingsRepository: SettingsRepository
+
+    @MockK
+    private lateinit var progressRepository: ProgressRepository
+
+    private val settings = MutableStateFlow(CookSettings())
+
+    private val progress = MutableStateFlow<DataResult<Progress>>(DataResult.Success(progressOf(emptyList())))
+    private lateinit var sut: MeViewModel
+
+    private fun cook(
+        id: Long,
+        kind: CookKind = CookKind.Lesson,
+        dishId: String = "boiled-eggs",
+        finishedAt: Long = 1_800_000_000_000L,
+        xp: Int = 30,
+    ) = Cook(
+        id = id,
+        dishId = dishId,
+        kind = kind,
+        name = dishId,
+        photo = null,
+        startedAt = finishedAt - 600_000,
+        finishedAt = finishedAt,
+        xp = xp,
+        rating = null,
+        weeklyGoal = 4,
+    )
+
+    private fun progressOf(
+        history: List<Cook>,
+        weekStreak: Int = 0,
+        bestWeekStreak: Int = 0,
+        goal: Int = 4,
+    ) = Progress(
+        totalXp = history.sumOf { it.xp },
+        weekStreak = weekStreak,
+        bestWeekStreak = bestWeekStreak,
+        thisWeek = WeekProgress(days = emptyList(), cooks = 0, goal = goal),
+        history = history,
+    )
+
+    @Before
+    fun setup() {
+        MockKAnnotations.init(this, relaxed = true)
+        every { progressUseCases.observeProgress() } returns progress
+        every { settingsRepository.observeCookSettings() } returns settings
+        coEvery { settingsRepository.saveWeeklyGoal(any()) } answers {
+            settings.value = settings.value.copy(weeklyGoal = firstArg())
+            DataResult.Success(true)
+        }
+        coEvery { settingsRepository.saveKeepScreenOn(any()) } answers {
+            settings.value = settings.value.copy(keepScreenOn = firstArg())
+            DataResult.Success(true)
+        }
+        coEvery { settingsRepository.saveWeeklyReminder(any()) } answers {
+            settings.value = settings.value.copy(weeklyReminder = firstArg())
+            DataResult.Success(true)
+        }
+        coEvery { progressRepository.clearProgress() } answers {
+            progress.value = DataResult.Success(progressOf(emptyList()))
+            DataResult.Success(true)
+        }
+        sut = MeViewModel(progressUseCases, settingsRepository, progressRepository)
+    }
+
+    @Test
+    fun a_fresh_install_shows_zero_totals_and_an_empty_history() =
+        runTest {
+            sut.state.test {
+                // then
+                val state = expectMostRecentItem()
+                val shown = state.progress.dataOrNull()!!
+                assertThat(shown.totalXp).isEqualTo(0)
+                assertThat(shown.weekStreak).isEqualTo(0)
+                assertThat(shown.bestWeekStreak).isEqualTo(0)
+                assertThat(shown.cookCount).isEqualTo(0)
+                assertThat(shown.history).isEmpty()
+                assertThat(state.cookingSince).isNull()
+            }
+        }
+
+    @Test
+    fun several_cooks_show_their_totals() =
+        runTest {
+            sut.state.test {
+                skipItems(1)
+
+                // when
+                progress.value = DataResult.Success(progressOf(listOf(cook(3, xp = 10), cook(2, xp = 30), cook(1, xp = 30)), weekStreak = 2, bestWeekStreak = 2))
+
+                // then
+                val shown = expectMostRecentItem().progress.dataOrNull()!!
+                assertThat(shown.totalXp).isEqualTo(70)
+                assertThat(shown.cookCount).isEqualTo(3)
+                assertThat(shown.weekStreak).isEqualTo(2)
+            }
+        }
+
+    @Test
+    fun the_best_streak_stays_after_the_current_streak_resets() =
+        runTest {
+            sut.state.test {
+                skipItems(1)
+
+                // when
+                progress.value = DataResult.Success(progressOf(listOf(cook(1)), weekStreak = 0, bestWeekStreak = 3))
+
+                // then
+                val shown = expectMostRecentItem().progress.dataOrNull()!!
+                assertThat(shown.weekStreak).isEqualTo(0)
+                assertThat(shown.bestWeekStreak).isEqualTo(3)
+            }
+        }
+
+    @Test
+    fun the_history_keeps_the_newest_cook_first_and_dates_the_first_cook() =
+        runTest {
+            sut.state.test {
+                skipItems(1)
+                val oldest = cook(1, finishedAt = 1_700_000_000_000L)
+
+                // when
+                progress.value = DataResult.Success(progressOf(listOf(cook(3), cook(2), oldest)))
+
+                // then
+                val state = expectMostRecentItem()
+                assertThat(state.progress.dataOrNull()!!.history.map { it.id }).containsExactly(3L, 2L, 1L).inOrder()
+                assertThat(state.cookingSince).isEqualTo(oldest.finishedAt.asLocalDate)
+            }
+        }
+
+    @Test
+    fun a_failed_load_shows_an_error_and_retry_loads_again() =
+        runTest {
+            progress.value = DataResult.Error(DataError.Unknown("broken"))
+            sut.state.test {
+                assertThat(expectMostRecentItem().progress).isInstanceOf(ViewState.Error::class.java)
+
+                // when
+                progress.value = DataResult.Success(progressOf(emptyList()))
+                sut.onAction(MeAction.OnClickRetry)
+
+                // then
+                assertThat(expectMostRecentItem().progress).isInstanceOf(ViewState.Success::class.java)
+            }
+        }
+
+    @Test
+    fun tapping_a_lesson_cook_opens_its_intro() =
+        runTest {
+            progress.value = DataResult.Success(progressOf(listOf(cook(1, dishId = "jammy-eggs-on-toast"))))
+            sut.state.test {
+                skipItems(1)
+                sut.event.test {
+                    // when
+                    sut.onAction(MeAction.OnClickCook(1))
+
+                    // then
+                    assertThat(awaitItem()).isEqualTo(MeEvent.OpenLesson("jammy-eggs-on-toast"))
+                }
+                cancelAndIgnoreRemainingEvents()
+            }
+        }
+
+    @Test
+    fun tapping_a_recipe_cook_opens_its_recipe_page() =
+        runTest {
+            progress.value = DataResult.Success(progressOf(listOf(cook(1, kind = CookKind.Recipe, dishId = "52772"))))
+            sut.state.test {
+                skipItems(1)
+                sut.event.test {
+                    // when
+                    sut.onAction(MeAction.OnClickCook(1))
+
+                    // then
+                    assertThat(awaitItem()).isEqualTo(MeEvent.OpenRecipe("52772"))
+                }
+                cancelAndIgnoreRemainingEvents()
+            }
+        }
+
+    @Test
+    fun the_empty_history_points_back_to_the_path() =
+        runTest {
+            sut.event.test {
+                // when
+                sut.onAction(MeAction.OnClickGoToPath)
+
+                // then
+                assertThat(awaitItem()).isEqualTo(MeEvent.OpenPath)
+            }
+        }
+
+    @Test
+    fun changing_the_goal_updates_the_week_row() =
+        runTest {
+            every { progressUseCases.observeProgress() } returns settings.map { DataResult.Success(progressOf(emptyList(), goal = it.weeklyGoal)) }
+            sut = MeViewModel(progressUseCases, settingsRepository, progressRepository)
+            sut.state.test {
+                skipItems(1)
+
+                // when
+                sut.onAction(MeAction.OnClickRaiseGoal)
+
+                // then
+                val state = expectMostRecentItem()
+                assertThat(state.settings?.weeklyGoal).isEqualTo(5)
+                assertThat(state.progress.dataOrNull()?.thisWeek?.goal).isEqualTo(5)
+                coVerify { settingsRepository.saveWeeklyGoal(5) }
+            }
+        }
+
+    @Test
+    fun the_goal_cannot_go_below_one() =
+        runTest {
+            settings.value = CookSettings(weeklyGoal = 1)
+            sut.state.test {
+                                // when
+                sut.onAction(MeAction.OnClickLowerGoal)
+
+                // then
+                val state = expectMostRecentItem()
+                assertThat(state.settings?.weeklyGoal).isEqualTo(1)
+                assertThat(state.canLowerGoal).isFalse()
+                assertThat(state.canRaiseGoal).isTrue()
+                coVerify(exactly = 0) { settingsRepository.saveWeeklyGoal(any()) }
+            }
+        }
+
+    @Test
+    fun the_goal_cannot_go_above_seven() =
+        runTest {
+            settings.value = CookSettings(weeklyGoal = 7)
+            sut.state.test {
+                                // when
+                sut.onAction(MeAction.OnClickRaiseGoal)
+
+                // then
+                val state = expectMostRecentItem()
+                assertThat(state.settings?.weeklyGoal).isEqualTo(7)
+                assertThat(state.canRaiseGoal).isFalse()
+                assertThat(state.canLowerGoal).isTrue()
+                coVerify(exactly = 0) { settingsRepository.saveWeeklyGoal(any()) }
+            }
+        }
+
+    @Test
+    fun switching_keep_screen_on_saves_it() =
+        runTest {
+            sut.state.test {
+                skipItems(1)
+
+                // when
+                sut.onAction(MeAction.OnKeepScreenOnChange(false))
+
+                // then
+                assertThat(expectMostRecentItem().settings?.keepScreenOn).isFalse()
+                coVerify { settingsRepository.saveKeepScreenOn(false) }
+            }
+        }
+
+    @Test
+    fun the_weekly_reminder_is_on_by_default() =
+        runTest {
+            sut.state.test {
+                // then
+                assertThat(expectMostRecentItem().settings?.weeklyReminder).isTrue()
+            }
+        }
+
+    @Test
+    fun switching_the_weekly_reminder_off_saves_it() =
+        runTest {
+            sut.state.test {
+                skipItems(1)
+
+                // when
+                sut.onAction(MeAction.OnWeeklyReminderChange(false))
+
+                // then
+                assertThat(expectMostRecentItem().settings?.weeklyReminder).isFalse()
+                coVerify { settingsRepository.saveWeeklyReminder(false) }
+            }
+        }
+
+    @Test
+    fun a_weekly_reminder_switch_that_fails_to_save_goes_back_on() =
+        runTest {
+            coEvery { settingsRepository.saveWeeklyReminder(any()) } returns DataResult.Error(DataError.Unknown("disk"))
+            sut.state.test {
+                skipItems(1)
+                sut.event.test {
+                    // when
+                    sut.onAction(MeAction.OnWeeklyReminderChange(false))
+
+                    // then
+                    assertThat(awaitItem()).isEqualTo(MeEvent.ShowSaveFailed)
+                }
+                assertThat(expectMostRecentItem().settings?.weeklyReminder).isTrue()
+            }
+        }
+
+    @Test
+    fun a_setting_that_fails_to_save_goes_back_and_says_so() =
+        runTest {
+            coEvery { settingsRepository.saveWeeklyGoal(any()) } returns DataResult.Error(DataError.Unknown("disk"))
+            sut.state.test {
+                skipItems(1)
+                sut.event.test {
+                    // when
+                    sut.onAction(MeAction.OnClickRaiseGoal)
+
+                    // then
+                    assertThat(awaitItem()).isEqualTo(MeEvent.ShowSaveFailed)
+                }
+                assertThat(expectMostRecentItem().settings?.weeklyGoal).isEqualTo(4)
+            }
+        }
+
+    @Test
+    fun start_over_asks_first_and_clears_nothing_until_confirmed() =
+        runTest {
+            sut.event.test {
+                // when
+                sut.onAction(MeAction.OnClickStartOver)
+
+                // then
+                assertThat(awaitItem()).isEqualTo(MeEvent.AskToStartOver)
+                coVerify(exactly = 0) { progressRepository.clearProgress() }
+            }
+        }
+
+    @Test
+    fun cancelling_start_over_keeps_the_progress() =
+        runTest {
+            progress.value = DataResult.Success(progressOf(listOf(cook(1)), weekStreak = 1, bestWeekStreak = 1))
+            sut.state.test {
+                // when
+                sut.onAction(MeAction.OnClickStartOver)
+
+                // then
+                val shown = expectMostRecentItem().progress.dataOrNull()!!
+                assertThat(shown.totalXp).isEqualTo(30)
+                assertThat(shown.history).hasSize(1)
+                coVerify(exactly = 0) { progressRepository.clearProgress() }
+            }
+        }
+
+    @Test
+    fun confirming_start_over_clears_the_progress() =
+        runTest {
+            progress.value = DataResult.Success(progressOf(listOf(cook(2), cook(1)), weekStreak = 1, bestWeekStreak = 2))
+            sut.state.test {
+                skipItems(1)
+
+                // when
+                sut.onAction(MeAction.OnConfirmStartOver)
+
+                // then
+                val shown = expectMostRecentItem().progress.dataOrNull()!!
+                assertThat(shown.totalXp).isEqualTo(0)
+                assertThat(shown.bestWeekStreak).isEqualTo(0)
+                assertThat(shown.history).isEmpty()
+                coVerify(exactly = 1) { progressRepository.clearProgress() }
+            }
+        }
+
+    @Test
+    fun starting_over_keeps_the_settings() =
+        runTest {
+            settings.value = CookSettings(weeklyGoal = 6, keepScreenOn = false)
+            sut.state.test {
+                // when
+                sut.onAction(MeAction.OnConfirmStartOver)
+
+                // then
+                assertThat(expectMostRecentItem().settings).isEqualTo(CookSettings(weeklyGoal = 6, keepScreenOn = false))
+                coVerify(exactly = 0) { settingsRepository.saveWeeklyGoal(any()) }
+                coVerify(exactly = 0) { settingsRepository.saveKeepScreenOn(any()) }
+            }
+        }
+
+    @Test
+    fun a_start_over_that_fails_says_so() =
+        runTest {
+            coEvery { progressRepository.clearProgress() } returns DataResult.Error(DataError.Unknown("disk"))
+            sut.event.test {
+                // when
+                sut.onAction(MeAction.OnConfirmStartOver)
+
+                // then
+                assertThat(awaitItem()).isEqualTo(MeEvent.ShowStartOverFailed)
+            }
+        }
+
+    @Test
+    fun badges_show_earned_and_not_yet_earned() =
+        runTest {
+            // given
+            val badges =
+                listOf(
+                    Badge("unit:home-basics:eggs", BadgeKind.UnitDone("Home basics", "Eggs"), earned = true),
+                    Badge("streak:2", BadgeKind.Streak(2), earned = false),
+                )
+            every { progressUseCases.observeBadges() } returns flowOf(DataResult.Success(badges))
+            sut = MeViewModel(progressUseCases, settingsRepository, progressRepository)
+
+            sut.state.test {
+                // then
+                assertThat(expectMostRecentItem().badges).isEqualTo(badges)
+                cancelAndIgnoreRemainingEvents()
+            }
+        }
+}

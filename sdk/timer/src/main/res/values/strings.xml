@@ -1,0 +1,17 @@
+<resources>
+    <string name="sdk_timer_channel_running_name">Running timers</string>
+    <string name="sdk_timer_channel_running_description">Shows the timers that are counting down</string>
+    <string name="sdk_timer_channel_alarm_name">Timer alarms</string>
+    <string name="sdk_timer_channel_alarm_description">Rings when a timer ends</string>
+    <string name="sdk_timer_title">Timers</string>
+    <plurals name="sdk_timer_running_count">
+        <item quantity="one">%d timer running</item>
+        <item quantity="other">%d timers running</item>
+    </plurals>
+    <string name="sdk_timer_ends_at">Ends at %1$s</string>
+    <string name="sdk_timer_paused">Paused, %1$s left</string>
+    <string name="sdk_timer_times_up">Time\'s up</string>
+    <string name="sdk_timer_line">%1$s · %2$s</string>
+    <string name="sdk_timer_action_stop">Stop</string>
+    <string name="sdk_timer_action_snooze">+1 min</string>
+</resources>

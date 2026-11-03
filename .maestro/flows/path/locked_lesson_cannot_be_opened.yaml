@@ -1,0 +1,20 @@
+appId: com.ericwathome.stovetime
+name: A locked lesson explains why and opens nothing
+tags:
+  - path
+---
+- launchApp:
+    clearState: true
+- extendedWaitUntil:
+    visible: "Boiled eggs, up next"
+    timeout: 10000
+- scrollUntilVisible:
+    element:
+      id: "path_node_2"
+    direction: DOWN
+- tapOn:
+    id: "path_node_2"
+- assertVisible: "Finish the previous lesson first"
+- assertNotVisible:
+    id: "intro_start"
+- assertVisible: "Home basics"

@@ -12,9 +12,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.ericwathome.stovetime.design.theme.StovetimePreviewTheme
 import com.ericwathome.stovetime.design.theme.StovetimeTheme
 
 @Composable
@@ -44,16 +45,16 @@ fun StoveProgressBar(
                     .padding(start = 10.dp, end = 10.dp, top = height / 4)
                     .fillMaxWidth()
                     .height(height / 4)
-                    .background(Color.White.copy(alpha = 0.35f), shape),
+                    .background(StovetimeTheme.colors.onAccent.copy(alpha = 0.35f), shape),
             )
         }
     }
 }
 
-@Preview(showBackground = true, backgroundColor = 0xFFFBF6EC)
+@PreviewLightDark
 @Composable
 private fun StoveProgressBarPreview() {
-    StovetimeTheme {
+    StovetimePreviewTheme {
         StoveProgressBar(progress = 0.4f, modifier = Modifier.padding(16.dp))
     }
 }

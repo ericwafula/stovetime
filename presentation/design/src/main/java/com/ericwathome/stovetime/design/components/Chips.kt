@@ -9,9 +9,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.ericwathome.stovetime.design.theme.StovetimeLedge
+import com.ericwathome.stovetime.design.theme.StovetimePreviewTheme
 import com.ericwathome.stovetime.design.theme.StovetimeTheme
 
 enum class StatKind { Streak, Xp }
@@ -23,9 +24,11 @@ fun StatChip(
     contentDescription: String,
     modifier: Modifier = Modifier,
 ) {
-    val color = if (kind == StatKind.Streak) StovetimeTheme.colors.primary else StovetimeTheme.colors.xp
+    val colors = StovetimeTheme.colors
+    val iconTint = if (kind == StatKind.Streak) colors.primary else colors.xp
+    val color = if (kind == StatKind.Streak) colors.primaryContent else colors.xpContent
     Row(modifier = modifier, verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-        StoveIcon(if (kind == StatKind.Streak) StoveIcons.Flame else StoveIcons.Star, contentDescription, tint = color)
+        StoveIcon(if (kind == StatKind.Streak) StoveIcons.Flame else StoveIcons.Star, contentDescription, tint = iconTint)
         StoveText(value, style = StovetimeTheme.typography.heading, color = color)
     }
 }
@@ -51,8 +54,8 @@ fun TimerChip(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(8.dp),
         ) {
-            StoveIcon(StoveIcons.Timer, contentDescription = null, tint = colors.primary, size = 20.dp)
-            StoveText(text, style = StovetimeTheme.typography.label, color = colors.primary)
+            StoveIcon(StoveIcons.Timer, contentDescription = null, tint = colors.primaryContent, size = 20.dp)
+            StoveText(text, style = StovetimeTheme.typography.label, color = colors.primaryContent)
         }
     }
 }
@@ -75,10 +78,10 @@ fun Pill(
     )
 }
 
-@Preview(showBackground = true, backgroundColor = 0xFFFBF6EC)
+@PreviewLightDark
 @Composable
 private fun ChipsPreview() {
-    StovetimeTheme {
+    StovetimePreviewTheme {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
             Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
                 StatChip(StatKind.Streak, value = "3", contentDescription = "Week streak")
@@ -87,7 +90,7 @@ private fun ChipsPreview() {
             TimerChip(text = "Start 6:30", onClick = {})
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 Pill("15 min")
-                Pill("+30 XP", background = StovetimeTheme.colors.xpSoft, color = StovetimeTheme.colors.xpShade)
+                Pill("+30 XP", background = StovetimeTheme.colors.xpSoft, color = StovetimeTheme.colors.xpContent)
             }
         }
     }

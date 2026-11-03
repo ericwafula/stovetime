@@ -1,8 +1,8 @@
 # Stovetime
 
-**Recipes & timers for home cooks.** Know exactly when to flip, stir and rest.
+**Learn to cook, one dish at a time.**
 
-Stovetime answers "how long do I cook this?" with cooking guides and timers that keep running while you cook several things at once, then grows into a recipe app with cook mode, a shopping list and your own cookbook.
+Stovetime is a learning path for home cooks. Short units of real recipes, cooked one step at a time with timers built in, plus XP and a weekly streak to keep you going. A Recipes tab brings in thousands more from TheMealDB.
 
 ## Requirements
 
@@ -36,72 +36,65 @@ To check everything builds without installing:
 
 ## Level 3: build the setup
 
-This branch is the starting point for Level 3. Each step is built live. Skills and agents go in `.ai/skills/` and `.ai/agents/`; run `.ai/setup.sh` after adding one so Claude Code can find it.
+This branch is the finished app with a few pieces taken out, so you can build them live. Each gap is marked `TODO(workshop N)` and says what goes there; list them all with `grep -rn "TODO(workshop" .`. The `workshop` skill knows every step, and `workshop/level-3-complete` has the finished version of each piece.
 
-- [ ] **0. Check your setup.** Run `.ai/setup.sh` and `code-review-graph build`, then start `claude` in the project and approve the plugins and MCP servers it asks about. Then:
+Before you start: `.ai/setup.sh`, then `code-review-graph build`, then `claude`. Approve the plugins and MCP servers it asks about, and in `/mcp` pick `figma` → **Authenticate**. Note your starting `/context` number.
 
-  - `/mcp` lists `code-review-graph` and `context-mode` as connected.
-  - `/context-mode:ctx-doctor` shows every check as `[x]`.
-  - `/context` gives your starting token count. Note it down.
-
-- [ ] **1. Connect Figma and create a skill.** Add the Figma MCP server, then `/mcp` → `figma` → **Authenticate**:
-
-  ```bash
-  claude mcp add --transport http --scope project figma https://mcp.figma.com/mcp
-  ```
-
-  Write the skill for how we build screens:
+- [ ] **0. Make CLAUDE.md yours.** There's no `CLAUDE.md` yet. Run `/init`, read what it wrote, then:
 
   ```text
-  Create a skill in .ai/skills/compose-screen for how we build screens: Route → Screen → Content, the ViewModel through Koin, previews, strings in strings.xml, and only StovetimeTheme and the Stove* components from :presentation:design, never Material. Then run .ai/setup.sh.
+  Trim CLAUDE.md to what every session needs, and add our rules: no AI attribution anywhere, run the checks skill before any commit, commit only when I ask, no secrets in source, and no comments unless the code can't say it.
   ```
 
-  Then build the screen from its Figma frame:
+- [ ] **1. Skills.** Two skills are empty (`TODO(workshop 1)`): how we write a repository, and how we build a screen.
 
   ```text
-  Build this screen in Jetpack Compose, and add a ViewModel to handle its state: https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=70-98
+  Do workshop step 1: write the add-repository and new-compose-screen skills from their TODOs, in the same shape as our other skills. Then run .ai/setup.sh.
   ```
 
-- [ ] **2. Create a subagent:**
+- [ ] **2. Agents.** The code reviewer is empty (`TODO(workshop 2)`).
 
   ```text
-  Create a code-reviewer subagent in .ai/agents/code-reviewer.md: read-only (Read, Grep, Glob), model sonnet, reviews changed files against our conventions and reports only issues it's at least 80% sure of. Then run .ai/setup.sh.
+  Do workshop step 2: write the code-reviewer agent from its TODO. Then run .ai/setup.sh and review the last commit with it.
   ```
 
-  ```text
-  Review my changes.
-  ```
+  Compare `/context` before and after: the review runs in its own context, so the main session barely grows.
 
-  Compare `/context` before and after: the main session barely grows.
-
-- [ ] **3. Manage context.** Run `/context`, then `/compact keep the decisions about the Path screen`, then `/clear`. Then try the tools that keep context small:
+- [ ] **3. See and manage context.** Run `/context`, then `/compact keep the decisions about the skills`, then `/clear`. Then try the tools that keep context small:
 
   | Tool | Try | What to look for |
   |---|---|---|
-  | context-mode | `Run the Gradle build and tell me if it passed`, then `/context-mode:ctx-stats` | How much output stayed out of context |
-  | code-review-graph | `What depends on StoveButton?` | It answers from the graph instead of opening files |
-  | memsearch | In a new session: `What did we build last time?` | It recalls the earlier session from `.memsearch/` |
   | RTK | `git status` with and without RTK | Shorter command output |
+  | context-mode | `Run the Gradle build and tell me if it passed`, then `/context-mode:ctx-stats` | How much output stayed out of context |
+  | code-review-graph | `What depends on GetRecipeRepository?` | It answers from the graph instead of opening files |
+  | memsearch | In a new session: `What did we do last time?` | It recalls the earlier session from `.memsearch/` |
   | ctxline | Watch the status line during `/compact` | The `ctx` figure drops, and the `5h` and `wk` limits stay in view |
 
-- [ ] **4. Control cost:** run the same small task (for example `Add a preview for the empty state`) on low effort, then on high effort (`/effort`), and compare.
-- [ ] **5. Plan:**
+- [ ] **4. Control cost.** Run the same small task (for example `Add a preview for the error state of the Recipes tab`) on low effort, then on high effort (`/effort`), and compare.
+
+- [ ] **5. Plan.** Read step 3.3 in `.ai/roadmap/backlog/phase-3-recipes.md`: it's the spec for the recipe page you'll build next. Then turn a new request into a spec:
 
   ```text
-  Users want to time poached eggs too. Turn that into a roadmap step with acceptance criteria in our backlog format.
+  Users want to save recipes they like. Turn that into a roadmap step with acceptance criteria, edge cases and out of scope, in our backlog format.
   ```
 
-- [ ] **6. Verify:** run the checks, add the Mobile MCP, and let Claude check the screen on a device:
-
-  ```bash
-  claude mcp add --scope project mobile -- npx -y @mobilenext/mobile-mcp@latest
-  ```
+- [ ] **6. Build the recipe page.** Tapping a recipe in the Recipes tab shows a placeholder. Build it bottom-up, one layer at a time (`TODO(workshop 6.1)` to `6.5`):
 
   ```text
-  Install the app on my phone and check the Path screen matches the Figma frame. Then add a Maestro flow for it.
+  Do workshop step 6: build the recipe page from spec 3.3, layer by layer — the TheMealDB lookup, the local read and save, the cache-first repository, the ViewModel, then the screen from https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=72-120. Add the tests as you go.
   ```
 
-- [ ] **7. See it all together:** `git checkout workshop/level-3-complete`
+- [ ] **7. Verify.** Run the checks, then:
+
+  ```text
+  Review the recipe page with the code-reviewer, then install the app on my phone and check the recipe page against the Figma frame.
+  ```
+
+  Then the offline test: open a recipe, turn on airplane mode, go back and open it again. It still opens.
+
+- [ ] **8. See it all together:** `git switch workshop/level-3-complete`
+
+Stuck on a step? `git checkout workshop/level-3-complete -- <file>` puts the finished version in. The `workshop` skill lists the files for each step.
 
 ## Tools for Level 3
 
@@ -123,7 +116,7 @@ Install these before the Level 3 steps. Everything else comes with the repo.
 
 ### Figma MCP
 
-The server is added in step 1 on `workshop/level-3-start`, and is already in `.mcp.json` on `workshop/level-3-complete`.
+The server is already in `.mcp.json` on both Level 3 branches, so it only needs signing in.
 
 1. Start `claude` in the project and approve the `figma` server when asked.
 2. Run `/mcp`, pick `figma` and choose **Authenticate**. Sign in to Figma in the browser that opens.
@@ -174,7 +167,8 @@ To go back to your old status line, run `ctxline uninstall`.
 
 - `app/` — the Android app
 - `build-logic/` — Gradle convention plugins (`stovetime.*`)
-- `.ai/` — the roadmap, and the skills and agents you add
+- `.ai/` — skills, agents and the roadmap used to build the app
+- `.maestro/` — end-to-end flows
 
 ## License
 

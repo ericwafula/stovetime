@@ -12,8 +12,8 @@ It links everything into `.claude/`. Re-run it after adding a skill or agent.
 
 | Folder | What's in it |
 |---|---|
-| `skills/` | Playbooks for *how* to do something, like building a screen |
-| `agents/` | *Who* does a self-contained job, like a code reviewer |
+| `skills/` | Playbooks for *how* to do something: build a screen, add a ViewModel, write tests, run checks, ship a PR |
+| `agents/` | *Who* does a self-contained job: `orchestrator` (the main session), `code-reviewer`, `planner` |
 | `roadmap/` | *What* to build and in what order, with acceptance criteria per step |
 
-On this branch `skills/` and `agents/` start empty. The finished set is on `workshop/level-3-complete`.
+MCP servers (Figma and Mobile) are in `.mcp.json` at the repo root. Claude Code asks to enable them the first time.
