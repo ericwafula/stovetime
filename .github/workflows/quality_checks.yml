@@ -1,0 +1,66 @@
+name: Run quality checks
+
+on:
+  pull_request:
+    paths-ignore:
+      - '**/*.md'
+  push:
+    branches:
+      - main
+      - 'workshop/**'
+    paths-ignore:
+      - '**/*.md'
+
+concurrency:
+  group: quality-checks-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  quality_checks:
+    name: Run Quality Checks
+    runs-on: ${{ (github.event.pull_request.head.repo.fork && 'ubuntu-latest') || vars.CI_RUNNER || 'ubuntu-latest' }}
+
+    steps:
+      - uses: actions/checkout@v7
+      - if: runner.environment == 'github-hosted'
+        uses: actions/setup-java@v6
+        with:
+          distribution: 'temurin'
+          java-version: 21
+
+      - name: Restore the Gradle cache
+        id: gradle-cache
+        if: runner.environment == 'github-hosted'
+        uses: actions/cache/restore@v5
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: gradle-${{ runner.os }}-${{ hashFiles('**/*.gradle.kts', 'gradle/libs.versions.toml', 'gradle/wrapper/gradle-wrapper.properties') }}-${{ github.run_id }}
+          restore-keys: |
+            gradle-${{ runner.os }}-${{ hashFiles('**/*.gradle.kts', 'gradle/libs.versions.toml', 'gradle/wrapper/gradle-wrapper.properties') }}-
+            gradle-${{ runner.os }}-
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v6
+        with:
+          cache-provider: external
+
+      - name: Add gradlew exec permissions
+        run: chmod +x ./gradlew
+
+      - name: Build, test and lint the debug app
+        run: ./gradlew assembleDebug testDebugUnitTest checkHardcodedText ktlintCheck --continue
+
+      - name: Stop Gradle so its cache can be saved
+        if: always()
+        run: ./gradlew --stop
+
+      - name: Save the Gradle cache for pull requests
+        if: github.event_name == 'push' && runner.environment == 'github-hosted'
+        uses: actions/cache/save@v5
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ steps.gradle-cache.outputs.cache-primary-key }}
