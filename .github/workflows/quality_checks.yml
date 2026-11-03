@@ -64,3 +64,36 @@ jobs:
             ~/.gradle/caches
             ~/.gradle/wrapper
           key: ${{ steps.gradle-cache.outputs.cache-primary-key }}
+
+  review:
+    name: Review the changes
+    needs: quality_checks
+    if: github.event_name == 'pull_request' && !github.event.pull_request.draft && !github.event.pull_request.head.repo.fork
+    runs-on: ${{ vars.CI_RUNNER || 'ubuntu-latest' }}
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      pull-requests: write
+      id-token: write
+
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Link the skills and agents
+        run: if [ -x .ai/setup.sh ]; then .ai/setup.sh; fi
+
+      - name: Review with the code-reviewer agent
+        uses: anthropics/claude-code-action@v1
+        env:
+          GH_TOKEN: ${{ github.token }}
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          prompt: |
+            Review pull request #${{ github.event.pull_request.number }} in ${{ github.repository }}.
+            The changed files are the ones in `git diff --name-only origin/${{ github.event.pull_request.base.ref }}...HEAD`.
+            Hand them to the code-reviewer agent and let it review them against CLAUDE.md, the skills in .ai/skills and the step's spec in .ai/roadmap if the PR names one.
+            Post each finding it reports as an inline comment on its line, with why it matters and the fix. If it finds nothing, post one short comment saying the review found no issues.
+            Don't change, commit or push anything.
+          claude_args: '--max-turns 30 --allowedTools "Read,Grep,Glob,Task,Agent,Bash(git diff:*),Bash(git log:*),Bash(gh pr comment:*),mcp__github_inline_comment__create_inline_comment"'
