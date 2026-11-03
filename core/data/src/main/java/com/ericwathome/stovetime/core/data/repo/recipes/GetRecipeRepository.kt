@@ -20,6 +20,7 @@ internal class GetRecipeRepositoryImpl(
     private val recipeLocalDatasource: RecipeLocalDatasource,
 ) : GetRecipeRepository {
     override suspend fun invoke(id: String): DataResult<Recipe> {
+        // get the recipe from the local datasource first
         recipeLocalDatasource.getRecipe(id).mapToData { it?.toData() }.getOrNull()?.let { return DataResult.Success(it) }
 
         val fetched =
