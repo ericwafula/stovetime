@@ -40,7 +40,7 @@ Same screen, same prompt, but now Claude Code can read the project. Nothing is s
 
 The screen to build:
 
-<img src="assets/kitchen-screen.png" alt="Stovetime Kitchen screen" width="300">
+<img src="assets/recipe-screen.png" alt="Stovetime recipe page" width="300">
 
 1. From the project folder, start Claude Code:
 
@@ -49,7 +49,7 @@ The screen to build:
    ```
 
 2. Run `/init` so Claude writes a `CLAUDE.md` describing the project. Read what it wrote.
-3. Drag in [`assets/kitchen-screen.png`](assets/kitchen-screen.png), then paste this prompt:
+3. Drag in [`assets/recipe-screen.png`](assets/recipe-screen.png), then paste this prompt:
 
    ```text
    Build this screen in Jetpack Compose, and add a ViewModel to handle its state.
