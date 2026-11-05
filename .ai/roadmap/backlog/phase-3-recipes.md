@@ -61,7 +61,7 @@ The Recipes tab: category chips across the top, a grid of meal cards with photos
 ## 3.3 Recipe page ✅
 
 **Size:** M · **Depends on:** 3.2
-**Design:** follow [Figma › Recipe — Intro](https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=72-120) until it has its own frame
+**Design:** [Figma › Recipe — Details](https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=106-103)
 
 ### Description
 A recipe from TheMealDB in the same layout as a lesson intro: photo, name, category and area, "+10 XP", the ingredients with measures, and a Start cooking button. The full recipe is fetched the first time it's opened and kept on the phone after that.
