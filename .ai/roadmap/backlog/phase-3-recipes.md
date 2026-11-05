@@ -58,7 +58,7 @@ The Recipes tab: category chips across the top, a grid of meal cards with photos
 
 ---
 
-## 3.3 Recipe page ✅
+## 3.3 Recipe page ⬜
 
 **Size:** M · **Depends on:** 3.2
 **Design:** follow [Figma › Recipe — Intro](https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=72-120) until it has its own frame
