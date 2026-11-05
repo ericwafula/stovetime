@@ -38,6 +38,8 @@ To check everything builds without installing:
 
 This branch is the finished app with a few pieces taken out, so you can build them live. Each gap is marked `TODO(workshop N)` and says what goes there; list them all with `grep -rn "TODO(workshop" .`. The `workshop` skill knows every step, and `workshop/level-3-complete` has the finished version of each piece.
 
+Skills and agents live in `.ai/`. `.ai/setup.sh` links them into `.claude/`, which is where Claude Code reads them, so run it after you add or change one.
+
 This branch installs as **Stovetime Start** (with a green START banner on its icon), next to the finished **Stovetime** from `workshop/level-3-complete`, so you can compare them on one phone.
 
 Before you start: `.ai/setup.sh`, then `code-review-graph build`, then `claude`. Approve the plugins and MCP servers it asks about, and in `/mcp` pick `figma` → **Authenticate**. Note your starting `/context` number.
@@ -48,13 +50,13 @@ Before you start: `.ai/setup.sh`, then `code-review-graph build`, then `claude`.
   Trim CLAUDE.md to what every session needs, and add our rules: no AI attribution anywhere, run the checks skill before any commit, commit only when I ask, no secrets in source, and no comments unless the code can't say it.
   ```
 
-- [ ] **1. Skills.** Two skills are empty (`TODO(workshop 1)`): how we write a repository, and how we build a screen.
+- [ ] **1. Skills.** Two skills are empty (`TODO(workshop 1)`): how we write a repository ([`.ai/skills/add-repository/SKILL.md`](.ai/skills/add-repository/SKILL.md)), and how we build a screen ([`.ai/skills/new-compose-screen/SKILL.md`](.ai/skills/new-compose-screen/SKILL.md)).
 
   ```text
   Do workshop step 1: write the add-repository and new-compose-screen skills from their TODOs, in the same shape as our other skills. Then run .ai/setup.sh.
   ```
 
-- [ ] **2. Agents.** The code reviewer is empty (`TODO(workshop 2)`).
+- [ ] **2. Agents.** The code reviewer is empty (`TODO(workshop 2)`): [`.ai/agents/code-reviewer.md`](.ai/agents/code-reviewer.md).
 
   ```text
   Do workshop step 2: write the code-reviewer agent from its TODO. Then run .ai/setup.sh and review the last commit with it.
@@ -81,6 +83,14 @@ Before you start: `.ai/setup.sh`, then `code-review-graph build`, then `claude`.
   ```
 
 - [ ] **6. Build the recipe page.** Tapping a recipe in the Recipes tab shows a placeholder. Build it bottom-up, one layer at a time (`TODO(workshop 6.1)` to `6.5`):
+
+  | Step | Layer | File |
+  |---|---|---|
+  | 6.1 | Ask TheMealDB for the recipe | [`LookupMealRemoteDatasource.kt`](datasources/network/src/main/java/com/ericwathome/stovetime/datasources/network/sources/recipes/LookupMealRemoteDatasource.kt) |
+  | 6.2 | Read and save it on the phone | [`GetRecipeLocalDatasource.kt`](datasources/local/src/main/java/com/ericwathome/stovetime/datasources/local/sources/recipes/recipe/GetRecipeLocalDatasource.kt), [`SaveRecipeLocalDatasource.kt`](datasources/local/src/main/java/com/ericwathome/stovetime/datasources/local/sources/recipes/recipe/SaveRecipeLocalDatasource.kt) |
+  | 6.3 | Phone first, then the network | [`GetRecipeRepository.kt`](core/data/src/main/java/com/ericwathome/stovetime/core/data/repo/recipes/GetRecipeRepository.kt) |
+  | 6.4 | The ViewModel | [`RecipeViewModel.kt`](features/recipes/src/main/java/com/ericwathome/stovetime/features/recipes/recipe/RecipeViewModel.kt) |
+  | 6.5 | The screen, from Figma | [`RecipeScreen.kt`](features/recipes/src/main/java/com/ericwathome/stovetime/features/recipes/recipe/RecipeScreen.kt) |
 
   ```text
   Do workshop step 6: build the recipe page from spec 3.3, layer by layer — the TheMealDB lookup, the local read and save, the cache-first repository, the ViewModel, then the screen from https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=72-120. Add the tests as you go.
