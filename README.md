@@ -74,7 +74,7 @@ Before you start: `.ai/setup.sh`, then `code-review-graph build`, then `claude`.
   | memsearch | In a new session: `What did we do last time?` | It recalls the earlier session from `.memsearch/` |
   | ctxline | Watch the status line during `/compact` | The `ctx` figure drops, and the `5h` and `wk` limits stay in view |
 
-- [ ] **4. Control cost.** Run the same small task (for example `Add a preview for the error state of the Recipes tab`) on low effort, then on high effort (`/effort`), and compare.
+- [ ] **4. Control cost.** Look at the `model:` line in [`.ai/agents/planner.md`](.ai/agents/planner.md) (opus) and [`.ai/agents/code-reviewer.md`](.ai/agents/code-reviewer.md) (sonnet): plan on the big model, run focused jobs on a cheaper one. Then run the same small task (for example `Add a preview for the error state of the Recipes tab`) on low effort, then on high effort (`/effort`), and compare.
 
 - [ ] **5. Plan.** Read step 3.3 in [`.ai/roadmap/backlog/phase-3-recipes.md`](.ai/roadmap/backlog/phase-3-recipes.md): it's the spec for the recipe page you'll build next. Then turn a new request into a spec at the end of that file (`TODO(workshop 5)`):
 
@@ -104,7 +104,15 @@ Before you start: `.ai/setup.sh`, then `code-review-graph build`, then `claude`.
 
   Then the offline test: open a recipe, turn on airplane mode, go back and open it again. It still opens.
 
-- [ ] **8. See it all together:** `git switch workshop/level-3-complete`
+- [ ] **8. See it all together.** Your changes touch files that are different on the finished branch, so put them aside first or git won't switch:
+
+  ```bash
+  git stash -u
+  git switch workshop/level-3-complete
+  .ai/setup.sh
+  ```
+
+  Then open `/plugin` to see the plugins this repo turns on. `git stash pop` on `workshop/level-3-start` brings your work back.
 
 Stuck on a step? `git checkout workshop/level-3-complete -- <file>` puts the finished version in. The `workshop` skill lists the files for each step.
 
