@@ -311,6 +311,7 @@ These rules live in `:core:domain` and are covered by tests with fixed dates.
 | 2026-11-02 | The course sheet shows one card per course (title and "N of M cooked"), the current one in basil with a check; N counts different lessons cooked, so cooking one again doesn't raise it | Figma only has the sheet itself (from the quick timer), not its rows; the cards reuse `StoveCard` and the selected look of `StoveChoice` |
 | 2026-11-02 | The course chip sits in a 48 dp tap area and reads "Change course" to screen readers | The chip itself is shorter than a touch target and the frame keeps its size |
 | 2026-11-02 | The new courses name their photos (`lesson_<id>`) but don't bundle them yet; only Home basics is checked for bundled photos | Photography is out of scope for 5.1, and the Path, intro and finish screens already fall back to a plain placeholder |
+| 2026-11-05 | Sharing a cook gets two Figma frames: Cook — Done · Share (`115:105`), the finish screen with a Secondary Share button above Continue, and Share card (`115:160`), the picture that gets shared | Every workshop screen is built from a Figma frame; the card matches `ShareCookCard` in `:presentation:ui` |
 | 2026-11-05 | The recipe page gets its own Figma frame, Recipe — Details (`106:103`): photo, name, category, area and +10 XP pills, ingredients with measures, Start cooking | The workshop builds 3.3 from Figma, and the lesson intro frame showed parts a TheMealDB recipe doesn't have |
 
 ---
@@ -326,6 +327,8 @@ Screens are in Figma: **[Stovetime](https://www.figma.com/design/4hJuAVOMHyuF0hE
 | Recipe — Details | [`106:103`](https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=106-103) | 3.3 |
 | Cook — Step | [`72:158`](https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=72-158) | 1.4 |
 | Cook — Done | [`72:184`](https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=72-184) | 1.6 |
+| Cook — Done · Share | [`115:105`](https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=115-105) | 5.7 |
+| Share card | [`115:160`](https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=115-160) | 5.7 |
 | Recipes — Browse | [`80:48`](https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=80-48) | 3.2 |
 | Timers | [`80:110`](https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=80-110) | 2.4 |
 | Timers — Quick timer | [`81:194`](https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=81-194) | 2.4 |

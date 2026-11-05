@@ -6,6 +6,11 @@ when_to_use: "Share", "share your cook", "share sheet", "share a picture/image/c
 
 # Skill: share-image
 
+## Designs
+
+- [Cook — Done · Share](https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=115-105): where the Share button goes, a Secondary button above Continue.
+- [Share card](https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=115-160): the picture that gets shared. `ShareCookCard` already matches it.
+
 ## What's already built
 
 Everything that touches files, bitmaps and other apps lives in `:presentation:ui`. Don't rebuild any of it.

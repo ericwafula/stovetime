@@ -147,7 +147,7 @@ On a recipe page, a "Serves 4" stepper sets how many people you're cooking for, 
 ## 5.7 Share your cook ⬜
 
 **Size:** S · **Depends on:** 1.6
-**Design:** no frame yet. A Secondary button above Continue on [Figma › Cook — Done](https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=72-184); the shared card reuses the finish screen's photo ring and stat tiles
+**Design:** [Figma › Cook — Done · Share](https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=115-105) for the button, [Figma › Share card](https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=115-160) for the picture that gets shared
 
 ### Description
 On the finish screen, Share sends a picture of what you just cooked to any app on the phone: the dish photo, its name, "Cooked on Stovetime", and the XP, cook time and week streak from this cook, with a short caption. The card and the share helper are already in `:presentation:ui` (`ShareCookCard`, `rememberImageShare`, `ShareImageSource`); this step adds the button and the caption.

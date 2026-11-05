@@ -23,6 +23,8 @@ Frames on page "v4 — Home cook":
 | Recipe — Details | `106:103` | `https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=106-103` |
 | Cook — Step | `72:158` | `https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=72-158` |
 | Cook — Done | `72:184` | `https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=72-184` |
+| Cook — Done · Share | `115:105` | `https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=115-105` |
+| Share card | `115:160` | `https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=115-160` |
 | Recipes — Browse | `80:48` | `https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=80-48` |
 | Timers | `80:110` | `https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=80-110` |
 | Timers — Quick timer | `81:194` | `https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=81-194` |
