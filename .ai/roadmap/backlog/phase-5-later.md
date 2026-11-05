@@ -1,6 +1,6 @@
 # Phase 5 — Later
 
-**Order:** 5.1 → 5.2 → 5.3 → 5.4 → 5.5
+**Order:** 5.1 → 5.2 → 5.3 → 5.4 → 5.5 → 5.6
 
 Phases 0–4 shipped on 2026-11-02, so the Phase 5 ideas from the roadmap become steps. Each one builds on what's there and keeps the principles: cooking first, encourage don't nag, and the Path works offline.
 
@@ -109,3 +109,35 @@ A home-screen widget that shows the running timers, soonest first, with each one
 
 ### Out of scope
 - Starting or pausing timers from the widget
+
+---
+
+## 5.6 Scale servings ⬜
+
+**Size:** M · **Depends on:** 3.3
+**Design:** no frame yet. A − / + stepper under the ingredients heading on [Figma › Recipe — Intro](https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=72-120), built from the design system's buttons and text styles
+
+### Description
+On a recipe page, a "Serves 4" stepper sets how many people you're cooking for, and every measure with a number in it changes to match. TheMealDB doesn't say how many a recipe serves, so every recipe starts at 4.
+
+### Acceptance Criteria
+- [ ] The recipe page shows "Serves 4" with − and + buttons, from 1 up to 12
+- [ ] Measures with a number scale with the servings: "200g" for 4 is "100g" for 2, and "1 1/2 cups" for 4 is "3 cups" for 8
+- [ ] Scaled amounts show as whole numbers or kitchen fractions (½, ⅓, ¼, ¾), rounded to the nearest quarter and never below ¼, never as long decimals like 0.333
+- [ ] Measures without a number ("pinch", "to taste", "garnish") stay as they are
+- [ ] Ticked ingredients stay ticked when the servings change
+- [ ] Tests cover: reading "1/2", "1 1/2", "2-3", "200g" and "1.5 kg"; measures without numbers; the 1 and 12 limits; rounding to kitchen fractions; ticks surviving a change
+
+### Edge cases
+- Ranges scale both ends: "2-3 cloves" for 4 is "4-6 cloves" for 8.
+- The unit stays the same: "500g" for 4 is "1500g" for 12, not "1.5 kg".
+- "1 egg" for 4 is "¼ egg" for 1. We don't guess which ingredients can't be split.
+- A measure that can't be read stays exactly as TheMealDB wrote it.
+- Opening the recipe again starts back at 4.
+
+### Out of scope
+- Amounts written inside the step text in cook mode
+- Converting units (cups to grams, g to kg)
+- Scaling lesson ingredients (lessons are written for the servings they teach)
+- Remembering the servings for each recipe
+- Changing timer lengths

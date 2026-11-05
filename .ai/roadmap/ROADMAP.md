@@ -64,7 +64,7 @@ Teach people to cook at home, **one recipe at a time**. Stovetime is a learning 
 | 2 | Timers | Timers that keep running and ring with the app closed, and a Timers tab | ✅ |
 | 3 | Recipes | Sync TheMealDB to the phone, browse and search it offline, and cook any recipe | ✅ |
 | 4 | Me | Progress, history, the weekly goal and settings | ✅ |
-| 5 | Later | More courses, badges, reminders, dark mode, widgets | ✅ |
+| 5 | Later | More courses, badges, reminders, dark mode, widgets, scaling servings | 🟨 |
 
 The **Path screen (1.2)** is the screen built live in the workshop.
 
@@ -124,6 +124,7 @@ The **Path screen (1.2)** is the screen built live in the workshop.
 | 5.3 | A gentle reminder when the week's goal is close | ✅ |
 | 5.4 | Dark mode | ✅ |
 | 5.5 | Home-screen widget with running timers | ✅ |
+| 5.6 | Scale a recipe's ingredients to the number of people cooking | ⬜ |
 
 ---
 
