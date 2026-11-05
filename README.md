@@ -38,10 +38,10 @@ To check everything builds without installing:
 
 The screen to build:
 
-<img src="assets/kitchen-screen.png" alt="Stovetime Kitchen screen" width="300">
+<img src="assets/recipe-screen.png" alt="Stovetime recipe page" width="300">
 
 1. Open a new chat on [claude.ai](https://claude.ai).
-2. Attach [`assets/kitchen-screen.png`](assets/kitchen-screen.png), then paste this prompt:
+2. Attach [`assets/recipe-screen.png`](assets/recipe-screen.png), then paste this prompt:
 
    ```text
    Build this screen in Jetpack Compose, and add a ViewModel to handle its state.
