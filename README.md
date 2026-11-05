@@ -56,4 +56,4 @@ The screen to build:
 
 ## License
 
-To be decided.
+Apache License 2.0. See [LICENSE](LICENSE).
