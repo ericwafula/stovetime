@@ -121,4 +121,4 @@ To go back to your old status line, run `ctxline uninstall`.
 
 ## License
 
-To be decided.
+Apache License 2.0. See [LICENSE](LICENSE).
