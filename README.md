@@ -76,7 +76,7 @@ Before you start: `.ai/setup.sh`, then `code-review-graph build`, then `claude`.
 
 - [ ] **4. Control cost.** Run the same small task (for example `Add a preview for the error state of the Recipes tab`) on low effort, then on high effort (`/effort`), and compare.
 
-- [ ] **5. Plan.** Read step 3.3 in `.ai/roadmap/backlog/phase-3-recipes.md`: it's the spec for the recipe page you'll build next. Then turn a new request into a spec:
+- [ ] **5. Plan.** Read step 3.3 in [`.ai/roadmap/backlog/phase-3-recipes.md`](.ai/roadmap/backlog/phase-3-recipes.md): it's the spec for the recipe page you'll build next. Then turn a new request into a spec at the end of that file (`TODO(workshop 5)`):
 
   ```text
   Users want to save recipes they like. Turn that into a roadmap step with acceptance criteria, edge cases and out of scope, in our backlog format.

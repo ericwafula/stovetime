@@ -121,3 +121,5 @@ Make it clear when the Recipes tab is working from the phone's copy, and what to
 
 ### Out of scope
 - Letting the user choose how often it syncs
+
+TODO(workshop 5): turn "users want to save recipes they like" into a step here, in the same format as the ones above.

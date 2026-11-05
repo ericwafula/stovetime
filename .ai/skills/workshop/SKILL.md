@@ -23,7 +23,8 @@ Leave out the number to list every gap. Markers are the one kind of comment allo
 | 0 | none | `CLAUDE.md` (missing) | Run `/init`, then trim it and add the house rules: no AI attribution, checks before any commit, commit only when asked, no secrets, no comments | — |
 | 1 | `workshop 1` | `.ai/skills/add-repository`, `.ai/skills/new-compose-screen` | Write both skills from their marker notes, following the shape of the other skills in `.ai/skills/`. Run `.ai/setup.sh` afterwards | `architecture` |
 | 2 | `workshop 2` | `.ai/agents/code-reviewer.md` | Write the reviewer from its marker note. Run `.ai/setup.sh` afterwards | `review-pr` |
-| 3–5 | none | — | Context, cost and planning are shown, not built. Step 3.3 in `.ai/roadmap/backlog/phase-3-recipes.md` is the recipe page's spec | — |
+| 3–4 | none | — | Context and cost are shown, not built | — |
+| 5 | `workshop 5` | `.ai/roadmap/backlog/phase-3-recipes.md` | Read step 3.3, the recipe page's spec. Then turn "users want to save recipes they like" into a new step in the same format: size, dependencies, description, acceptance criteria, edge cases, out of scope. There's no answer key for this one | — |
 | 6.1 | `workshop 6.1` | `LookupMealRemoteDatasource` in `:datasources:network` | The TheMealDB `lookup.php` call | `add-datasource` |
 | 6.2 | `workshop 6.2` | `GetRecipeLocalDatasource`, `SaveRecipeLocalDatasource` in `:datasources:local` | Read and save a recipe in Room (the entity and DAO already exist) | `add-datasource` |
 | 6.3 | `workshop 6.3` | `GetRecipeRepository` in `:core:data` | Cache first: the phone's copy, else fetch, save and return | `add-repository` |
