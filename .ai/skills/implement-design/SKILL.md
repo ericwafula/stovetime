@@ -20,6 +20,7 @@ Frames on page "v4 — Home cook":
 |---|---|---|
 | Home — Path | `70:98` | `https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=70-98` |
 | Recipe — Intro | `72:120` | `https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=72-120` |
+| Recipe — Details | `106:103` | `https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=106-103` |
 | Cook — Step | `72:158` | `https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=72-158` |
 | Cook — Done | `72:184` | `https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=72-184` |
 | Recipes — Browse | `80:48` | `https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=80-48` |

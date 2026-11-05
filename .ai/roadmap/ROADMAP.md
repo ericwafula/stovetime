@@ -311,6 +311,7 @@ These rules live in `:core:domain` and are covered by tests with fixed dates.
 | 2026-11-02 | The course sheet shows one card per course (title and "N of M cooked"), the current one in basil with a check; N counts different lessons cooked, so cooking one again doesn't raise it | Figma only has the sheet itself (from the quick timer), not its rows; the cards reuse `StoveCard` and the selected look of `StoveChoice` |
 | 2026-11-02 | The course chip sits in a 48 dp tap area and reads "Change course" to screen readers | The chip itself is shorter than a touch target and the frame keeps its size |
 | 2026-11-02 | The new courses name their photos (`lesson_<id>`) but don't bundle them yet; only Home basics is checked for bundled photos | Photography is out of scope for 5.1, and the Path, intro and finish screens already fall back to a plain placeholder |
+| 2026-11-05 | The recipe page gets its own Figma frame, Recipe — Details (`106:103`): photo, name, category, area and +10 XP pills, ingredients with measures, Start cooking | The workshop builds 3.3 from Figma, and the lesson intro frame showed parts a TheMealDB recipe doesn't have |
 
 ---
 
@@ -322,6 +323,7 @@ Screens are in Figma: **[Stovetime](https://www.figma.com/design/4hJuAVOMHyuF0hE
 |---|---|---|
 | Home — Path | [`70:98`](https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=70-98) | 1.2, nav bar for 0.3 |
 | Recipe — Intro | [`72:120`](https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=72-120) | 1.3 |
+| Recipe — Details | [`106:103`](https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=106-103) | 3.3 |
 | Cook — Step | [`72:158`](https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=72-158) | 1.4 |
 | Cook — Done | [`72:184`](https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=72-184) | 1.6 |
 | Recipes — Browse | [`80:48`](https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=80-48) | 3.2 |
@@ -332,6 +334,6 @@ Screens are in Figma: **[Stovetime](https://www.figma.com/design/4hJuAVOMHyuF0hE
 | Photos (lesson and sample dish photos) | [`79:141`](https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=79-141) | 1.1, 3.2 |
 | Components (Button, PathNode, StatChip, TimerChip, Progress) and the Home palette, theme and size variables | — | 0.1 |
 
-The recipe page (3.3) reuses the Recipe — Intro layout. The lesson photos are exported to `.ai/roadmap/content/photos/`.
+The recipe page (3.3) has its own frame, Recipe — Details, built from the Recipe — Intro layout. The lesson photos are exported to `.ai/roadmap/content/photos/`.
 
 **The look: tactile flat.** Flat colour with no gradients or shadows, but every pressable thing sits on a darker "ledge" and drops into it when pressed. Primary is tomato (`#E12B36`); success is basil green; XP is yolk yellow. Dark mode keeps the same accents on warm espresso surfaces and follows the phone. Type is Gabarito for headings and numbers, Rubik for text. The food photos are AI-generated placeholders; replace them with real photography before launch.

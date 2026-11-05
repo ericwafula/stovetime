@@ -115,7 +115,7 @@ A home-screen widget that shows the running timers, soonest first, with each one
 ## 5.6 Scale servings ⬜
 
 **Size:** M · **Depends on:** 3.3
-**Design:** no frame yet. A − / + stepper under the ingredients heading on [Figma › Recipe — Intro](https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=72-120), built from the design system's buttons and text styles
+**Design:** no frame yet. A − / + stepper under the ingredients heading on [Figma › Recipe — Details](https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=106-103), built from the design system's buttons and text styles
 
 ### Description
 On a recipe page, a "Serves 4" stepper sets how many people you're cooking for, and every measure with a number in it changes to match. TheMealDB doesn't say how many a recipe serves, so every recipe starts at 4.
