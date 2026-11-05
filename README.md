@@ -114,7 +114,7 @@ To go back to your old status line, run `ctxline uninstall`.
 
 ## Demo: share your cook
 
-This branch adds step 5.7 from `.ai/roadmap/backlog/phase-5-later.md`: a Share button on the finish screen that sends a picture of what you just cooked. The card and the share plumbing are already built in `:presentation:ui`. What's left is the product part: agree what gets shared, then wire the button and the caption. The `share-image` skill knows the pieces, and the gap is marked `TODO(demo)` in `FinishScreen.kt`.
+This branch adds step 5.7 from `.ai/roadmap/backlog/phase-5-later.md`, tracked in issue [#3](https://github.com/ericwafula/stovetime/issues/3): a Share button on the finish screen that sends a picture of what you just cooked. The card and the share plumbing are already built in `:presentation:ui`. What's left is the product part: agree what gets shared, then wire the button and the caption. The `share-image` skill knows the pieces, and the gap is marked `TODO(demo)` in `FinishScreen.kt`.
 
 Before you start:
 
