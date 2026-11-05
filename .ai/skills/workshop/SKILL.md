@@ -29,7 +29,7 @@ Leave out the number to list every gap. Markers are the one kind of comment allo
 | 6.2 | `workshop 6.2` | `GetRecipeLocalDatasource`, `SaveRecipeLocalDatasource` in `:datasources:local` | Read and save a recipe in Room (the entity and DAO already exist) | `add-datasource` |
 | 6.3 | `workshop 6.3` | `GetRecipeRepository` in `:core:data` | Cache first: the phone's copy, else fetch, save and return | `add-repository` |
 | 6.4 | `workshop 6.4` | `RecipeViewModel` in `:features:recipes` | Load, retry, tick ingredients, start cooking | `add-viewmodel` |
-| 6.5 | `workshop 6.5` | `RecipeScreen` in `:features:recipes` | The page from Figma frame Recipe — Intro (`72:120`), with loading and error states | `implement-design`, `new-compose-screen`, `collect-one-time-event` |
+| 6.5 | `workshop 6.5` | `RecipeScreen` in `:features:recipes` | The page from Figma frame Recipe — Details (`106:103`), with loading and error states | `implement-design`, `new-compose-screen`, `collect-one-time-event` |
 | 7 | none | — | Verify: `checks`, the `code-reviewer` agent, the page on the phone with the Mobile MCP, then airplane mode: a recipe opened once still opens offline | `checks`, `generate-unit-test` |
 
 ## Doing a step

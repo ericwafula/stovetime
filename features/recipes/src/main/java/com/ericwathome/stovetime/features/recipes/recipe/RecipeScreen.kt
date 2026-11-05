@@ -37,7 +37,7 @@ fun RecipeRoute(
     )
 }
 
-// TODO(workshop 6.5): build the recipe page from the Figma frame Recipe — Intro (72:120) with the implement-design and new-compose-screen skills: collect the ViewModel's state and StartCooking event, then a stateless RecipeContent with the photo, name, category, area and XP pills, the ingredient checklist and Start cooking, plus loading and error states with Try again
+// TODO(workshop 6.5): build the recipe page from the Figma frame Recipe — Details (106:103) with the implement-design and new-compose-screen skills: collect the ViewModel's state and StartCooking event, then a stateless RecipeContent with the photo, name, category, area and XP pills, the ingredient checklist and Start cooking, plus loading and error states with Try again
 @Composable
 internal fun RecipeScreen(
     onBack: () -> Unit,

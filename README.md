@@ -93,7 +93,7 @@ Before you start: `.ai/setup.sh`, then `code-review-graph build`, then `claude`.
   | 6.5 | The screen, from Figma | [`RecipeScreen.kt`](features/recipes/src/main/java/com/ericwathome/stovetime/features/recipes/recipe/RecipeScreen.kt) |
 
   ```text
-  Do workshop step 6: build the recipe page from spec 3.3, layer by layer — the TheMealDB lookup, the local read and save, the cache-first repository, the ViewModel, then the screen from https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=72-120. Add the tests as you go.
+  Do workshop step 6: build the recipe page from spec 3.3, layer by layer — the TheMealDB lookup, the local read and save, the cache-first repository, the ViewModel, then the screen from https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=106-103. Add the tests as you go.
   ```
 
 - [ ] **7. Verify.** Run the checks, then:
