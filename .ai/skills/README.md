@@ -24,6 +24,7 @@ The playbooks Claude Code follows to build Stovetime. Each lives in `.ai/skills/
 | [`add-navigation`](./add-navigation/SKILL.md) | Navigation 3 destinations, the `Navigator` and the Path, Recipes, Timers and Me tabs. |
 | [`add-launcher`](./add-launcher/SKILL.md) | Bottom sheets as launchers in `:presentation:ui`, plus permission helpers. |
 | [`collect-one-time-event`](./collect-one-time-event/SKILL.md) | Collect ViewModel one-off events with `CollectOneTimeEvent`. |
+| [`share-image`](./share-image/SKILL.md) | Share a card as an image through the share sheet, with the helpers in `:presentation:ui`. |
 
 ## Testing
 

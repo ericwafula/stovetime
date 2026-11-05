@@ -117,7 +117,7 @@ private fun FinishContent(
             is ViewState.Error -> FinishError(onRetry = { onAction(FinishAction.OnClickRetry) }, modifier = Modifier.weight(1f))
             is ViewState.Success -> FinishDetails(dish = dish.data, state = state, onAction = onAction, modifier = Modifier.weight(1f))
         }
-        // TODO(demo): a Share button here sends ShareCookCard as an image with a caption, through rememberImageShare and ShareImageSource in :presentation:ui
+        // TODO(demo): a Share button here sends ShareCookCard as an image with a caption. The share-image skill has the steps
         StoveButton(
             text = stringResource(R.string.finish_continue),
             onClick = { onAction(FinishAction.OnClickContinue) },

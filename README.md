@@ -112,6 +112,42 @@ Opus 5.5 · stovetime ⑂ main · ctx 186k (19%) · 5h 8%(3h) · wk 28%(2d) · $
 
 To go back to your old status line, run `ctxline uninstall`.
 
+## Demo: share your cook
+
+This branch adds step 5.7 from `.ai/roadmap/backlog/phase-5-later.md`: a Share button on the finish screen that sends a picture of what you just cooked. The card and the share plumbing are already built in `:presentation:ui`. What's left is the product part: agree what gets shared, then wire the button and the caption. The `share-image` skill knows the pieces, and the gap is marked `TODO(demo)` in `FinishScreen.kt`.
+
+Before you start:
+
+```bash
+git switch demo/share-cook
+.ai/setup.sh
+claude
+```
+
+1. **Read the spec.** Open step 5.7 at the end of `.ai/roadmap/backlog/phase-5-later.md` and go through the acceptance criteria, edge cases and out of scope with the room. Change anything the room disagrees with, for example whether the rating goes on the card.
+
+2. **Build it.**
+
+   ```text
+   Build step 5.7 from the backlog: do the TODO(demo) in FinishScreen with the share-image skill. Add the tests the spec asks for, then run the checks.
+   ```
+
+3. **Review it.**
+
+   ```text
+   Review the change with the code-reviewer.
+   ```
+
+4. **Try it on the phone.**
+
+   ```text
+   Install the app on my phone.
+   ```
+
+   Cook any lesson to the end (Next step through each step), tap Share once, and check the share sheet shows "1 image" with the card and the caption. Close it without sending.
+
+Stuck? `git restore .` puts the branch back to the start of the demo.
+
 ## Project layout
 
 - `app/` — the Android app
