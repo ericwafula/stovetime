@@ -51,4 +51,4 @@ Run `/init` once to have Claude write a `CLAUDE.md` describing the project, then
 
 ## License
 
-To be decided.
+Apache License 2.0. See [LICENSE](LICENSE).
