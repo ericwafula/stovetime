@@ -1,6 +1,6 @@
 # Phase 5 — Later
 
-**Order:** 5.1 → 5.2 → 5.3 → 5.4 → 5.5 → 5.6
+**Order:** 5.1 → 5.2 → 5.3 → 5.4 → 5.5 → 5.6 → 5.7
 
 Phases 0–4 shipped on 2026-11-02, so the Phase 5 ideas from the roadmap become steps. Each one builds on what's there and keeps the principles: cooking first, encourage don't nag, and the Path works offline.
 
@@ -141,3 +141,32 @@ On a recipe page, a "Serves 4" stepper sets how many people you're cooking for, 
 - Scaling lesson ingredients (lessons are written for the servings they teach)
 - Remembering the servings for each recipe
 - Changing timer lengths
+
+---
+
+## 5.7 Share your cook ⬜
+
+**Size:** S · **Depends on:** 1.6
+**Design:** no frame yet. A Secondary button above Continue on [Figma › Cook — Done](https://www.figma.com/design/4hJuAVOMHyuF0hEXxbSvlN?node-id=72-184); the shared card reuses the finish screen's photo ring and stat tiles
+
+### Description
+On the finish screen, Share sends a picture of what you just cooked to any app on the phone: the dish photo, its name, "Cooked on Stovetime", and the XP, cook time and week streak from this cook, with a short caption. The card and the share helper are already in `:presentation:ui` (`ShareCookCard`, `rememberImageShare`, `ShareImageSource`); this step adds the button and the caption.
+
+### Acceptance Criteria
+- [ ] The finish screen shows a Share button above Continue
+- [ ] Tapping it opens the phone's share sheet with the card as an image and a caption
+- [ ] The card shows this cook's dish, photo, XP earned, cook time and week streak
+- [ ] The caption reads like "I just cooked Jammy eggs on toast in 14m on Stovetime"
+- [ ] Coming back from the share sheet leaves the finish screen as it was, and Continue still works
+- [ ] Tests cover: the caption for a normal cook, a cook over an hour, and a first cook with no streak
+
+### Edge cases
+- A dish with no photo shares the card with the plain placeholder.
+- Closing the share sheet without picking an app changes nothing.
+- Sharing twice in a row sends the latest card, not an old one.
+
+### Out of scope
+- The rating ("Nailed it") on the card or in the caption
+- A link to the app, until it's on the Play Store
+- Sharing older cooks from the Me tab
+- Choosing between card styles

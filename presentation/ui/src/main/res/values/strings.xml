@@ -43,4 +43,9 @@
     <string name="badge_earned">earned</string>
     <string name="badge_not_earned">not earned yet</string>
     <string name="badge_description">%1$s, %2$s. %3$s</string>
+    <string name="share_cook_caption">Cooked on Stovetime</string>
+    <string name="share_cook_xp_value">+%1$d</string>
+    <string name="share_cook_xp_label">XP earned</string>
+    <string name="share_cook_time_label">Cook time</string>
+    <string name="share_cook_streak_label">Week streak</string>
 </resources>
